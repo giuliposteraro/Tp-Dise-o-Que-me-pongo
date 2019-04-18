@@ -1,0 +1,5 @@
+package domain;
+
+public enum EColor {
+	ROJO, NARANJA, AMARILLO, VERDE, AZUL, MAGENTA, VIOLETA, BLANCO, NEGRO, NINGUNO;
+}
