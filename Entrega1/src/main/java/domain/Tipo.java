@@ -11,6 +11,10 @@ public class Tipo {
 		this.categoria = categoria;
 	}
 	
+	public Boolean esTelaValida(ETela tela) {
+		return telasValidas.contains(tela);
+	}
+	
 	public static Tipo REMERA = new Tipo(ECategoria.SUPERIOR);
 	public static Tipo BUZO = new Tipo(ECategoria.SUPERIOR);
 	public static Tipo PANTALON = new Tipo(ECategoria.INFERIOR);
