@@ -7,7 +7,9 @@ class Main {
 		ConstructorPrenda c = new ConstructorPrenda();
 		
 		c.setTipo(Tipo.REMERA);
+
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
+
 		c.setTela(ETela.ALGODON);
 		
 		try {

@@ -30,4 +30,5 @@ public class Atuendo {
 			this.accesorio = unAccesorio;
 		}
 	}
+
 }
