@@ -26,10 +26,10 @@ public class TestGuardarropa {
 	}
 	
 	@Test
-	public void agregarPrendaAGuardarropa() throws Exception {
+	public void agregarUnaPrenda() {
 		Guardarropa g = new Guardarropa();
 		g.agregarPrenda(p);
-		assertTrue(g.contains(p));
+		assertTrue(g.tienePrenda(p));
 	}
 
 }
