@@ -4,7 +4,6 @@ package domain;
 
 public class Prenda {
 	
-	ECategoria categoria;
 	Tipo tipo;
 	Color color;
 	ETela tela;
@@ -13,5 +12,21 @@ public class Prenda {
 		this.tipo = tipo;
 		this.color = color;
 		this.tela = tela;
+	}
+	
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public ETela getTela() {
+		return tela;
+	}
+	
+	public ECategoria getCategoria() {
+		return tipo.getCategoria();
 	}
 }
