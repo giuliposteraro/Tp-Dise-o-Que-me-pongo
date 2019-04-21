@@ -8,12 +8,11 @@ import domain.EColor;
 import domain.ETela;
 import domain.Prenda;
 import domain.Tipo;
-import junit.framework.AssertionFailedError;
 
 public class TestPrenda {
 
 	@Test
-	public void saberDeQueTipoEsUnaPrenda() {
+	public void saberDeQueTipoEsUnaPrenda() throws Exception {
 		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
@@ -23,7 +22,7 @@ public class TestPrenda {
 	}
 	
 	@Test
-	public void saberDeQueCategoriaEsUnaPrenda() {
+	public void saberDeQueCategoriaEsUnaPrenda() throws Exception {
 		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
@@ -33,7 +32,7 @@ public class TestPrenda {
 	}
 	
 	@Test
-	public void saberDeQueTelaEsUnaPrenda() {
+	public void saberDeQueTelaEsUnaPrenda() throws Exception {
 		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
