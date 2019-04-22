@@ -1,22 +1,25 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
 public class Guardarropa {
 	
-	ArrayList<Prenda> prendas;
+	Set<Prenda> prendas;
 	
-	ArrayList<Prenda> prendasSuperiores;
-	ArrayList<Prenda> prendasInferiores;
-	ArrayList<Prenda> calzados;
-	ArrayList<Prenda> accesorios;
+	Set<Prenda> prendasSuperiores;
+	Set<Prenda> prendasInferiores;
+	Set<Prenda> calzados;
+	Set<Prenda> accesorios;
+	
+	public Guardarropa() {
+		this.prendas = new HashSet<Prenda>();
+	}
 	
 	public List<Atuendo> generarSugerencias() {
 		Set<List<Prenda>> prendasSueltas = sugerenciasDePrendas();
@@ -27,20 +30,42 @@ public class Guardarropa {
 		return prendas.contains(unaPrenda);
 	}
 	
+	public void agregarPrenda(Prenda prenda) {
+		prendas.add(prenda);
+		actualizarCategorias();
+	}
+	
+	public void eliminarPrenda(Prenda prenda) {
+		prendas.remove(prenda);
+		actualizarCategorias();
+	}
+	
 	private Set<List<Prenda>> sugerenciasDePrendas(){
-		return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(prendasSuperiores),ImmutableSet.copyOf(prendasInferiores),ImmutableSet.copyOf(calzados),ImmutableSet.copyOf(accesorios)));
+		return Sets.cartesianProduct(ImmutableList.of(
+			prendasSuperiores,
+			prendasInferiores,
+			calzados,
+			accesorios
+			));
 	}
 	
 	private List<Atuendo> crearAtuendos(Set<List<Prenda>> prendasSueltas){
-		return prendasSueltas.stream().map(conjuntoDePrendas -> new Atuendo(conjuntoDePrendas)).collect(Collectors.toList());
+		return prendasSueltas.stream()
+			.map(conjuntoDePrendas -> new Atuendo(conjuntoDePrendas))
+			.collect(Collectors.toList());
 	}
 	
 	private void actualizarCategorias() {
-		prendasSuperiores = prendas.stream().filter(p->p.getGategoria()==ECategoria.SUPERIOR);
-		prendasInferiores = prendas.stream().filter(p->p.getGategoria()==ECategoria.INFERIOR);
-		calzados = prendas.stream().filter(p->p.getGategoria()==ECategoria.CALZADO);
-		accesorios = prendas.stream().filter(p->p.getGategoria()==ECategoria.ACCESORIO);
+		prendasSuperiores = filtrarPrendasPorCategoria(ECategoria.SUPERIOR);
+		prendasInferiores = filtrarPrendasPorCategoria(ECategoria.INFERIOR);
+		calzados = filtrarPrendasPorCategoria(ECategoria.CALZADO);
+		accesorios = filtrarPrendasPorCategoria(ECategoria.ACCESORIO);
 	}
 	
+	private Set<Prenda> filtrarPrendasPorCategoria(ECategoria categoria) {
+		return prendas.stream()
+			.filter(p -> p.getCategoria() == categoria)
+			.collect(Collectors.toSet());
+	}
 	
 }

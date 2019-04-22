@@ -3,10 +3,10 @@ import java.util.*;
 
 public class Usuario {
 	
-	HashSet<Guardarropa> guardarropas = new HashSet<Guardarropa>() ;
+	Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
 	
-	public void agregarGuardarropa(Guardarropa nuevoGuardarropa) {
-		this.guardarropas.add(nuevoGuardarropa);
+	public void agregarGuardarropa(Guardarropa guardarropa) {
+		this.guardarropas.add(guardarropa);
 	}
 	
 	public void eliminarGuardarropa(Guardarropa guardarropa) {
@@ -15,5 +15,9 @@ public class Usuario {
 
 	public Boolean tieneGuardarropa(Guardarropa g) {
 		return guardarropas.contains(g);
+	}
+	
+	public List<Atuendo> generarSugerencias(Guardarropa guardarropa) {
+		return guardarropa.generarSugerencias();
 	}
 }
