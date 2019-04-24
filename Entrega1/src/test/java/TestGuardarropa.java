@@ -14,22 +14,42 @@ import domain.Tipo;
 public class TestGuardarropa {
 
 	@Parameter(0)
-	public Prenda p;
+	public Prenda remera;
+	public Prenda pantalon;
+	public Prenda zapatillas;
+	public Prenda reloj;
 	
 	@Before
 	public void crearBuzo() throws Exception {
 		ConstructorPrenda c = new ConstructorPrenda();
-		c.setTipo(Tipo.BUZO);
+		c.setTipo(Tipo.REMERA);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.NEGRO, EColor.AZUL);
-		p = c.crear();
+		remera = c.crear();
+		
+		c.setTipo(Tipo.PANTALON);
+		c.setTela(ETela.JEAN);
+		c.setColor(EColor.AZUL, EColor.NINGUNO);
+		pantalon = c.crear();
+		
+		c.setTipo(Tipo.ZAPATILLAS);
+		c.setTela(ETela.TELA);
+		c.setColor(EColor.BLANCO, EColor.NEGRO);
+		reloj = c.crear();
+		
+		c.setTipo(Tipo.RELOJ);
+		c.setTela(ETela.NINGUNA);
+		c.setColor(EColor.NEGRO, EColor.NINGUNO);
+		reloj = c.crear();
 	}
 	
 	@Test
 	public void agregarUnaPrenda() {
 		Guardarropa g = new Guardarropa();
-		g.agregarPrenda(p);
-		assertTrue(g.tienePrenda(p));
+		g.agregarPrenda(remera);
+		assertTrue(g.tienePrenda(remera));
 	}
+	
+	
 
 }
