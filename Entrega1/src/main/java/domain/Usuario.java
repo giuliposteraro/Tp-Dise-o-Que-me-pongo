@@ -17,7 +17,7 @@ public class Usuario {
 		return guardarropas.contains(g);
 	}
 	
-	public List<Atuendo> generarSugerencias(Guardarropa guardarropa) {
+	public List<Atuendo> generarSugerencias(Guardarropa guardarropa) throws Exception {
 		return guardarropa.generarSugerencias();
 	}
 }

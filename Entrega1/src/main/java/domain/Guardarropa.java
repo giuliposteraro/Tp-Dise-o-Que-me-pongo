@@ -21,11 +21,12 @@ public class Guardarropa {
 		this.prendas = new HashSet<Prenda>();
 	}
 	
-	public List<Atuendo> generarSugerencias() {
+	public List<Atuendo> generarSugerencias() throws Exception {
+		validarListas();
 		Set<List<Prenda>> prendasSueltas = sugerenciasDePrendas();
 		return crearAtuendos(prendasSueltas);
 	}
-	
+
 	public Boolean tienePrenda (Prenda unaPrenda) {
 		return prendas.contains(unaPrenda);
 	}
@@ -40,7 +41,7 @@ public class Guardarropa {
 		actualizarCategorias();
 	}
 	
-	private Set<List<Prenda>> sugerenciasDePrendas(){
+	private Set<List<Prenda>> sugerenciasDePrendas() {
 		return Sets.cartesianProduct(ImmutableList.of(
 			prendasSuperiores,
 			prendasInferiores,
@@ -49,7 +50,7 @@ public class Guardarropa {
 			));
 	}
 	
-	private List<Atuendo> crearAtuendos(Set<List<Prenda>> prendasSueltas){
+	private List<Atuendo> crearAtuendos(Set<List<Prenda>> prendasSueltas) {
 		return prendasSueltas.stream()
 			.map(conjuntoDePrendas -> new Atuendo(conjuntoDePrendas))
 			.collect(Collectors.toList());
@@ -68,4 +69,8 @@ public class Guardarropa {
 			.collect(Collectors.toSet());
 	}
 	
+	private void validarListas() throws Exception {
+		if(prendasSuperiores.isEmpty() || prendasInferiores.isEmpty() || calzados.isEmpty() || accesorios.isEmpty())
+			throw new Exception("No se pueden generar sugerencias en este guardarropa");		
+	}
 }

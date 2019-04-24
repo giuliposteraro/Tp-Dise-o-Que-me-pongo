@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Atuendo {
@@ -9,18 +10,22 @@ public class Atuendo {
 	Prenda calzado;
 	Prenda accesorio;
 	
-	public Atuendo(List<Prenda> prendas) {
-		this.superior = obtenerPrendaDeCategoria(ECategoria.SUPERIOR, prendas);
-		this.inferior = obtenerPrendaDeCategoria(ECategoria.INFERIOR, prendas);
-		this.calzado = obtenerPrendaDeCategoria(ECategoria.CALZADO, prendas);
-		this.accesorio = obtenerPrendaDeCategoria(ECategoria.ACCESORIO, prendas);
+	public Atuendo(List<Prenda> conjuntoDePrendas) {
+		this.superior = obtenerPrendaDeCategoria(ECategoria.SUPERIOR, conjuntoDePrendas);
+		this.inferior = obtenerPrendaDeCategoria(ECategoria.INFERIOR, conjuntoDePrendas);
+		this.calzado = obtenerPrendaDeCategoria(ECategoria.CALZADO, conjuntoDePrendas);
+		this.accesorio = obtenerPrendaDeCategoria(ECategoria.ACCESORIO, conjuntoDePrendas);
 	}
 
-	private Prenda obtenerPrendaDeCategoria(ECategoria categoria, List<Prenda> prendas) {
-		return prendas.parallelStream()
+	private Prenda obtenerPrendaDeCategoria(ECategoria categoria, List<Prenda> conjuntoDePrendas) {
+		return conjuntoDePrendas.parallelStream()
 			.filter(prenda -> prenda.getCategoria() == categoria)
 			.findFirst()
 			.orElse(null);
+	}
+	
+	public List<Prenda> prendas() {
+		return Arrays.asList(superior, inferior, calzado, accesorio);
 	}
 
 }
