@@ -84,5 +84,15 @@ public class TestGuardarropa {
 		
 		assertEquals(2, g.generarSugerencias().size());
 	}
+	
+	@Test(expected = Exception.class)
+	public void siNoHayAlgunaCategoriaFalla() throws Exception{
+		Guardarropa g = new Guardarropa();
+		g.agregarPrenda(reloj);
+		g.agregarPrenda(pantalon);
+		g.agregarPrenda(zapatillas);
 
+		g.generarSugerencias();
+	}
+	
 }
