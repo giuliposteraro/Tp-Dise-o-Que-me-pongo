@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
+import exceptions.*;
+
 public class Guardarropa {
 	
 	Set<Prenda> prendas;
@@ -21,7 +23,7 @@ public class Guardarropa {
 		this.prendas = new HashSet<Prenda>();
 	}
 	
-	public List<Atuendo> generarSugerencias() throws Exception {
+	public List<Atuendo> generarSugerencias() throws NoSePuedeGenerarSugerencia {
 		validarListas();
 		Set<List<Prenda>> prendasSueltas = sugerenciasDePrendas();
 		return crearAtuendos(prendasSueltas);
@@ -69,8 +71,8 @@ public class Guardarropa {
 			.collect(Collectors.toSet());
 	}
 	
-	private void validarListas() throws Exception {
+	private void validarListas() throws NoSePuedeGenerarSugerencia {
 		if(prendasSuperiores.isEmpty() || prendasInferiores.isEmpty() || calzados.isEmpty() || accesorios.isEmpty())
-			throw new Exception("No se pueden generar sugerencias en este guardarropa");		
+			throw new NoSePuedeGenerarSugerencia("No se pueden generar sugerencias en este guardarropa");		
 	}
 }

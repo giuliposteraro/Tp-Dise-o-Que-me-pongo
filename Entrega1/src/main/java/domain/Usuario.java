@@ -1,5 +1,8 @@
 package domain;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import exceptions.*;
 
 public class Usuario {
 	
@@ -17,7 +20,18 @@ public class Usuario {
 		return guardarropas.contains(g);
 	}
 	
-	public List<Atuendo> generarSugerencias(Guardarropa guardarropa) throws Exception {
-		return guardarropa.generarSugerencias();
+	public List<Atuendo> generarSugerencias(Guardarropa guardarropa) throws NoSePuedeGenerarSugerencia {
+		if(tieneGuardarropa(guardarropa)){
+			return guardarropa.generarSugerencias();
+		}
+		else {
+			throw new NoSePuedeGenerarSugerencia("No tiene el guardarropa solicitado");	
+		}
+	}
+	
+	public List<List<Atuendo>> generarTodasLasSugerencias() throws NoSePuedeGenerarSugerencia {
+		return guardarropas.stream()
+				.map(guardarropa -> generarSugerencias(guardarropa))
+				.collect(Collectors.toList());
 	}
 }

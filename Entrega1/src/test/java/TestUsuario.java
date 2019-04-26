@@ -11,6 +11,8 @@ import domain.Prenda;
 import domain.Tipo;
 import domain.Usuario;
 
+import exceptions.*;
+
 public class TestUsuario {
 
 	public Prenda remera;
@@ -58,7 +60,7 @@ public class TestUsuario {
 	}
 	
 	@Test
-	public void seGeneraSugerenciaCorrectamente() throws Exception {
+	public void seGeneraSugerenciaCorrectamente() throws NoSePuedeGenerarSugerencia {
 		Guardarropa g = new Guardarropa();
 		Usuario u = new Usuario();
 		
@@ -73,7 +75,7 @@ public class TestUsuario {
 	}
 
 	@Test(expected = Exception.class)
-	public void fallanSugerenciasSiFaltaPrenda() throws Exception {
+	public void fallanSugerenciasSiFaltaPrenda() throws NoSePuedeGenerarSugerencia {
 		Guardarropa g = new Guardarropa();
 		Usuario u = new Usuario();
 	

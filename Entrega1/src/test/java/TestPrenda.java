@@ -9,10 +9,12 @@ import domain.ETela;
 import domain.Prenda;
 import domain.Tipo;
 
+import exceptions.*;
+
 public class TestPrenda {
 
 	@Test
-	public void saberDeQueTipoEsUnaPrenda() throws Exception {
+	public void saberDeQueTipoEsUnaPrenda() throws ParametrosNoValidos {
 		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
@@ -22,7 +24,7 @@ public class TestPrenda {
 	}
 	
 	@Test
-	public void saberDeQueCategoriaEsUnaPrenda() throws Exception {
+	public void saberDeQueCategoriaEsUnaPrenda() throws ParametrosNoValidos {
 		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
@@ -32,7 +34,7 @@ public class TestPrenda {
 	}
 	
 	@Test
-	public void saberDeQueTelaEsUnaPrenda() throws Exception {
+	public void saberDeQueTelaEsUnaPrenda() throws ParametrosNoValidos {
 		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
@@ -42,7 +44,7 @@ public class TestPrenda {
 	}
 	
 	@Test(expected = Exception.class)
-	public void crearPrendaSinTipoFalla() throws Exception {
+	public void crearPrendaSinTipoFalla() throws ParametrosNoValidos {
 		ConstructorPrenda c = new ConstructorPrenda();
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		c.setTela(ETela.ALGODON);
@@ -50,7 +52,7 @@ public class TestPrenda {
 	}
 	
 	@Test(expected = Exception.class)
-	public void crearPrendaSinColorFalla() throws Exception {
+	public void crearPrendaSinColorFalla() throws ParametrosNoValidos {
 		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setTela(ETela.ALGODON);
@@ -58,7 +60,7 @@ public class TestPrenda {
 	}
 	
 	@Test(expected = Exception.class)
-	public void crearPrendaSinColorPrimarioFalla() throws Exception {
+	public void crearPrendaSinColorPrimarioFalla() throws ParametrosNoValidos {
 		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.NINGUNO, EColor.NINGUNO);
@@ -67,7 +69,7 @@ public class TestPrenda {
 	}
 	
 	@Test(expected = Exception.class)
-	public void crearPrendaConDosColoresIgualesFalla() throws Exception {
+	public void crearPrendaConDosColoresIgualesFalla() throws ParametrosNoValidos {
 		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.ROJO);
@@ -76,7 +78,7 @@ public class TestPrenda {
 	}
 	
 	@Test(expected = Exception.class)
-	public void crearPrendaSinTelaFalla() throws Exception {
+	public void crearPrendaSinTelaFalla() throws ParametrosNoValidos {
 		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
