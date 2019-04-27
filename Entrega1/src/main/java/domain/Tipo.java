@@ -8,7 +8,7 @@ public class Tipo {
 	ECategoria categoria;
 	List<ETela> telasValidas;
 	
-	public Tipo(ECategoria categoria, List<ETela> telasValidas) {
+	private Tipo(ECategoria categoria, List<ETela> telasValidas) {
 		this.categoria = categoria;
 		this.telasValidas = telasValidas;
 	}

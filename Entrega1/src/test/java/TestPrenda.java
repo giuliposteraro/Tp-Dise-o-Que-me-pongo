@@ -82,4 +82,13 @@ public class TestPrenda {
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		c.crear();
 	}
+	
+	@Test(expected = Exception.class)
+	public void unaPrendaConUnaTelaInconsistenteFalla() throws Exception {
+		ConstructorPrenda c = new ConstructorPrenda();
+		c.setTipo(Tipo.REMERA);
+		c.setColor(EColor.ROJO, EColor.NINGUNO);
+		c.setTela(ETela.CUERO);
+		c.crear();
+	}
 }

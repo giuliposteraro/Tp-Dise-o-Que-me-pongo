@@ -16,7 +16,7 @@ import domain.Tipo;
 
 public class TestGuardarropa {
 
-	@Parameter(0)
+	@Parameter
 	public Prenda remera;
 	public Prenda remera2;
 	public Prenda pantalon;
