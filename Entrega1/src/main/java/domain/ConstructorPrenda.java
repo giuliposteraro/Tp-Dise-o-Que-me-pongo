@@ -2,6 +2,8 @@ package domain;
 
 import java.util.Arrays;
 
+import exceptions.*;
+
 public class ConstructorPrenda {
 	
 	// Mismos atributos que Prenda
@@ -9,14 +11,14 @@ public class ConstructorPrenda {
 	Color color;
 	ETela tela;
 	
-	public Prenda crear() throws Exception {
+	public Prenda crear() throws ParametrosNoValidos {
 		validar();
 		return new Prenda(tipo, tela, color);
 	}
 	
-	private void validar() throws Exception {
+	private void validar() throws ParametrosNoValidos {
 		if (Arrays.asList(tipo, color, tela).contains(null) || !color.esValido() || !tipo.esTelaValida(tela)) {
-			throw new Exception("Los parametros no son validos.");
+			throw new ParametrosNoValidos("Los parametros no son validos.");
 		}
 	}
 

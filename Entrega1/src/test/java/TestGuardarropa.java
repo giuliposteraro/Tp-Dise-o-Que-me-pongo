@@ -14,6 +14,8 @@ import domain.Guardarropa;
 import domain.Prenda;
 import domain.Tipo;
 
+import exceptions.*;
+
 public class TestGuardarropa {
 
 	@Parameter
@@ -61,7 +63,7 @@ public class TestGuardarropa {
 	}
 	
 	@Test
-	public void unGuardarropaConCuatroPrendasGeneraUnAtuendoConEsasPrendas() throws Exception {
+	public void unGuardarropaConCuatroPrendasGeneraUnAtuendoConEsasPrendas() throws NoSePuedeGenerarSugerencia {
 		Guardarropa g = new Guardarropa();
 		g.agregarPrenda(remera);
 		g.agregarPrenda(pantalon);
@@ -74,7 +76,7 @@ public class TestGuardarropa {
 	}
 	
 	@Test
-	public void unGuardarropaConDosRemerasGeneraDosAtuendos() throws Exception {
+	public void unGuardarropaConDosRemerasGeneraDosAtuendos() throws NoSePuedeGenerarSugerencia {
 		Guardarropa g = new Guardarropa();
 		g.agregarPrenda(remera);
 		g.agregarPrenda(remera2);
@@ -86,7 +88,7 @@ public class TestGuardarropa {
 	}
 	
 	@Test(expected = Exception.class)
-	public void siNoHayAlgunaCategoriaFalla() throws Exception{
+	public void siNoHayAlgunaCategoriaFalla() throws NoSePuedeGenerarSugerencia{
 		Guardarropa g = new Guardarropa();
 		g.agregarPrenda(reloj);
 		g.agregarPrenda(pantalon);
