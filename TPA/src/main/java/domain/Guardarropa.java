@@ -14,16 +14,11 @@ public class Guardarropa {
 
 	Set<Prenda> prendas;
 
-	Set<Prenda> prendasSuperiores;
-	Set<Prenda> prendasInferiores;
-	Set<Prenda> calzados;
-	Set<Prenda> accesorios;
-
 	public Guardarropa() {
 		this.prendas = new HashSet<Prenda>();
 	}
 
-	public List<Atuendo> generarSugerencias() throws NoSePuedeGenerarSugerencia {
+	public List<Atuendo> generarSugerencias() {
 		validarListas();
 		return crearAtuendos(sugerenciasDePrendas());
 	}
@@ -34,36 +29,46 @@ public class Guardarropa {
 
 	public void agregarPrenda(Prenda prenda) {
 		prendas.add(prenda);
-		actualizarCategorias();
 	}
 
 	public void eliminarPrenda(Prenda prenda) {
 		prendas.remove(prenda);
-		actualizarCategorias();
 	}
 
+	private Set<Prenda> prendasSuperiores() {
+		return filtrarPrendasPorCategoria(ECategoria.SUPERIOR);
+	}
+	
+	private Set<Prenda> prendasInferiores() {
+		return filtrarPrendasPorCategoria(ECategoria.INFERIOR);
+	}
+	
+	private Set<Prenda> calzados() {
+		return filtrarPrendasPorCategoria(ECategoria.CALZADO);
+	}
+	
+	private Set<Prenda> accesorios() {
+		return filtrarPrendasPorCategoria(ECategoria.ACCESORIO);
+	}
+	
 	private Set<List<Prenda>> sugerenciasDePrendas() {
-		return Sets.cartesianProduct(ImmutableList.of(prendasSuperiores, prendasInferiores, calzados, accesorios));
+		return Sets.cartesianProduct(ImmutableList.of(prendasSuperiores(), prendasInferiores(), calzados(), accesorios()));
 	}
 
 	private List<Atuendo> crearAtuendos(Set<List<Prenda>> prendasSueltas) {
-		return prendasSueltas.stream().map(conjuntoDePrendas -> new Atuendo(conjuntoDePrendas))
+		return prendasSueltas.stream()
+				.map(conjuntoDePrendas -> new Atuendo(conjuntoDePrendas))
 				.collect(Collectors.toList());
 	}
-
-	private void actualizarCategorias() {
-		prendasSuperiores = filtrarPrendasPorCategoria(ECategoria.SUPERIOR);
-		prendasInferiores = filtrarPrendasPorCategoria(ECategoria.INFERIOR);
-		calzados = filtrarPrendasPorCategoria(ECategoria.CALZADO);
-		accesorios = filtrarPrendasPorCategoria(ECategoria.ACCESORIO);
-	}
-
+	
 	private Set<Prenda> filtrarPrendasPorCategoria(ECategoria categoria) {
-		return prendas.stream().filter(p -> p.getCategoria() == categoria).collect(Collectors.toSet());
+		return prendas.stream()
+				.filter(p -> categoria.equals(p.getCategoria()))
+				.collect(Collectors.toSet());
 	}
 
 	private void validarListas() throws NoSePuedeGenerarSugerencia {
-		if(prendasSuperiores.isEmpty() || prendasInferiores.isEmpty() || calzados.isEmpty() || accesorios.isEmpty())
+		if(prendasSuperiores().isEmpty() || prendasInferiores().isEmpty() || calzados().isEmpty() || accesorios().isEmpty())
 			throw new NoSePuedeGenerarSugerencia("No se pueden generar sugerencias en este guardarropa");
 	}
 }

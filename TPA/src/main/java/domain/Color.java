@@ -11,7 +11,7 @@ public class Color {
 	}
 	
 	public Boolean esValido() {
-		return colorPrimario != EColor.NINGUNO && colorPrimario != colorSecundario;
+		return !EColor.NINGUNO.equals(colorPrimario) && !colorPrimario.equals(colorSecundario);
 	}
 	
 	

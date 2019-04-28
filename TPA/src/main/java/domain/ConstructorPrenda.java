@@ -11,12 +11,12 @@ public class ConstructorPrenda {
 	Color color;
 	ETela tela;
 	
-	public Prenda crear() throws ParametrosNoValidos {
+	public Prenda crear() {
 		validar();
 		return new Prenda(tipo, tela, color);
 	}
 	
-	private void validar() throws ParametrosNoValidos {
+	private void validar() {
 		if (Arrays.asList(tipo, color, tela).contains(null) || !color.esValido() || !tipo.esTelaValida(tela)) {
 			throw new ParametrosNoValidos("Los parametros no son validos.");
 		}

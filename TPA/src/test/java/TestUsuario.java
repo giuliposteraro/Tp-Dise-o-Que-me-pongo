@@ -1,11 +1,7 @@
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runners.Parameterized.Parameter;
 
 import domain.ConstructorPrenda;
 import domain.EColor;
@@ -13,12 +9,12 @@ import domain.ETela;
 import domain.Guardarropa;
 import domain.Prenda;
 import domain.Tipo;
+import domain.Usuario;
 
 import exceptions.*;
 
-public class TestGuardarropa {
+public class TestUsuario {
 
-	@Parameter
 	public Prenda remera;
 	public Prenda remera2;
 	public Prenda pantalon;
@@ -26,7 +22,7 @@ public class TestGuardarropa {
 	public Prenda reloj;
 	
 	@Before
-	public void crearPrendas() throws Exception {
+	public void crearPrendas() {
 		ConstructorPrenda c = new ConstructorPrenda();
 		
 		c.setTipo(Tipo.REMERA);
@@ -56,45 +52,37 @@ public class TestGuardarropa {
 	}
 	
 	@Test
-	public void agregarUnaPrenda() {
+	public void agregarUnGuardarropa() {
 		Guardarropa g = new Guardarropa();
-		g.agregarPrenda(remera);
-		assertTrue(g.tienePrenda(remera));
+		Usuario u = new Usuario();
+		u.agregarGuardarropa(g);
+		assertTrue(u.tieneGuardarropa(g));
 	}
 	
 	@Test
-	public void unGuardarropaConCuatroPrendasGeneraUnAtuendoConEsasPrendas() throws NoSePuedeGenerarSugerencia {
+	public void seGeneraSugerenciaCorrectamente() {
 		Guardarropa g = new Guardarropa();
+		Usuario u = new Usuario();
+		
 		g.agregarPrenda(remera);
 		g.agregarPrenda(pantalon);
 		g.agregarPrenda(zapatillas);
 		g.agregarPrenda(reloj);
+		u.agregarGuardarropa(g);
 		
-		List<Prenda> esperadas = Arrays.asList(remera, pantalon, zapatillas, reloj);
+		assertEquals(1,u.generarSugerencias(g).size());
 		
-		assertEquals(esperadas, g.generarSugerencias().get(0).prendas());
 	}
-	
-	@Test
-	public void unGuardarropaConDosRemerasGeneraDosAtuendos() throws NoSePuedeGenerarSugerencia {
-		Guardarropa g = new Guardarropa();
-		g.agregarPrenda(remera);
-		g.agregarPrenda(remera2);
-		g.agregarPrenda(pantalon);
-		g.agregarPrenda(zapatillas);
-		g.agregarPrenda(reloj);
-		
-		assertEquals(2, g.generarSugerencias().size());
-	}
-	
-	@Test(expected = Exception.class)
-	public void siNoHayAlgunaCategoriaFalla() throws NoSePuedeGenerarSugerencia{
-		Guardarropa g = new Guardarropa();
-		g.agregarPrenda(reloj);
-		g.agregarPrenda(pantalon);
-		g.agregarPrenda(zapatillas);
 
-		g.generarSugerencias();
-	}
+	@Test(expected = NoSePuedeGenerarSugerencia.class)
+	public void fallanSugerenciasSiFaltaPrenda() {
+		Guardarropa g = new Guardarropa();
+		Usuario u = new Usuario();
 	
+		g.agregarPrenda(pantalon);
+		g.agregarPrenda(zapatillas);
+		g.agregarPrenda(reloj);
+		u.agregarGuardarropa(g);
+		u.generarSugerencias(g);
+	}
 }

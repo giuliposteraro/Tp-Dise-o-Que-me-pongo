@@ -18,8 +18,8 @@ public class Atuendo {
 	}
 
 	private Prenda obtenerPrendaDeCategoria(ECategoria categoria, List<Prenda> conjuntoDePrendas) {
-		return conjuntoDePrendas.parallelStream()
-			.filter(prenda -> prenda.getCategoria() == categoria)
+		return conjuntoDePrendas.stream()
+			.filter(prenda -> categoria.equals(prenda.getCategoria()))
 			.findFirst()
 			.orElse(null);
 	}

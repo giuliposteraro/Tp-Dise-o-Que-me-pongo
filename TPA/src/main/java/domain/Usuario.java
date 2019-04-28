@@ -16,20 +16,17 @@ public class Usuario {
 		this.guardarropas.remove(guardarropa);
 	}
 
-	public Boolean tieneGuardarropa(Guardarropa g) {
-		return guardarropas.contains(g);
+	public Boolean tieneGuardarropa(Guardarropa guardarropa) {
+		return guardarropas.contains(guardarropa);
 	}
 	
-	public List<Atuendo> generarSugerencias(Guardarropa guardarropa) throws NoSePuedeGenerarSugerencia {
-		if(tieneGuardarropa(guardarropa)){
-			return guardarropa.generarSugerencias();
-		}
-		else {
-			throw new NoSePuedeGenerarSugerencia("No tiene el guardarropa solicitado");	
-		}
+	public List<Atuendo> generarSugerencias(Guardarropa guardarropa) {
+		if(!tieneGuardarropa(guardarropa))
+			throw new NoSePuedeGenerarSugerencia("No tiene el guardarropa solicitado");
+		return guardarropa.generarSugerencias();
 	}
 	
-	public List<List<Atuendo>> generarTodasLasSugerencias() throws NoSePuedeGenerarSugerencia {
+	public List<List<Atuendo>> generarTodasLasSugerencias() {
 		return guardarropas.stream()
 				.map(guardarropa -> generarSugerencias(guardarropa))
 				.collect(Collectors.toList());
