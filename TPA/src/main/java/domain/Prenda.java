@@ -10,8 +10,8 @@ public class Prenda {
 	
 	public Prenda(Tipo tipo, ETela tela, Color color) {
 		this.tipo = tipo;
-		this.color = color;
 		this.tela = tela;
+		this.color = color;
 	}
 	
 	public Tipo getTipo() {
@@ -29,4 +29,6 @@ public class Prenda {
 	public ECategoria getCategoria() {
 		return tipo.getCategoria();
 	}
+	
+	public static Prenda SIN_ACCESORIO = new Prenda(Tipo.SIN_ACCESORIO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO));
 }

@@ -30,6 +30,7 @@ public class Tipo {
 	public static Tipo ZAPATILLAS = new Tipo(ECategoria.CALZADO, Arrays.asList(ETela.TELA));
 	public static Tipo LENTES = new Tipo(ECategoria.ACCESORIO, Arrays.asList(ETela.NINGUNA));
 	public static Tipo RELOJ = new Tipo(ECategoria.ACCESORIO, Arrays.asList(ETela.NINGUNA));
-	public static Tipo COLLAR = new Tipo(ECategoria.ACCESORIO, Arrays.asList(ETela.NINGUNA));	
+	public static Tipo COLLAR = new Tipo(ECategoria.ACCESORIO, Arrays.asList(ETela.NINGUNA));
+	public static Tipo SIN_ACCESORIO = new Tipo(ECategoria.ACCESORIO, Arrays.asList(ETela.NINGUNA));
 	
 }
