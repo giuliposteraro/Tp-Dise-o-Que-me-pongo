@@ -12,7 +12,7 @@ import exceptions.*;
 
 public class Guardarropa {
 
-	Set<Prenda> prendas;
+	private Set<Prenda> prendas;
 
 	public Guardarropa() {
 		this.prendas = new HashSet<Prenda>();
@@ -35,6 +35,10 @@ public class Guardarropa {
 		prendas.remove(prenda);
 	}
 
+	public Set<Prenda> getPrendas() {
+		return this.prendas;
+	}
+	
 	private Set<Prenda> prendasSuperiores() {
 		return filtrarPrendasPorCategoria(ECategoria.SUPERIOR);
 	}

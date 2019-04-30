@@ -9,7 +9,21 @@ public class Usuario {
 	Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
 	
 	public void agregarGuardarropa(Guardarropa guardarropa) {
+		if (!esValidoUn(guardarropa)) {
+			throw new NoSePuedenCompartirPrendas("No se pueden compartir prendas entre distintos guardarropas");
+		} 
 		this.guardarropas.add(guardarropa);
+	}
+	
+	private Boolean esValidoUn(Guardarropa nuevoGuardarropa) {
+		return nuevoGuardarropa.getPrendas()
+				.stream()
+				.allMatch(prenda -> !algunGuardarropaTiene(prenda));
+	}
+	
+	private Boolean algunGuardarropaTiene(Prenda unaPrenda) {
+		return guardarropas.stream()
+				.anyMatch(guardarropa -> guardarropa.tienePrenda(unaPrenda));
 	}
 	
 	public void eliminarGuardarropa(Guardarropa guardarropa) {

@@ -22,21 +22,15 @@ public class ConstructorPrenda {
 		}
 	}
 
-	public Tipo getTipo() {
-		return tipo;
-	}
+
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
-	public Color getColor() {
-		return color;
-	}
+
 	public void setColor(EColor colorPrimario, EColor colorSecundario) {
 		this.color = new Color(colorPrimario, colorSecundario);
 	}
-	public ETela getTela() {
-		return tela;
-	}
+
 	public void setTela(ETela tela) {
 		this.tela = tela;
 	}
