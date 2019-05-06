@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import domain.ConstructorPrenda;
@@ -13,9 +14,15 @@ import exceptions.*;
 
 public class TestPrenda {
 
+	ConstructorPrenda c;
+	
+	@Before
+	public void crearConstructorPrenda() {
+		c = new ConstructorPrenda();
+	}
+	
 	@Test
 	public void saberDeQueTipoEsUnaPrenda() {
-		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		c.setTela(ETela.ALGODON);
@@ -25,7 +32,6 @@ public class TestPrenda {
 	
 	@Test
 	public void saberDeQueCategoriaEsUnaPrenda() {
-		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		c.setTela(ETela.ALGODON);
@@ -35,7 +41,6 @@ public class TestPrenda {
 	
 	@Test
 	public void saberDeQueTelaEsUnaPrenda() {
-		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		c.setTela(ETela.ALGODON);
@@ -45,7 +50,6 @@ public class TestPrenda {
 	
 	@Test(expected = ParametrosNoValidos.class)
 	public void crearPrendaSinTipoFalla() {
-		ConstructorPrenda c = new ConstructorPrenda();
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		c.setTela(ETela.ALGODON);
 		c.crear();
@@ -53,7 +57,6 @@ public class TestPrenda {
 	
 	@Test(expected = ParametrosNoValidos.class)
 	public void crearPrendaSinColorFalla() {
-		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setTela(ETela.ALGODON);
 		c.crear();
@@ -61,7 +64,6 @@ public class TestPrenda {
 	
 	@Test(expected = ParametrosNoValidos.class)
 	public void crearPrendaSinColorPrimarioFalla() {
-		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.NINGUNO, EColor.NINGUNO);
 		c.setTela(ETela.ALGODON);
@@ -70,7 +72,6 @@ public class TestPrenda {
 	
 	@Test(expected = ParametrosNoValidos.class)
 	public void crearPrendaConDosColoresIgualesFalla() {
-		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.ROJO);
 		c.setTela(ETela.ALGODON);
@@ -79,7 +80,6 @@ public class TestPrenda {
 	
 	@Test(expected = ParametrosNoValidos.class)
 	public void crearPrendaSinTelaFalla() {
-		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		c.crear();
@@ -87,7 +87,6 @@ public class TestPrenda {
 	
 	@Test(expected = ParametrosNoValidos.class)
 	public void unaPrendaConUnaTelaInconsistenteFalla() {
-		ConstructorPrenda c = new ConstructorPrenda();
 		c.setTipo(Tipo.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		c.setTela(ETela.CUERO);

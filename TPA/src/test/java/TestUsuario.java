@@ -15,11 +15,14 @@ import exceptions.*;
 
 public class TestUsuario {
 
-	public Prenda remera;
-	public Prenda remera2;
-	public Prenda pantalon;
-	public Prenda zapatillas;
-	public Prenda reloj;
+	Prenda remera;
+	Prenda remera2;
+	Prenda pantalon;
+	Prenda zapatillas;
+	Prenda reloj;
+	Guardarropa guardarropa;
+	Guardarropa guardarropa2;
+	Usuario usuario;
 	
 	@Before
 	public void crearPrendas() {
@@ -49,40 +52,49 @@ public class TestUsuario {
 		c.setTela(ETela.NINGUNA);
 		c.setColor(EColor.NEGRO, EColor.NINGUNO);
 		reloj = c.crear();
+		
+		guardarropa = new Guardarropa();
+		guardarropa2 = new Guardarropa();
+		usuario = new Usuario();
+		
+		usuario.agregarGuardarropa(guardarropa);
+		usuario.agregarGuardarropa(guardarropa2);
 	}
 	
 	@Test
 	public void agregarUnGuardarropa() {
-		Guardarropa g = new Guardarropa();
-		Usuario u = new Usuario();
-		u.agregarGuardarropa(g);
-		assertTrue(u.tieneGuardarropa(g));
+		assertTrue(usuario.tieneGuardarropa(guardarropa));
 	}
 	
 	@Test
 	public void seGeneraSugerenciaCorrectamente() {
-		Guardarropa g = new Guardarropa();
-		Usuario u = new Usuario();
+		usuario.agregarPrenda(remera, guardarropa);
+		usuario.agregarPrenda(pantalon, guardarropa);
+		usuario.agregarPrenda(zapatillas, guardarropa);
+		usuario.agregarPrenda(reloj, guardarropa);
 		
-		g.agregarPrenda(remera);
-		g.agregarPrenda(pantalon);
-		g.agregarPrenda(zapatillas);
-		g.agregarPrenda(reloj);
-		u.agregarGuardarropa(g);
 		
-		assertEquals(1,u.generarSugerencias(g).size());
+		assertEquals(1,usuario.generarSugerencias(guardarropa).size());
 		
 	}
-
+	
 	@Test(expected = NoSePuedeGenerarSugerencia.class)
 	public void fallanSugerenciasSiFaltaPrenda() {
-		Guardarropa g = new Guardarropa();
-		Usuario u = new Usuario();
+		usuario.agregarPrenda(pantalon, guardarropa);
+		usuario.agregarPrenda(zapatillas, guardarropa);
+		usuario.agregarPrenda(reloj, guardarropa);
+		usuario.generarSugerencias(guardarropa);
+	}
 	
-		g.agregarPrenda(pantalon);
-		g.agregarPrenda(zapatillas);
-		g.agregarPrenda(reloj);
-		u.agregarGuardarropa(g);
-		u.generarSugerencias(g);
+	@Test(expected = NoSePuedenCompartirPrendas.class)
+	public void noSePuedeAgregarLaMismaPrendaADosGuardarropasDistintos() {
+		usuario.agregarPrenda(remera, guardarropa);
+		usuario.agregarPrenda(remera, guardarropa2);
+	}
+	
+	@Test(expected = AccesoAGuardarropaDenegado.class)
+	public void NoSePuedeAccederAUnGuardarropaAjeno() {
+		Guardarropa guardarropa3 = new Guardarropa();
+		usuario.agregarPrenda(remera, guardarropa3);
 	}
 }

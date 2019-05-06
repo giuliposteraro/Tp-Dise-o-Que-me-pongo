@@ -19,11 +19,12 @@ import exceptions.*;
 public class TestGuardarropa {
 
 	@Parameter
-	public Prenda remera;
-	public Prenda remera2;
-	public Prenda pantalon;
-	public Prenda zapatillas;
-	public Prenda reloj;
+	Prenda remera;
+	Prenda remera2;
+	Prenda pantalon;
+	Prenda zapatillas;
+	Prenda reloj;
+	Guardarropa guardarropa;
 	
 	@Before
 	public void crearPrendas() {
@@ -53,48 +54,46 @@ public class TestGuardarropa {
 		c.setTela(ETela.NINGUNA);
 		c.setColor(EColor.NEGRO, EColor.NINGUNO);
 		reloj = c.crear();
+	
+		guardarropa = new Guardarropa();
 	}
 	
 	@Test
 	public void agregarUnaPrenda() {
-		Guardarropa g = new Guardarropa();
-		g.agregarPrenda(remera);
-		assertTrue(g.tienePrenda(remera));
+		guardarropa.agregarPrenda(remera);
+		assertTrue(guardarropa.tienePrenda(remera));
 	}
 	
 	@Test
 	public void unGuardarropaConCuatroPrendasGeneraUnAtuendoConEsasPrendas() {
-		Guardarropa g = new Guardarropa();
-		g.agregarPrenda(remera);
-		g.agregarPrenda(pantalon);
-		g.agregarPrenda(zapatillas);
-		g.agregarPrenda(reloj);
+		guardarropa.agregarPrenda(remera);
+		guardarropa.agregarPrenda(pantalon);
+		guardarropa.agregarPrenda(zapatillas);
+		guardarropa.agregarPrenda(reloj);
 		
 		List<Prenda> esperadas = Arrays.asList(remera, pantalon, zapatillas, reloj);
 		
-		assertEquals(esperadas, g.generarSugerencias().get(0).prendas());
+		assertEquals(esperadas, guardarropa.generarSugerencias().get(0).prendas());
 	}
 	
 	@Test
 	public void unGuardarropaConDosRemerasGeneraDosAtuendos() {
-		Guardarropa g = new Guardarropa();
-		g.agregarPrenda(remera);
-		g.agregarPrenda(remera2);
-		g.agregarPrenda(pantalon);
-		g.agregarPrenda(zapatillas);
-		g.agregarPrenda(reloj);
+		guardarropa.agregarPrenda(remera);
+		guardarropa.agregarPrenda(remera2);
+		guardarropa.agregarPrenda(pantalon);
+		guardarropa.agregarPrenda(zapatillas);
+		guardarropa.agregarPrenda(reloj);
 		
-		assertEquals(2, g.generarSugerencias().size());
+		assertEquals(2, guardarropa.generarSugerencias().size());
 	}
 	
 	@Test(expected = NoSePuedeGenerarSugerencia.class)
 	public void siNoHayAlgunaCategoriaFalla() {
-		Guardarropa g = new Guardarropa();
-		g.agregarPrenda(reloj);
-		g.agregarPrenda(pantalon);
-		g.agregarPrenda(zapatillas);
+		guardarropa.agregarPrenda(reloj);
+		guardarropa.agregarPrenda(pantalon);
+		guardarropa.agregarPrenda(zapatillas);
 
-		g.generarSugerencias();
+		guardarropa.generarSugerencias();
 	}
 	
 }
