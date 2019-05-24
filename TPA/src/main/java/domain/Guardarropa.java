@@ -28,6 +28,9 @@ public class Guardarropa {
 	}
 
 	public void agregarPrenda(Prenda prenda) {
+		if(!this.tieneLugar()) {
+			throw new CapacidadDelGuardarropaLlena("No entran mas prendas en este guardarropa");
+		}
 		prendas.add(prenda);
 	}
 
@@ -74,5 +77,9 @@ public class Guardarropa {
 	private void validarListas() throws NoSePuedeGenerarSugerencia {
 		if(prendasSuperiores().isEmpty() || prendasInferiores().isEmpty() || calzados().isEmpty() || accesorios().isEmpty())
 			throw new NoSePuedeGenerarSugerencia("No se pueden generar sugerencias en este guardarropa");
+	}
+	
+	public Boolean tieneLugar() {
+		return true;
 	}
 }

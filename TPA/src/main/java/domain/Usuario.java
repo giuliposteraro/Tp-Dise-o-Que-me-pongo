@@ -6,6 +6,7 @@ import exceptions.*;
 
 public class Usuario {
 	
+	private TipoUsuario tipoUsuario = new UsuarioGratuito();
 	Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
 	
 	public void agregarGuardarropa(Guardarropa guardarropa) {
@@ -39,6 +40,9 @@ public class Usuario {
 		if(this.algunGuardarropaTiene(prenda)) {
 			throw new NoSePuedenCompartirPrendas("No se pueden compartir prendas entre distintos guardarropas");
 		}
+		if(!this.validarCapacidadGuardarropa(guardarropa)) {
+			throw new CapacidadDelGuardarropaLlena("Como usuario gratuito ya ocupo su capacidad maxima de prendas en este guardarropa");
+		}
 		guardarropa.agregarPrenda(prenda);
 	}
 
@@ -57,5 +61,9 @@ public class Usuario {
 	private Boolean algunGuardarropaTiene(Prenda unaPrenda) {
 		return guardarropas.stream()
 				.anyMatch(guardarropa -> guardarropa.tienePrenda(unaPrenda));
+	}
+	
+	private Boolean validarCapacidadGuardarropa(Guardarropa guardarropa) {
+		return tipoUsuario.tieneLugarGuardarropa(guardarropa);
 	}
 }
