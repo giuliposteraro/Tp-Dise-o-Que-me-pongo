@@ -18,10 +18,10 @@ public class Guardarropa {
 		this.prendas = new HashSet<Prenda>();
 	}
 
-	public List<Atuendo> generarSugerencias() {
-		validarListas();
-		return crearAtuendos(sugerenciasDePrendas());
-	}
+//	public List<Atuendo> generarSugerencias() {
+//		validarListas();
+//		return crearAtuendos(sugerenciasDePrendas());
+//	}
 
 	public Boolean tienePrenda(Prenda unaPrenda) {
 		return prendas.contains(unaPrenda);
@@ -42,31 +42,31 @@ public class Guardarropa {
 		return this.prendas;
 	}
 	
-	private Set<Prenda> prendasSuperiores() {
+	public Set<Prenda> prendasSuperiores() {
 		return filtrarPrendasPorCategoria(ECategoria.SUPERIOR);
 	}
 	
-	private Set<Prenda> prendasInferiores() {
+	public Set<Prenda> prendasInferiores() {
 		return filtrarPrendasPorCategoria(ECategoria.INFERIOR);
 	}
 	
-	private Set<Prenda> calzados() {
+	public Set<Prenda> calzados() {
 		return filtrarPrendasPorCategoria(ECategoria.CALZADO);
 	}
 	
-	private Set<Prenda> accesorios() {
+	public Set<Prenda> accesorios() {
 		return filtrarPrendasPorCategoria(ECategoria.ACCESORIO);
 	}
 	
-	private Set<List<Prenda>> sugerenciasDePrendas() {
-		return Sets.cartesianProduct(ImmutableList.of(prendasSuperiores(), prendasInferiores(), calzados(), accesorios()));
-	}
-
-	private List<Atuendo> crearAtuendos(Set<List<Prenda>> prendasSueltas) {
-		return prendasSueltas.stream()
-				.map(conjuntoDePrendas -> new Atuendo(conjuntoDePrendas))
-				.collect(Collectors.toList());
-	}
+//	private Set<List<Prenda>> sugerenciasDePrendas() {
+//		return Sets.cartesianProduct(ImmutableList.of(prendasSuperiores(), prendasInferiores(), calzados(), accesorios()));
+//	}
+//
+//	private List<Atuendo> crearAtuendos(Set<List<Prenda>> prendasSueltas) {
+//		return prendasSueltas.stream()
+//				.map(conjuntoDePrendas -> new Atuendo(conjuntoDePrendas))
+//				.collect(Collectors.toList());
+//	}
 	
 	private Set<Prenda> filtrarPrendasPorCategoria(ECategoria categoria) {
 		return prendas.stream()
@@ -74,10 +74,10 @@ public class Guardarropa {
 				.collect(Collectors.toSet());
 	}
 
-	private void validarListas() throws NoSePuedeGenerarSugerencia {
-		if(prendasSuperiores().isEmpty() || prendasInferiores().isEmpty() || calzados().isEmpty() || accesorios().isEmpty())
-			throw new NoSePuedeGenerarSugerencia("No se pueden generar sugerencias en este guardarropa");
-	}
+//	private void validarListas() throws NoSePuedeGenerarSugerencia {
+//		if(prendasSuperiores().isEmpty() || prendasInferiores().isEmpty() || calzados().isEmpty() || accesorios().isEmpty())
+//			throw new NoSePuedeGenerarSugerencia("No se pueden generar sugerencias en este guardarropa");
+//	}
 	
 	public Boolean tieneLugar() {
 		return true;
