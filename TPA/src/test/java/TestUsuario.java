@@ -73,8 +73,9 @@ public class TestUsuario {
 		usuario.agregarPrenda(zapatillas, guardarropa);
 		usuario.agregarPrenda(reloj, guardarropa);
 		
+		usuario.generarSugerencias(guardarropa);
 		
-		assertEquals(1,usuario.generarSugerencias(guardarropa).size());
+		assertEquals(1, usuario.getSugerenciasPendientes().size());
 		
 	}
 	
