@@ -2,12 +2,13 @@ package domain;
 
 import java.util.Arrays;
 
+import domain.TipoPrenda.TipoPrenda;
 import exceptions.*;
 
 public class ConstructorPrenda {
 	
 	// Mismos atributos que Prenda
-	Tipo tipo;
+	TipoPrenda tipo;
 	Color color;
 	ETela tela;
 	
@@ -23,7 +24,7 @@ public class ConstructorPrenda {
 	}
 
 
-	public void setTipo(Tipo tipo) {
+	public void setTipo(TipoPrenda tipo) {
 		this.tipo = tipo;
 	}
 

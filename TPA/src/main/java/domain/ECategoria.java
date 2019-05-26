@@ -1,5 +1,5 @@
 package domain;
 
 public enum ECategoria {
-	SUPERIOR, INFERIOR, CALZADO, ACCESORIO;
+	SUPERIOR, INFERIOR, CALZADO, ACCESORIO, ABRIGO;
 }

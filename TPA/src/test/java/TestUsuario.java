@@ -8,7 +8,7 @@ import domain.EColor;
 import domain.ETela;
 import domain.Guardarropa;
 import domain.Prenda;
-import domain.Tipo;
+import domain.TipoPrenda;
 import domain.Usuario;
 
 import exceptions.*;
@@ -28,27 +28,27 @@ public class TestUsuario {
 	public void crearPrendas() {
 		ConstructorPrenda c = new ConstructorPrenda();
 		
-		c.setTipo(Tipo.REMERA);
+		c.setTipo(TipoPrenda.REMERA);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.NEGRO, EColor.AZUL);
 		remera = c.crear();
 		
-		c.setTipo(Tipo.REMERA);
+		c.setTipo(TipoPrenda.REMERA);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		remera2 = c.crear();
 		
-		c.setTipo(Tipo.PANTALON);
+		c.setTipo(TipoPrenda.PANTALON);
 		c.setTela(ETela.JEAN);
 		c.setColor(EColor.AZUL, EColor.NINGUNO);
 		pantalon = c.crear();
 		
-		c.setTipo(Tipo.ZAPATILLAS);
+		c.setTipo(TipoPrenda.ZAPATILLAS);
 		c.setTela(ETela.TELA);
 		c.setColor(EColor.BLANCO, EColor.NEGRO);
 		zapatillas = c.crear();
 		
-		c.setTipo(Tipo.RELOJ);
+		c.setTipo(TipoPrenda.RELOJ);
 		c.setTela(ETela.NINGUNA);
 		c.setColor(EColor.NEGRO, EColor.NINGUNO);
 		reloj = c.crear();
