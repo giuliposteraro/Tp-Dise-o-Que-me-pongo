@@ -23,7 +23,6 @@ public class ConstructorPrenda {
 		}
 	}
 
-
 	public void setTipo(TipoPrenda tipo) {
 		this.tipo = tipo;
 	}

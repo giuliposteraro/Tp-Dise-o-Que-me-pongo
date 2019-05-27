@@ -46,6 +46,10 @@ public class Guardarropa {
 		return filtrarPrendasPorCategoria(ECategoria.SUPERIOR);
 	}
 	
+	private Set<Prenda> prendasSuperioresDeAbrigo() {
+		return filtrarPrendasPorCategoria(ECategoria.ABRIGO);
+	}
+	
 	private Set<Prenda> prendasInferiores() {
 		return filtrarPrendasPorCategoria(ECategoria.INFERIOR);
 	}
@@ -59,7 +63,7 @@ public class Guardarropa {
 	}
 	
 	private Set<List<Prenda>> sugerenciasDePrendas() {
-		return Sets.cartesianProduct(ImmutableList.of(prendasSuperiores(), prendasInferiores(), calzados(), accesorios()));
+		return Sets.cartesianProduct(ImmutableList.of(prendasSuperiores(),prendasSuperioresDeAbrigo(), prendasInferiores(), calzados(), accesorios()));
 	}
 
 	private List<Atuendo> crearAtuendos(Set<List<Prenda>> prendasSueltas) {
@@ -75,11 +79,12 @@ public class Guardarropa {
 	}
 
 	private void validarListas() throws NoSePuedeGenerarSugerencia {
-		if(prendasSuperiores().isEmpty() || prendasInferiores().isEmpty() || calzados().isEmpty() || accesorios().isEmpty())
+		if(prendasSuperiores().isEmpty() || prendasSuperioresDeAbrigo().isEmpty() || prendasInferiores().isEmpty() || calzados().isEmpty() || accesorios().isEmpty())
 			throw new NoSePuedeGenerarSugerencia("No se pueden generar sugerencias en este guardarropa");
 	}
 	
 	public Boolean tieneLugar() {
 		return true;
 	}
+	
 }

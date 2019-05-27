@@ -18,4 +18,5 @@ public class TipoPrenda {
 	public ECategoria getCategoria() {
 		return  this.categoria;
 	}
+	
 }

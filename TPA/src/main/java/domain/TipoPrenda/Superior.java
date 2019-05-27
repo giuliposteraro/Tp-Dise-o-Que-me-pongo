@@ -20,4 +20,5 @@ public class Superior extends TipoPrenda {
 	protected boolean puededeAbrigarseCon(Superior prendaSuperior) {
 		return this.nivelAbrigo < prendaSuperior.getNivelAbrigo();
 	}
+	
 }
