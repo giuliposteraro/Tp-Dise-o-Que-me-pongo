@@ -13,6 +13,15 @@ import exceptions.*;
 public class Guardarropa {
 
 	private Set<Prenda> prendas;
+	private TipoGuardarropa tipoGuardarropa = new GuardarropaLimitado();
+	
+	public Boolean tieneLugar() {
+		return tipoGuardarropa.tieneLugar(this);
+	}
+	
+	public int cantidadPrendas() {
+		return prendas.size();
+	}
 
 	public Guardarropa() {
 		this.prendas = new HashSet<Prenda>();
@@ -28,7 +37,7 @@ public class Guardarropa {
 	}
 
 	public void agregarPrenda(Prenda prenda) {
-		if(!this.tieneLugar()) {
+		if(!tipoGuardarropa.tieneLugar(this)) {
 			throw new CapacidadDelGuardarropaLlena("No entran mas prendas en este guardarropa");
 		}
 		prendas.add(prenda);
@@ -78,8 +87,5 @@ public class Guardarropa {
 		if(prendasSuperiores().isEmpty() || prendasInferiores().isEmpty() || calzados().isEmpty() || accesorios().isEmpty())
 			throw new NoSePuedeGenerarSugerencia("No se pueden generar sugerencias en este guardarropa");
 	}
-	
-	public Boolean tieneLugar() {
-		return true;
-	}
+
 }

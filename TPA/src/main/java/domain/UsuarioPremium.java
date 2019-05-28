@@ -2,11 +2,8 @@ package domain;
 
 public class UsuarioPremium implements TipoUsuario{
 	
-	public Boolean tieneLugarGuardarropa(Guardarropa guardarropa) {
-		return true;
-	}
-	
-	public void crearGuardarropa(Guardarropa guardarropa) {
+	@Override 
+	public Guardarropa crearGuardarropa() {
 		return new GuardarropaIlimitado();
 	}
 	
