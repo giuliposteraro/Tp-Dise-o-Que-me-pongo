@@ -14,7 +14,14 @@ public class Guardarropa {
 
 	private Set<Prenda> prendas;
 	private TipoGuardarropa tipoGuardarropa = new GuardarropaLimitado();
+
+	public TipoGuardarropa getTipoGuardarropa() {
+		return this.tipoGuardarropa;
+	}
 	
+	public void setTipoGuardarropa(TipoGuardarropa tipo) {
+		this.tipoGuardarropa = tipo;
+	}
 	public Boolean tieneLugar() {
 		return tipoGuardarropa.tieneLugar(this);
 	}
@@ -23,8 +30,16 @@ public class Guardarropa {
 		return prendas.size();
 	}
 
-	public Guardarropa() {
+	public Guardarropa(TipoGuardarropa tipo) {
 		this.prendas = new HashSet<Prenda>();
+	}
+
+	public Guardarropa(GuardarropaIlimitado tipo) {
+		this.tipoGuardarropa = tipo;
+	}
+
+	public Guardarropa(GuardarropaLimitado tipo) {
+		this.tipoGuardarropa = tipo;
 	}
 
 	public List<Atuendo> generarSugerencias() {

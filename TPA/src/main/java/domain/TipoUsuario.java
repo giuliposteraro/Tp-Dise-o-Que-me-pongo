@@ -1,5 +1,5 @@
 package domain;
 
 public interface TipoUsuario {
-	public Guardarropa crearGuardarropa();
+	public Guardarropa crearGuardarropa(Guardarropa tipoGuardarropa);
 }
