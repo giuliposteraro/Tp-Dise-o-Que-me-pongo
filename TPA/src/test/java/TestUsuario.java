@@ -3,14 +3,14 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.Atuendo;
 import domain.ConstructorPrenda;
 import domain.EColor;
 import domain.ETela;
 import domain.Guardarropa;
 import domain.Prenda;
-import domain.Tipo;
+import domain.RepoPrendas;
 import domain.Usuario;
-
 import exceptions.*;
 
 public class TestUsuario {
@@ -20,6 +20,7 @@ public class TestUsuario {
 	Prenda pantalon;
 	Prenda zapatillas;
 	Prenda reloj;
+	Prenda campera;
 	Guardarropa guardarropa;
 	Guardarropa guardarropa2;
 	Usuario usuario;
@@ -28,35 +29,44 @@ public class TestUsuario {
 	public void crearPrendas() {
 		ConstructorPrenda c = new ConstructorPrenda();
 		
-		c.setTipo(Tipo.REMERA);
+		c.setTipo(RepoPrendas.REMERA);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.NEGRO, EColor.AZUL);
 		remera = c.crear();
 		
-		c.setTipo(Tipo.REMERA);
+		c.setTipo(RepoPrendas.REMERA);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		remera2 = c.crear();
 		
-		c.setTipo(Tipo.PANTALON);
+		c.setTipo(RepoPrendas.CAMPERA);
+		c.setTela(ETela.CUERO);
+		c.setColor(EColor.NEGRO, EColor.NINGUNO);
+		campera = c.crear();
+		
+		c.setTipo(RepoPrendas.PANTALON);
 		c.setTela(ETela.JEAN);
 		c.setColor(EColor.AZUL, EColor.NINGUNO);
 		pantalon = c.crear();
 		
-		c.setTipo(Tipo.ZAPATILLAS);
+		c.setTipo(RepoPrendas.ZAPATILLAS);
 		c.setTela(ETela.TELA);
 		c.setColor(EColor.BLANCO, EColor.NEGRO);
 		zapatillas = c.crear();
 		
-		c.setTipo(Tipo.RELOJ);
+		c.setTipo(RepoPrendas.RELOJ);
 		c.setTela(ETela.NINGUNA);
 		c.setColor(EColor.NEGRO, EColor.NINGUNO);
 		reloj = c.crear();
 		
-		guardarropa = new Guardarropa();
-		guardarropa2 = new Guardarropa();
-		usuario = new Usuario();
 		
+		guardarropa = new Guardarropa();
+		guardarropa.agregarPrenda(Atuendo.SIN_ABRIGO);
+		guardarropa.agregarPrenda(Atuendo.SIN_ACCESORIO);
+		guardarropa2 = new Guardarropa();
+		guardarropa.agregarPrenda(Atuendo.SIN_ABRIGO);
+		guardarropa.agregarPrenda(Atuendo.SIN_ACCESORIO);
+		usuario = new Usuario();
 		usuario.agregarGuardarropa(guardarropa);
 		usuario.agregarGuardarropa(guardarropa2);
 	}
@@ -69,6 +79,7 @@ public class TestUsuario {
 	@Test
 	public void seGeneraSugerenciaCorrectamente() {
 		usuario.agregarPrenda(remera, guardarropa);
+		usuario.agregarPrenda(campera, guardarropa);
 		usuario.agregarPrenda(pantalon, guardarropa);
 		usuario.agregarPrenda(zapatillas, guardarropa);
 		usuario.agregarPrenda(reloj, guardarropa);
@@ -76,7 +87,6 @@ public class TestUsuario {
 		usuario.generarSugerencias(guardarropa);
 		
 		assertEquals(1, usuario.getSugerenciasPendientes().size());
-		
 	}
 	
 	@Test(expected = NoSePuedeGenerarSugerencia.class)

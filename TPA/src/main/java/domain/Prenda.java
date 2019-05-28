@@ -1,20 +1,22 @@
 package domain;
 
+import domain.TipoPrenda.TipoPrenda;
+
 //No instanciar directamente, usar ConstructorPrenda
 
 public class Prenda {
 	
-	Tipo tipo;
+	TipoPrenda tipo;
 	Color color;
 	ETela tela;
 	
-	public Prenda(Tipo tipo, ETela tela, Color color) {
+	public Prenda(TipoPrenda tipo, ETela tela, Color color) {
 		this.tipo = tipo;
 		this.tela = tela;
 		this.color = color;
 	}
 	
-	public Tipo getTipo() {
+	public TipoPrenda getTipo() {
 		return tipo;
 	}
 
@@ -30,5 +32,7 @@ public class Prenda {
 		return tipo.getCategoria();
 	}
 	
-	public static Prenda SIN_ACCESORIO = new Prenda(Tipo.SIN_ACCESORIO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO));
+	//public static Prenda SIN_ACCESORIO = new Prenda(RepoPrendas.SIN_ACCESORIO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO));
+	//public static Prenda SIN_ABRIGO = new Prenda(RepoPrendas.SIN_ABRIGO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO));
 }
+

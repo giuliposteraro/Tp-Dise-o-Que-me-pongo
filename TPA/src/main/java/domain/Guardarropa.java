@@ -37,6 +37,10 @@ public class Guardarropa {
 		return filtrarPrendasPorCategoria(ECategoria.SUPERIOR);
 	}
 	
+	public Set<Prenda> prendasSuperioresDeAbrigo() {
+		return filtrarPrendasPorCategoria(ECategoria.ABRIGO);
+	}
+  
 	public Set<Prenda> prendasInferiores() {
 		return filtrarPrendasPorCategoria(ECategoria.INFERIOR);
 	}
@@ -58,4 +62,5 @@ public class Guardarropa {
 	public Boolean tieneLugar() {
 		return true;
 	}
+	
 }
