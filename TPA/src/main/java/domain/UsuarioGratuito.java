@@ -6,5 +6,9 @@ public class UsuarioGratuito implements TipoUsuario{
 		return guardarropa.tieneLugar();
 	}
 	
+	public Guardarropa crearGuardarropa() {
+		return new GuardardarropaLimitado();
+	}
+	
 	
 }

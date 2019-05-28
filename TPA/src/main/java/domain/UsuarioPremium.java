@@ -6,4 +6,8 @@ public class UsuarioPremium implements TipoUsuario{
 		return true;
 	}
 	
+	public void crearGuardarropa(Guardarropa guardarropa) {
+		return new GuardarropaIlimitado();
+	}
+	
 }
