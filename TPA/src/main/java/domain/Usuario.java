@@ -1,7 +1,5 @@
 package domain;
 import java.util.*;
-import java.util.stream.Collectors;
-
 import exceptions.*;
 
 public class Usuario {
@@ -9,6 +7,10 @@ public class Usuario {
 	private TipoUsuario tipoUsuario = new UsuarioGratuito();
 	Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
 	
+	List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
+	
+	
+	// ELIMINAR
 	public void agregarGuardarropa(Guardarropa guardarropa) {
 		if (!esGuardarropaValido(guardarropa)) {
 			throw new NoSePuedenCompartirPrendas("No se pueden compartir prendas entre distintos guardarropas");
@@ -24,15 +26,17 @@ public class Usuario {
 		return guardarropas.contains(guardarropa);
 	}
 	
-	public List<Atuendo> generarSugerencias(Guardarropa guardarropa) {
+	public void generarSugerencias(Guardarropa guardarropa) {
 		validarAccesoAGuardarropa(guardarropa);
-		return guardarropa.generarSugerencias();
+		
+		Sugeridor sugeridor = new Sugeridor(this, guardarropa, new Date());
+		
+		sugeridor.generarSugerencias();
 	}
 	
-	public List<Atuendo> generarTodasLasSugerencias() {
-		return guardarropas.stream()
-				.flatMap(guardarropa -> generarSugerencias(guardarropa).stream())
-				.collect(Collectors.toList());
+	public void generarTodasLasSugerencias() {
+		guardarropas.stream()
+			.forEach(guardarropa -> generarSugerencias(guardarropa));
 	}
 	
 	public void agregarPrenda(Prenda prenda, Guardarropa guardarropa) {
@@ -65,5 +69,13 @@ public class Usuario {
 	
 	private Boolean validarCapacidadGuardarropa(Guardarropa guardarropa) {
 		return tipoUsuario.tieneLugarGuardarropa(guardarropa);
+	}
+	
+	public void agregarSugerencia(Sugerencia sugerencia) {
+		sugerenciasPendientes.add(sugerencia);
+	}
+
+	public List<Sugerencia> getSugerenciasPendientes() {
+		return sugerenciasPendientes;
 	}
 }
