@@ -13,4 +13,11 @@ public class Sugerencia {
 		this.estado = EstadoSugerencia.PENDIENTE;
 	}
 
+	public void setEstado(EstadoSugerencia estado) {
+		this.estado = estado;
+	}
+	
+	public void esValidaParaTemp(int temp) {
+		
+	}
 }
