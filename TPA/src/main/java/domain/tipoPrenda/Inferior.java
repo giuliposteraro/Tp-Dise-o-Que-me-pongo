@@ -5,8 +5,7 @@ import java.util.List;
 public class Inferior extends TipoPrenda {
 		
 	public Inferior(List<ETela> unasTelas) {
-		super();
+		super(unasTelas, 2.0);
 		this.categoria = ECategoria.INFERIOR;
-		this.telasValidas = unasTelas;
 	}
 }

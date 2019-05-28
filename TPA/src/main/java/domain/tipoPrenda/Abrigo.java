@@ -6,11 +6,14 @@ import java.util.Optional;
 public class Abrigo extends Superior {
 	private Optional<Superior> prendaAbajo = Optional.empty();
 	
-	public Abrigo(List<ETela> unasTelas, int nivelAbrigo) {
+	public Abrigo(List<ETela> unasTelas, int capa) {
 		super(unasTelas);
 		this.categoria = ECategoria.ABRIGO;
-		this.nivelAbrigo = nivelAbrigo;
+		this.nivelAbrigo = 5.0;
+		this.capa = capa;
 	}
+	
+	//TODO Preguntar
 	
 	public void ponerSobre(Superior otraPrenda) {
 		if(otraPrenda.puededeAbrigarseCon(this)) {
@@ -22,7 +25,7 @@ public class Abrigo extends Superior {
 	}
 	
 	@Override
-	public int getNivelAbrigo(){
-		return this.nivelAbrigo + this.prendaAbajo.map(prenda -> prenda.getNivelAbrigo()).orElse(0);
+	public Double getNivelAbrigo(){
+		return this.nivelAbrigo + this.prendaAbajo.map(prenda -> prenda.getNivelAbrigo()).orElse(0.0);
 	}
 }

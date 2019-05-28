@@ -12,15 +12,15 @@ import domain.tipoPrenda.ETela;
 
 public class Atuendo {
 	
-	Prenda superior;
 	Prenda abrigo;
+	Prenda superior;
 	Prenda inferior;
 	Prenda calzado;
 	Prenda accesorio;
 	
 	public Atuendo(List<Prenda> conjuntoDePrendas) {
-		this.superior = obtenerPrendaDeCategoria(ECategoria.SUPERIOR, conjuntoDePrendas);
 		this.abrigo = obtenerPrendaDeCategoria(ECategoria.ABRIGO, conjuntoDePrendas);
+		this.superior = obtenerPrendaDeCategoria(ECategoria.SUPERIOR, conjuntoDePrendas);
 		this.inferior = obtenerPrendaDeCategoria(ECategoria.INFERIOR, conjuntoDePrendas);
 		this.calzado = obtenerPrendaDeCategoria(ECategoria.CALZADO, conjuntoDePrendas);
 		this.accesorio = obtenerPrendaDeCategoria(ECategoria.ACCESORIO, conjuntoDePrendas);
@@ -39,5 +39,9 @@ public class Atuendo {
 	
 	public static Prenda SIN_ACCESORIO = new Prenda(RepoPrendas.SIN_ACCESORIO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO));
 	public static Prenda SIN_ABRIGO = new Prenda(RepoPrendas.SIN_ABRIGO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO));
+
+	public Double getNivelAbrigo() {
+		return abrigo.getNivelAbrigo() + superior.getNivelAbrigo() + inferior.getNivelAbrigo() + calzado.getNivelAbrigo() + accesorio.getNivelAbrigo();
+	}
 
 }

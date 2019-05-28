@@ -3,20 +3,19 @@ package domain.tipoPrenda;
 import java.util.List;
 
 public class Superior extends TipoPrenda {
-	protected int nivelAbrigo = 0;
+	protected int capa = 0;
 	
 	public Superior(List<ETela> unasTelas) {
-		super();
+		super(unasTelas, 2.0);
 		this.categoria = ECategoria.SUPERIOR;
-		this.telasValidas = unasTelas;
 	}
 	
-	protected int getNivelAbrigo() {
-		return this.nivelAbrigo;
+	protected int getCapa() {
+		return this.capa;
 	}
 	
 	protected boolean puededeAbrigarseCon(Superior prendaSuperior) {
-		return this.nivelAbrigo < prendaSuperior.getNivelAbrigo();
+		return this.capa < prendaSuperior.getCapa();
 	}
 	
 }
