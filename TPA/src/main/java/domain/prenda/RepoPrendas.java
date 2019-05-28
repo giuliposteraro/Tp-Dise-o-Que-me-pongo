@@ -1,9 +1,7 @@
-package domain;
+package domain.prenda;
 
 import java.util.Arrays;
-import java.util.List;
-
-import domain.TipoPrenda.*;
+import domain.tipoPrenda.*;
 
 public class RepoPrendas {
 	public static Superior REMERA = new Superior(Arrays.asList(ETela.ALGODON));

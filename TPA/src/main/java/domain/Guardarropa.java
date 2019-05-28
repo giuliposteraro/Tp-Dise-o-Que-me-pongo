@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import domain.prenda.Prenda;
+import domain.tipoPrenda.ECategoria;
 import exceptions.*;
 
 public class Guardarropa {

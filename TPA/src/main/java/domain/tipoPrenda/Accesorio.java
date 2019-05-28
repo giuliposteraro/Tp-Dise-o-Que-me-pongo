@@ -1,9 +1,6 @@
-package domain.TipoPrenda;
+package domain.tipoPrenda;
 
 import java.util.List;
-
-import domain.ECategoria;
-import domain.ETela;
 
 public class Accesorio extends TipoPrenda {
 	public Accesorio(List<ETela> unasTelas) {

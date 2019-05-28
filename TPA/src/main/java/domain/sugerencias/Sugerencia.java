@@ -1,4 +1,7 @@
-package domain;
+package domain.sugerencias;
+
+import domain.Atuendo;
+import domain.usuario.Usuario;
 
 public class Sugerencia {
 
@@ -17,7 +20,13 @@ public class Sugerencia {
 		this.estado = estado;
 	}
 	
-	public void esValidaParaTemp(int temp) {
-		
+	public Double coeficienteDeAbrigo(Double temp) {
+		//Campana de Gauss
+		return Math.pow(Math.E, (-Math.pow(this.getAbrigo() - (40.0 - temp), 2) / 2));
+	}
+
+	private Double getAbrigo() {
+		// TODO Auto-generated method stub
+		return 0.0;
 	}
 }

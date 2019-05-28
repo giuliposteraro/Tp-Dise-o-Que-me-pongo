@@ -1,10 +1,7 @@
-package domain.TipoPrenda;
+package domain.tipoPrenda;
 
 import java.util.List;
 import java.util.Optional;
-
-import domain.ECategoria;
-import domain.ETela;
 
 public class Abrigo extends Superior {
 	private Optional<Superior> prendaAbajo = Optional.empty();

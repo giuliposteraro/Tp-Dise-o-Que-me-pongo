@@ -1,8 +1,11 @@
-package domain;
+package domain.prenda;
 
 import java.util.Arrays;
 
-import domain.TipoPrenda.TipoPrenda;
+import domain.color.Color;
+import domain.color.EColor;
+import domain.tipoPrenda.ETela;
+import domain.tipoPrenda.TipoPrenda;
 import exceptions.*;
 
 public class ConstructorPrenda {

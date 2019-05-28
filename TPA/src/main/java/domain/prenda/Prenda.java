@@ -1,6 +1,9 @@
-package domain;
+package domain.prenda;
 
-import domain.TipoPrenda.TipoPrenda;
+import domain.color.Color;
+import domain.tipoPrenda.ECategoria;
+import domain.tipoPrenda.ETela;
+import domain.tipoPrenda.TipoPrenda;
 
 //No instanciar directamente, usar ConstructorPrenda
 

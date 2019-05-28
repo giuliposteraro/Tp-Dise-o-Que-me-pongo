@@ -1,4 +1,6 @@
-package domain;
+package domain.usuario;
+
+import domain.Guardarropa;
 
 public class UsuarioPremium implements TipoUsuario{
 	

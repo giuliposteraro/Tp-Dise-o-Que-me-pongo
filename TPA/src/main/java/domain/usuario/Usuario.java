@@ -1,5 +1,10 @@
-package domain;
+package domain.usuario;
 import java.util.*;
+
+import domain.Guardarropa;
+import domain.prenda.Prenda;
+import domain.sugerencias.Sugerencia;
+import domain.sugerencias.Sugeridor;
 import exceptions.*;
 
 public class Usuario {

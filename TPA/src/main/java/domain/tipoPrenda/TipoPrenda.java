@@ -1,9 +1,6 @@
-package domain.TipoPrenda;
+package domain.tipoPrenda;
 
 import java.util.List;
-
-import domain.ECategoria;
-import domain.ETela;
 
 public class TipoPrenda {
 	protected ECategoria categoria;

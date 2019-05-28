@@ -1,4 +1,4 @@
-package domain;
+package domain.sugerencias;
 
 import java.util.Date;
 import java.util.List;
@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
+import domain.Atuendo;
+import domain.Guardarropa;
+import domain.prenda.Prenda;
+import domain.usuario.Usuario;
 import exceptions.NoSePuedeGenerarSugerencia;
 
 public class Sugeridor {
@@ -25,21 +29,22 @@ public class Sugeridor {
 	}
 
 	public void generarSugerencias() {
-//		int temp = provClima.getTemp();
+		Double temp = 25.0; //provClima.getTemp();
+		Set<Prenda> abr = guardarropa.prendasSuperioresDeAbrigo();
 		Set<Prenda> sup = guardarropa.prendasSuperiores();
 		Set<Prenda> inf = guardarropa.prendasInferiores();
 		Set<Prenda> cal = guardarropa.calzados();
 		Set<Prenda> acc = guardarropa.accesorios();
 
-		List<Sugerencia> sugerencias = obtenerSugerencias(sup, inf, cal, acc);
+		List<Sugerencia> sugerencias = obtenerSugerencias(abr, sup, inf, cal, acc);
 		
-//		sugerencias.stream().filter(sugerencia -> sugerencia.esValidaParaTemp(temp));
+		sugerencias.sort((a, b) -> a.coeficienteDeAbrigo(temp).compareTo(b.coeficienteDeAbrigo(temp)));
 
-		sugerencias.stream().forEach(sug -> usuario.agregarSugerencia(sug));
+		sugerencias.subList(0, 4).stream().forEach(sug -> usuario.agregarSugerencia(sug));
 	}
 
-	private List<Sugerencia> obtenerSugerencias(Set<Prenda> sup, Set<Prenda> inf, Set<Prenda> cal, Set<Prenda> acc) {
-		validarPrendasSuficientes(sup, inf, cal, acc);
+	private List<Sugerencia> obtenerSugerencias(Set<Prenda> abr, Set<Prenda> sup, Set<Prenda> inf, Set<Prenda> cal, Set<Prenda> acc) {
+		validarPrendasSuficientes(abr, sup, inf, cal, acc);
 		
 		return convertirASugerencias(obtenerCombinaciones(sup, inf, cal, acc));
 	}
@@ -53,8 +58,8 @@ public class Sugeridor {
 		return Sets.cartesianProduct(ImmutableList.of(sup, inf, cal, acc));
 	}
 
-	private void validarPrendasSuficientes(Set<Prenda> sup, Set<Prenda> inf, Set<Prenda> cal, Set<Prenda> acc) {
-		if(sup.isEmpty() || inf.isEmpty() || cal.isEmpty() || acc.isEmpty())
+	private void validarPrendasSuficientes(Set<Prenda> abr, Set<Prenda> sup, Set<Prenda> inf, Set<Prenda> cal, Set<Prenda> acc) {
+		if(abr.isEmpty() || sup.isEmpty() || inf.isEmpty() || cal.isEmpty() || acc.isEmpty())
 			throw new NoSePuedeGenerarSugerencia("No se pueden generar sugerencias en este guardarropa");
 	}
 }

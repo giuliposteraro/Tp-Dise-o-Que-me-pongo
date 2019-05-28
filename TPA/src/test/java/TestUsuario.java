@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import domain.Atuendo;
-import domain.ConstructorPrenda;
-import domain.EColor;
-import domain.ETela;
 import domain.Guardarropa;
-import domain.Prenda;
-import domain.RepoPrendas;
-import domain.Usuario;
+import domain.color.EColor;
+import domain.prenda.ConstructorPrenda;
+import domain.prenda.Prenda;
+import domain.prenda.RepoPrendas;
+import domain.tipoPrenda.ETela;
+import domain.usuario.Usuario;
 import exceptions.*;
 
 public class TestUsuario {
