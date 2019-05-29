@@ -1,4 +1,5 @@
 package domain.usuario;
+import java.time.LocalDate;
 import java.util.*;
 
 import domain.Guardarropa;
@@ -32,7 +33,7 @@ public class Usuario {
 	public void generarSugerencias(Guardarropa guardarropa) {
 		validarAccesoAGuardarropa(guardarropa);
 		
-		Sugeridor sugeridor = new Sugeridor(this, guardarropa, new Date());
+		Sugeridor sugeridor = new Sugeridor(this, guardarropa/*, Config.instance().getProveedor()*/);
 		
 		sugeridor.generarSugerencias();
 	}
