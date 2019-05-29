@@ -1,7 +1,8 @@
 package domain.eventos;
 import java.time.LocalDate;
-import domain.Guardarropa;
+
 import domain.usuario.*;
+import domain.guardarropa.Guardarropa;
 import domain.sugerencias.*;
 
 public class Evento {
@@ -20,7 +21,7 @@ public class Evento {
 		this.motivo=unMotivo;
 	}
 	
-	public boolean esProximo() {  // es próximo si el evento es hoy mismo
+	public boolean esProximo() {  // es prï¿½ximo si el evento es hoy mismo
 		return fecha.isEqual(LocalDate.now());
 	}
 	

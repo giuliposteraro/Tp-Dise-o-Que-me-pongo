@@ -1,6 +1,6 @@
 package domain.usuario;
 
-import domain.Guardarropa;
+import domain.guardarropa.Guardarropa;
 
 public interface TipoUsuario {
 	public Guardarropa crearGuardarropa();

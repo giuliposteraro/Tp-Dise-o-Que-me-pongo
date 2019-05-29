@@ -3,9 +3,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import domain.Guardarropa;
-import domain.GuardarropaIlimitado;
 import domain.color.EColor;
+import domain.guardarropa.Guardarropa;
+import domain.guardarropa.GuardarropaIlimitado;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
 import domain.prenda.RepoPrendas;

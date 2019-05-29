@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
-import domain.Atuendo;
-import domain.Guardarropa;
+import domain.guardarropa.Atuendo;
+import domain.guardarropa.Guardarropa;
 import domain.prenda.Prenda;
 import domain.usuario.Usuario;
 import exceptions.NoSePuedeGenerarSugerencia;

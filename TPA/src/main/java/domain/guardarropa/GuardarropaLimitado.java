@@ -1,4 +1,5 @@
-package domain;
+package domain.guardarropa;
+import domain.Config;
 import exceptions.CapacidadDelGuardarropaLlena;
 
 public class GuardarropaLimitado implements TipoGuardarropa{

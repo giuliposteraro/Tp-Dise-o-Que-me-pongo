@@ -1,6 +1,6 @@
 package domain.sugerencias;
 
-import domain.Atuendo;
+import domain.guardarropa.Atuendo;
 import domain.usuario.Usuario;
 
 public class Sugerencia {

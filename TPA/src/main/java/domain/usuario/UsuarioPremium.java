@@ -1,7 +1,7 @@
 package domain.usuario;
 
-import domain.Guardarropa;
-import domain.GuardarropaIlimitado;
+import domain.guardarropa.Guardarropa;
+import domain.guardarropa.GuardarropaIlimitado;
 
 public class UsuarioPremium implements TipoUsuario{
 	@Override 

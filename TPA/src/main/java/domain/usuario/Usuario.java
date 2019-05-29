@@ -3,9 +3,9 @@ import java.time.LocalDate;
 import java.util.*;
 
 import domain.Config;
-import domain.Guardarropa;
 import domain.eventos.Evento;
 import domain.eventos.RepositorioEventos;
+import domain.guardarropa.Guardarropa;
 import domain.prenda.Prenda;
 import domain.sugerencias.Sugerencia;
 import domain.sugerencias.Sugeridor;

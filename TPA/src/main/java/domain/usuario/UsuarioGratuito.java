@@ -1,7 +1,7 @@
 package domain.usuario;
 
-import domain.Guardarropa;
-import domain.GuardarropaLimitado;
+import domain.guardarropa.Guardarropa;
+import domain.guardarropa.GuardarropaLimitado;
 
 public class UsuarioGratuito implements TipoUsuario{
 	

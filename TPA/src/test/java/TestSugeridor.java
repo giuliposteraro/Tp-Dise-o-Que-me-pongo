@@ -8,9 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
 
-import domain.Atuendo;
-import domain.Guardarropa;
 import domain.color.EColor;
+import domain.guardarropa.Atuendo;
+import domain.guardarropa.Guardarropa;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
 import domain.prenda.RepoPrendas;
