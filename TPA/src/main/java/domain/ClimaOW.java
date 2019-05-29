@@ -12,9 +12,10 @@ import javax.ws.rs.core.MediaType;
 public class ClimaOW implements ProveedorClima{
 	
 	private Client client;
-    private static final String API_OPEN_WEATHER = "https://www.googleapis.com/books/v1";
-    private static final String RESOURCE = "volumes";
-	
+    private static final String API_OPEN_WEATHER = "http://api.openweathermap.org/data/2.5/";
+    private static final String RESOURCE = "forecast";
+    private static final String APIKEY = "548beb56f12ba10a1d0a0c39b96d34d9";
+    
     //Inicializacion del cliente.
     public ClimaOW() {
         this.client = Client.create();
@@ -24,8 +25,8 @@ public class ClimaOW implements ProveedorClima{
     
     public ClientResponse getTempByPlace(String filter, String value){
         WebResource recurso = this.client.resource(API_OPEN_WEATHER).path(RESOURCE);
-        WebResource recursoConParametros = recurso.queryParam("q",filter + ":" + value);
-        
+        WebResource recursoConParametros = recurso.queryParam("q",filter + ":" + value).queryParam("APPID",APIKEY);
+        System.out.println(recursoConParametros);
         WebResource.Builder builder = recursoConParametros.accept(MediaType.APPLICATION_JSON);
 
         ClientResponse response = builder.get(ClientResponse.class);
