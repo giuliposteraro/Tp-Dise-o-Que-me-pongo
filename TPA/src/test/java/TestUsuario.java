@@ -3,20 +3,15 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import domain.Atuendo;
 import domain.Guardarropa;
-<<<<<<< HEAD
-import domain.Prenda;
-import domain.Tipo;
-import domain.Usuario;
-=======
+import domain.GuardarropaIlimitado;
 import domain.color.EColor;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
 import domain.prenda.RepoPrendas;
 import domain.tipoPrenda.ETela;
 import domain.usuario.Usuario;
->>>>>>> master
+import domain.usuario.UsuarioPremium;
 import exceptions.*;
 
 public class TestUsuario {
@@ -66,15 +61,13 @@ public class TestUsuario {
 		reloj = c.crear();
 		
 		
-		guardarropa = new Guardarropa();
-		guardarropa.agregarPrenda(Prenda.SIN_ABRIGO);
-		guardarropa.agregarPrenda(Prenda.SIN_ACCESORIO);
-		guardarropa2 = new Guardarropa();
-		guardarropa.agregarPrenda(Prenda.SIN_ABRIGO);
-		guardarropa.agregarPrenda(Prenda.SIN_ACCESORIO);
-		usuario = new Usuario();
-		usuario.agregarGuardarropa(guardarropa);
-		usuario.agregarGuardarropa(guardarropa2);
+		usuario = new Usuario(new UsuarioPremium());
+		guardarropa = usuario.crearGuardarropa();
+		usuario.agregarPrenda(Prenda.SIN_ABRIGO, guardarropa);
+		usuario.agregarPrenda(Prenda.SIN_ACCESORIO, guardarropa);
+		guardarropa2 = usuario.crearGuardarropa();
+		usuario.agregarPrenda(Prenda.SIN_ABRIGO, guardarropa2);
+		usuario.agregarPrenda(Prenda.SIN_ACCESORIO, guardarropa2);
 	}
 	
 	@Test
@@ -111,7 +104,7 @@ public class TestUsuario {
 	
 	@Test(expected = AccesoAGuardarropaDenegado.class)
 	public void NoSePuedeAccederAUnGuardarropaAjeno() {
-		Guardarropa guardarropa3 = new Guardarropa();
+		Guardarropa guardarropa3 = new Guardarropa(new GuardarropaIlimitado());
 		usuario.agregarPrenda(remera, guardarropa3);
 	}
 }

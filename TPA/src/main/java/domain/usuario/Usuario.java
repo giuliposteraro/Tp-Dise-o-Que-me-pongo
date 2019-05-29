@@ -9,18 +9,16 @@ import exceptions.*;
 
 public class Usuario {
 	
-	private TipoUsuario tipoUsuario = new UsuarioGratuito();
+	private TipoUsuario tipo;
 	Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
-	
 	List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
 	
+	public Usuario(TipoUsuario tipo) {
+		this.setTipo(tipo);
+	}
 	
-	// ELIMINAR
-	public void agregarGuardarropa(Guardarropa guardarropa) {
-		if (!esGuardarropaValido(guardarropa)) {
-			throw new NoSePuedenCompartirPrendas("No se pueden compartir prendas entre distintos guardarropas");
-		} 
-		this.guardarropas.add(guardarropa);
+	public Guardarropa crearGuardarropa() {
+		return tipo.crearGuardarropa();
 	}
 	
 	public void eliminarGuardarropa(Guardarropa guardarropa) {
@@ -61,12 +59,6 @@ public class Usuario {
 		}
 	}
 	
-	private Boolean esGuardarropaValido(Guardarropa nuevoGuardarropa) {
-		return nuevoGuardarropa.getPrendas()
-				.stream()
-				.allMatch(prenda -> !algunGuardarropaTiene(prenda));
-	}
-	
 	private Boolean algunGuardarropaTiene(Prenda unaPrenda) {
 		return guardarropas.stream()
 				.anyMatch(guardarropa -> guardarropa.tienePrenda(unaPrenda));
@@ -82,5 +74,13 @@ public class Usuario {
 
 	public List<Sugerencia> getSugerenciasPendientes() {
 		return sugerenciasPendientes;
+	}
+
+	TipoUsuario getTipo() {
+		return tipo;
+	}
+
+	void setTipo(TipoUsuario tipo) {
+		this.tipo = tipo;
 	}
 }
