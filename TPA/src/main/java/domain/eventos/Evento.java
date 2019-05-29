@@ -1,5 +1,8 @@
-package domain;
-import java.time;
+package domain.eventos;
+import java.time.LocalDate;
+import domain.Guardarropa;
+import domain.usuario.*;
+import domain.sugerencias.*;
 
 public class Evento {
 	
@@ -9,7 +12,7 @@ public class Evento {
 	String lugar;
 	String motivo;
 	
-	public Evento(unUsuario,unGuardarropa,unaFecha,unLugar,unMotivo) {
+	public Evento(Usuario unUsuario,Guardarropa unGuardarropa,LocalDate unaFecha,String unLugar, String unMotivo) {
 		this.usuario=unUsuario;
 		this.guardarropa=unGuardarropa;
 		this.fecha=unaFecha;
@@ -22,8 +25,8 @@ public class Evento {
 	}
 	
 	public void sugerir() {   
-		Sugeridor unSugeridor = new Sugeridor(usuario,guardarropa,/*proveedorClima*/,motivo);
-		unSugeridor.generarSugerencia();
+		Sugeridor unSugeridor = new Sugeridor(usuario,guardarropa/*,provClima*/);
+		unSugeridor.generarSugerencias();
 	}
 	
 	

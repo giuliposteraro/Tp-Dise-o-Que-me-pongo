@@ -1,6 +1,6 @@
 package domain.sugerencias;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,13 +17,12 @@ public class Sugeridor {
 
 	Usuario usuario;
 	Guardarropa guardarropa;
-	Date fecha;
+	LocalDate fecha;
 //	ProveedorClima provClima;
 
-	public Sugeridor(Usuario usuario, Guardarropa guardarropa, Date fecha/*, ProveedorClima provClima*/) {
+	public Sugeridor(Usuario usuario, Guardarropa guardarropa/*, ProveedorClima provClima*/) {
 		this.usuario = usuario;
 		this.guardarropa = guardarropa;
-		this.fecha = fecha;
 //		this.provClima = provClima;
 	}
 

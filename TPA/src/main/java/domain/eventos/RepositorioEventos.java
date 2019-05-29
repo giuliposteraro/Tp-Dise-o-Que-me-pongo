@@ -1,22 +1,24 @@
-package domain;
+package domain.eventos;
 import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class RepositorioEventos {
 	
-	private Set<Evento> eventos;
+	public Set<Evento> eventos;
 	
 	public RepositorioEventos() {
-		this.eventos= new Hashset<Evento>();
+		this.eventos= new HashSet<Evento>();
 	}
 	public void agregarEvento(Evento unEvento) {
 		this.eventos.add(unEvento);
 	}
 	
 	public Set<Evento> proximosEventos(){
-		return eventos.filter(evento->evento.esProximo);
+		return eventos.stream().filter(evento->evento.esProximo()).collect(Collectors.toSet());
 	}
 	
-	public Set<Evento> eventos(Set<Evento> unosEventos){
+	public void eventos(Set<Evento> unosEventos){
 		eventos = unosEventos;
 	}
 	

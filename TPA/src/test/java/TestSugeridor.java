@@ -86,7 +86,7 @@ public class TestSugeridor {
 		usuario.agregarPrenda(pantalon, guardarropa);
 		usuario.agregarPrenda(zapatillas, guardarropa);
 		usuario.agregarPrenda(reloj, guardarropa);
-		s = new Sugeridor(usuario, guardarropa, new Date());
+		s = new Sugeridor(usuario, guardarropa);
 	}
 	
 	@Test
