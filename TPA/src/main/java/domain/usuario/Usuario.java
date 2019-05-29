@@ -1,19 +1,24 @@
-package domain;
+package domain.usuario;
 import java.util.*;
-import java.util.stream.Collectors;
 
+import domain.Guardarropa;
+import domain.prenda.Prenda;
+import domain.sugerencias.Sugerencia;
+import domain.sugerencias.Sugeridor;
 import exceptions.*;
 
 public class Usuario {
 	
-	private TipoUsuario tipoUsuario = new UsuarioGratuito();
+	private TipoUsuario tipo;
 	Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
+	List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
 	
-	public void agregarGuardarropa(Guardarropa guardarropa) {
-		if (!esGuardarropaValido(guardarropa)) {
-			throw new NoSePuedenCompartirPrendas("No se pueden compartir prendas entre distintos guardarropas");
-		} 
-		this.guardarropas.add(guardarropa);
+	public Usuario(TipoUsuario tipo) {
+		this.setTipo(tipo);
+	}
+	
+	public Guardarropa crearGuardarropa() {
+		return tipo.crearGuardarropa();
 	}
 	
 	public void eliminarGuardarropa(Guardarropa guardarropa) {
@@ -24,15 +29,17 @@ public class Usuario {
 		return guardarropas.contains(guardarropa);
 	}
 	
-	public List<Atuendo> generarSugerencias(Guardarropa guardarropa) {
+	public void generarSugerencias(Guardarropa guardarropa) {
 		validarAccesoAGuardarropa(guardarropa);
-		return guardarropa.generarSugerencias();
+		
+		Sugeridor sugeridor = new Sugeridor(this, guardarropa, new Date());
+		
+		sugeridor.generarSugerencias();
 	}
 	
-	public List<Atuendo> generarTodasLasSugerencias() {
-		return guardarropas.stream()
-				.flatMap(guardarropa -> generarSugerencias(guardarropa).stream())
-				.collect(Collectors.toList());
+	public void generarTodasLasSugerencias() {
+		guardarropas.stream()
+			.forEach(guardarropa -> generarSugerencias(guardarropa));
 	}
 	
 	public void agregarPrenda(Prenda prenda, Guardarropa guardarropa) {
@@ -52,18 +59,28 @@ public class Usuario {
 		}
 	}
 	
-	private Boolean esGuardarropaValido(Guardarropa nuevoGuardarropa) {
-		return nuevoGuardarropa.getPrendas()
-				.stream()
-				.allMatch(prenda -> !algunGuardarropaTiene(prenda));
-	}
-	
 	private Boolean algunGuardarropaTiene(Prenda unaPrenda) {
 		return guardarropas.stream()
 				.anyMatch(guardarropa -> guardarropa.tienePrenda(unaPrenda));
 	}
 	
 	private Boolean validarCapacidadGuardarropa(Guardarropa guardarropa) {
-		return tipoUsuario.tieneLugarGuardarropa(guardarropa);
+		return guardarropa.tieneLugar();
+	}
+	
+	public void agregarSugerencia(Sugerencia sugerencia) {
+		sugerenciasPendientes.add(sugerencia);
+	}
+
+	public List<Sugerencia> getSugerenciasPendientes() {
+		return sugerenciasPendientes;
+	}
+
+	TipoUsuario getTipo() {
+		return tipo;
+	}
+
+	void setTipo(TipoUsuario tipo) {
+		this.tipo = tipo;
 	}
 }
