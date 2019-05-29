@@ -10,12 +10,8 @@ public class Superior extends TipoPrenda {
 		this.categoria = ECategoria.SUPERIOR;
 	}
 	
-	protected int getCapa() {
+	@Override
+	public int getCapa() {
 		return this.capa;
 	}
-	
-	protected boolean puededeAbrigarseCon(Superior prendaSuperior) {
-		return this.capa < prendaSuperior.getCapa();
-	}
-	
 }

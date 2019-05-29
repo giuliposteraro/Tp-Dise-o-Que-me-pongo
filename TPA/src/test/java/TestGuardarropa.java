@@ -62,8 +62,8 @@ public class TestGuardarropa {
 		reloj = c.crear();
 	
 		guardarropa = new Guardarropa();
-		guardarropa.agregarPrenda(Atuendo.SIN_ABRIGO);
-		guardarropa.agregarPrenda(Atuendo.SIN_ACCESORIO);
+		guardarropa.agregarPrenda(Prenda.SIN_ABRIGO);
+		guardarropa.agregarPrenda(Prenda.SIN_ACCESORIO);
 	}
 	
 	@Test

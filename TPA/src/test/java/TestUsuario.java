@@ -61,11 +61,11 @@ public class TestUsuario {
 		
 		
 		guardarropa = new Guardarropa();
-		guardarropa.agregarPrenda(Atuendo.SIN_ABRIGO);
-		guardarropa.agregarPrenda(Atuendo.SIN_ACCESORIO);
+		guardarropa.agregarPrenda(Prenda.SIN_ABRIGO);
+		guardarropa.agregarPrenda(Prenda.SIN_ACCESORIO);
 		guardarropa2 = new Guardarropa();
-		guardarropa.agregarPrenda(Atuendo.SIN_ABRIGO);
-		guardarropa.agregarPrenda(Atuendo.SIN_ACCESORIO);
+		guardarropa.agregarPrenda(Prenda.SIN_ABRIGO);
+		guardarropa.agregarPrenda(Prenda.SIN_ACCESORIO);
 		usuario = new Usuario();
 		usuario.agregarGuardarropa(guardarropa);
 		usuario.agregarGuardarropa(guardarropa2);

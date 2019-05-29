@@ -36,9 +36,6 @@ public class Atuendo {
 	public List<Prenda> prendas() {
 		return Arrays.asList(superior, abrigo, inferior, calzado, accesorio);
 	}
-	
-	public static Prenda SIN_ACCESORIO = new Prenda(RepoPrendas.SIN_ACCESORIO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO));
-	public static Prenda SIN_ABRIGO = new Prenda(RepoPrendas.SIN_ABRIGO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO));
 
 	public Double getNivelAbrigo() {
 		return abrigo.getNivelAbrigo() + superior.getNivelAbrigo() + inferior.getNivelAbrigo() + calzado.getNivelAbrigo() + accesorio.getNivelAbrigo();

@@ -24,4 +24,12 @@ public class TipoPrenda {
 		return nivelAbrigo;
 	}
 	
+	public boolean puedeAbrigarseCon(TipoPrenda tipoPrenda) {
+		return false;
+	}
+
+	public int getCapa() {
+		return 0;
+	}
+	
 }

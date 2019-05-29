@@ -19,5 +19,5 @@ public class RepoPrendas {
 	public static Accesorio RELOJ = new Accesorio(Arrays.asList(ETela.NINGUNA));
 	public static Accesorio COLLAR = new Accesorio(Arrays.asList(ETela.NINGUNA));
 	public static Accesorio SIN_ACCESORIO = new Accesorio(Arrays.asList(ETela.NINGUNA));
-	public static Abrigo SIN_ABRIGO = new Abrigo(Arrays.asList(ETela.NINGUNA), 0);
+	public static Abrigo SIN_ABRIGO = new Abrigo(Arrays.asList(ETela.NINGUNA), 0, 0.0);
 }
