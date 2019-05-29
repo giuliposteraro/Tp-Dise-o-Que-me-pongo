@@ -2,6 +2,9 @@ package domain;
 
 import domain.clima.ClimaOW;
 import domain.eventos.JobEventos;
+
+import java.time.LocalDate;
+
 import org.json.JSONException;
 
 public class Main {
@@ -17,6 +20,9 @@ public class Main {
 			
 		}
 		JobEventos.ejecutar();
+		
+		System.out.println(LocalDate.now().isEqual(LocalDate.of(2019,5,29)));
+		
 		
 	}
 

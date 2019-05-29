@@ -1,7 +1,11 @@
 package domain.usuario;
+import java.time.LocalDate;
 import java.util.*;
 
+import domain.Config;
 import domain.Guardarropa;
+import domain.eventos.Evento;
+import domain.eventos.RepositorioEventos;
 import domain.prenda.Prenda;
 import domain.sugerencias.Sugerencia;
 import domain.sugerencias.Sugeridor;
@@ -18,7 +22,9 @@ public class Usuario {
 	}
 	
 	public Guardarropa crearGuardarropa() {
-		return tipo.crearGuardarropa();
+		Guardarropa guardarropa = tipo.crearGuardarropa();
+		guardarropas.add(guardarropa);
+		return(guardarropa);
 	}
 	
 	public void eliminarGuardarropa(Guardarropa guardarropa) {
@@ -70,6 +76,12 @@ public class Usuario {
 	
 	public void agregarSugerencia(Sugerencia sugerencia) {
 		sugerenciasPendientes.add(sugerencia);
+	}
+	
+	public void crearEvento(Guardarropa guardarropa, LocalDate fecha, String lugar, String motivo) {
+		Evento eventoNuevo = new Evento(this,guardarropa,fecha,lugar,motivo);
+		RepositorioEventos repo = Config.instance().getRepositorioEventos();
+		repo.agregarEvento(eventoNuevo);
 	}
 
 	public List<Sugerencia> getSugerenciasPendientes() {

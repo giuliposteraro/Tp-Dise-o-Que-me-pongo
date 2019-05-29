@@ -27,7 +27,7 @@ public class ConstructorPrenda {
 	}
 	
 	private void validar() {
-		if (Arrays.asList(tipo, color, tela, imagen).contains(null) || !color.esValido() || !tipo.esTelaValida(tela)) {
+		if (Arrays.asList(tipo, color, tela).contains(null) || !color.esValido() || !tipo.esTelaValida(tela)) {
 			throw new ParametrosNoValidos("Los parametros no son validos.");
 		}
 	}
