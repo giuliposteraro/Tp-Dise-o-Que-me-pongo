@@ -1,6 +1,11 @@
 package domain.prenda;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
+
+import javax.imageio.ImageIO;
 
 import domain.color.Color;
 import domain.color.EColor;
@@ -14,10 +19,11 @@ public class ConstructorPrenda {
 	TipoPrenda tipo;
 	Color color;
 	ETela tela;
+	BufferedImage imagen;
 	
 	public Prenda crear() {
 		validar();
-		return new Prenda(tipo, tela, color);
+		return new Prenda(tipo, tela, color, imagen);
 	}
 	
 	private void validar() {
@@ -38,4 +44,13 @@ public class ConstructorPrenda {
 		this.tela = tela;
 	}
 	
+	public void setImagen(String path) {
+		File archivoImg = new File(path);
+		try {
+			imagen = ImageIO.read(archivoImg);
+		} catch (IOException e) {
+			imagen = null;
+			e.printStackTrace();
+		}
+	}
 }
