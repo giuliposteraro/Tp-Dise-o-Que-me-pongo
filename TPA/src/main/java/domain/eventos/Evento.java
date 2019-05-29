@@ -21,7 +21,7 @@ public class Evento {
 	}
 	
 	public boolean esProximo() {  // es próximo si el evento es hoy mismo
-		return fecha == LocalDate.now();
+		return fecha.isEqual(LocalDate.now());
 	}
 	
 	public void sugerir() {   

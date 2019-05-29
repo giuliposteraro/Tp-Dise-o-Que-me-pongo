@@ -1,15 +1,16 @@
 package domain.eventos;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class JobEventos{
-	   public static void main(String[] args){
+	   public static void ejecutar(){
 
 	     Timer timer = new Timer();
 	     TimerTask tarea = new TareaRevision();
 	     // Esta tarea se corre cada 10 seg
 
-	     timer.scheduleAtFixedRate(tarea, 0, 10000);
+	     timer.schedule(tarea, 10000, 10000);
 	   }
 
 	}

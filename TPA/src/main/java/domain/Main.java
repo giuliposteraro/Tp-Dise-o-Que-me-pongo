@@ -1,7 +1,7 @@
 package domain;
 
 import domain.clima.ClimaOW;
-
+import domain.eventos.JobEventos;
 import org.json.JSONException;
 
 public class Main {
@@ -14,7 +14,9 @@ public class Main {
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
+		JobEventos.ejecutar();
 		
 	}
 
