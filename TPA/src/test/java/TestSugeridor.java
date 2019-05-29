@@ -11,6 +11,7 @@ import org.junit.runners.Parameterized.Parameter;
 
 import domain.Atuendo;
 import domain.Guardarropa;
+import domain.GuardarropaIlimitado;
 import domain.color.EColor;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
@@ -19,6 +20,7 @@ import domain.sugerencias.Sugerencia;
 import domain.sugerencias.Sugeridor;
 import domain.tipoPrenda.ETela;
 import domain.usuario.Usuario;
+import domain.usuario.UsuarioPremium;
 
 public class TestSugeridor {
 
@@ -74,17 +76,16 @@ public class TestSugeridor {
 		c.setColor(EColor.NEGRO, EColor.NINGUNO);
 		reloj = c.crear();
 		
-		usuario = new Usuario();
-		guardarropa = new Guardarropa();
-		usuario.agregarGuardarropa(guardarropa);
-		guardarropa.agregarPrenda(Prenda.SIN_ABRIGO);
-		guardarropa.agregarPrenda(Prenda.SIN_ACCESORIO);
-		guardarropa.agregarPrenda(remera);
-		guardarropa.agregarPrenda(buzo);
-		guardarropa.agregarPrenda(campera);
-		guardarropa.agregarPrenda(pantalon);
-		guardarropa.agregarPrenda(zapatillas);
-		guardarropa.agregarPrenda(reloj);
+		usuario = new Usuario(new UsuarioPremium());
+		guardarropa = usuario.crearGuardarropa();
+		usuario.agregarPrenda(Prenda.SIN_ABRIGO, guardarropa);
+		usuario.agregarPrenda(Prenda.SIN_ACCESORIO, guardarropa);
+		usuario.agregarPrenda(remera, guardarropa);
+		usuario.agregarPrenda(buzo, guardarropa);
+		usuario.agregarPrenda(campera, guardarropa);
+		usuario.agregarPrenda(pantalon, guardarropa);
+		usuario.agregarPrenda(zapatillas, guardarropa);
+		usuario.agregarPrenda(reloj, guardarropa);
 		s = new Sugeridor(usuario, guardarropa, new Date());
 	}
 	

@@ -4,15 +4,20 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import domain.Prenda;
-import domain.ECategoria;
+import domain.prenda.Prenda;
+import domain.tipoPrenda.ECategoria;
 import exceptions.*;
 
 public class Guardarropa {
 
 	private Set<Prenda> prendas;
-	private TipoGuardarropa tipoGuardarropa = new GuardarropaLimitado();
+	private TipoGuardarropa tipoGuardarropa;
 
+	public Guardarropa(TipoGuardarropa tipo) {
+		this.prendas = new HashSet<Prenda>();
+		this.tipoGuardarropa = tipo;
+	}
+	
 	public TipoGuardarropa getTipoGuardarropa() {
 		return this.tipoGuardarropa;
 	}
@@ -20,29 +25,13 @@ public class Guardarropa {
 	public void setTipoGuardarropa(TipoGuardarropa tipo) {
 		this.tipoGuardarropa = tipo;
 	}
+	
 	public Boolean tieneLugar() {
 		return tipoGuardarropa.tieneLugar(this);
 	}
 	
 	public int cantidadPrendas() {
 		return prendas.size();
-	}
-
-	public Guardarropa(TipoGuardarropa tipo) {
-		this.prendas = new HashSet<Prenda>();
-	}
-
-	public Guardarropa(GuardarropaIlimitado tipo) {
-		this.tipoGuardarropa = tipo;
-	}
-
-	public Guardarropa(GuardarropaLimitado tipo) {
-		this.tipoGuardarropa = tipo;
-	}
-
-	public List<Atuendo> generarSugerencias() {
-		validarListas();
-		return crearAtuendos(sugerenciasDePrendas());
 	}
 
 	public Boolean tienePrenda(Prenda unaPrenda) {
@@ -88,9 +77,5 @@ public class Guardarropa {
 		return prendas.stream()
 				.filter(p -> categoria.equals(p.getCategoria()))
 				.collect(Collectors.toSet());
-	}
-	
-	public Boolean tieneLugar() {
-		return true;
 	}
 }

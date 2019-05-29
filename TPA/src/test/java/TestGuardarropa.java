@@ -1,25 +1,16 @@
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
 
-import domain.Atuendo;
 import domain.Guardarropa;
-<<<<<<< HEAD
-import domain.Prenda;
-import domain.Tipo;
-=======
+import domain.GuardarropaIlimitado;
 import domain.color.EColor;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
 import domain.prenda.RepoPrendas;
 import domain.tipoPrenda.ETela;
->>>>>>> master
-import exceptions.*;
 
 public class TestGuardarropa {
 
@@ -66,7 +57,7 @@ public class TestGuardarropa {
 		c.setColor(EColor.NEGRO, EColor.NINGUNO);
 		reloj = c.crear();
 	
-		guardarropa = new Guardarropa();
+		guardarropa = new Guardarropa(new GuardarropaIlimitado());
 		guardarropa.agregarPrenda(Prenda.SIN_ABRIGO);
 		guardarropa.agregarPrenda(Prenda.SIN_ACCESORIO);
 	}
