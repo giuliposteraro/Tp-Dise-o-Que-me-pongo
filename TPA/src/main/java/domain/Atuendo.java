@@ -3,9 +3,6 @@ package domain;
 import java.util.Arrays;
 import java.util.List;
 
-import domain.prenda.Prenda;
-import domain.tipoPrenda.ECategoria;
-
 public class Atuendo {
 	
 	Prenda superior;

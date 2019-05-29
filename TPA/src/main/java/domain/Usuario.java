@@ -1,12 +1,7 @@
-package domain.usuario;
+package domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import domain.Atuendo;
-import domain.Guardarropa;
-import domain.TipoUsuario;
-import domain.UsuarioGratuito;
-import domain.prenda.Prenda;
 import exceptions.*;
 
 public class Usuario {

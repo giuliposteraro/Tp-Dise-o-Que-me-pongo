@@ -1,4 +1,4 @@
-package domain.color;
+package domain;
 
 public class Color {
 	
