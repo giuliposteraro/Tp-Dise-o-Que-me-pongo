@@ -10,6 +10,7 @@ import domain.eventos.*;
 import domain.prenda.ConstructorPrenda;
 import domain.color.EColor;
 import domain.tipoPrenda.ETela;
+import domain.Config;
 import domain.Guardarropa;
 import domain.prenda.*;
 import domain.tipoPrenda.TipoPrenda;
@@ -30,17 +31,18 @@ public class TestEventos {
 	Prenda prenda1;
 	Usuario usuario;
 	LocalDate fecha;
+	LocalDate fecha2;
 	GuardarropaLimitado grLimitado; 
-	UsuarioPremium premium;
 	
 	@Before
 	public void crearObj() {
-		guardarropa = new Guardarropa(grLimitado);
-		repo = new RepositorioEventos();
-		usuario = new Usuario(premium);
+		repo = Config.instance().getRepositorioEventos();
+		usuario = new Usuario(new UsuarioPremium());
+		guardarropa = usuario.crearGuardarropa();
 		fecha = LocalDate.of(2019,10,22);
+		fecha2 = LocalDate.of(2019,5,29);
 		evento1 = new Evento(usuario,guardarropa,fecha,"Mi casa","Cumple Juan");
-		
+		evento2 = new Evento(usuario,guardarropa,fecha2,"Boliche","Fiesta");
 	}
 	
 	@Test
@@ -49,6 +51,25 @@ public class TestEventos {
 		repo.agregarEvento(evento1);
 		assertEquals(1,repo.eventos.size());
 	}
+	
+	@Test
+	
+	public void detectaCorrectamenteSiEsProximoCasoPositivo() {
+		repo.agregarEvento(evento2);
+		assertEquals(1,repo.proximosEventos().size());
+	}
+	
+	@Test
+	public void detectaCorrectamenteSiEsProximoCasoNegativo() {
+		repo.agregarEvento(evento1);
+		assertEquals(0,repo.proximosEventos().size());
+	}
+	
+	public void chequearSugerenciasUsuarioTrasAgregarEvento() {
+		
+		
+	}
+	
 	
 	
 }
