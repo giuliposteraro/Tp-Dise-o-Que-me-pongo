@@ -2,13 +2,9 @@ package domain;
 
 public class UsuarioGratuito implements TipoUsuario{
 	
-	public Boolean tieneLugarGuardarropa(Guardarropa guardarropa) {
-		return guardarropa.tieneLugar();
+	@Override 
+	public Guardarropa crearGuardarropa(Guardarropa tipoGuardarropa) {
+		return new Guardarropa(new GuardarropaLimitado());
 	}
-	
-	public Guardarropa crearGuardarropa() {
-		return new GuardardarropaLimitado();
-	}
-	
 	
 }

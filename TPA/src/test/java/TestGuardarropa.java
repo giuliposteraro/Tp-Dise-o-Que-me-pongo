@@ -9,11 +9,16 @@ import org.junit.runners.Parameterized.Parameter;
 
 import domain.Atuendo;
 import domain.Guardarropa;
+<<<<<<< HEAD
+import domain.Prenda;
+import domain.Tipo;
+=======
 import domain.color.EColor;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
 import domain.prenda.RepoPrendas;
 import domain.tipoPrenda.ETela;
+>>>>>>> master
 import exceptions.*;
 
 public class TestGuardarropa {

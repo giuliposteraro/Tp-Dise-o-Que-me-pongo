@@ -73,7 +73,7 @@ public class Usuario {
 	}
 	
 	private Boolean validarCapacidadGuardarropa(Guardarropa guardarropa) {
-		return tipoUsuario.tieneLugarGuardarropa(guardarropa);
+		return guardarropa.tieneLugar();
 	}
 	
 	public void agregarSugerencia(Sugerencia sugerencia) {
