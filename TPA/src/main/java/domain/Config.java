@@ -1,4 +1,6 @@
 package domain;
+import domain.clima.ClimaOW;
+import domain.clima.ProveedorClima;
 
 public class Config {
 	
@@ -6,7 +8,7 @@ public class Config {
 	
 	static Config instance;
 	
-	static Config instance() {
+	public static Config instance() {
 		if(instance == null) {
 			instance = new Config();
 		}
@@ -16,14 +18,24 @@ public class Config {
 	
 	// Class
 	
-	public int capacidadMaxima = 20;
+	int capacidadMaxima = 20;
+	String ciudad = "Buenos Aires";
 	
 	public int getCapacidadMaxima() {
 		return this.capacidadMaxima;
 	}
 	
+	public String getCiudad() {
+		return this.ciudad;
+	}
+	
+	public ProveedorClima getProveedor() {
+		return new ClimaOW();
+	}
+	
+	
 	public void setCapacidadMaxima(int cap) {
 		this.capacidadMaxima = cap;
 	}
-	//Ubicacion ubicacion = CABA;
+
 }

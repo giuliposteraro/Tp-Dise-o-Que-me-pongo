@@ -2,7 +2,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.Before;
@@ -11,7 +10,6 @@ import org.junit.runners.Parameterized.Parameter;
 
 import domain.Atuendo;
 import domain.Guardarropa;
-import domain.GuardarropaIlimitado;
 import domain.color.EColor;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;

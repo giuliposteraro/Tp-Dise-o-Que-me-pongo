@@ -1,6 +1,5 @@
 package domain.sugerencias;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,10 +13,8 @@ import domain.usuario.Usuario;
 import exceptions.NoSePuedeGenerarSugerencia;
 
 public class Sugeridor {
-
 	Usuario usuario;
 	Guardarropa guardarropa;
-	LocalDate fecha;
 //	ProveedorClima provClima;
 
 	public Sugeridor(Usuario usuario, Guardarropa guardarropa/*, ProveedorClima provClima*/) {
