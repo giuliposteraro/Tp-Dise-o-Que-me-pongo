@@ -1,20 +1,13 @@
 package domain;
+import exceptions.CapacidadDelGuardarropaLlena;
 
-
-public class GuardarropaLimitado extends Guardarropa{
-	
-	private int capacidadPrendas = 50;
-	
-	public GuardarropaLimitado() {
-		super();
-	}
+public class GuardarropaLimitado implements TipoGuardarropa{
 	
 	@Override
-	public Boolean tieneLugar() {
-		return capacidadPrendas > this.cantidadPrendas();
-	}
-	
-	private int cantidadPrendas() {
-		return this.getPrendas().size();
+	public Boolean tieneLugar(Guardarropa guardarropa) {
+		if(guardarropa.cantidadPrendas() > Config.instance().getCapacidadMaxima()) {
+			throw new CapacidadDelGuardarropaLlena("El guardarropa no tiene lugar suficiente");
+		}
+			return true;
 	}
 }
