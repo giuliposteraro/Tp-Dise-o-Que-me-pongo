@@ -5,6 +5,9 @@ public class RepositorioEventos {
 	
 	private Set<Evento> eventos;
 	
+	public RepositorioEventos() {
+		this.eventos= new Hashset<Evento>();
+	}
 	public void agregarEvento(Evento unEvento) {
 		this.eventos.add(unEvento);
 	}

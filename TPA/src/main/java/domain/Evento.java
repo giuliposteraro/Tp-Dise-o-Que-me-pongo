@@ -9,6 +9,14 @@ public class Evento {
 	String lugar;
 	String motivo;
 	
+	public Evento(unUsuario,unGuardarropa,unaFecha,unLugar,unMotivo) {
+		this.usuario=unUsuario;
+		this.guardarropa=unGuardarropa;
+		this.fecha=unaFecha;
+		this.lugar=unLugar;
+		this.motivo=unMotivo;
+	}
+	
 	public boolean esProximo() {  // es próximo si el evento es hoy mismo
 		return fecha == LocalDate.now();
 	}
