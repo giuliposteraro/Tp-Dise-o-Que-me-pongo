@@ -3,14 +3,16 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
-
+import domain.Config;
 import domain.color.EColor;
 import domain.guardarropa.Guardarropa;
 import domain.guardarropa.GuardarropaIlimitado;
+import domain.guardarropa.GuardarropaLimitado;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
 import domain.prenda.RepoPrendas;
 import domain.tipoPrenda.ETela;
+import exceptions.CapacidadDelGuardarropaLlena;
 
 public class TestGuardarropa {
 
@@ -61,13 +63,43 @@ public class TestGuardarropa {
 		guardarropa.agregarPrenda(Prenda.SIN_ABRIGO);
 		guardarropa.agregarPrenda(Prenda.SIN_ACCESORIO);
 	}
-	
+
+
 	@Test
 	public void agregarUnaPrenda() {
 		guardarropa.agregarPrenda(remera);
 		assertTrue(guardarropa.tienePrenda(remera));
 	}
 	
+	@Test 
+	public void tieneLugarGuardarropaIlimitado() {
+		guardarropa.agregarPrenda(buzo);
+		guardarropa.agregarPrenda(pantalon);
+		guardarropa.agregarPrenda(remera);
+		assertTrue(guardarropa.tieneLugar());
+	}
+	
+	@Test 
+	public void tieneLugarGuardarropaLimitado() {
+		Config.instance().getCapacidadMaxima();
+		guardarropa.setTipoGuardarropa(new GuardarropaLimitado());
+		guardarropa.agregarPrenda(buzo);
+		guardarropa.agregarPrenda(pantalon);
+		guardarropa.agregarPrenda(reloj);
+		assertTrue(guardarropa.tieneLugar());
+	}
+	
+	@Test(expected = CapacidadDelGuardarropaLlena.class)
+	public void tieneLugarGuardarropaLimitadoConMasPrendas() {
+		Config.instance().getCapacidadMaxima();
+		guardarropa.setTipoGuardarropa(new GuardarropaLimitado());
+		guardarropa.agregarPrenda(remera2);
+		guardarropa.agregarPrenda(zapatillas);
+		guardarropa.agregarPrenda(buzo);
+		guardarropa.agregarPrenda(pantalon);
+		guardarropa.agregarPrenda(reloj);
+		guardarropa.tieneLugar();
+	}
 	//TODO Actualizar Tests
 	
 //	@Test
