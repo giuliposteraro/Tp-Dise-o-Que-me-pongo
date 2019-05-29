@@ -1,5 +1,4 @@
 package domain.usuario;
-import java.time.LocalDate;
 import java.util.*;
 
 import domain.Guardarropa;

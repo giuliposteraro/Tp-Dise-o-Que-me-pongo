@@ -3,12 +3,8 @@ package domain;
 import java.util.Arrays;
 import java.util.List;
 
-import domain.color.Color;
-import domain.color.EColor;
 import domain.prenda.Prenda;
-import domain.prenda.RepoPrendas;
 import domain.tipoPrenda.ECategoria;
-import domain.tipoPrenda.ETela;
 
 public class Atuendo {
 	

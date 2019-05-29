@@ -1,7 +1,6 @@
 package domain.tipoPrenda;
 
 import java.util.List;
-import java.util.Optional;
 
 public class Abrigo extends Superior {
 	

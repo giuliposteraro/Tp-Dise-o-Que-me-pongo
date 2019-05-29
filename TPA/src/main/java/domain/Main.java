@@ -3,7 +3,6 @@ package domain;
 import domain.clima.ClimaOW;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class Main {
 
