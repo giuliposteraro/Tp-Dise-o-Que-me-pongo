@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
+import domain.prenda.Prenda;
+import domain.tipoPrenda.ECategoria;
 import exceptions.*;
 
 public class Guardarropa {

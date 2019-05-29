@@ -3,13 +3,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import domain.ConstructorPrenda;
-import domain.ECategoria;
-import domain.EColor;
-import domain.ETela;
-import domain.Prenda;
-import domain.Tipo;
-
+import domain.color.EColor;
+import domain.prenda.ConstructorPrenda;
+import domain.prenda.Prenda;
+import domain.tipoPrenda.ECategoria;
+import domain.tipoPrenda.ETela;
+import domain.tipoPrenda.Tipo;
 import exceptions.*;
 
 public class TestPrenda {

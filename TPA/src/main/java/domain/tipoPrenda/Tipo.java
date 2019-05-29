@@ -1,4 +1,4 @@
-package domain;
+package domain.tipoPrenda;
 
 import java.util.Arrays;
 import java.util.List;
