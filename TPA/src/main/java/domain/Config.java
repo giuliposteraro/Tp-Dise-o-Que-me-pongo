@@ -6,7 +6,7 @@ public class Config {
 	
 	static Config instance;
 	
-	static Config instance() {
+	public static Config instance() {
 		if(instance == null) {
 			instance = new Config();
 		}
@@ -16,7 +16,7 @@ public class Config {
 	
 	// Class
 	
-	public int capacidadMaxima = 20;
+	public int capacidadMaxima = 5;
 	
 	public int getCapacidadMaxima() {
 		return this.capacidadMaxima;
