@@ -39,6 +39,10 @@ public class Prenda {
 		return tela;
 	}
 	
+	public BufferedImage getImagen() {
+		return imagen;
+	}
+	
 	public ECategoria getCategoria() {
 		return tipo.getCategoria();
 	}

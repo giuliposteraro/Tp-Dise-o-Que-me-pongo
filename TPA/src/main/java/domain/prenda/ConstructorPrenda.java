@@ -50,7 +50,7 @@ public class ConstructorPrenda {
 			imagen = ImageIO.read(archivoImg);
 		} catch (IOException e) {
 			imagen = null;
-			e.printStackTrace();
+			throw new NoSePudoCargarLaImagen("La ruta indicada no es valida");
 		}
 	}
 }

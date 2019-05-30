@@ -108,25 +108,23 @@ public class TestSugeridor {
 	@Test
 	public void obtenerElCoeficienteDeAbrigo() {
 		
-		guardarropa.agregarPrenda(campera);
-		
-		campera.ponerSobre(buzo);
+		campera = campera.ponerSobre(buzo);
 		
 		Atuendo a = new Atuendo(Arrays.asList(remera, campera, pantalon, zapatillas, reloj));
 		
 		Sugerencia s = new Sugerencia(a, usuario);
 
-//		System.out.println(s.coeficienteDeAbrigo(12.0));
+		System.out.println(s.coeficienteDeAbrigo(4.0));
 		
 		assertTrue(s.coeficienteDeAbrigo(20.0).doubleValue() >= 0.0 && s.coeficienteDeAbrigo(20.0).doubleValue() <= 1.0);
 	}
 	
 	@Test
-	public void generarSugerenciasParaEstaConfiguracionDevuelveMaximaCantidadDeSugerencias() {
+	public void generarSugerenciasParaEstaConfiguracionGenera8Sugerencias() {
 		
 		s.generarSugerencias();
 		
-		assertEquals(5, usuario.getSugerenciasPendientes().size());
+		assertEquals(8, usuario.getSugerenciasPendientes().size());
 	}
 	
 	@Test

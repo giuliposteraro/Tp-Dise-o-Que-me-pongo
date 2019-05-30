@@ -12,7 +12,6 @@ import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
 import domain.prenda.RepoPrendas;
 import domain.tipoPrenda.ETela;
-import exceptions.CapacidadDelGuardarropaLlena;
 
 public class TestGuardarropa {
 
@@ -60,8 +59,6 @@ public class TestGuardarropa {
 		reloj = c.crear();
 	
 		guardarropa = new Guardarropa(new GuardarropaIlimitado());
-		guardarropa.agregarPrenda(Prenda.SIN_ABRIGO);
-		guardarropa.agregarPrenda(Prenda.SIN_ACCESORIO);
 	}
 
 
@@ -89,74 +86,13 @@ public class TestGuardarropa {
 		assertTrue(guardarropa.tieneLugar());
 	}
 	
-	@Test(expected = CapacidadDelGuardarropaLlena.class)
-	public void tieneLugarGuardarropaLimitadoConMasPrendas() {
-		Config.instance().getCapacidadMaxima();
+	public void NoTieneLugarGuardarropaLimitadoConMasPrendas() {
 		guardarropa.setTipoGuardarropa(new GuardarropaLimitado());
 		guardarropa.agregarPrenda(remera2);
 		guardarropa.agregarPrenda(zapatillas);
 		guardarropa.agregarPrenda(buzo);
 		guardarropa.agregarPrenda(pantalon);
 		guardarropa.agregarPrenda(reloj);
-		guardarropa.tieneLugar();
+		assertFalse(guardarropa.tieneLugar());
 	}
-	//TODO Actualizar Tests
-	
-//	@Test
-//	public void unGuardarropaConCuatroPrendasPuedeGenerarMasDeUnAtuendoConEsasPrendas() {
-//		guardarropa.agregarPrenda(remera);
-//		guardarropa.agregarPrenda(buzo);
-//		guardarropa.agregarPrenda(pantalon);
-//		guardarropa.agregarPrenda(zapatillas);
-//		guardarropa.agregarPrenda(reloj);
-//		
-//		assertEquals(4, guardarropa.generarSugerencias().size());
-//	}
-	
-//	@Test
-//	public void unGuardarropaConDosRemerasGeneraOchoAtuendos() {
-//		guardarropa.agregarPrenda(remera);
-//		guardarropa.agregarPrenda(remera2);
-//		guardarropa.agregarPrenda(buzo);
-//		guardarropa.agregarPrenda(pantalon);
-//		guardarropa.agregarPrenda(zapatillas);
-//		guardarropa.agregarPrenda(reloj);
-//		
-//		assertEquals(8, guardarropa.generarSugerencias().size());
-//	}
-	
-//	>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	
-//	@Test
-//	public void unGuardarropaConCuatroPrendasGeneraUnAtuendoConEsasPrendas() {
-//		guardarropa.agregarPrenda(remera);
-//		guardarropa.agregarPrenda(pantalon);
-//		guardarropa.agregarPrenda(zapatillas);
-//		guardarropa.agregarPrenda(reloj);
-//		
-//		List<Prenda> esperadas = Arrays.asList(remera, pantalon, zapatillas, reloj);
-//		
-//		assertEquals(esperadas, guardarropa.generarSugerencias().get(0).prendas());
-//	}
-//	
-//	@Test
-//	public void unGuardarropaConDosRemerasGeneraDosAtuendos() {
-//		guardarropa.agregarPrenda(remera);
-//		guardarropa.agregarPrenda(remera2);
-//		guardarropa.agregarPrenda(pantalon);
-//		guardarropa.agregarPrenda(zapatillas);
-//		guardarropa.agregarPrenda(reloj);
-//		
-//		assertEquals(2, guardarropa.generarSugerencias().size());
-//	}
-//	
-//	@Test(expected = NoSePuedeGenerarSugerencia.class)
-//	public void siNoHayAlgunaCategoriaFalla() {
-//		guardarropa.agregarPrenda(reloj);
-//		guardarropa.agregarPrenda(pantalon);
-//		guardarropa.agregarPrenda(zapatillas);
-//
-//		guardarropa.generarSugerencias();
-//	}
-	
 }

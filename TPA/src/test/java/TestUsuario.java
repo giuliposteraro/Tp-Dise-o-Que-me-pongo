@@ -63,11 +63,7 @@ public class TestUsuario {
 		
 		usuario = new Usuario(new UsuarioPremium());
 		guardarropa = usuario.crearGuardarropa();
-		usuario.agregarPrenda(Prenda.SIN_ABRIGO, guardarropa);
-		usuario.agregarPrenda(Prenda.SIN_ACCESORIO, guardarropa);
 		guardarropa2 = usuario.crearGuardarropa();
-		usuario.agregarPrenda(Prenda.SIN_ABRIGO, guardarropa2);
-		usuario.agregarPrenda(Prenda.SIN_ACCESORIO, guardarropa2);
 	}
 	
 	@Test
@@ -85,7 +81,7 @@ public class TestUsuario {
 		
 		usuario.generarSugerencias(guardarropa);
 		
-		assertEquals(1, usuario.getSugerenciasPendientes().size());
+		assertEquals(4, usuario.getSugerenciasPendientes().size());
 	}
 	
 	@Test(expected = NoSePuedeGenerarSugerencia.class)

@@ -22,7 +22,7 @@ public class Sugerencia {
 	
 	public Double coeficienteDeAbrigo(Double temp) {
 		//Campana de Gauss
-		return Math.pow(Math.E, (-Math.pow(this.getNivelAbrigo() - (35.0 - temp), 2) / 10));
+		return Math.pow(Math.E, (-Math.pow(this.getNivelAbrigo() - (30.0 - temp * 1.25), 2) / 10));
 	}
 
 	public Double getNivelAbrigo() {

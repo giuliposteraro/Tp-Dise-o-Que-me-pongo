@@ -46,6 +46,24 @@ public class TestPrenda {
 		assertEquals(ETela.ALGODON, p.getTela());
 	}
 	
+	@Test
+	public void cargarUnaImagen() {
+		c.setTipo(RepoPrendas.REMERA);
+		c.setColor(EColor.ROJO, EColor.NINGUNO);
+		c.setTela(ETela.ALGODON);
+		c.setImagen("/home/mauro/2019-ju-ma-group-03/TPA/img/remera-azul.png");
+		Prenda p = c.crear();
+		assertNotNull(p.getImagen());
+	}
+	
+	@Test(expected = NoSePudoCargarLaImagen.class)
+	public void cargarUnaImagenInexistenteFalla() {
+		c.setTipo(RepoPrendas.REMERA);
+		c.setColor(EColor.ROJO, EColor.NINGUNO);
+		c.setTela(ETela.ALGODON);
+		c.setImagen("/home/mauro/2019-ju-ma-group-03/TPA/img/a.png");
+	}
+	
 	@Test(expected = ParametrosNoValidos.class)
 	public void crearPrendaSinTipoFalla() {
 		c.setColor(EColor.ROJO, EColor.NINGUNO);

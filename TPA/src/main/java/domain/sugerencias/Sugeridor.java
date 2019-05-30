@@ -35,7 +35,7 @@ public class Sugeridor {
 		
 		sugerencias.sort((a, b) -> a.coeficienteDeAbrigo(temp).compareTo(b.coeficienteDeAbrigo(temp)));
 		
-		if(sugerencias.size() > 5) {
+		if(sugerencias.size() > 10) {
 			sugerencias = sugerencias.subList(0, 5);
 		}
 		
