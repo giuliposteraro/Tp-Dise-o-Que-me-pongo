@@ -7,6 +7,7 @@ import domain.eventos.Evento;
 import domain.eventos.RepositorioEventos;
 import domain.guardarropa.Guardarropa;
 import domain.prenda.Prenda;
+import domain.sugerencias.EstadoSugerencia;
 import domain.sugerencias.Sugerencia;
 import domain.sugerencias.Sugeridor;
 import exceptions.*;
@@ -16,6 +17,7 @@ public class Usuario {
 	private TipoUsuario tipo;
 	Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
 	List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
+	List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();
 	
 	public Usuario(TipoUsuario tipo) {
 		this.setTipo(tipo);
@@ -86,6 +88,24 @@ public class Usuario {
 
 	public List<Sugerencia> getSugerenciasPendientes() {
 		return sugerenciasPendientes;
+	}
+	
+	public void revisarSugerencia(Sugerencia sugerencia, EstadoSugerencia estado) {
+		if(!sugerenciasPendientes.contains(sugerencia)) {
+			throw new NoTieneSugerenciaPendiente("Esta sugerencia no esta pendiente para este usuario");
+		}
+		sugerencia.setEstado(estado);
+		sugerenciasPendientes.remove(sugerencia);
+		sugerenciasRevisadas.add(sugerencia);
+	}
+	
+	public void deshacerUltimaSugerenciaRevisada() {
+		if(sugerenciasRevisadas.isEmpty()) {
+			throw new NoHaySugerenciasRevisadas("Este usuario no tiene sugerencias para deshacer");
+		}
+		Sugerencia sugerenciaADeshacer = sugerenciasRevisadas.remove(sugerenciasRevisadas.size() - 1);
+		sugerenciaADeshacer.setEstado(EstadoSugerencia.PENDIENTE);
+		sugerenciasPendientes.add(sugerenciaADeshacer);
 	}
 
 	TipoUsuario getTipo() {
