@@ -85,10 +85,6 @@ public class Usuario {
 		RepositorioEventos repo = Config.instance().getRepositorioEventos();
 		repo.agregarEvento(eventoNuevo);
 	}
-
-	public List<Sugerencia> getSugerenciasPendientes() {
-		return sugerenciasPendientes;
-	}
 	
 	public void revisarSugerencia(Sugerencia sugerencia, EstadoSugerencia estado) {
 		if(!sugerenciasPendientes.contains(sugerencia)) {
@@ -108,6 +104,14 @@ public class Usuario {
 		sugerenciasPendientes.add(sugerenciaADeshacer);
 	}
 
+	public List<Sugerencia> getSugerenciasPendientes() {
+		return sugerenciasPendientes;
+	}
+	
+	public List<Sugerencia> getSugerenciasRevisadas() {
+		return sugerenciasRevisadas;
+	}
+	
 	TipoUsuario getTipo() {
 		return tipo;
 	}

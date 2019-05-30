@@ -32,4 +32,8 @@ public class Sugerencia {
 	public Atuendo getAtuendo() {
 		return atuendo;
 	}
+
+	public EstadoSugerencia getEstado() {
+		return estado;
+	}
 }

@@ -9,6 +9,8 @@ import domain.guardarropa.GuardarropaIlimitado;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
 import domain.prenda.RepoPrendas;
+import domain.sugerencias.EstadoSugerencia;
+import domain.sugerencias.Sugerencia;
 import domain.tipoPrenda.ETela;
 import domain.usuario.Usuario;
 import domain.usuario.UsuarioPremium;
@@ -82,6 +84,49 @@ public class TestUsuario {
 		usuario.generarSugerencias(guardarropa);
 		
 		assertEquals(4, usuario.getSugerenciasPendientes().size());
+	}
+	
+	@Test
+	public void aceptarUnaSugerencia() {
+		usuario.agregarPrenda(remera, guardarropa);
+		usuario.agregarPrenda(pantalon, guardarropa);
+		usuario.agregarPrenda(zapatillas, guardarropa);
+		
+		usuario.generarSugerencias(guardarropa);
+		
+		Sugerencia sugerencia = usuario.getSugerenciasPendientes().get(0);
+		usuario.revisarSugerencia(sugerencia, EstadoSugerencia.ACEPTADA);
+		
+		assertEquals(EstadoSugerencia.ACEPTADA, usuario.getSugerenciasRevisadas().get(0).getEstado());
+	}
+	
+	@Test
+	public void rechazarUnaSugerencia() {
+		usuario.agregarPrenda(remera, guardarropa);
+		usuario.agregarPrenda(pantalon, guardarropa);
+		usuario.agregarPrenda(zapatillas, guardarropa);
+		
+		usuario.generarSugerencias(guardarropa);
+		
+		Sugerencia sugerencia = usuario.getSugerenciasPendientes().get(0);
+		usuario.revisarSugerencia(sugerencia, EstadoSugerencia.RECHAZADA);
+		
+		assertEquals(EstadoSugerencia.RECHAZADA, usuario.getSugerenciasRevisadas().get(0).getEstado());
+	}
+	
+	@Test
+	public void deshacerLaUltimaAccion() {
+		usuario.agregarPrenda(remera, guardarropa);
+		usuario.agregarPrenda(pantalon, guardarropa);
+		usuario.agregarPrenda(zapatillas, guardarropa);
+		
+		usuario.generarSugerencias(guardarropa);
+		
+		Sugerencia sugerencia = usuario.getSugerenciasPendientes().get(0);
+		usuario.revisarSugerencia(sugerencia, EstadoSugerencia.RECHAZADA);
+		usuario.deshacerUltimaSugerenciaRevisada();
+		
+		assertEquals(0, usuario.getSugerenciasRevisadas().size());
 	}
 	
 	@Test(expected = NoSePuedeGenerarSugerencia.class)
