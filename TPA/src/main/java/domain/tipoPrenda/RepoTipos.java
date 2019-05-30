@@ -1,9 +1,8 @@
-package domain.prenda;
+package domain.tipoPrenda;
 
 import java.util.Arrays;
-import domain.tipoPrenda.*;
 
-public class RepoPrendas {
+public class RepoTipos {
 	public static Superior REMERA = new Superior(Arrays.asList(ETela.ALGODON));
 	public static Abrigo BUZO = new Abrigo(Arrays.asList(ETela.ALGODON), 30);
 	public static Abrigo CAMPERA = new Abrigo(Arrays.asList(ETela.CUERO, ETela.ALGODON), 40);

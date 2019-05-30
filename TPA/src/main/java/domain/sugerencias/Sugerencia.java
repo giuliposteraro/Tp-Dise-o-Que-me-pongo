@@ -1,18 +1,17 @@
 package domain.sugerencias;
 
+import domain.eventos.Evento;
 import domain.guardarropa.Atuendo;
-import domain.usuario.Usuario;
 
 public class Sugerencia {
 
 	Atuendo atuendo;
-	Usuario usuario;
 	EstadoSugerencia estado;
-//	Evento evento;
+	Evento evento;
 	
-	public Sugerencia(Atuendo atuendo, Usuario usuario) {
+	public Sugerencia(Atuendo atuendo, Evento evento) {
 		this.atuendo = atuendo;
-		this.usuario = usuario;
+		this.evento = evento;
 		this.estado = EstadoSugerencia.PENDIENTE;
 	}
 

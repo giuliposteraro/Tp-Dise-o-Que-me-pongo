@@ -40,7 +40,9 @@ public class Usuario {
 	public void generarSugerencias(Guardarropa guardarropa) {
 		validarAccesoAGuardarropa(guardarropa);
 		
-		Sugeridor sugeridor = new Sugeridor(this, guardarropa/*, Config.instance().getProveedor()*/);
+		Evento evento = new Evento(this, guardarropa, LocalDate.now(), "", "Consulta");
+		
+		Sugeridor sugeridor = new Sugeridor(evento, Config.instance().getProveedor());
 		
 		sugeridor.generarSugerencias();
 	}

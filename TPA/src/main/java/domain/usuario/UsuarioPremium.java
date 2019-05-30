@@ -8,5 +8,4 @@ public class UsuarioPremium implements TipoUsuario{
 	public Guardarropa crearGuardarropa() {
 		return new Guardarropa(new GuardarropaIlimitado());
 	}
-	
 }

@@ -5,31 +5,28 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
-
+import domain.clima.ProveedorClima;
+import domain.eventos.Evento;
 import domain.guardarropa.Atuendo;
-import domain.guardarropa.Guardarropa;
 import domain.prenda.Prenda;
-import domain.usuario.Usuario;
 import exceptions.NoSePuedeGenerarSugerencia;
 
 public class Sugeridor {
-	Usuario usuario;
-	Guardarropa guardarropa;
-//	ProveedorClima provClima;
+	Evento evento;
+	ProveedorClima provClima;
 
-	public Sugeridor(Usuario usuario, Guardarropa guardarropa/*, ProveedorClima provClima*/) {
-		this.usuario = usuario;
-		this.guardarropa = guardarropa;
-//		this.provClima = provClima;
+	public Sugeridor(Evento evento, ProveedorClima provClima) {
+		this.evento = evento;
+		this.provClima = provClima;
 	}
 
 	public void generarSugerencias() {
-		Double temp = 25.0; //provClima.getTemp();
-		Set<Prenda> abr = guardarropa.prendasSuperioresDeAbrigo();
-		Set<Prenda> sup = guardarropa.prendasSuperiores();
-		Set<Prenda> inf = guardarropa.prendasInferiores();
-		Set<Prenda> cal = guardarropa.calzados();
-		Set<Prenda> acc = guardarropa.accesorios();
+		Double temp = provClima.getTemp();
+		Set<Prenda> abr = evento.getGuardarropa().prendasSuperioresDeAbrigo();
+		Set<Prenda> sup = evento.getGuardarropa().prendasSuperiores();
+		Set<Prenda> inf = evento.getGuardarropa().prendasInferiores();
+		Set<Prenda> cal = evento.getGuardarropa().calzados();
+		Set<Prenda> acc = evento.getGuardarropa().accesorios();
 		
 		List<Sugerencia> sugerencias = obtenerSugerencias(abr, sup, inf, cal, acc);
 		
@@ -39,7 +36,7 @@ public class Sugeridor {
 			sugerencias = sugerencias.subList(0, 5);
 		}
 		
-		sugerencias.forEach(sug -> usuario.agregarSugerencia(sug));
+		sugerencias.forEach(sug -> evento.getUsuario().agregarSugerencia(sug));
 	}
 
 	private List<Sugerencia> obtenerSugerencias(Set<Prenda> abr, Set<Prenda> sup, Set<Prenda> inf, Set<Prenda> cal, Set<Prenda> acc) {
@@ -50,7 +47,7 @@ public class Sugeridor {
 	
 	private List<Sugerencia> convertirASugerencias(Set<List<Prenda>> combinaciones) {
 		Set<Atuendo> atuendos = combinaciones.stream().map(combinacion -> new Atuendo(combinacion)).collect(Collectors.toSet());
-		return atuendos.stream().map(atuendo -> new Sugerencia(atuendo, usuario)).collect(Collectors.toList());
+		return atuendos.stream().map(atuendo -> new Sugerencia(atuendo, evento)).collect(Collectors.toList());
 	}
 
 	private Set<List<Prenda>> obtenerCombinaciones(Set<Prenda> abr, Set<Prenda> sup, Set<Prenda> inf, Set<Prenda> cal, Set<Prenda> acc) {

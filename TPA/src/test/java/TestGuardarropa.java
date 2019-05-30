@@ -10,8 +10,8 @@ import domain.guardarropa.GuardarropaIlimitado;
 import domain.guardarropa.GuardarropaLimitado;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
-import domain.prenda.RepoPrendas;
 import domain.tipoPrenda.ETela;
+import domain.tipoPrenda.RepoTipos;
 
 public class TestGuardarropa {
 
@@ -28,32 +28,32 @@ public class TestGuardarropa {
 	public void crearPrendas() {
 		ConstructorPrenda c = new ConstructorPrenda();
 		
-		c.setTipo(RepoPrendas.REMERA);
+		c.setTipo(RepoTipos.REMERA);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.NEGRO, EColor.AZUL);
 		remera = c.crear();
 		
-		c.setTipo(RepoPrendas.REMERA);
+		c.setTipo(RepoTipos.REMERA);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		remera2 = c.crear();
 		
-		c.setTipo(RepoPrendas.BUZO);
+		c.setTipo(RepoTipos.BUZO);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.NEGRO, EColor.BLANCO);
 		buzo = c.crear();
 		
-		c.setTipo(RepoPrendas.PANTALON);
+		c.setTipo(RepoTipos.PANTALON);
 		c.setTela(ETela.JEAN);
 		c.setColor(EColor.AZUL, EColor.NINGUNO);
 		pantalon = c.crear();
 		
-		c.setTipo(RepoPrendas.ZAPATILLAS);
+		c.setTipo(RepoTipos.ZAPATILLAS);
 		c.setTela(ETela.TELA);
 		c.setColor(EColor.BLANCO, EColor.NEGRO);
 		zapatillas = c.crear();
 		
-		c.setTipo(RepoPrendas.RELOJ);
+		c.setTipo(RepoTipos.RELOJ);
 		c.setTela(ETela.NINGUNA);
 		c.setColor(EColor.NEGRO, EColor.NINGUNO);
 		reloj = c.crear();

@@ -8,6 +8,7 @@ import domain.color.EColor;
 import domain.tipoPrenda.ECategoria;
 import domain.tipoPrenda.ETela;
 import domain.tipoPrenda.TipoPrenda;
+import domain.tipoPrenda.RepoTipos;
 
 //No instanciar directamente, usar ConstructorPrenda
 
@@ -64,7 +65,7 @@ public class Prenda {
 		return tipo.puedeAbrigarseCon(otraPrenda.getTipo());
 	}
 	
-	public static Prenda SIN_ACCESORIO = new Prenda(RepoPrendas.SIN_ACCESORIO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO), null);
-	public static Prenda SIN_ABRIGO = new Prenda(RepoPrendas.SIN_ABRIGO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO), null);
+	public static Prenda SIN_ACCESORIO = new Prenda(RepoTipos.SIN_ACCESORIO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO), null);
+	public static Prenda SIN_ABRIGO = new Prenda(RepoTipos.SIN_ABRIGO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO), null);
 }
 

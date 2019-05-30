@@ -30,6 +30,5 @@ public class TipoPrenda {
 
 	public int getCapa() {
 		return 0;
-	}
-	
+	}	
 }

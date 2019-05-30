@@ -1,4 +1,4 @@
-package domain.usuario;
+package exceptions;
 
 public class NoHaySugerenciasRevisadas extends RuntimeException {
 	private static final long serialVersionUID = 1L;

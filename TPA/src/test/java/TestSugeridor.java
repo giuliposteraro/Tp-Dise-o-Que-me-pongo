@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,15 +9,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
 
+import domain.clima.ClimaMock;
 import domain.color.EColor;
+import domain.eventos.Evento;
 import domain.guardarropa.Atuendo;
 import domain.guardarropa.Guardarropa;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
-import domain.prenda.RepoPrendas;
 import domain.sugerencias.Sugerencia;
 import domain.sugerencias.Sugeridor;
 import domain.tipoPrenda.ETela;
+import domain.tipoPrenda.RepoTipos;
 import domain.usuario.Usuario;
 import domain.usuario.UsuarioPremium;
 
@@ -33,58 +36,58 @@ public class TestSugeridor {
 	Prenda reloj;
 	Usuario usuario;
 	Guardarropa guardarropa;
+	Evento evento;
 	Sugeridor s;
 	
 	@Before
 	public void crearPrendas() {
 		ConstructorPrenda c = new ConstructorPrenda();
 		
-		c.setTipo(RepoPrendas.REMERA);
+		c.setTipo(RepoTipos.REMERA);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.NEGRO, EColor.AZUL);
 		remera = c.crear();
 		
-		c.setTipo(RepoPrendas.REMERA);
+		c.setTipo(RepoTipos.REMERA);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		remera2 = c.crear();
 		
-		c.setTipo(RepoPrendas.BUZO);
+		c.setTipo(RepoTipos.BUZO);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.NEGRO, EColor.BLANCO);
 		buzo = c.crear();
 		
-		c.setTipo(RepoPrendas.CAMPERA);
+		c.setTipo(RepoTipos.CAMPERA);
 		c.setTela(ETela.ALGODON);
 		c.setColor(EColor.AZUL, EColor.NEGRO);
 		campera = c.crear();
 		
-		c.setTipo(RepoPrendas.PANTALON);
+		c.setTipo(RepoTipos.PANTALON);
 		c.setTela(ETela.JEAN);
 		c.setColor(EColor.AZUL, EColor.NINGUNO);
 		pantalon = c.crear();
 		
-		c.setTipo(RepoPrendas.ZAPATILLAS);
+		c.setTipo(RepoTipos.ZAPATILLAS);
 		c.setTela(ETela.TELA);
 		c.setColor(EColor.BLANCO, EColor.NEGRO);
 		zapatillas = c.crear();
 		
-		c.setTipo(RepoPrendas.RELOJ);
+		c.setTipo(RepoTipos.RELOJ);
 		c.setTela(ETela.NINGUNA);
 		c.setColor(EColor.NEGRO, EColor.NINGUNO);
 		reloj = c.crear();
 		
 		usuario = new Usuario(new UsuarioPremium());
 		guardarropa = usuario.crearGuardarropa();
-		usuario.agregarPrenda(Prenda.SIN_ABRIGO, guardarropa);
-		usuario.agregarPrenda(Prenda.SIN_ACCESORIO, guardarropa);
 		usuario.agregarPrenda(remera, guardarropa);
 		usuario.agregarPrenda(buzo, guardarropa);
 		usuario.agregarPrenda(campera, guardarropa);
 		usuario.agregarPrenda(pantalon, guardarropa);
 		usuario.agregarPrenda(zapatillas, guardarropa);
 		usuario.agregarPrenda(reloj, guardarropa);
-		s = new Sugeridor(usuario, guardarropa);
+		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "");
+		s = new Sugeridor(evento, new ClimaMock());
 	}
 	
 	@Test
@@ -97,31 +100,22 @@ public class TestSugeridor {
 	
 	@Test
 	public void obtenerElNivelDeAbrigoDeUnaSugerencia() {
-		
 		Atuendo a = new Atuendo(Arrays.asList(remera, buzo, pantalon, zapatillas, reloj));
-		
-		Sugerencia s = new Sugerencia(a, usuario);
-		
+		Sugerencia s = new Sugerencia(a, evento);
 		assertEquals(15.0, s.getNivelAbrigo().doubleValue(), 0.001);
 	}
 	
 	@Test
 	public void obtenerElCoeficienteDeAbrigo() {
-		
 		campera = campera.ponerSobre(buzo);
-		
-		Atuendo a = new Atuendo(Arrays.asList(remera, campera, pantalon, zapatillas, reloj));
-		
-		Sugerencia s = new Sugerencia(a, usuario);
-
-		System.out.println(s.coeficienteDeAbrigo(4.0));
+		Atuendo atuendo = new Atuendo(Arrays.asList(remera, campera, pantalon, zapatillas, reloj));
+		Sugerencia s = new Sugerencia(atuendo, evento);
 		
 		assertTrue(s.coeficienteDeAbrigo(20.0).doubleValue() >= 0.0 && s.coeficienteDeAbrigo(20.0).doubleValue() <= 1.0);
 	}
 	
 	@Test
 	public void generarSugerenciasParaEstaConfiguracionGenera8Sugerencias() {
-		
 		s.generarSugerencias();
 		
 		assertEquals(8, usuario.getSugerenciasPendientes().size());

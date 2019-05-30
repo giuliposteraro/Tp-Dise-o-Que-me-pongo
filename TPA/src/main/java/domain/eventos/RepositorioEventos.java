@@ -25,8 +25,4 @@ public class RepositorioEventos {
 	public Set<Evento> eventos(){
 		return this.eventos;
 	}
-	
-	
-	
-	
 }

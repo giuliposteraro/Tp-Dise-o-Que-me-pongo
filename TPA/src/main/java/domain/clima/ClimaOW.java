@@ -3,14 +3,11 @@ package domain.clima;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-
 import domain.Config;
-
+import exceptions.NoSePuedeObtenerElClima;
 import javax.ws.rs.core.MediaType;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 public class ClimaOW implements ProveedorClima{
 	
@@ -22,27 +19,29 @@ public class ClimaOW implements ProveedorClima{
     
     public ClimaOW() {
         this.client = Client.create();
-        
     }
     
-    public ClientResponse getTempResponse(){
+    private ClientResponse getTempResponse(){
         WebResource recurso = this.client.resource(API_OPEN_WEATHER).path(RESOURCE);
-        WebResource recursoConParametros = recurso.queryParam("q",CITY).queryParam("APPID",APIKEY);
+        WebResource recursoConParametros = recurso.queryParam("q", CITY).queryParam("APPID", APIKEY);
         WebResource.Builder builder = recursoConParametros.accept(MediaType.APPLICATION_JSON);
 
         ClientResponse response = builder.get(ClientResponse.class);
         return response;
     }
-        
-    
+   
 	@Override
-	public Double getTemp() throws JSONException {
+	public Double getTemp() {
 		String ResultadoJson = this.getTempResponse().getEntity(String.class);
+		JSONObject json;
+		String temp;
 		
-		JSONObject json = new JSONObject(ResultadoJson);
-		String temp = json.getJSONObject("main").getString("temp");
-		return Double.valueOf(temp) - 273.15;
-		
+		try {
+			json = new JSONObject(ResultadoJson);
+			temp = json.getJSONObject("main").getString("temp");
+			return Double.valueOf(temp) - 273.15;
+		} catch (JSONException e) {
+			throw new NoSePuedeObtenerElClima("La API de clima no esta disponible");
+		}
 	}
-
 }
