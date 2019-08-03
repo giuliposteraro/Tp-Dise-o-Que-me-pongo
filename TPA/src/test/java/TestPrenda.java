@@ -50,7 +50,7 @@ public class TestPrenda {
 		c.setTipo(RepoTipos.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		c.setTela(ETela.ALGODON);
-		c.setImagen("/home/mauro/2019-ju-ma-group-03/TPA/img/remera-azul.png");
+		c.setImagen("img/remera-azul.png");
 		Prenda p = c.crear();
 		assertNotNull(p.getImagen());
 	}
