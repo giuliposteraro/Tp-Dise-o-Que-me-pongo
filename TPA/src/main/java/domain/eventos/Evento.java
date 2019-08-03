@@ -26,7 +26,7 @@ public class Evento {
 		return fecha.isEqual(LocalDate.now());
 	}
 	
-	public void sugerir() {   
+	public void sugerir() {
 		Sugeridor unSugeridor = new Sugeridor(this, Config.instance().getProveedor());
 		unSugeridor.generarSugerencias();
 	}	

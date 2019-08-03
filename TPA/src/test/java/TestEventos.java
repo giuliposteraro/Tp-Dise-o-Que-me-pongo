@@ -6,6 +6,8 @@ import org.junit.runners.Parameterized.Parameter;
 import domain.eventos.*;
 import domain.guardarropa.Guardarropa;
 import domain.guardarropa.GuardarropaLimitado;
+import domain.Config;
+import domain.clima.ClimaMock;
 import domain.color.EColor;
 import domain.tipoPrenda.ETela;
 import domain.tipoPrenda.RepoTipos;
@@ -89,6 +91,7 @@ public class TestEventos {
 
 	@Test
 	public void chequearSugerenciasUsuarioTrasAgregarEvento() {
+		Config.instance().setProveedor(new ClimaMock());
 		evento1 = new Evento(usuario, guardarropa, fecha2, "Boliche", "Party");
 		evento1.sugerir();
 		assertEquals(2, usuario.getSugerenciasPendientes().size());

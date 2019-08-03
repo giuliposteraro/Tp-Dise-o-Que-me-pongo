@@ -12,7 +12,7 @@ public class TareaRevision extends TimerTask {
    public void run() {
 	   System.out.println("Running Job...");
 	   repo.proximosEventos().forEach(evento->evento.sugerir());
-	   repo.eventos(repo.eventos().stream().filter(evento -> !evento.esProximo()).collect(Collectors.toSet())); //????? aca borrar�a de la lista de eventos a aquellos que fueron ya sugeridos
+	   repo.eventos(repo.eventos().stream().filter(evento -> !evento.esProximo()).collect(Collectors.toSet()));
 	   System.out.println("Job Finished!");
    }
 }
