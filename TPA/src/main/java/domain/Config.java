@@ -6,7 +6,7 @@ import domain.clima.ProveedorClima;
 public class Config {
 	
 	// Singleton
-	static Config instance;
+	private static Config instance;
 	
 	public static Config instance() {
 		if(instance == null) {
@@ -16,9 +16,14 @@ public class Config {
 	}
 	
 	// Class
-	int capacidadMaxima = 20;
-	String ciudad = "Buenos Aires";
-	RepositorioEventos repo = new RepositorioEventos();
+	private int capacidadMaxima = 20;
+	private String ciudad = "Buenos Aires";
+	private RepositorioEventos repo = new RepositorioEventos();
+	private ProveedorClima proveedor = new ClimaOW();
+	
+	private Config() {
+		
+	}
 	
 	public RepositorioEventos getRepositorioEventos() {
 		return repo;
@@ -33,11 +38,23 @@ public class Config {
 	}
 	
 	public ProveedorClima getProveedor() {
-		return new ClimaOW();
+		return proveedor;
+	}
+	
+	public void setRepositorioEventos(RepositorioEventos repo) {
+		this.repo = repo;
 	}
 	
 	public void setCapacidadMaxima(int cap) {
 		this.capacidadMaxima = cap;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+	
+	public void setProveedor(ProveedorClima proveedor) {
+		 this.proveedor = proveedor; 
 	}
 
 }
