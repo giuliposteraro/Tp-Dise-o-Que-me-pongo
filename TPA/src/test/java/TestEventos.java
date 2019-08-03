@@ -33,15 +33,16 @@ public class TestEventos {
 	Prenda zapatillas;
 	Prenda reloj;
 	Sugeridor s;
+	TareaRevision tareaRevision;
 
 	@Before
 	public void crearObj() {
 		repo = new RepositorioEventos();
 		usuario = new Usuario(new UsuarioPremium());
 		guardarropa = usuario.crearGuardarropa();
-		fecha = LocalDate.of(2019, 10, 22);
+		fecha = LocalDate.of(2023, 8, 4);
 		fecha2 = LocalDate.now();
-		fecha3=LocalDate.of(2019, 5, 29);
+		tareaRevision = new TareaRevision();
 
 		ConstructorPrenda c = new ConstructorPrenda();
 
@@ -94,6 +95,14 @@ public class TestEventos {
 		Config.instance().setProveedor(new ClimaMock());
 		evento1 = new Evento(usuario, guardarropa, fecha2, "Boliche", "Party");
 		evento1.sugerir();
+		assertEquals(2, usuario.getSugerenciasPendientes().size());
+	}
+	
+	@Test
+	public void chequearQueSeRealicenLasSugerenciasAlEjecutarElJob() {
+		repo = Config.instance().getRepositorioEventos();
+		repo.agregarEvento(new Evento(usuario, guardarropa, fecha2, "Boliche", "Fiesta"));
+		tareaRevision.run();
 		assertEquals(2, usuario.getSugerenciasPendientes().size());
 	}
 }

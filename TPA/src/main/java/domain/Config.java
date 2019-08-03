@@ -41,10 +41,18 @@ public class Config {
 		return proveedor;
 	}
 	
+	public void setRepositorioEventos(RepositorioEventos repo) {
+		this.repo = repo;
+	}
+	
 	public void setCapacidadMaxima(int cap) {
 		this.capacidadMaxima = cap;
 	}
 
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+	
 	public void setProveedor(ProveedorClima proveedor) {
 		 this.proveedor = proveedor; 
 	}
