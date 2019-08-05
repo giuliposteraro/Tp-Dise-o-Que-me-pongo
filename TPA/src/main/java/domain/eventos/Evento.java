@@ -12,14 +12,14 @@ public class Evento {
 	Usuario usuario;
 	LocalDate fecha;
 	String lugar;
-	String motivo;
+	String nombre;
 	
-	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unMotivo) {
+	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unNombre) {
 		this.usuario = unUsuario;
 		this.guardarropa = unGuardarropa;
 		this.fecha = unaFecha;
 		this.lugar = unLugar;
-		this.motivo = unMotivo;
+		this.nombre = unNombre;
 	}
 	
 	public boolean esProximo() {  // es proximo si el evento es hoy mismo
@@ -37,5 +37,9 @@ public class Evento {
 	
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public String getNombre() {
+		return nombre;
 	}
 }
