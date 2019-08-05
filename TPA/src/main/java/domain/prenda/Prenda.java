@@ -18,6 +18,7 @@ public class Prenda {
 	Color color;
 	ETela tela;
 	BufferedImage imagen;
+	Boolean enUso; 
 	
 	private Optional<Prenda> prendaAbajo = Optional.empty();
 	
