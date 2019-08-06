@@ -18,6 +18,10 @@ public class RepositorioEventos {
 		return eventos.stream().filter(evento->evento.esProximo()).collect(Collectors.toSet());
 	}
 	
+	public Set<Evento> eventosProximosYPendientes(){
+		return eventos.stream().filter(evento->evento.esProximo() && evento.estaPendiente()).collect(Collectors.toSet());
+	}
+	
 	public void eventos(Set<Evento> unosEventos){
 		eventos = unosEventos;
 	}
