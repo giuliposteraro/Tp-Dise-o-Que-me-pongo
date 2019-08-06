@@ -12,6 +12,10 @@ public class Guardarropa {
 
 	private Set<Prenda> prendas;
 	private TipoGuardarropa tipoGuardarropa;
+	
+	public boolean tienePrendasEnUso() {
+		return prendas.stream().anyMatch(prenda -> prenda.estaEnUso());
+	}
 
 	public Guardarropa(TipoGuardarropa tipo) {
 		this.prendas = new HashSet<Prenda>();

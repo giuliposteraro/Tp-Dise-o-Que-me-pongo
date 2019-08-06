@@ -29,6 +29,9 @@ public class Prenda {
 		this.imagen = imagen;
 	}
 	
+	public boolean estaEnUso() {
+		return enUso;
+	}
 	public TipoPrenda getTipo() {
 		return tipo;
 	}

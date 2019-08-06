@@ -1,6 +1,7 @@
 package domain.usuario;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Stream;
 
 import domain.Config;
 import domain.eventos.Evento;
@@ -19,6 +20,28 @@ public class Usuario {
 	List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
 	List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();
 	
+	
+	public void compartirGuardarropaCon(Set<Guardarropa> guardarropas, Usuario usuario) {
+		if(usuario.guardarropasOcupados(guardarropas)){
+			throw new NoSePuedeCompartirGuardarropa("No se pueden compartir los guardarropas porque tienen prendas en uso");
+		}
+		
+			usuario.agregarGuardarropa(usuario.guardarropasLibres(guardarropas));
+	}
+
+
+	private Stream<Guardarropa> guardarropasLibres(Set<Guardarropa> guardarropas) {
+		return guardarropas.stream().filter(guardarropa -> !guardarropa.tienePrendasEnUso());
+	}
+
+	public boolean guardarropasOcupados(Stream<Guardarropa> guardarropas) {
+		return guardarropas.allMatch(g -> g.tienePrendasEnUso());
+	}
+
+	public void agregarGuardarropa(Set<Guardarropa> guardarropas) {
+		((Set<Guardarropa>) this.guardarropas.stream()).addAll(guardarropas);
+	}
+
 	public Usuario(TipoUsuario tipo) {
 		this.setTipo(tipo);
 	}
