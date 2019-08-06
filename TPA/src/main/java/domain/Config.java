@@ -1,6 +1,7 @@
 package domain;
 import domain.clima.ClimaOW;
 import domain.eventos.*;
+import domain.usuario.RepositorioUsuarios;
 import domain.clima.ProveedorClima;
 
 public class Config {
@@ -18,7 +19,8 @@ public class Config {
 	// Class
 	private int capacidadMaxima = 20;
 	private String ciudad = "Buenos Aires";
-	private RepositorioEventos repo = new RepositorioEventos();
+	private RepositorioEventos repoEventos = new RepositorioEventos();
+	private RepositorioUsuarios repoUsuarios = new RepositorioUsuarios();
 	private ProveedorClima proveedor = new ClimaOW();
 	
 	private Config() {
@@ -26,7 +28,11 @@ public class Config {
 	}
 	
 	public RepositorioEventos getRepositorioEventos() {
-		return repo;
+		return repoEventos;
+	}
+	
+	public RepositorioUsuarios getRepositorioUsuarios() {
+		return repoUsuarios;
 	}
 	
 	public int getCapacidadMaxima() {
@@ -42,7 +48,11 @@ public class Config {
 	}
 	
 	public void setRepositorioEventos(RepositorioEventos repo) {
-		this.repo = repo;
+		this.repoEventos = repo;
+	}
+	
+	public void setRepositorioUsuarios(RepositorioUsuarios repo) {
+		this.repoUsuarios = repo;
 	}
 	
 	public void setCapacidadMaxima(int cap) {

@@ -92,7 +92,7 @@ public class TestEventos {
 
 	@Test
 	public void chequearSugerenciasUsuarioTrasAgregarEvento() {
-		Config.instance().setProveedor(new ClimaMock());
+		Config.instance().setProveedor(new ClimaMock(20.0, "Clear"));
 		evento1 = new Evento(usuario, guardarropa, fecha2, "Boliche", "Party");
 		evento1.sugerir();
 		assertEquals(2, usuario.getSugerenciasPendientes().size());

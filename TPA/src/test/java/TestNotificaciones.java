@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
@@ -6,6 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
 
+import domain.Config;
+import domain.clima.ClimaMock;
+import domain.clima.TareaAlertasMeteorologicas;
 import domain.eventos.Evento;
 import domain.guardarropa.Guardarropa;
 import domain.notificaciones.NotificadorMock;
@@ -37,6 +41,20 @@ public class TestNotificaciones {
 	@Test
 	public void testNotificacionAlerta() {
 		usuario.notificarAlertaMeteorologica();
+		assertTrue(notificador.alertaNotificada);
+	}
+	
+	@Test
+	public void testNotificacionAlertaDesdeTareaNegativo() {
+		Config.instance().setProveedor(new ClimaMock(10.0, "Clear"));
+		new TareaAlertasMeteorologicas().run();
+		assertFalse(notificador.alertaNotificada);
+	}
+	
+	@Test
+	public void testNotificacionAlertaDesdeTareaPositivo() {
+		Config.instance().setProveedor(new ClimaMock(10.0, "Thunderstorm"));
+		new TareaAlertasMeteorologicas().run();
 		assertTrue(notificador.alertaNotificada);
 	}
 	

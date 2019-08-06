@@ -23,6 +23,7 @@ public class Usuario {
 	
 	public Usuario(TipoUsuario tipo) {
 		this.setTipo(tipo);
+		Config.instance().getRepositorioUsuarios().agregarUsuario(this);
 	}
 	
 	public Guardarropa crearGuardarropa() {
