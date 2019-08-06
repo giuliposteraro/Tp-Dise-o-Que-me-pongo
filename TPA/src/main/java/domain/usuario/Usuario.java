@@ -6,6 +6,7 @@ import domain.Config;
 import domain.eventos.Evento;
 import domain.eventos.RepositorioEventos;
 import domain.guardarropa.Guardarropa;
+import domain.notificaciones.INotificador;
 import domain.prenda.Prenda;
 import domain.sugerencias.EstadoSugerencia;
 import domain.sugerencias.Sugerencia;
@@ -15,9 +16,10 @@ import exceptions.*;
 public class Usuario {
 	
 	private TipoUsuario tipo;
-	Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
-	List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
-	List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();
+	private Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
+	private List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
+	private List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();
+	private List<INotificador> notificadores = new ArrayList<INotificador>();
 	
 	public Usuario(TipoUsuario tipo) {
 		this.setTipo(tipo);
@@ -105,6 +107,18 @@ public class Usuario {
 		sugerenciaADeshacer.setEstado(EstadoSugerencia.PENDIENTE);
 		sugerenciasPendientes.add(sugerenciaADeshacer);
 	}
+	
+	public void agregarNotificador(INotificador notificador) {
+		notificadores.add(notificador);
+	}
+	
+	public void notificarSugerencias(Evento evento) {
+		notificadores.forEach(n -> n.notificarSugerencia(evento));
+	}
+	
+	public void notificarAlertaMeteorologica() {
+		notificadores.forEach(n -> n.notificarAlertaMeteorologica());
+	}
 
 	public List<Sugerencia> getSugerenciasPendientes() {
 		return sugerenciasPendientes;
@@ -114,11 +128,11 @@ public class Usuario {
 		return sugerenciasRevisadas;
 	}
 	
-	TipoUsuario getTipo() {
+	public TipoUsuario getTipo() {
 		return tipo;
 	}
 
-	void setTipo(TipoUsuario tipo) {
+	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
 	}
 }
