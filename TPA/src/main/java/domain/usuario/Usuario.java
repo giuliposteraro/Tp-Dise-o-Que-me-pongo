@@ -1,6 +1,7 @@
 package domain.usuario;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import domain.Config;
 import domain.eventos.Evento;
@@ -27,6 +28,18 @@ public class Usuario {
 		Guardarropa guardarropa = tipo.crearGuardarropa();
 		guardarropas.add(guardarropa);
 		return(guardarropa);
+	}
+	
+	public Double getToleranciaAlFrio() {
+		try{
+			return this.sugerenciasAprobadas().stream().mapToDouble(s -> s.getCalificacion()).sum() / this.sugerenciasAprobadas().size();
+		}catch(Exception e){
+			return 0.0;
+		}
+	}
+	
+	private List<Sugerencia> sugerenciasAprobadas() {
+		return sugerenciasRevisadas.stream().filter(s -> s.getEstado() == EstadoSugerencia.ACEPTADA).collect(Collectors.toList());
 	}
 	
 	public void eliminarGuardarropa(Guardarropa guardarropa) {
