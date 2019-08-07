@@ -29,6 +29,10 @@ public class Usuario {
 		return(guardarropa);
 	}
 	
+	public int getToleranciaAlFrio() {
+		return sugerenciasRevisadas.stream().mapToInt(s -> s.getCalificacion()).sum() / sugerenciasRevisadas.size();
+	}
+	
 	public void eliminarGuardarropa(Guardarropa guardarropa) {
 		this.guardarropas.remove(guardarropa);
 	}
