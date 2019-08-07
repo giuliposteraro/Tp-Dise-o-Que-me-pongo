@@ -12,10 +12,6 @@ public class Guardarropa {
 
 	private Set<Prenda> prendas;
 	private TipoGuardarropa tipoGuardarropa;
-	
-	public boolean tienePrendasEnUso() {
-		return prendas.stream().anyMatch(prenda -> prenda.estaEnUso());
-	}
 
 	public Guardarropa(TipoGuardarropa tipo) {
 		this.prendas = new HashSet<Prenda>();
@@ -83,6 +79,7 @@ public class Guardarropa {
 	
 	private Set<Prenda> filtrarPrendasPorCategoria(ECategoria categoria) {
 		return prendas.stream()
+				.filter(p -> !p.getEnUso())
 				.filter(p -> categoria.equals(p.getCategoria()))
 				.collect(Collectors.toSet());
 	}

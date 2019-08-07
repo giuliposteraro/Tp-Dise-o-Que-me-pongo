@@ -1,6 +1,7 @@
 package domain.usuario;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import domain.Config;
@@ -22,24 +23,11 @@ public class Usuario {
 	
 	
 	public void compartirGuardarropaCon(Set<Guardarropa> guardarropas, Usuario usuario) {
-		if(usuario.guardarropasOcupados(guardarropas)){
-			throw new NoSePuedeCompartirGuardarropa("No se pueden compartir los guardarropas porque tienen prendas en uso");
-		}
-		
-			usuario.agregarGuardarropa(usuario.guardarropasLibres(guardarropas));
-	}
-
-
-	private Stream<Guardarropa> guardarropasLibres(Set<Guardarropa> guardarropas) {
-		return guardarropas.stream().filter(guardarropa -> !guardarropa.tienePrendasEnUso());
-	}
-
-	public boolean guardarropasOcupados(Stream<Guardarropa> guardarropas) {
-		return guardarropas.allMatch(g -> g.tienePrendasEnUso());
+			usuario.agregarGuardarropa(guardarropas);
 	}
 
 	public void agregarGuardarropa(Set<Guardarropa> guardarropas) {
-		((Set<Guardarropa>) this.guardarropas.stream()).addAll(guardarropas);
+		this.guardarropas.addAll(guardarropas);
 	}
 
 	public Usuario(TipoUsuario tipo) {
@@ -111,7 +99,16 @@ public class Usuario {
 		repo.agregarEvento(eventoNuevo);
 	}
 	
-	public void revisarSugerencia(Sugerencia sugerencia, EstadoSugerencia estado) {
+	public void aceptarSugerencia(Sugerencia sugerencia) {
+		this.revisarSugerencia(sugerencia, EstadoSugerencia.ACEPTADA);
+		sugerencia.ponerPrendasEnUso();
+	}
+	
+	public void rechazarSugerencia(Sugerencia sugerencia) {
+		this.revisarSugerencia(sugerencia, EstadoSugerencia.RECHAZADA);
+	}
+	
+	private void revisarSugerencia(Sugerencia sugerencia, EstadoSugerencia estado) {
 		if(!sugerenciasPendientes.contains(sugerencia)) {
 			throw new NoTieneSugerenciaPendiente("Esta sugerencia no esta pendiente para este usuario");
 		}

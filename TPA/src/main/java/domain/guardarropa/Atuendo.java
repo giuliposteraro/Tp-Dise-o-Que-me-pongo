@@ -37,4 +37,12 @@ public class Atuendo {
 		return abrigo.getNivelAbrigo() + superior.getNivelAbrigo() + inferior.getNivelAbrigo() + calzado.getNivelAbrigo() + accesorio.getNivelAbrigo();
 	}
 
+	public void ponerPrendasEnUso() {
+		abrigo.setEnUso(true);
+		superior.setEnUso(true);
+		inferior.setEnUso(true);
+		calzado.setEnUso(true);
+		accesorio.setEnUso(true);
+	}
+
 }

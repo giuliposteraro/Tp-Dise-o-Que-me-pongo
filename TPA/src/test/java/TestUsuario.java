@@ -95,7 +95,7 @@ public class TestUsuario {
 		usuario.generarSugerencias(guardarropa);
 		
 		Sugerencia sugerencia = usuario.getSugerenciasPendientes().get(0);
-		usuario.revisarSugerencia(sugerencia, EstadoSugerencia.ACEPTADA);
+		usuario.aceptarSugerencia(sugerencia);
 		
 		assertEquals(EstadoSugerencia.ACEPTADA, usuario.getSugerenciasRevisadas().get(0).getEstado());
 	}
@@ -109,7 +109,7 @@ public class TestUsuario {
 		usuario.generarSugerencias(guardarropa);
 		
 		Sugerencia sugerencia = usuario.getSugerenciasPendientes().get(0);
-		usuario.revisarSugerencia(sugerencia, EstadoSugerencia.RECHAZADA);
+		usuario.rechazarSugerencia(sugerencia);
 		
 		assertEquals(EstadoSugerencia.RECHAZADA, usuario.getSugerenciasRevisadas().get(0).getEstado());
 	}
@@ -123,7 +123,7 @@ public class TestUsuario {
 		usuario.generarSugerencias(guardarropa);
 		
 		Sugerencia sugerencia = usuario.getSugerenciasPendientes().get(0);
-		usuario.revisarSugerencia(sugerencia, EstadoSugerencia.RECHAZADA);
+		usuario.rechazarSugerencia(sugerencia);
 		usuario.deshacerUltimaSugerenciaRevisada();
 		
 		assertEquals(0, usuario.getSugerenciasRevisadas().size());

@@ -35,4 +35,9 @@ public class Sugerencia {
 	public EstadoSugerencia getEstado() {
 		return estado;
 	}
+
+	public void ponerPrendasEnUso() {
+		atuendo.ponerPrendasEnUso();
+		
+	}
 }
