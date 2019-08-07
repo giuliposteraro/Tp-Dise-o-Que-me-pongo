@@ -30,11 +30,11 @@ public class Usuario {
 		return(guardarropa);
 	}
 	
-	public int getToleranciaAlFrio() {
+	public Double getToleranciaAlFrio() {
 		try{
-			return this.sugerenciasAprobadas().stream().mapToInt(s -> s.getCalificacion()).sum() / this.sugerenciasAprobadas().size();
+			return this.sugerenciasAprobadas().stream().mapToDouble(s -> s.getCalificacion()).sum() / this.sugerenciasAprobadas().size();
 		}catch(Exception e){
-			return 0;
+			return 0.0;
 		}
 	}
 	

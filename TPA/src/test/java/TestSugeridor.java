@@ -101,7 +101,7 @@ public class TestSugeridor {
 		usuario.agregarSugerencia(sug);
 		usuario.revisarSugerencia(sug,EstadoSugerencia.ACEPTADA);
 		sug.setCalificacion(2);
-		assertEquals(2, usuario.getToleranciaAlFrio());
+		assertEquals(2.0, usuario.getToleranciaAlFrio(),0.001);
 	}
 	
 	@Test
