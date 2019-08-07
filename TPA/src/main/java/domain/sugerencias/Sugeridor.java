@@ -9,6 +9,7 @@ import domain.clima.ProveedorClima;
 import domain.eventos.Evento;
 import domain.guardarropa.Atuendo;
 import domain.prenda.Prenda;
+import domain.usuario.Usuario;
 import exceptions.NoSePuedeGenerarSugerencia;
 
 public class Sugeridor {
@@ -36,7 +37,10 @@ public class Sugeridor {
 			sugerencias = sugerencias.subList(0, 10);
 		}
 
-		sugerencias.forEach(sug -> evento.getUsuario().agregarSugerencia(sug));
+		Usuario usuario = evento.getUsuario();	
+		sugerencias.forEach(sug -> usuario.agregarSugerencia(sug));
+		sugerencias.forEach(sug -> evento.agregarSugerencia(sug));
+    usuario.notificarSugerencias(evento);
 	}
 
 	private List<Sugerencia> obtenerSugerencias(Set<Prenda> abr, Set<Prenda> sup, Set<Prenda> inf, Set<Prenda> cal,

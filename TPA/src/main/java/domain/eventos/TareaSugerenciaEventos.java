@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 import domain.Config;
 
-public class TareaRevision extends TimerTask {
+public class TareaSugerenciaEventos extends TimerTask {
 
 	RepositorioEventos repo = Config.instance().getRepositorioEventos();
 
@@ -12,7 +12,6 @@ public class TareaRevision extends TimerTask {
    public void run() {
 	   System.out.println("Running Job...");
 	   repo.proximosEventos().forEach(evento->evento.sugerir());
-	   repo.eventos(repo.eventos().stream().filter(evento -> !evento.esProximo()).collect(Collectors.toSet()));
 	   System.out.println("Job Finished!");
    }
 }
