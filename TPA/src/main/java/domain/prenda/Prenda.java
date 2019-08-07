@@ -18,6 +18,7 @@ public class Prenda {
 	Color color;
 	ETela tela;
 	BufferedImage imagen;
+	Boolean enUso;
 	
 	private Optional<Prenda> prendaAbajo = Optional.empty();
 	
@@ -28,6 +29,15 @@ public class Prenda {
 		this.imagen = imagen;
 	}
 	
+	public Boolean getEnUso() {
+		return enUso;
+	}
+
+	public void setEnUso(Boolean enUso) {
+		this.enUso = enUso;
+		this.prendaAbajo.ifPresent(p -> p.setEnUso(enUso));
+	}
+
 	public TipoPrenda getTipo() {
 		return tipo;
 	}

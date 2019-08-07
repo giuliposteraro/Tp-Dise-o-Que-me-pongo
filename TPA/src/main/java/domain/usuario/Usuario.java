@@ -2,6 +2,7 @@ package domain.usuario;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import domain.Config;
 import domain.eventos.Evento;
@@ -23,6 +24,15 @@ public class Usuario {
 	private List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();
 	private List<INotificador> notificadores = new ArrayList<INotificador>();
 	
+	
+	public void compartirGuardarropaCon(Set<Guardarropa> guardarropas, Usuario usuario) {
+			usuario.agregarGuardarropa(guardarropas);
+	}
+
+	public void agregarGuardarropa(Set<Guardarropa> guardarropas) {
+		this.guardarropas.addAll(guardarropas);
+	}
+
 	public Usuario(TipoUsuario tipo) {
 		this.setTipo(tipo);
 		Config.instance().getRepositorioUsuarios().agregarUsuario(this);
@@ -105,7 +115,16 @@ public class Usuario {
 		repo.agregarEvento(eventoNuevo);
 	}
 	
-	public void revisarSugerencia(Sugerencia sugerencia, EstadoSugerencia estado) {
+	public void aceptarSugerencia(Sugerencia sugerencia) {
+		this.revisarSugerencia(sugerencia, EstadoSugerencia.ACEPTADA);
+		sugerencia.ponerPrendasEnUso();
+	}
+	
+	public void rechazarSugerencia(Sugerencia sugerencia) {
+		this.revisarSugerencia(sugerencia, EstadoSugerencia.RECHAZADA);
+	}
+	
+	private void revisarSugerencia(Sugerencia sugerencia, EstadoSugerencia estado) {
 		if(!sugerenciasPendientes.contains(sugerencia)) {
 			throw new NoTieneSugerenciaPendiente("Esta sugerencia no esta pendiente para este usuario");
 		}

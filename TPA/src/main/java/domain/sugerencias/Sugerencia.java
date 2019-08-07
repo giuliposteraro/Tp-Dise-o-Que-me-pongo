@@ -36,8 +36,12 @@ public class Sugerencia {
 
 	public EstadoSugerencia getEstado() {
 		return estado;
-	}
-	
+  }
+  
+	public void ponerPrendasEnUso() {
+		atuendo.ponerPrendasEnUso();
+  }
+  
 	public int getCalificacion() {
 		return calificacion;
 	}
@@ -45,4 +49,5 @@ public class Sugerencia {
 	public void setCalificacion(int cal) {
 		calificacion = cal;
 	}
+    
 }
