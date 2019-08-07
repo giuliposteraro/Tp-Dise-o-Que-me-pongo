@@ -33,7 +33,7 @@ public class Evento {
 	}
 	
 	public boolean esProximo() {  // es proximo si el evento es antes de maniana
-		return fecha.isBefore(LocalDate.now().plus(1,ChronoUnit.DAYS));
+		return fecha.isBefore(LocalDate.now().plus(2,ChronoUnit.DAYS));
 	}
 	
 	public void sugerir() {
@@ -72,7 +72,15 @@ public class Evento {
 		pendiente = pend;
 	}
 	
+	public void fecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
+	
 	public boolean pendiente() {
 		return pendiente;
+	}
+
+	public LocalDate fecha() {
+		return fecha;
 	}
 }

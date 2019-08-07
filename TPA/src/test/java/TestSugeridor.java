@@ -12,6 +12,7 @@ import org.junit.runners.Parameterized.Parameter;
 import domain.clima.ClimaMock;
 import domain.color.EColor;
 import domain.eventos.Evento;
+import domain.eventos.Frecuencia;
 import domain.guardarropa.Atuendo;
 import domain.guardarropa.Guardarropa;
 import domain.prenda.ConstructorPrenda;
@@ -86,7 +87,7 @@ public class TestSugeridor {
 		usuario.agregarPrenda(pantalon, guardarropa);
 		usuario.agregarPrenda(zapatillas, guardarropa);
 		usuario.agregarPrenda(reloj, guardarropa);
-		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "");
+		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "",Frecuencia.UNICA);
 		s = new Sugeridor(evento, new ClimaMock());
 	}
 	
