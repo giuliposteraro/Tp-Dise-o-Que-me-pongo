@@ -15,7 +15,7 @@ public class RepositorioEventos {
 	}
 	
 	public Set<Evento> proximosEventos(){
-		return eventos.stream().filter(evento->evento.esProximo()).collect(Collectors.toSet());
+		return eventos.stream().filter(evento->evento.proximoPendiente()).collect(Collectors.toSet());
 	}
 	
 	public void eventos(Set<Evento> unosEventos){
@@ -25,4 +25,5 @@ public class RepositorioEventos {
 	public Set<Evento> eventos(){
 		return this.eventos;
 	}
+	
 }

@@ -10,6 +10,7 @@ import domain.prenda.Prenda;
 import domain.sugerencias.EstadoSugerencia;
 import domain.sugerencias.Sugerencia;
 import domain.sugerencias.Sugeridor;
+import domain.eventos.Frecuencia;
 import exceptions.*;
 
 public class Usuario {
@@ -40,7 +41,7 @@ public class Usuario {
 	public void generarSugerencias(Guardarropa guardarropa) {
 		validarAccesoAGuardarropa(guardarropa);
 		
-		Evento evento = new Evento(this, guardarropa, LocalDate.now(), "", "Consulta");
+		Evento evento = new Evento(this, guardarropa, LocalDate.now(), "", "Consulta", Frecuencia.UNICA);
 		
 		Sugeridor sugeridor = new Sugeridor(evento, Config.instance().getProveedor());
 		
@@ -83,7 +84,7 @@ public class Usuario {
 	}
 	
 	public void crearEvento(Guardarropa guardarropa, LocalDate fecha, String lugar, String motivo) {
-		Evento eventoNuevo = new Evento(this,guardarropa,fecha,lugar,motivo);
+		Evento eventoNuevo = new Evento(this,guardarropa,fecha,lugar,motivo,Frecuencia.UNICA);
 		RepositorioEventos repo = Config.instance().getRepositorioEventos();
 		repo.agregarEvento(eventoNuevo);
 	}

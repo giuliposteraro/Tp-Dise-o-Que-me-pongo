@@ -6,7 +6,7 @@ public class JobEventos {
 	public static void ejecutar(){
 
 		Timer timer = new Timer();
-		TimerTask tarea = new TareaRevision();
+		TimerTask tarea = new TareaSugerenciaEventos();
 		
 		// Esta tarea se corre cada 10 seg
 		timer.schedule(tarea, 5000, 10000);

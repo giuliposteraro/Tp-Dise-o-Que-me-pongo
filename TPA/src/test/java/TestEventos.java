@@ -33,7 +33,7 @@ public class TestEventos {
 	Prenda zapatillas;
 	Prenda reloj;
 	Sugeridor s;
-	TareaRevision tareaRevision;
+	TareaSugerenciaEventos tareaRevision;
 
 	@Before
 	public void crearObj() {
@@ -42,7 +42,7 @@ public class TestEventos {
 		guardarropa = usuario.crearGuardarropa();
 		fecha = LocalDate.of(2023, 8, 4);
 		fecha2 = LocalDate.now();
-		tareaRevision = new TareaRevision();
+		tareaRevision = new TareaSugerenciaEventos();
 
 		ConstructorPrenda c = new ConstructorPrenda();
 
