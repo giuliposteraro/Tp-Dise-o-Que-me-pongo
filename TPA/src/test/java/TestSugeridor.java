@@ -92,7 +92,7 @@ public class TestSugeridor {
 		usuario.agregarPrenda(reloj, guardarropa);
 		a = new Atuendo(Arrays.asList(remera, buzo, pantalon, zapatillas, reloj));
 		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "");
-		s = new Sugeridor(evento, new ClimaMock());
+		s = new Sugeridor(evento, new ClimaMock(20.0, "Clear"));
 	}
 	
 	@Test
