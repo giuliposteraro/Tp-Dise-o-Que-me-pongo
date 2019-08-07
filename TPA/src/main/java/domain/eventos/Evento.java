@@ -19,9 +19,9 @@ public class Evento {
 	Set<Sugerencia> sugerencias;
 	Frecuencia frecuencia;
 	Boolean pendiente;
-	
-	
+		
 	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unMotivo, Frecuencia unaFrecuencia) {
+
 		this.usuario = unUsuario;
 		this.guardarropa = unGuardarropa;
 		this.fecha = unaFecha;
