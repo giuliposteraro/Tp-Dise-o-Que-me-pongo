@@ -16,6 +16,7 @@ import domain.guardarropa.Atuendo;
 import domain.guardarropa.Guardarropa;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
+import domain.sugerencias.EstadoSugerencia;
 import domain.sugerencias.Sugerencia;
 import domain.sugerencias.Sugeridor;
 import domain.tipoPrenda.ETela;
@@ -38,6 +39,7 @@ public class TestSugeridor {
 	Guardarropa guardarropa;
 	Evento evento;
 	Sugeridor s;
+	Atuendo a;
 	
 	@Before
 	public void crearPrendas() {
@@ -78,6 +80,8 @@ public class TestSugeridor {
 		c.setColor(EColor.NEGRO, EColor.NINGUNO);
 		reloj = c.crear();
 		
+		
+		
 		usuario = new Usuario(new UsuarioPremium());
 		guardarropa = usuario.crearGuardarropa();
 		usuario.agregarPrenda(remera, guardarropa);
@@ -86,15 +90,22 @@ public class TestSugeridor {
 		usuario.agregarPrenda(pantalon, guardarropa);
 		usuario.agregarPrenda(zapatillas, guardarropa);
 		usuario.agregarPrenda(reloj, guardarropa);
+		a = new Atuendo(Arrays.asList(remera, buzo, pantalon, zapatillas, reloj));
 		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "");
 		s = new Sugeridor(evento, new ClimaMock());
 	}
 	
 	@Test
-	public void obtenerElNivelDeAbrigoDeUnAtuendo() {
-		
-		Atuendo a = new Atuendo(Arrays.asList(remera, buzo, pantalon, zapatillas, reloj));
-				
+	public void calificandoUnaSugerenciaVariaLaToleranciaAlFrio() {
+		Sugerencia sug = new Sugerencia(a,evento);
+		usuario.agregarSugerencia(sug);
+		usuario.revisarSugerencia(sug,EstadoSugerencia.ACEPTADA);
+		sug.setCalificacion(2);
+		assertEquals(2, usuario.getToleranciaAlFrio());
+	}
+	
+	@Test
+	public void obtenerElNivelDeAbrigoDeUnAtuendo() {				
 		assertEquals(15.0, a.getNivelAbrigo().doubleValue(), 0.001);
 	}
 	
@@ -104,16 +115,7 @@ public class TestSugeridor {
 		Sugerencia s = new Sugerencia(a, evento);
 		assertEquals(15.0, s.getNivelAbrigo().doubleValue(), 0.001);
 	}
-	
-	@Test
-	public void obtenerElCoeficienteDeAbrigo() {
-		campera = campera.ponerSobre(buzo);
-		Atuendo atuendo = new Atuendo(Arrays.asList(remera, campera, pantalon, zapatillas, reloj));
-		Sugerencia s = new Sugerencia(atuendo, evento);
 		
-		assertTrue(s.coeficienteDeAbrigo(20.0).doubleValue() >= 0.0 && s.coeficienteDeAbrigo(20.0).doubleValue() <= 1.0);
-	}
-	
 	@Test
 	public void generarSugerenciasParaEstaConfiguracionGenera8Sugerencias() {
 		s.generarSugerencias();

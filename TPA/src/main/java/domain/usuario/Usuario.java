@@ -1,6 +1,7 @@
 package domain.usuario;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import domain.Config;
 import domain.eventos.Evento;
@@ -30,7 +31,15 @@ public class Usuario {
 	}
 	
 	public int getToleranciaAlFrio() {
-		return sugerenciasRevisadas.stream().mapToInt(s -> s.getCalificacion()).sum() / sugerenciasRevisadas.size();
+		try{
+			return this.sugerenciasAprobadas().stream().mapToInt(s -> s.getCalificacion()).sum() / this.sugerenciasAprobadas().size();
+		}catch(Exception e){
+			return 0;
+		}
+	}
+	
+	private List<Sugerencia> sugerenciasAprobadas() {
+		return sugerenciasRevisadas.stream().filter(s -> s.getEstado() == EstadoSugerencia.ACEPTADA).collect(Collectors.toList());
 	}
 	
 	public void eliminarGuardarropa(Guardarropa guardarropa) {
