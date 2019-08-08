@@ -22,9 +22,9 @@ public class TareaAlertasMeteorologicas extends TimerTask {
 
 		return condiciones.stream().anyMatch(c ->
 			c.equals("Thunderstorm") ||
-			c.equals("Drizzle") ||
 			c.equals("Rain") ||
-			c.equals("Snow")
+			c.equals("Snow") ||
+			c.equals("Tornado")
 		);
 	}
 

@@ -38,11 +38,13 @@ public class Atuendo {
 	}
 
 	public void ponerPrendasEnUso() {
-		abrigo.setEnUso(true);
+		if(!abrigo.equals(Prenda.SIN_ABRIGO))
+			abrigo.setEnUso(true);
 		superior.setEnUso(true);
 		inferior.setEnUso(true);
 		calzado.setEnUso(true);
-		accesorio.setEnUso(true);
+		if(!accesorio.equals(Prenda.SIN_ACCESORIO))
+			accesorio.setEnUso(true);
 	}
 
 }

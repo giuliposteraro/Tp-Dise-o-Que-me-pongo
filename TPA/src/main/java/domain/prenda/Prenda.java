@@ -27,6 +27,7 @@ public class Prenda {
 		this.tela = tela;
 		this.color = color;
 		this.imagen = imagen;
+		this.enUso = false;
 	}
 	
 	public Boolean getEnUso() {

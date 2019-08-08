@@ -11,14 +11,14 @@ import domain.sugerencias.*;
 
 public class Evento {
 	
-	Guardarropa guardarropa;
-	Usuario usuario;
-	LocalDate fecha;
-	String lugar;
-	String motivo;
-	Set<Sugerencia> sugerencias;
-	Frecuencia frecuencia;
-	Boolean pendiente;
+	private Guardarropa guardarropa;
+	private Usuario usuario;
+	private LocalDate fecha;
+	private String lugar;
+	private String motivo;
+	private Set<Sugerencia> sugerencias;
+	private Frecuencia frecuencia;
+	private Boolean pendiente;
 		
 	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unMotivo, Frecuencia unaFrecuencia) {
 
@@ -72,6 +72,10 @@ public class Evento {
 		pendiente = pend;
 	}
 	
+	public LocalDate fecha() {
+		return this.fecha;
+	}
+	
 	public void fecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
@@ -80,7 +84,7 @@ public class Evento {
 		return pendiente;
 	}
 
-	public LocalDate fecha() {
-		return fecha;
+	public String getNombre() {
+		return motivo;
 	}
 }

@@ -2,7 +2,6 @@ package domain.usuario;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import domain.Config;
 import domain.eventos.Evento;

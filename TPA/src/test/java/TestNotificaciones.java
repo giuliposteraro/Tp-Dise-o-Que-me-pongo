@@ -11,6 +11,7 @@ import domain.Config;
 import domain.clima.ClimaMock;
 import domain.clima.TareaAlertasMeteorologicas;
 import domain.eventos.Evento;
+import domain.eventos.Frecuencia;
 import domain.guardarropa.Guardarropa;
 import domain.notificaciones.NotificadorMock;
 import domain.usuario.Usuario;
@@ -29,7 +30,7 @@ public class TestNotificaciones {
 		notificador = new NotificadorMock();
 		usuario.agregarNotificador(notificador);
 		Guardarropa guardarropa = usuario.crearGuardarropa();
-		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "Evento Random");
+		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "Evento Random", Frecuencia.UNICA);
 	}
 	
 	@Test

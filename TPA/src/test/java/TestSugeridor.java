@@ -1,5 +1,4 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -17,7 +16,6 @@ import domain.guardarropa.Atuendo;
 import domain.guardarropa.Guardarropa;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
-import domain.sugerencias.EstadoSugerencia;
 import domain.sugerencias.Sugerencia;
 import domain.sugerencias.Sugeridor;
 import domain.tipoPrenda.ETela;
@@ -102,7 +100,7 @@ public class TestSugeridor {
 	public void calificandoUnaSugerenciaVariaLaToleranciaAlFrio() {
 		Sugerencia sug = new Sugerencia(a,evento);
 		usuario.agregarSugerencia(sug);
-		usuario.revisarSugerencia(sug,EstadoSugerencia.ACEPTADA);
+		usuario.aceptarSugerencia(sug);
 		sug.setCalificacion(2);
 		assertEquals(2.0, usuario.getToleranciaAlFrio(),0.001);
 	}
