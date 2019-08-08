@@ -6,6 +6,8 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.Config;
+import domain.clima.ClimaMock;
 import domain.color.EColor;
 import domain.guardarropa.Guardarropa;
 import domain.guardarropa.GuardarropaIlimitado;
@@ -74,6 +76,8 @@ public class TestUsuario {
 		guardarropa2 = usuario.crearGuardarropa();
 		listaGuardarropas.add(guardarropa);
 		listaGuardarropas.add(guardarropa2);
+		
+		Config.instance().setProveedor(new ClimaMock(20.0, "Clear"));
 	}
 	
 	@Test
