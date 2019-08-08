@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class RepositorioEventos {
 	
-	public Set<Evento> eventos;
+	public static Set<Evento> eventos;
 	
 	public RepositorioEventos() {
 		this.eventos= new HashSet<Evento>();
@@ -26,7 +26,7 @@ public class RepositorioEventos {
 		eventos = unosEventos;
 	}
 	
-	public Set<Evento> eventos(){
-		return this.eventos;
+	public static Set<Evento> eventos(){
+		return eventos;
 	}
 }

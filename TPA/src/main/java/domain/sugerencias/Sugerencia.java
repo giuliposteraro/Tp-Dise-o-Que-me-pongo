@@ -35,4 +35,8 @@ public class Sugerencia {
 	public EstadoSugerencia getEstado() {
 		return estado;
 	}
+	
+	public Evento getEvento() {
+		return evento;
+	}
 }

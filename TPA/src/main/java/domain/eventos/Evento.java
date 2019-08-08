@@ -1,16 +1,23 @@
 package domain.eventos;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import org.uqbar.arena.bindings.DateTransformer;
+import org.uqbar.commons.model.annotations.Observable;
 
 import domain.usuario.*;
 import domain.Config;
 import domain.guardarropa.Guardarropa;
 import domain.sugerencias.*;
 
+@Observable
 public class Evento {
 	
 	Guardarropa guardarropa;
 	Usuario usuario;
-	LocalDate fecha;
+	Date fecha;
 	String lugar;
 	String motivo;
 	EstadoEvento estado;
@@ -18,14 +25,16 @@ public class Evento {
 	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unMotivo) {
 		this.usuario = unUsuario;
 		this.guardarropa = unGuardarropa;
-		this.fecha = unaFecha;
+		this.fecha = Date.from(unaFecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		this.lugar = unLugar;
 		this.motivo = unMotivo;
 		this.estado = EstadoEvento.PENDIENTE;
 	}
 	
 	public boolean esProximo() {  // es proximo si el evento es hoy mismo
-		return fecha.isEqual(LocalDate.now());
+		return fecha.toInstant()
+			      	.atZone(ZoneId.systemDefault())
+			      	.toLocalDate().isEqual(LocalDate.now());
 	}
 	
 	public boolean estaPendiente() {
@@ -46,5 +55,17 @@ public class Evento {
 	
 	public Usuario getUsuario() {
 		return usuario;
+	}
+	
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+	
+	public Set<Sugerencia> sugerencias() {
+		return this.usuario.sugerenciasPara(this);
 	}
 }
