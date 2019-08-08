@@ -87,4 +87,8 @@ public class Evento {
 	public String getNombre() {
 		return motivo;
 	}
+
+	public String getLugar() {
+		return lugar;
+	}
 }

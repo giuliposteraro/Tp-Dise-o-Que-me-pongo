@@ -3,8 +3,6 @@ package domain;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import domain.eventos.TareaSugerenciaEventos;
-
 public class Job {
 
 	private TimerTask tarea;
