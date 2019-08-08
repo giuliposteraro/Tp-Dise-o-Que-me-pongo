@@ -6,7 +6,6 @@ import java.util.TimerTask;
 import domain.Config;
 
 public class TareaAlertasMeteorologicas extends TimerTask {
-
 	@Override
 	public void run() {
 		System.out.println("Verificando alertas meteorologicas...");

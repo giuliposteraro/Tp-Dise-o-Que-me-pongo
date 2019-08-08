@@ -13,8 +13,9 @@ import domain.usuario.Usuario;
 import exceptions.NoSePuedeGenerarSugerencia;
 
 public class Sugeridor {
-	Evento evento;
-	ProveedorClima provClima;
+	
+	private Evento evento;
+	private ProveedorClima provClima;
 
 	public Sugeridor(Evento evento, ProveedorClima provClima) {
 		this.evento = evento;

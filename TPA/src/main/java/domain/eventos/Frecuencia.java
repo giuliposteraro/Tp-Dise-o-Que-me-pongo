@@ -12,8 +12,8 @@ public enum Frecuencia{
 		this.unidad = unidad;
 	}
 	
-	public void actualizarFecha(Evento event) {	
-		event.fecha(event.fecha().plus(cantidad, unidad));
+	public void actualizarFecha(Evento evento) {	
+		evento.fecha(evento.fecha().plus(cantidad, unidad));
 	}
 
 	

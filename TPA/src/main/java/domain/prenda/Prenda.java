@@ -14,12 +14,11 @@ import domain.tipoPrenda.RepoTipos;
 
 public class Prenda {
 	
-	TipoPrenda tipo;
-	Color color;
-	ETela tela;
-	BufferedImage imagen;
-	Boolean enUso;
-	
+	private TipoPrenda tipo;
+	private Color color;
+	private ETela tela;
+	private BufferedImage imagen;
+	private Boolean enUso;
 	private Optional<Prenda> prendaAbajo = Optional.empty();
 	
 	public Prenda(TipoPrenda tipo, ETela tela, Color color, BufferedImage imagen) {

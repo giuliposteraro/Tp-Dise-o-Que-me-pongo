@@ -6,10 +6,10 @@ import domain.guardarropa.Atuendo;
 
 public class Sugerencia {
 
-	Atuendo atuendo;
-	EstadoSugerencia estado;
-	Evento evento;
-	int calificacion;
+	private Atuendo atuendo;
+	private EstadoSugerencia estado;
+	private Evento evento;
+	private int calificacion;
 	
 	public Sugerencia(Atuendo atuendo, Evento evento) {
 		this.atuendo = atuendo;

@@ -77,7 +77,7 @@ public class TestEventos {
 	@Test
 	public void agregarEvento() {
 		repo.agregarEvento(new Evento(usuario, guardarropa, fecha, "Boliche", "Fiesta", Frecuencia.UNICA));
-		assertEquals(1, repo.eventos.size());
+		assertEquals(1, repo.eventos().size());
 	}
 
 	@Test

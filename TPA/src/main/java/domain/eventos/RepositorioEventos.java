@@ -5,11 +5,12 @@ import java.util.stream.Collectors;
 
 public class RepositorioEventos {
 	
-	public Set<Evento> eventos;
+	private Set<Evento> eventos;
 	
 	public RepositorioEventos() {
 		this.eventos= new HashSet<Evento>();
 	}
+	
 	public void agregarEvento(Evento unEvento) {
 		this.eventos.add(unEvento);
 	}
