@@ -163,7 +163,7 @@ public class TestUsuario {
 	
 	@Test 
 	public void compartirGuardarropa() {
-		usuario.compartirGuardarropaCon(listaGuardarropas,usuario2);	
+		usuario.compartirGuardarropaCon(listaGuardarropas,usuario2);	//TODO agregar assert 
 	}
 	
 	@Test

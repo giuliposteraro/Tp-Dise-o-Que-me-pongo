@@ -27,7 +27,7 @@ public class Usuario {
 	public void compartirGuardarropaCon(Set<Guardarropa> guardarropas, Usuario usuario) {
 			usuario.agregarGuardarropa(guardarropas);
 	}
-
+	// TODO validar que un guardarropas pertenezca a un usuario.
 	public void agregarGuardarropa(Set<Guardarropa> guardarropas) {
 		this.guardarropas.addAll(guardarropas);
 	}
@@ -44,9 +44,9 @@ public class Usuario {
 	}
 	
 	public Double getToleranciaAlFrio() {
-		try{
+		try{ //TODO Nivel de abrigo por categoria de prenda
 			return this.sugerenciasAprobadas().stream().mapToDouble(s -> s.getCalificacion()).sum() / this.sugerenciasAprobadas().size();
-		}catch(Exception e){
+		}catch(Exception e){ //TODO Excepcion dividir por 0
 			return 0.0;
 		}
 	}

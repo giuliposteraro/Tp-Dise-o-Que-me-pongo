@@ -67,11 +67,11 @@ public class ClimaOW implements ProveedorClima{
 			throw new NoSePuedeObtenerElClima("La API de clima no esta disponible");
 		}
 	}
-
+	
 	private List<String> getConditionsFromArray(JSONArray jsonConditions) throws JSONException {
 		List<String> conditions = new ArrayList<String>();
 		for(int i = 0; i < jsonConditions.length(); i++) {
-			String c = jsonConditions.getJSONObject(0).getString("main");
+			String c = jsonConditions.getJSONObject(i).getString("main");	//TODO verificar i
 			conditions.add(c);
 		}
 		return conditions;

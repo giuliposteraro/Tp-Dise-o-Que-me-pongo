@@ -24,7 +24,7 @@ public class TestNotificaciones {
 	NotificadorMock notificador;
 	Evento evento;
 	
-	@Before
+	@Before			//TODO BeforeEach?
 	public void before() {
 		usuario = new Usuario(new UsuarioPremium());
 		notificador = new NotificadorMock();

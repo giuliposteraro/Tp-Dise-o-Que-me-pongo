@@ -18,7 +18,7 @@ public class Prenda {
 	private Color color;
 	private ETela tela;
 	private BufferedImage imagen;
-	private Boolean enUso;
+	private Boolean enUso; //TODO cuando termina un evento poner en false.
 	private Optional<Prenda> prendaAbajo = Optional.empty();
 	
 	public Prenda(TipoPrenda tipo, ETela tela, Color color, BufferedImage imagen) {

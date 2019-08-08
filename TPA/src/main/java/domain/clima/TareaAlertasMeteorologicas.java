@@ -20,7 +20,7 @@ public class TareaAlertasMeteorologicas extends TimerTask {
 		List<String> condiciones = Config.instance().getProveedor().getWeatherConditions();
 
 		return condiciones.stream().anyMatch(c ->
-			c.equals("Thunderstorm") ||
+			c.equals("Thunderstorm") ||				//TODO cambiar a enum
 			c.equals("Rain") ||
 			c.equals("Snow") ||
 			c.equals("Tornado")

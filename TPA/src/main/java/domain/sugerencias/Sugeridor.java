@@ -41,7 +41,7 @@ public class Sugeridor {
 		Usuario usuario = evento.getUsuario();	
 		sugerencias.forEach(sug -> usuario.agregarSugerencia(sug));
 		sugerencias.forEach(sug -> evento.agregarSugerencia(sug));
-    usuario.notificarSugerencias(evento);
+		usuario.notificarSugerencias(evento);
 	}
 
 	private List<Sugerencia> obtenerSugerencias(Set<Prenda> abr, Set<Prenda> sup, Set<Prenda> inf, Set<Prenda> cal,

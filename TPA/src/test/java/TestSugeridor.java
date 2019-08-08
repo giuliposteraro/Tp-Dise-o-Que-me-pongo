@@ -96,8 +96,8 @@ public class TestSugeridor {
 
 	}
 	
-	@Test
-	public void calificandoUnaSugerenciaVariaLaToleranciaAlFrio() {
+	@Test //TODO Testear que cambie el atuendo sugerido segun la tolerancia al frio
+	public void calificandoUnaSugerenciaVariaLaToleranciaAlFrio() { //TODO Otro test (Calificaciones)
 		Sugerencia sug = new Sugerencia(a,evento);
 		usuario.agregarSugerencia(sug);
 		usuario.aceptarSugerencia(sug);

@@ -42,8 +42,8 @@ public class Evento {
 		this.recalcularFecha();
 	}	
 	
-	public void recalcularFecha() {
-		frecuencia.actualizarFecha(this);
+	public void recalcularFecha() {   //TODO crear distintos eventos en vez de cambiar fecha
+		frecuencia.actualizarFecha(this); //TODO encapsulamiento fecha
 		if(frecuencia.equals(Frecuencia.UNICA))
 			this.pendiente = false;
 	}

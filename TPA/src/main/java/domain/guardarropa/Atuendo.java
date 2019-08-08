@@ -41,7 +41,7 @@ public class Atuendo {
 		superior.setEnUso(true);
 		inferior.setEnUso(true);
 		calzado.setEnUso(true);
-		if(!abrigo.equals(Prenda.SIN_ABRIGO))
+		if(!abrigo.equals(Prenda.SIN_ABRIGO)) // TODO que las prendas incompletas entiendan el enUso pero no hagan nada.
 			abrigo.setEnUso(true);
 		if(!accesorio.equals(Prenda.SIN_ACCESORIO))
 			accesorio.setEnUso(true);
