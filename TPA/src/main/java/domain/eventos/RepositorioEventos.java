@@ -26,7 +26,7 @@ public class RepositorioEventos {
 		eventos = unosEventos;
 	}
 	
-	public static Set<Evento> eventos(){
+	public Set<Evento> eventos(){
 		return eventos;
 	}
 }

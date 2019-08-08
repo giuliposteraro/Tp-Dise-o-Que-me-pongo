@@ -44,7 +44,7 @@ public class SugerenciasView extends Dialog<SugerenciasViewModel>{
 
 	@Override
 	protected void executeTask() {
-		System.out.println("Me aceptaron, yuppiiii!!!");
+//		System.out.println("Me aceptaron, yuppiiii!!!");
 		super.executeTask();
 	}
 

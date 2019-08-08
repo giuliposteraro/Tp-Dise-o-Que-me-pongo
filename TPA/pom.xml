@@ -17,6 +17,20 @@
     </plugins>
   </build>
 
+<repositories>
+  <repository>
+    <id>maven.uqbar.org-releases</id>
+    <name>maven.uqbar.org-releases</name>
+    <url>http://maven.uqbar.org/releases</url>
+  </repository>
+  <repository>
+    <snapshots />
+    <id>maven.uqbar.org-snapshots</id>
+    <name>maven.uqbar.org-snapshots</name>
+    <url>http://maven.uqbar.org/snapshots</url>
+  </repository>
+</repositories>
+
  <dependencies>
 
 	<dependency>
@@ -43,11 +57,11 @@
 	    <version>20090211</version>
 	</dependency>
 	
-	<dependency>
-        <groupId>org.uqbar-project</groupId>
-        <artifactId>arena-jface</artifactId>
-        <version>3.6.3</version>
-	</dependency>
+    <dependency>
+      <groupId>org.uqbar-project</groupId>
+      <artifactId>arena-jface</artifactId>
+      <version>3.6.3</version>
+    </dependency>
 
    </dependencies>
 

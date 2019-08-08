@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.uqbar.commons.model.annotations.Observable;
 
+import domain.Config;
 import domain.eventos.RepositorioEventos;
 import domain.sugerencias.Sugerencia;
 
@@ -14,7 +15,7 @@ public class SugerenciasViewModel {
 	private Sugerencia sugerenciaSeleccionada;
 
 	public SugerenciasViewModel() {
-		this.sugerencias = RepositorioEventos.eventos().stream().flatMap(evento -> evento.sugerencias().stream()).collect(Collectors.toSet());
+		this.sugerencias = Config.instance().getRepositorioEventos().eventos().stream().flatMap(evento -> evento.sugerencias().stream()).collect(Collectors.toSet());
 		
 	}
 

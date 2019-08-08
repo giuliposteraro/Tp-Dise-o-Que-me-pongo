@@ -65,6 +65,14 @@ public class Evento {
 		this.fecha = fecha;
 	}
 	
+	public String getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+
 	public Set<Sugerencia> sugerencias() {
 		return this.usuario.sugerenciasPara(this);
 	}
