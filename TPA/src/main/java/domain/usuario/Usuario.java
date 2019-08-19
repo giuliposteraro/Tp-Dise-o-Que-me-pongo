@@ -25,7 +25,9 @@ public class Usuario {
 	
 	
 	public void compartirGuardarropaCon(Set<Guardarropa> guardarropas, Usuario usuario) {
-			usuario.agregarGuardarropa(guardarropas);
+			if(this.tieneListaGuardarropas(guardarropas)) {
+				usuario.agregarGuardarropa(guardarropas);
+			}
 	}
 	// TODO validar que un guardarropas pertenezca a un usuario.
 	public void agregarGuardarropa(Set<Guardarropa> guardarropas) {
@@ -62,7 +64,9 @@ public class Usuario {
 	public Boolean tieneGuardarropa(Guardarropa guardarropa) {
 		return guardarropas.contains(guardarropa);
 	}
-	
+	public Boolean tieneListaGuardarropas(Set<Guardarropa> listaGuardarropas) {
+		return guardarropas.contains(listaGuardarropas);
+	}
 	public void generarSugerencias(Guardarropa guardarropa) {
 		validarAccesoAGuardarropa(guardarropa);
 		

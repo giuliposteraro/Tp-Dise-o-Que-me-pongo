@@ -76,7 +76,6 @@ public class TestUsuario {
 		guardarropa2 = usuario.crearGuardarropa();
 		listaGuardarropas.add(guardarropa);
 		listaGuardarropas.add(guardarropa2);
-		
 		Config.instance().setProveedor(new ClimaMock(20.0, "Clear"));
 	}
 	
@@ -162,8 +161,15 @@ public class TestUsuario {
 	}
 	
 	@Test 
-	public void compartirGuardarropa() {
-		usuario.compartirGuardarropaCon(listaGuardarropas,usuario2);	//TODO agregar assert 
+	public void compartirGuardarropaQueTieneConUsuario() {
+		usuario.agregarGuardarropa(listaGuardarropas);
+		usuario.compartirGuardarropaCon(listaGuardarropas,usuario2);	
+		assertTrue(usuario.tieneListaGuardarropas(listaGuardarropas));//TODO agregar assert 
+	}
+	@Test
+	public void compartirGuardarropasQueNoTieneConUsuario() {
+		usuario.compartirGuardarropaCon(listaGuardarropas, usuario2);
+		assertFalse(usuario.tieneListaGuardarropas(listaGuardarropas));
 	}
 	
 	@Test
