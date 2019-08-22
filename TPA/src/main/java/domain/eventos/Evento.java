@@ -76,4 +76,5 @@ public class Evento {
 	public Set<Sugerencia> sugerencias() {
 		return this.usuario.sugerenciasPara(this);
 	}
+	
 }

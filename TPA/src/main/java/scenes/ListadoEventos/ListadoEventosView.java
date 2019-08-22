@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.apache.commons.collections15.Transformer;
 import org.uqbar.arena.layout.HorizontalLayout;
+import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
@@ -29,8 +30,9 @@ public class ListadoEventosView extends SimpleWindow<ListadoEventosViewModel>{
 	@Override
 	protected void addActions(Panel actionsPanel) {
 		new Button(actionsPanel)
-		.setCaption("Sugerencias")
-		.onClick(this::obtenerSugerencias);
+		.setCaption("Buscar")
+		.onClick(()-> this.getModelObject().buscarEventos());
+		//.onClick(this::buscarEventos());
 	}
 
 	@Override
@@ -38,9 +40,12 @@ public class ListadoEventosView extends SimpleWindow<ListadoEventosViewModel>{
 		this.setTitle("Que Me Pongo");
 		
 		Panel panelSelectores = new Panel(mainPanel);
-		this.crearPanelSelectoresFechasEn(panelSelectores);
+		panelSelectores.setLayout(new VerticalLayout());
+		this.crearPanelSelectorFechasDesdeEn(panelSelectores);
+		this.crearPanelSelectorFechasHastaEn(panelSelectores);
 		
 		Table<Evento> tablaEventos = new Table<Evento>(mainPanel, Evento.class);
+		tablaEventos.setHeight(300);
 		tablaEventos.bindItemsToProperty("eventos");
 		tablaEventos.bindValueToProperty("eventoSeleccionado");
 		
@@ -69,22 +74,45 @@ public class ListadoEventosView extends SimpleWindow<ListadoEventosViewModel>{
 		tablaEventos.setHeight(600);
 	}
 	
-	private void crearPanelSelectoresFechasEn(Panel panel) {
-		panel.setLayout(new HorizontalLayout());
+	private void crearPanelSelectorFechasDesdeEn(Panel panel) {
+		Panel panelFecha = new Panel(panel);
+		panelFecha.setLayout(new HorizontalLayout());
 		
-		new Label(panel).setText("Fecha desde ");
-		new TextBox(panel).setWidth(300)
-			.bindValueToProperty("fechaDesde");
-//		Selector<String> selectorFechaDesde = new Selector<String>(panel).allowNull(true);
 		
-//		new Label(panel).setText("Fecha hasta ");
-//		Selector<String> selectorFechaHasta = new Selector<String>(panel).allowNull(true);
+		new Label(panelFecha).setText("Fecha desde: ");
+		
+		Selector<Integer> selectorDia = new Selector<Integer>(panelFecha);
+		selectorDia.bindValueToProperty("diaDesde");
+		selectorDia.bindItemsToProperty("dias");
+		
+		Selector <Integer> selectorMes = new Selector<Integer>(panelFecha);
+		selectorMes.bindValueToProperty("mesDesde");
+		selectorMes.bindItemsToProperty("meses");
+		
+		Selector <Integer> selectorAnio= new Selector<Integer>(panelFecha);
+		selectorAnio.bindValueToProperty("anioDesde");	
+		selectorAnio.bindItemsToProperty("anios");
+		
+		
 	}
 	
-
-	public void obtenerSugerencias() {
-		Dialog<?> dialog = new SugerenciasView(this);
-		dialog.open();
+	private void crearPanelSelectorFechasHastaEn(Panel panel) {
+		Panel panelFecha = new Panel(panel);
+		panelFecha.setLayout(new HorizontalLayout());
+		
+		new Label(panelFecha).setText("Fecha hasta: ");
+		
+		Selector<Integer> selectorDia = new Selector<Integer>(panelFecha);
+		selectorDia.bindValueToProperty("diaHasta");
+		selectorDia.bindItemsToProperty("dias");
+		
+		Selector <Integer> selectorMes = new Selector<Integer>(panelFecha);
+		selectorMes.bindValueToProperty("mesHasta");
+		selectorMes.bindItemsToProperty("meses");
+		
+		Selector <Integer> selectorAnio= new Selector<Integer>(panelFecha);
+		selectorAnio.bindValueToProperty("anioHasta");	
+		selectorAnio.bindItemsToProperty("anios");
 	}
 
 }
