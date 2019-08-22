@@ -14,7 +14,7 @@ public class NotificadorWhatsApp implements INotificador {
 	
 	@Override
 	public void notificarSugerencia(Evento evento) {
-		enviarWhatsApp("Nuevas sugerencias para " + evento.getNombre() + " ya están disponibles en la sección \"Sugerencias\"." + "");
+		enviarWhatsApp("Nuevas sugerencias para " + evento.getMotivo() + " ya están disponibles en la sección \"Sugerencias\"." + "");
 	}
 
 	@Override

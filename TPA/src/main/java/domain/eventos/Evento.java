@@ -91,7 +91,7 @@ public class Evento {
 		return pendiente;
 	}
 
-	public String getNombre() {
+	public String getMotivo() {
 		return motivo;
 	}
 

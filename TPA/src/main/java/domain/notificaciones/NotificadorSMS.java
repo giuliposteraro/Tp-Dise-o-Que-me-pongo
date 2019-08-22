@@ -14,7 +14,7 @@ public class NotificadorSMS implements INotificador {
 	
 	@Override
 	public void notificarSugerencia(Evento evento) {
-		enviarSMS("Nuevas sugerencias para " + evento.getNombre() + " ya están disponibles en la sección \"Sugerencias\"." + "");
+		enviarSMS("Nuevas sugerencias para " + evento.getMotivo() + " ya están disponibles en la sección \"Sugerencias\"." + "");
 	}
 
 	@Override

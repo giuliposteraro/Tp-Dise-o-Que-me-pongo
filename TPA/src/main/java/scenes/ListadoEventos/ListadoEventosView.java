@@ -1,7 +1,8 @@
 package scenes.ListadoEventos;
 
 import java.text.DateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.apache.commons.collections15.Transformer;
 import org.uqbar.arena.layout.HorizontalLayout;
@@ -52,11 +53,12 @@ public class ListadoEventosView extends SimpleWindow<ListadoEventosViewModel>{
 		columnaFecha.setTitle("Fecha")
 					.setFixedSize(100)
 					.bindContentsToProperty("fecha")
-					.setTransformer(new Transformer<Date, String>() {
+					.setTransformer(new Transformer<LocalDate, String>() {
 
 						@Override
-						public String transform(Date fecha) {
-							return DateFormat.getInstance().format(fecha);
+						public String transform(LocalDate fecha) {
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+							return fecha.format(formatter);
 						}
 					});
 		

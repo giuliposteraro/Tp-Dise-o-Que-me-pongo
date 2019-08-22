@@ -13,8 +13,8 @@ public class NotificadorEmail implements INotificador {
 
 	@Override
 	public void notificarSugerencia(Evento evento) {
-		enviarMail("¡Nuevas sugerencias para " + evento.getNombre() + "!",
-				"Los atuendos sugeridos para " + evento.getNombre() + " ya están disponibles en la sección \"Sugerencias\"." + "");
+		enviarMail("¡Nuevas sugerencias para " + evento.getMotivo() + "!",
+				"Los atuendos sugeridos para " + evento.getMotivo() + " ya están disponibles en la sección \"Sugerencias\"." + "");
 	}
 
 	@Override
