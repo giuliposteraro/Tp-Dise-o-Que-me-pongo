@@ -12,6 +12,7 @@ import org.uqbar.commons.model.annotations.Observable;
 
 import domain.Config;
 import domain.eventos.Evento;
+import domain.eventos.Frecuencia;
 import domain.guardarropa.Guardarropa;
 import domain.guardarropa.GuardarropaIlimitado;
 import domain.usuario.Usuario;
@@ -39,9 +40,9 @@ public class ListadoEventosViewModel {
 		meses = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12);
 		anios = Arrays.asList(2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030);
 		
-		Evento unEvento1 = new Evento(usuario, guardarropa, LocalDate.now(), "", "A");
-		Evento unEvento2 = new Evento(usuario, guardarropa, LocalDate.now(), "", "B");
-		Evento unEvento3 = new Evento(usuario, guardarropa, LocalDate.now(), "", "C");
+		Evento unEvento1 = new Evento(usuario, guardarropa, LocalDate.now(), "", "A", Frecuencia.UNICA);
+		Evento unEvento2 = new Evento(usuario, guardarropa, LocalDate.now(), "", "B", Frecuencia.UNICA);
+		Evento unEvento3 = new Evento(usuario, guardarropa, LocalDate.now(), "", "C", Frecuencia.UNICA);
 		Config.instance().getRepositorioEventos().agregarEvento(unEvento1);
 		Config.instance().getRepositorioEventos().agregarEvento(unEvento2);
 		Config.instance().getRepositorioEventos().agregarEvento(unEvento3);

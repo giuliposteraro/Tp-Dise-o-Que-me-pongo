@@ -8,11 +8,11 @@ import domain.tipoPrenda.ECategoria;
 
 public class Atuendo {
 	
-	Prenda abrigo;
-	Prenda superior;
-	Prenda inferior;
-	Prenda calzado;
-	Prenda accesorio;
+	private Prenda abrigo;
+	private Prenda superior;
+	private Prenda inferior;
+	private Prenda calzado;
+	private Prenda accesorio;
 	
 	public Atuendo(List<Prenda> conjuntoDePrendas) {
 		this.abrigo = obtenerPrendaDeCategoria(ECategoria.ABRIGO, conjuntoDePrendas);
@@ -35,6 +35,16 @@ public class Atuendo {
 
 	public Double getNivelAbrigo() {
 		return abrigo.getNivelAbrigo() + superior.getNivelAbrigo() + inferior.getNivelAbrigo() + calzado.getNivelAbrigo() + accesorio.getNivelAbrigo();
+	}
+
+	public void ponerPrendasEnUso() {
+		superior.setEnUso(true);
+		inferior.setEnUso(true);
+		calzado.setEnUso(true);
+		if(!abrigo.equals(Prenda.SIN_ABRIGO)) // TODO que las prendas incompletas entiendan el enUso pero no hagan nada.
+			abrigo.setEnUso(true);
+		if(!accesorio.equals(Prenda.SIN_ACCESORIO))
+			accesorio.setEnUso(true); 
 	}
 
 }

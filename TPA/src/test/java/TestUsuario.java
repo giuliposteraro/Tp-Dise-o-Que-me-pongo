@@ -1,8 +1,13 @@
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.Config;
+import domain.clima.ClimaMock;
 import domain.color.EColor;
 import domain.guardarropa.Guardarropa;
 import domain.guardarropa.GuardarropaIlimitado;
@@ -13,6 +18,7 @@ import domain.sugerencias.Sugerencia;
 import domain.tipoPrenda.ETela;
 import domain.tipoPrenda.RepoTipos;
 import domain.usuario.Usuario;
+import domain.usuario.UsuarioGratuito;
 import domain.usuario.UsuarioPremium;
 import exceptions.*;
 
@@ -27,6 +33,8 @@ public class TestUsuario {
 	Guardarropa guardarropa;
 	Guardarropa guardarropa2;
 	Usuario usuario;
+	Usuario usuario2;
+	Set<Guardarropa> listaGuardarropas = new HashSet<Guardarropa>();
 	
 	@Before
 	public void crearPrendas() {
@@ -62,10 +70,13 @@ public class TestUsuario {
 		c.setColor(EColor.NEGRO, EColor.NINGUNO);
 		reloj = c.crear();
 		
-		
 		usuario = new Usuario(new UsuarioPremium());
+		usuario2 = new Usuario(new UsuarioGratuito());
 		guardarropa = usuario.crearGuardarropa();
 		guardarropa2 = usuario.crearGuardarropa();
+		listaGuardarropas.add(guardarropa);
+		listaGuardarropas.add(guardarropa2);
+		Config.instance().setProveedor(new ClimaMock(20.0, "Clear"));
 	}
 	
 	@Test
@@ -95,7 +106,7 @@ public class TestUsuario {
 		usuario.generarSugerencias(guardarropa);
 		
 		Sugerencia sugerencia = usuario.getSugerenciasPendientes().get(0);
-		usuario.revisarSugerencia(sugerencia, EstadoSugerencia.ACEPTADA);
+		usuario.aceptarSugerencia(sugerencia);
 		
 		assertEquals(EstadoSugerencia.ACEPTADA, usuario.getSugerenciasRevisadas().get(0).getEstado());
 	}
@@ -109,7 +120,7 @@ public class TestUsuario {
 		usuario.generarSugerencias(guardarropa);
 		
 		Sugerencia sugerencia = usuario.getSugerenciasPendientes().get(0);
-		usuario.revisarSugerencia(sugerencia, EstadoSugerencia.RECHAZADA);
+		usuario.rechazarSugerencia(sugerencia);
 		
 		assertEquals(EstadoSugerencia.RECHAZADA, usuario.getSugerenciasRevisadas().get(0).getEstado());
 	}
@@ -123,7 +134,7 @@ public class TestUsuario {
 		usuario.generarSugerencias(guardarropa);
 		
 		Sugerencia sugerencia = usuario.getSugerenciasPendientes().get(0);
-		usuario.revisarSugerencia(sugerencia, EstadoSugerencia.RECHAZADA);
+		usuario.rechazarSugerencia(sugerencia);
 		usuario.deshacerUltimaSugerenciaRevisada();
 		
 		assertEquals(0, usuario.getSugerenciasRevisadas().size());
@@ -147,5 +158,31 @@ public class TestUsuario {
 	public void NoSePuedeAccederAUnGuardarropaAjeno() {
 		Guardarropa guardarropa3 = new Guardarropa(new GuardarropaIlimitado());
 		usuario.agregarPrenda(remera, guardarropa3);
+	}
+	
+	@Test 
+	public void compartirGuardarropaQueTieneConUsuario() {
+		usuario.agregarGuardarropa(listaGuardarropas);
+		usuario.compartirGuardarropaCon(listaGuardarropas,usuario2);	
+		assertTrue(usuario.tieneListaGuardarropas(listaGuardarropas));//TODO agregar assert 
+	}
+	@Test
+	public void compartirGuardarropasQueNoTieneConUsuario() {
+		usuario.compartirGuardarropaCon(listaGuardarropas, usuario2);
+		assertFalse(usuario.tieneListaGuardarropas(listaGuardarropas));
+	}
+	
+	@Test
+	public void lasPrendasEstanEnUso() {
+		usuario.agregarPrenda(remera, guardarropa);
+		usuario.agregarPrenda(pantalon, guardarropa);
+		usuario.agregarPrenda(zapatillas, guardarropa);
+		usuario.generarSugerencias(guardarropa);
+		
+		Sugerencia sugerencia = usuario.getSugerenciasPendientes().get(0);
+		usuario.aceptarSugerencia(sugerencia);
+		assertTrue(remera.getEnUso());
+		assertTrue(pantalon.getEnUso());
+		assertTrue(zapatillas.getEnUso());
 	}
 }

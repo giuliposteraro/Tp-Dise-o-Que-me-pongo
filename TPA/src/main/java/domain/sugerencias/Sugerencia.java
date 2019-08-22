@@ -1,13 +1,15 @@
 package domain.sugerencias;
 
+import domain.algoritmoSugeridor.CampanaDeGauss;
 import domain.eventos.Evento;
 import domain.guardarropa.Atuendo;
 
 public class Sugerencia {
 
-	Atuendo atuendo;
-	EstadoSugerencia estado;
-	Evento evento;
+	private Atuendo atuendo;
+	private EstadoSugerencia estado;
+	private Evento evento;
+	private int calificacion;
 	
 	public Sugerencia(Atuendo atuendo, Evento evento) {
 		this.atuendo = atuendo;
@@ -20,8 +22,8 @@ public class Sugerencia {
 	}
 	
 	public Double coeficienteDeAbrigo(Double temp) {
-		//Campana de Gauss
-		return Math.pow(Math.E, (-Math.pow(this.getNivelAbrigo() - (30.0 - temp * 1.25), 2) / 10));
+		Double toleranciaAlFrio = evento.getUsuario().getToleranciaAlFrio();		
+		return new CampanaDeGauss().coeficienteDeAbrigo(this.getNivelAbrigo(), temp, toleranciaAlFrio);
 	}
 
 	public Double getNivelAbrigo() {
@@ -34,9 +36,24 @@ public class Sugerencia {
 
 	public EstadoSugerencia getEstado() {
 		return estado;
+  }
+  
+	public void ponerPrendasEnUso() {
+		atuendo.ponerPrendasEnUso();
+  }
+  
+	public int getCalificacion() {
+		return calificacion;
 	}
 	
+
 	public Evento getEvento() {
 		return evento;
 	}
+
+	public void setCalificacion(int cal) {
+		calificacion = cal;
+	}
+    
+
 }

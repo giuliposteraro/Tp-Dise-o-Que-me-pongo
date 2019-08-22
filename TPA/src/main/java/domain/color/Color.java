@@ -2,8 +2,8 @@ package domain.color;
 
 public class Color {
 	
-	EColor colorPrimario;
-	EColor colorSecundario;
+	private EColor colorPrimario;
+	private EColor colorSecundario;
 	
 	public Color(EColor colorPrimario, EColor colorSecundario) {
 		this.colorPrimario = colorPrimario;

@@ -16,10 +16,10 @@ import exceptions.*;
 public class ConstructorPrenda {
 	
 	// Mismos atributos que Prenda
-	TipoPrenda tipo;
-	Color color;
-	ETela tela;
-	BufferedImage imagen;
+	private TipoPrenda tipo;
+	private Color color;
+	private ETela tela;
+	private BufferedImage imagen;
 	
 	public Prenda crear() {
 		validar();

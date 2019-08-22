@@ -1,5 +1,4 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -12,6 +11,7 @@ import org.junit.runners.Parameterized.Parameter;
 import domain.clima.ClimaMock;
 import domain.color.EColor;
 import domain.eventos.Evento;
+import domain.eventos.Frecuencia;
 import domain.guardarropa.Atuendo;
 import domain.guardarropa.Guardarropa;
 import domain.prenda.ConstructorPrenda;
@@ -38,6 +38,7 @@ public class TestSugeridor {
 	Guardarropa guardarropa;
 	Evento evento;
 	Sugeridor s;
+	Atuendo a;
 	
 	@Before
 	public void crearPrendas() {
@@ -78,6 +79,8 @@ public class TestSugeridor {
 		c.setColor(EColor.NEGRO, EColor.NINGUNO);
 		reloj = c.crear();
 		
+		
+		
 		usuario = new Usuario(new UsuarioPremium());
 		guardarropa = usuario.crearGuardarropa();
 		usuario.agregarPrenda(remera, guardarropa);
@@ -86,15 +89,24 @@ public class TestSugeridor {
 		usuario.agregarPrenda(pantalon, guardarropa);
 		usuario.agregarPrenda(zapatillas, guardarropa);
 		usuario.agregarPrenda(reloj, guardarropa);
-		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "");
-		s = new Sugeridor(evento, new ClimaMock());
+	
+		a = new Atuendo(Arrays.asList(remera, buzo, pantalon, zapatillas, reloj));
+    evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "",Frecuencia.UNICA);
+    s = new Sugeridor(evento, new ClimaMock(20.0, "Clear"));
+
+	}
+	
+	@Test //TODO Testear que cambie el atuendo sugerido segun la tolerancia al frio
+	public void calificandoUnaSugerenciaVariaLaToleranciaAlFrio() { //TODO Otro test (Calificaciones)
+		Sugerencia sug = new Sugerencia(a,evento);
+		usuario.agregarSugerencia(sug);
+		usuario.aceptarSugerencia(sug);
+		sug.setCalificacion(2);
+		assertEquals(2.0, usuario.getToleranciaAlFrio(),0.001);
 	}
 	
 	@Test
-	public void obtenerElNivelDeAbrigoDeUnAtuendo() {
-		
-		Atuendo a = new Atuendo(Arrays.asList(remera, buzo, pantalon, zapatillas, reloj));
-				
+	public void obtenerElNivelDeAbrigoDeUnAtuendo() {				
 		assertEquals(15.0, a.getNivelAbrigo().doubleValue(), 0.001);
 	}
 	
@@ -104,16 +116,7 @@ public class TestSugeridor {
 		Sugerencia s = new Sugerencia(a, evento);
 		assertEquals(15.0, s.getNivelAbrigo().doubleValue(), 0.001);
 	}
-	
-	@Test
-	public void obtenerElCoeficienteDeAbrigo() {
-		campera = campera.ponerSobre(buzo);
-		Atuendo atuendo = new Atuendo(Arrays.asList(remera, campera, pantalon, zapatillas, reloj));
-		Sugerencia s = new Sugerencia(atuendo, evento);
 		
-		assertTrue(s.coeficienteDeAbrigo(20.0).doubleValue() >= 0.0 && s.coeficienteDeAbrigo(20.0).doubleValue() <= 1.0);
-	}
-	
 	@Test
 	public void generarSugerenciasParaEstaConfiguracionGenera8Sugerencias() {
 		s.generarSugerencias();

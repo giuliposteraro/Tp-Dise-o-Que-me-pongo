@@ -18,7 +18,6 @@ import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
 import domain.eventos.Evento;
-import scenes.Sugerencias.SugerenciasView;
 
 @SuppressWarnings("serial")
 public class ListadoEventosView extends SimpleWindow<ListadoEventosViewModel>{

@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import org.uqbar.arena.bindings.DateTransformer;
 import org.uqbar.commons.model.annotations.Observable;
+import java.util.HashSet;
+import java.util.Set;
+import java.time.temporal.ChronoUnit;
 
 import domain.usuario.*;
 import domain.Config;
@@ -15,39 +18,42 @@ import domain.sugerencias.*;
 @Observable
 public class Evento {
 	
-	Guardarropa guardarropa;
-	Usuario usuario;
-	Date fecha;
-	String lugar;
-	String motivo;
-	EstadoEvento estado;
-	
-	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unMotivo) {
+	private Guardarropa guardarropa;
+	private Usuario usuario;
+	private LocalDate fecha;
+	private String lugar;
+	private String motivo;
+	private Set<Sugerencia> sugerencias;
+	private Frecuencia frecuencia;
+	private Boolean pendiente;
+		
+	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unMotivo, Frecuencia unaFrecuencia) {
 		this.usuario = unUsuario;
 		this.guardarropa = unGuardarropa;
-		this.fecha = Date.from(unaFecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		this.fecha = unaFecha;
 		this.lugar = unLugar;
 		this.motivo = unMotivo;
-		this.estado = EstadoEvento.PENDIENTE;
+
+		this.frecuencia = unaFrecuencia;
+		this.sugerencias = new HashSet<Sugerencia>();
+		this.pendiente = true;
 	}
 	
-	public boolean esProximo() {  // es proximo si el evento es hoy mismo
-		return fecha.toInstant()
-			      	.atZone(ZoneId.systemDefault())
-			      	.toLocalDate().isEqual(LocalDate.now());
+	public boolean esProximo() {  // es proximo si el evento es antes de maniana
+		return fecha.isBefore(LocalDate.now().plus(2,ChronoUnit.DAYS));
 	}
 	
-	public boolean estaPendiente() {
-		return this.estado.equals(EstadoEvento.PENDIENTE); //
-	}
-	
-	public void marcarComoPasado() {
-		this.estado = EstadoEvento.PASADO;
-	}
 	public void sugerir() {
 		Sugeridor unSugeridor = new Sugeridor(this, Config.instance().getProveedor());
 		unSugeridor.generarSugerencias();
+		this.recalcularFecha();
 	}	
+	
+	public void recalcularFecha() {   //TODO crear distintos eventos en vez de cambiar fecha
+		frecuencia.actualizarFecha(this); //TODO encapsulamiento fecha
+		if(frecuencia.equals(Frecuencia.UNICA))
+			this.pendiente = false;
+	}
 	
 	public Guardarropa getGuardarropa() {
 		return guardarropa;
@@ -57,24 +63,39 @@ public class Evento {
 		return usuario;
 	}
 	
-	public Date getFecha() {
-		return fecha;
+	public boolean entre(LocalDate fecha1, LocalDate fecha2) {
+		return this.fecha.isBefore(fecha2) && this.fecha.isAfter(fecha1); 
 	}
-
-	public void setFecha(Date fecha) {
+	
+	public void agregarSugerencia(Sugerencia sug) {
+		sugerencias.add(sug);
+	}
+	
+	public boolean proximoPendiente() {
+		return this.esProximo() && this.pendiente(); 
+	}
+	
+	public void pendiente(boolean pend) {
+		pendiente = pend;
+	}
+	
+	public LocalDate fecha() {
+		return this.fecha;
+	}
+	
+	public void fecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 	
-	public String getMotivo() {
+	public boolean pendiente() {
+		return pendiente;
+	}
+
+	public String getNombre() {
 		return motivo;
 	}
 
-	public void setMotivo(String motivo) {
-		this.motivo = motivo;
+	public String getLugar() {
+		return lugar;
 	}
-
-	public Set<Sugerencia> sugerencias() {
-		return this.usuario.sugerenciasPara(this);
-	}
-	
 }

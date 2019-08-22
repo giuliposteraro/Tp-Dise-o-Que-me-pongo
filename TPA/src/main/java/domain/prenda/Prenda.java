@@ -14,11 +14,11 @@ import domain.tipoPrenda.RepoTipos;
 
 public class Prenda {
 	
-	TipoPrenda tipo;
-	Color color;
-	ETela tela;
-	BufferedImage imagen;
-	
+	private TipoPrenda tipo;
+	private Color color;
+	private ETela tela;
+	private BufferedImage imagen;
+	private Boolean enUso; //TODO cuando termina un evento poner en false.
 	private Optional<Prenda> prendaAbajo = Optional.empty();
 	
 	public Prenda(TipoPrenda tipo, ETela tela, Color color, BufferedImage imagen) {
@@ -26,8 +26,18 @@ public class Prenda {
 		this.tela = tela;
 		this.color = color;
 		this.imagen = imagen;
+		this.enUso = false;
 	}
 	
+	public Boolean getEnUso() {
+		return enUso;
+	}
+
+	public void setEnUso(Boolean enUso) {
+		this.enUso = enUso;
+		this.prendaAbajo.ifPresent(p -> p.setEnUso(enUso));
+	}
+
 	public TipoPrenda getTipo() {
 		return tipo;
 	}

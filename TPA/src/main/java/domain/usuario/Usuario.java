@@ -7,27 +7,54 @@ import domain.Config;
 import domain.eventos.Evento;
 import domain.eventos.RepositorioEventos;
 import domain.guardarropa.Guardarropa;
+import domain.notificaciones.INotificador;
 import domain.prenda.Prenda;
 import domain.sugerencias.EstadoSugerencia;
 import domain.sugerencias.Sugerencia;
 import domain.sugerencias.Sugeridor;
+import domain.eventos.Frecuencia;
 import exceptions.*;
 
 public class Usuario {
 	
 	private TipoUsuario tipo;
-	Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
-	List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
-	List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();
+	private Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
+	private List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
+	private List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();
+	private List<INotificador> notificadores = new ArrayList<INotificador>();
 	
+	
+	public void compartirGuardarropaCon(Set<Guardarropa> guardarropas, Usuario usuario) {
+			if(this.tieneListaGuardarropas(guardarropas)) {
+				usuario.agregarGuardarropa(guardarropas);
+			}
+	}
+	// TODO validar que un guardarropas pertenezca a un usuario.
+	public void agregarGuardarropa(Set<Guardarropa> guardarropas) {
+		this.guardarropas.addAll(guardarropas);
+	}
+
 	public Usuario(TipoUsuario tipo) {
 		this.setTipo(tipo);
+		Config.instance().getRepositorioUsuarios().agregarUsuario(this);
 	}
 	
 	public Guardarropa crearGuardarropa() {
 		Guardarropa guardarropa = tipo.crearGuardarropa();
 		guardarropas.add(guardarropa);
 		return(guardarropa);
+	}
+	
+	public Double getToleranciaAlFrio() {
+		try{ //TODO Nivel de abrigo por categoria de prenda
+			return this.sugerenciasAprobadas().stream().mapToDouble(s -> s.getCalificacion()).sum() / this.sugerenciasAprobadas().size();
+		}catch(Exception e){ //TODO Excepcion dividir por 0
+			return 0.0;
+		}
+	}
+	
+	private List<Sugerencia> sugerenciasAprobadas() {
+		return sugerenciasRevisadas.stream().filter(s -> s.getEstado() == EstadoSugerencia.ACEPTADA).collect(Collectors.toList());
 	}
 	
 	public void eliminarGuardarropa(Guardarropa guardarropa) {
@@ -37,11 +64,13 @@ public class Usuario {
 	public Boolean tieneGuardarropa(Guardarropa guardarropa) {
 		return guardarropas.contains(guardarropa);
 	}
-	
+	public Boolean tieneListaGuardarropas(Set<Guardarropa> listaGuardarropas) {
+		return guardarropas.contains(listaGuardarropas);
+	}
 	public void generarSugerencias(Guardarropa guardarropa) {
 		validarAccesoAGuardarropa(guardarropa);
 		
-		Evento evento = new Evento(this, guardarropa, LocalDate.now(), "", "Consulta");
+		Evento evento = new Evento(this, guardarropa, LocalDate.now(), "", "Consulta", Frecuencia.UNICA);
 		
 		Sugeridor sugeridor = new Sugeridor(evento, Config.instance().getProveedor());
 		
@@ -84,12 +113,21 @@ public class Usuario {
 	}
 	
 	public void crearEvento(Guardarropa guardarropa, LocalDate fecha, String lugar, String motivo) {
-		Evento eventoNuevo = new Evento(this,guardarropa,fecha,lugar,motivo);
+		Evento eventoNuevo = new Evento(this,guardarropa,fecha,lugar,motivo,Frecuencia.UNICA);
 		RepositorioEventos repo = Config.instance().getRepositorioEventos();
 		repo.agregarEvento(eventoNuevo);
 	}
 	
-	public void revisarSugerencia(Sugerencia sugerencia, EstadoSugerencia estado) {
+	public void aceptarSugerencia(Sugerencia sugerencia) {
+		this.revisarSugerencia(sugerencia, EstadoSugerencia.ACEPTADA);
+		sugerencia.ponerPrendasEnUso();
+	}
+	
+	public void rechazarSugerencia(Sugerencia sugerencia) {
+		this.revisarSugerencia(sugerencia, EstadoSugerencia.RECHAZADA);
+	}
+	
+	private void revisarSugerencia(Sugerencia sugerencia, EstadoSugerencia estado) {
 		if(!sugerenciasPendientes.contains(sugerencia)) {
 			throw new NoTieneSugerenciaPendiente("Esta sugerencia no esta pendiente para este usuario");
 		}
@@ -106,6 +144,18 @@ public class Usuario {
 		sugerenciaADeshacer.setEstado(EstadoSugerencia.PENDIENTE);
 		sugerenciasPendientes.add(sugerenciaADeshacer);
 	}
+	
+	public void agregarNotificador(INotificador notificador) {
+		notificadores.add(notificador);
+	}
+	
+	public void notificarSugerencias(Evento evento) {
+		notificadores.forEach(n -> n.notificarSugerencia(evento));
+	}
+	
+	public void notificarAlertaMeteorologica() {
+		notificadores.forEach(n -> n.notificarAlertaMeteorologica());
+	}
 
 	public List<Sugerencia> getSugerenciasPendientes() {
 		return sugerenciasPendientes;
@@ -115,11 +165,11 @@ public class Usuario {
 		return sugerenciasRevisadas;
 	}
 	
-	TipoUsuario getTipo() {
+	public TipoUsuario getTipo() {
 		return tipo;
 	}
 
-	void setTipo(TipoUsuario tipo) {
+	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
 	}
 	
