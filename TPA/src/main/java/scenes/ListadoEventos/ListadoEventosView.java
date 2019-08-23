@@ -45,7 +45,8 @@ public class ListadoEventosView extends SimpleWindow<ListadoEventosViewModel>{
 		this.crearPanelSelectorFechasHastaEn(panelSelectores);
 		
 		Table<Evento> tablaEventos = new Table<Evento>(mainPanel, Evento.class);
-		tablaEventos.setHeight(300);
+		tablaEventos.setHeight(800);
+		tablaEventos.setNumberVisibleRows(10);
 		tablaEventos.bindItemsToProperty("eventos");
 		tablaEventos.bindValueToProperty("eventoSeleccionado");
 		
@@ -60,19 +61,30 @@ public class ListadoEventosView extends SimpleWindow<ListadoEventosViewModel>{
 							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 							return fecha.format(formatter);
 						}
-					});
+					}) ;
 		
 		Column<Evento> columnaTitulos = new Column<Evento>(tablaEventos);
 		columnaTitulos.setTitle("Titulo")
 					  .setFixedSize(500)
 					  .bindContentsToProperty("motivo");
 		
-//		Column<Evento> columnaSugerencias = new Column<Evento>(tablaEventos);
-//		columnaSugerencias.setTitle("Sugerencia")
-//						  .setFixedSize(150);
+		Column<Evento> columnaSugerencias = new Column<Evento>(tablaEventos);
+		columnaSugerencias.setTitle("Sugerencia")
+						  .setFixedSize(150)
+						  .bindContentsToProperty("tieneSugerencias")
+						  .setTransformer(new Transformer<Boolean,String>() {
+							  
+							  @Override 
+							  public String transform (Boolean tieneSugerencia) {
+								  if(tieneSugerencia) {
+									  return "Si";
+								  }
+								  else {
+									  return "No";
+								  }
+							  }
+						  });
 		
-		tablaEventos.setWidth(800);
-		tablaEventos.setHeight(600);
 	}
 	
 	private void crearPanelSelectorFechasDesdeEn(Panel panel) {

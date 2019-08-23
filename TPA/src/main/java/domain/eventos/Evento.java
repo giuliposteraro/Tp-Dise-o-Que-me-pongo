@@ -64,11 +64,11 @@ public class Evento {
 	}
 	
 	public boolean entre(LocalDate fecha1, LocalDate fecha2) {
-		return this.fecha.isBefore(fecha2) && this.fecha.isAfter(fecha1); 
+		return this.fecha.isBefore(fecha2.plusDays(1)) && this.fecha.isAfter(fecha1.minusDays(1)); 
 	}
 	
 	public void agregarSugerencia(Sugerencia sug) {
-		sugerencias.add(sug);
+		this.sugerencias.add(sug);
 	}
 	
 	public boolean proximoPendiente() {
@@ -98,4 +98,19 @@ public class Evento {
 	public String getLugar() {
 		return lugar;
 	}
+	
+	public Boolean getTieneSugerencias() {
+		return !sugerencias.isEmpty();
+	}
+	
+	public void setTieneSugerencias() {}
+
+	public Set<Sugerencia> getSugerencias() {
+		return sugerencias;
+	}
+
+	public void setSugerencias(Set<Sugerencia> sugerencias) {
+		this.sugerencias = sugerencias;
+	}
+	
 }
