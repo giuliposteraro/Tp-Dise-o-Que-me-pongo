@@ -46,8 +46,14 @@ public class Sugerencia {
 		return calificacion;
 	}
 	
+
+	public Evento getEvento() {
+		return evento;
+	}
+
 	public void setCalificacion(int cal) {
 		calificacion = cal;
 	}
     
+
 }

@@ -91,8 +91,8 @@ public class TestSugeridor {
 		usuario.agregarPrenda(reloj, guardarropa);
 	
 		a = new Atuendo(Arrays.asList(remera, buzo, pantalon, zapatillas, reloj));
-    evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "",Frecuencia.UNICA);
-    s = new Sugeridor(evento, new ClimaMock(20.0, "Clear"));
+		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "",Frecuencia.UNICA);
+		s = new Sugeridor(evento, new ClimaMock(20.0, "Clear"));
 
 	}
 	

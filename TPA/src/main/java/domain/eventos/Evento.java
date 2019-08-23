@@ -1,5 +1,11 @@
 package domain.eventos;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import org.uqbar.arena.bindings.DateTransformer;
+import org.uqbar.commons.model.annotations.Observable;
 import java.util.HashSet;
 import java.util.Set;
 import java.time.temporal.ChronoUnit;
@@ -9,6 +15,7 @@ import domain.Config;
 import domain.guardarropa.Guardarropa;
 import domain.sugerencias.*;
 
+@Observable
 public class Evento {
 	
 	private Guardarropa guardarropa;
@@ -21,12 +28,12 @@ public class Evento {
 	private Boolean pendiente;
 		
 	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unMotivo, Frecuencia unaFrecuencia) {
-
 		this.usuario = unUsuario;
 		this.guardarropa = unGuardarropa;
 		this.fecha = unaFecha;
 		this.lugar = unLugar;
 		this.motivo = unMotivo;
+
 		this.frecuencia = unaFrecuencia;
 		this.sugerencias = new HashSet<Sugerencia>();
 		this.pendiente = true;
@@ -57,11 +64,11 @@ public class Evento {
 	}
 	
 	public boolean entre(LocalDate fecha1, LocalDate fecha2) {
-		return this.fecha.isBefore(fecha2) && this.fecha.isAfter(fecha1); 
+		return this.fecha.isBefore(fecha2.plusDays(1)) && this.fecha.isAfter(fecha1.minusDays(1)); 
 	}
 	
 	public void agregarSugerencia(Sugerencia sug) {
-		sugerencias.add(sug);
+		this.sugerencias.add(sug);
 	}
 	
 	public boolean proximoPendiente() {
@@ -84,11 +91,26 @@ public class Evento {
 		return pendiente;
 	}
 
-	public String getNombre() {
+	public String getMotivo() {
 		return motivo;
 	}
 
 	public String getLugar() {
 		return lugar;
 	}
+	
+	public Boolean getTieneSugerencias() {
+		return !sugerencias.isEmpty();
+	}
+	
+	public void setTieneSugerencias() {}
+
+	public Set<Sugerencia> getSugerencias() {
+		return sugerencias;
+	}
+
+	public void setSugerencias(Set<Sugerencia> sugerencias) {
+		this.sugerencias = sugerencias;
+	}
+	
 }

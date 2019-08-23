@@ -172,4 +172,20 @@ public class Usuario {
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
 	}
+	
+	//
+	public Set<Sugerencia>  sugerenciasPara(Evento unEvento) {
+		Set<Sugerencia> mergedSet = new HashSet<Sugerencia>(); 
+		  
+        // add the two sets to be merged 
+        // into the new set 
+        mergedSet.addAll(sugerenciasRevisadas.stream().filter(sugerencia -> sugerencia.getEvento().equals(unEvento)).collect(Collectors.toSet())); 
+        mergedSet.addAll(sugerenciasPendientes.stream().filter(sugerencia -> sugerencia.getEvento().equals(unEvento)).collect(Collectors.toSet()));
+  
+        // returning the merged set 
+        return mergedSet; 
+				
+	
+	}
+	
 }

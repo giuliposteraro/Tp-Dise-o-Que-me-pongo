@@ -3,7 +3,7 @@ package domain.clima;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class JobAlertasMeteorológicas {	//TODO eliminar
+public class JobAlertasMeteorologicas {	//TODO eliminar
 	public static void ejecutar(){
 
 		Timer timer = new Timer();
