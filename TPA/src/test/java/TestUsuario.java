@@ -1,11 +1,6 @@
 import static org.junit.Assert.*;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import domain.Config;
 import domain.clima.ClimaMock;
 import domain.color.EColor;
@@ -34,10 +29,9 @@ public class TestUsuario {
 	Guardarropa guardarropa2;
 	Usuario usuario;
 	Usuario usuario2;
-	Set<Guardarropa> listaGuardarropas = new HashSet<Guardarropa>();
 	
 	@Before
-	public void crearPrendas() {
+	public void init() {
 		ConstructorPrenda c = new ConstructorPrenda();
 		
 		c.setTipo(RepoTipos.REMERA);
@@ -74,8 +68,6 @@ public class TestUsuario {
 		usuario2 = new Usuario(new UsuarioGratuito());
 		guardarropa = usuario.crearGuardarropa();
 		guardarropa2 = usuario.crearGuardarropa();
-		listaGuardarropas.add(guardarropa);
-		listaGuardarropas.add(guardarropa2);
 		Config.instance().setProveedor(new ClimaMock(20.0, "Clear"));
 	}
 	
@@ -162,14 +154,14 @@ public class TestUsuario {
 	
 	@Test 
 	public void compartirGuardarropaQueTieneConUsuario() {
-		usuario.agregarGuardarropa(listaGuardarropas);
-		usuario.compartirGuardarropaCon(listaGuardarropas,usuario2);	
-		assertTrue(usuario.tieneListaGuardarropas(listaGuardarropas));//TODO agregar assert 
+		usuario.agregarGuardarropa(guardarropa);
+		usuario.compartirGuardarropaCon(guardarropa, usuario2);	
+		assertTrue(usuario2.tieneGuardarropa(guardarropa));
 	}
-	@Test
+	
+	@Test(expected = AccesoAGuardarropaDenegado.class)
 	public void compartirGuardarropasQueNoTieneConUsuario() {
-		usuario.compartirGuardarropaCon(listaGuardarropas, usuario2);
-		assertFalse(usuario.tieneListaGuardarropas(listaGuardarropas));
+		usuario2.compartirGuardarropaCon(guardarropa, usuario);
 	}
 	
 	@Test

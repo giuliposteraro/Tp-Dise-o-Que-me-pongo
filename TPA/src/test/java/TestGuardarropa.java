@@ -78,7 +78,6 @@ public class TestGuardarropa {
 	
 	@Test 
 	public void tieneLugarGuardarropaLimitado() {
-		Config.instance().getCapacidadMaxima();
 		guardarropa.setTipoGuardarropa(new GuardarropaLimitado());
 		guardarropa.agregarPrenda(buzo);
 		guardarropa.agregarPrenda(pantalon);
@@ -86,7 +85,9 @@ public class TestGuardarropa {
 		assertTrue(guardarropa.tieneLugar());
 	}
 	
+	@Test
 	public void NoTieneLugarGuardarropaLimitadoConMasPrendas() {
+		Config.instance().setCapacidadMaxima(5);
 		guardarropa.setTipoGuardarropa(new GuardarropaLimitado());
 		guardarropa.agregarPrenda(remera2);
 		guardarropa.agregarPrenda(zapatillas);

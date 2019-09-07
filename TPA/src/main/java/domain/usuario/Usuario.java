@@ -24,14 +24,15 @@ public class Usuario {
 	private List<INotificador> notificadores = new ArrayList<INotificador>();
 	
 	
-	public void compartirGuardarropaCon(Set<Guardarropa> guardarropas, Usuario usuario) {
-			if(this.tieneListaGuardarropas(guardarropas)) {
-				usuario.agregarGuardarropa(guardarropas);
+	public void compartirGuardarropaCon(Guardarropa guardarropa, Usuario usuario) {
+			if(!this.tieneGuardarropa(guardarropa)) {
+				throw new AccesoAGuardarropaDenegado("No se puede compartir este guardarropa");
 			}
+			usuario.agregarGuardarropa(guardarropa);
 	}
-	// TODO validar que un guardarropas pertenezca a un usuario.
-	public void agregarGuardarropa(Set<Guardarropa> guardarropas) {
-		this.guardarropas.addAll(guardarropas);
+
+	public void agregarGuardarropa(Guardarropa guardarropa) {
+		this.guardarropas.add(guardarropa);
 	}
 
 	public Usuario(TipoUsuario tipo) {
@@ -64,9 +65,7 @@ public class Usuario {
 	public Boolean tieneGuardarropa(Guardarropa guardarropa) {
 		return guardarropas.contains(guardarropa);
 	}
-	public Boolean tieneListaGuardarropas(Set<Guardarropa> listaGuardarropas) {
-		return guardarropas.contains(listaGuardarropas);
-	}
+
 	public void generarSugerencias(Guardarropa guardarropa) {
 		validarAccesoAGuardarropa(guardarropa);
 		

@@ -60,7 +60,7 @@ public class TestPrenda {
 		c.setTipo(RepoTipos.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		c.setTela(ETela.ALGODON);
-		c.setImagen("/home/mauro/2019-ju-ma-group-03/TPA/img/a.png");
+		c.setImagen("/img/a.png");
 	}
 	
 	@Test(expected = ParametrosNoValidos.class)
