@@ -24,10 +24,10 @@ public class Evento {
 	private String lugar;
 	private String motivo;
 	private Set<Sugerencia> sugerencias;
-	private Frecuencia frecuencia;
+	private EFrecuencia frecuencia;
 	private Boolean pendiente;
 		
-	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unMotivo, Frecuencia unaFrecuencia) {
+	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unMotivo, EFrecuencia unaFrecuencia) {
 		this.usuario = unUsuario;
 		this.guardarropa = unGuardarropa;
 		this.fecha = unaFecha;
@@ -51,7 +51,7 @@ public class Evento {
 	
 	public void recalcularFecha() {   //TODO crear distintos eventos en vez de cambiar fecha
 		frecuencia.actualizarFecha(this); //TODO encapsulamiento fecha
-		if(frecuencia.equals(Frecuencia.UNICA))
+		if(frecuencia.equals(EFrecuencia.UNICA))
 			this.pendiente = false;
 	}
 	

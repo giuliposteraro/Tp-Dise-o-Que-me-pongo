@@ -13,7 +13,7 @@ import org.uqbar.commons.model.annotations.Observable;
 import domain.Config;
 import domain.color.EColor;
 import domain.eventos.Evento;
-import domain.eventos.Frecuencia;
+import domain.eventos.EFrecuencia;
 import domain.guardarropa.Guardarropa;
 import domain.guardarropa.GuardarropaIlimitado;
 import domain.prenda.ConstructorPrenda;
@@ -51,9 +51,9 @@ public class ListadoEventosViewModel {
 		mesHasta = 12;
 		anioHasta = 2030;
 		
-		Evento unEvento1 = new Evento(usuario, guardarropa, LocalDate.now(), "", "Fiesta DDS", Frecuencia.UNICA);
-		Evento unEvento2 = new Evento(usuario, guardarropa, LocalDate.now(), "", "After DDS", Frecuencia.UNICA);
-		Evento unEvento3 = new Evento(usuario, guardarropa, LocalDate.now(), "", "Previa DDS", Frecuencia.UNICA);
+		Evento unEvento1 = new Evento(usuario, guardarropa, LocalDate.now(), "", "Fiesta DDS", EFrecuencia.UNICA);
+		Evento unEvento2 = new Evento(usuario, guardarropa, LocalDate.now(), "", "After DDS", EFrecuencia.UNICA);
+		Evento unEvento3 = new Evento(usuario, guardarropa, LocalDate.now(), "", "Previa DDS", EFrecuencia.UNICA);
 		unEvento1.sugerir();
 		Config.instance().getRepositorioEventos().agregarEvento(unEvento1);
 		Config.instance().getRepositorioEventos().agregarEvento(unEvento2);

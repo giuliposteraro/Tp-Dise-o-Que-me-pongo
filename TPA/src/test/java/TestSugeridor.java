@@ -9,9 +9,10 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
 
 import domain.clima.ClimaMock;
+import domain.clima.ECondicionClimatica;
 import domain.color.EColor;
 import domain.eventos.Evento;
-import domain.eventos.Frecuencia;
+import domain.eventos.EFrecuencia;
 import domain.guardarropa.Atuendo;
 import domain.guardarropa.Guardarropa;
 import domain.prenda.ConstructorPrenda;
@@ -91,8 +92,8 @@ public class TestSugeridor {
 		usuario.agregarPrenda(reloj, guardarropa);
 	
 		a = new Atuendo(Arrays.asList(remera, buzo, pantalon, zapatillas, reloj));
-		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "",Frecuencia.UNICA);
-		s = new Sugeridor(evento, new ClimaMock(20.0, "Clear"));
+		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "",EFrecuencia.UNICA);
+		s = new Sugeridor(evento, new ClimaMock(20.0, ECondicionClimatica.CLEAR));
 
 	}
 	

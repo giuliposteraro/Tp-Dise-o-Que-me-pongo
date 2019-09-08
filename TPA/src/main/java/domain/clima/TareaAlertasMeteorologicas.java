@@ -17,14 +17,9 @@ public class TareaAlertasMeteorologicas extends TimerTask {
 	}
 
 	private Boolean hayAlertaMeteorologica() {
-		List<String> condiciones = Config.instance().getProveedor().getWeatherConditions();
+		List<ECondicionClimatica> condiciones = Config.instance().getProveedor().getWeatherConditions();
 
-		return condiciones.stream().anyMatch(c ->
-			c.equals("Thunderstorm") ||				//TODO cambiar a enum
-			c.equals("Rain") ||
-			c.equals("Snow") ||
-			c.equals("Tornado")
-		);
+		return condiciones.stream().anyMatch(c -> c.esAlerta());
 	}
 
 }

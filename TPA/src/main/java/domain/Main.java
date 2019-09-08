@@ -5,6 +5,7 @@ import org.uqbar.arena.windows.Window;
 import domain.eventos.JobEventos;
 import scenes.ListadoEventos.ListadoEventosView;
 import scenes.ListadoEventos.ListadoEventosViewModel;
+import domain.clima.ClimaOW;
 import domain.clima.TareaAlertasMeteorologicas;
 import domain.eventos.TareaSugerenciaEventos;
 

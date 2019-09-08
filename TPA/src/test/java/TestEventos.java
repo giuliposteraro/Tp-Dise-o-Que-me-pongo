@@ -8,6 +8,7 @@ import domain.guardarropa.Guardarropa;
 import domain.guardarropa.GuardarropaLimitado;
 import domain.Config;
 import domain.clima.ClimaMock;
+import domain.clima.ECondicionClimatica;
 import domain.color.EColor;
 import domain.tipoPrenda.ETela;
 import domain.tipoPrenda.RepoTipos;
@@ -76,26 +77,26 @@ public class TestEventos {
 
 	@Test
 	public void agregarEvento() {
-		repo.agregarEvento(new Evento(usuario, guardarropa, fecha, "Boliche", "Fiesta", Frecuencia.UNICA));
+		repo.agregarEvento(new Evento(usuario, guardarropa, fecha, "Boliche", "Fiesta", EFrecuencia.UNICA));
 		assertEquals(1, repo.eventos().size());
 	}
 
 	@Test
 	public void detectaCorrectamenteSiEsProximoCasoPositivo() {
-		repo.agregarEvento(new Evento(usuario, guardarropa, fecha2, "Boliche", "Fiesta",Frecuencia.UNICA));
+		repo.agregarEvento(new Evento(usuario, guardarropa, fecha2, "Boliche", "Fiesta",EFrecuencia.UNICA));
 		assertEquals(1, repo.proximosEventos().size());
 	}
 
 	@Test
 	public void detectaCorrectamenteSiEsProximoCasoNegativo() {
-		repo.agregarEvento(new Evento(usuario, guardarropa, fecha, "Boliche", "Fiesta",Frecuencia.UNICA));
+		repo.agregarEvento(new Evento(usuario, guardarropa, fecha, "Boliche", "Fiesta",EFrecuencia.UNICA));
 		assertEquals(0, repo.proximosEventos().size());
 	}
 
 	@Test
 	public void chequearSugerenciasUsuarioTrasAgregarEvento() {
-	  Config.instance().setProveedor(new ClimaMock(20.0, "Clear"));
-    evento1 = new Evento(usuario, guardarropa, fecha2, "Boliche", "Party", Frecuencia.UNICA); 
+	  Config.instance().setProveedor(new ClimaMock(20.0, ECondicionClimatica.CLEAR));
+    evento1 = new Evento(usuario, guardarropa, fecha2, "Boliche", "Party", EFrecuencia.UNICA); 
 	  evento1.sugerir();
 	  assertEquals(2, usuario.getSugerenciasPendientes().size());
 	}
@@ -103,7 +104,7 @@ public class TestEventos {
 	@Test
 	public void chequearQueSeRealicenLasSugerenciasAlEjecutarElJob() {
 		repo = Config.instance().getRepositorioEventos();
-		repo.agregarEvento(new Evento(usuario, guardarropa, fecha2, "Boliche", "Fiesta", Frecuencia.UNICA));
+		repo.agregarEvento(new Evento(usuario, guardarropa, fecha2, "Boliche", "Fiesta", EFrecuencia.UNICA));
 		tareaRevision.run();
 		assertEquals(2, usuario.getSugerenciasPendientes().size());
 	}
@@ -111,7 +112,7 @@ public class TestEventos {
 	@Test
 	public void chequeoEventoUnico() {
 		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", Frecuencia.UNICA);
+		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.UNICA);
 		repo.agregarEvento(event);
 		tareaRevision.run();
 		assertFalse(event.pendiente());	
@@ -120,7 +121,7 @@ public class TestEventos {
 	@Test
 	public void chequeoCambioDeFechaDiaria() {
 		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", Frecuencia.DIARIA);
+		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
 		repo.agregarEvento(event);
 		tareaRevision.run();
 		assertEquals(fecha3.plus(1,ChronoUnit.DAYS),event.fecha());	
@@ -129,7 +130,7 @@ public class TestEventos {
 	@Test
 	public void chequeoCambioDeFechaSemanal() {
 		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", Frecuencia.SEMANAL);
+		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.SEMANAL);
 		repo.agregarEvento(event);
 		tareaRevision.run();
 		assertEquals(fecha3.plus(1,ChronoUnit.WEEKS),event.fecha());	
@@ -138,7 +139,7 @@ public class TestEventos {
 	@Test
 	public void chequeoCambioDeFechaMensual() {
 		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", Frecuencia.MENSUAL);
+		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.MENSUAL);
 		repo.agregarEvento(event);
 		tareaRevision.run();
 		assertEquals(fecha3.plus(1,ChronoUnit.MONTHS),event.fecha());	
@@ -147,7 +148,7 @@ public class TestEventos {
 	@Test
 	public void chequeoCambioDeFechaAnual() {
 		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", Frecuencia.ANUAL);
+		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.ANUAL);
 		repo.agregarEvento(event);
 		tareaRevision.run();
 		assertEquals(fecha3.plus(1,ChronoUnit.YEARS),event.fecha());	
@@ -156,7 +157,7 @@ public class TestEventos {
 	@Test
 	public void chequeoEstadoPendiente() {
 		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", Frecuencia.DIARIA);
+		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
 		repo.agregarEvento(event);
 		tareaRevision.run();
 		assertTrue(event.pendiente());	
@@ -165,8 +166,8 @@ public class TestEventos {
 	@Test
 	public void chequeoProximosEventosTrasCarga() {
 		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", Frecuencia.DIARIA);
-		Evento event2 = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", Frecuencia.SEMANAL);
+		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
+		Evento event2 = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.SEMANAL);
 		repo.agregarEvento(event);
 		repo.agregarEvento(event2);
 		assertEquals(2,repo.proximosEventos().size());	
@@ -175,8 +176,8 @@ public class TestEventos {
 	@Test
 	public void chequeoProximosEventosTrasJob() {
 		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", Frecuencia.DIARIA);
-		Evento event2 = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", Frecuencia.SEMANAL);
+		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
+		Evento event2 = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.SEMANAL);
 		repo.agregarEvento(event);
 		repo.agregarEvento(event2);
 		tareaRevision.run();

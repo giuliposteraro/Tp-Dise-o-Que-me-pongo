@@ -6,9 +6,9 @@ import java.util.List;
 public class ClimaMock implements ProveedorClima{
 	
 	private Double temp;
-	private String condition;
+	private ECondicionClimatica condition;
 	
-	public ClimaMock(Double temp, String condition) {
+	public ClimaMock(Double temp, ECondicionClimatica condition) {
 		this.temp = temp;
 		this.condition = condition;
 	}
@@ -17,7 +17,7 @@ public class ClimaMock implements ProveedorClima{
 		return temp;
 	}
 	
-	public List<String> getWeatherConditions() {
+	public List<ECondicionClimatica> getWeatherConditions() {
 		return Arrays.asList(condition);
 	}
 }

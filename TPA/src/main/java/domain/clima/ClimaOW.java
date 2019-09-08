@@ -55,7 +55,7 @@ public class ClimaOW implements ProveedorClima{
 		}
 	}
 
-	public List<String> getWeatherConditions() {
+	public List<ECondicionClimatica> getWeatherConditions() {
 		String ResultadoJson = this.getTempResponse().getEntity(String.class);
 		JSONObject json;
 
@@ -68,11 +68,11 @@ public class ClimaOW implements ProveedorClima{
 		}
 	}
 	
-	private List<String> getConditionsFromArray(JSONArray jsonConditions) throws JSONException {
-		List<String> conditions = new ArrayList<String>();
+	private List<ECondicionClimatica> getConditionsFromArray(JSONArray jsonConditions) throws JSONException {
+		List<ECondicionClimatica> conditions = new ArrayList<ECondicionClimatica>();
 		for(int i = 0; i < jsonConditions.length(); i++) {
-			String c = jsonConditions.getJSONObject(i).getString("main");	//TODO verificar i
-			conditions.add(c);
+			String c = jsonConditions.getJSONObject(i).getString("main");
+			conditions.add(ECondicionClimatica.getCondicionClimatica(c));
 		}
 		return conditions;
 	}

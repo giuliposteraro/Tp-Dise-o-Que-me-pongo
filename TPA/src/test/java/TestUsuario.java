@@ -3,6 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 import domain.Config;
 import domain.clima.ClimaMock;
+import domain.clima.ECondicionClimatica;
 import domain.color.EColor;
 import domain.guardarropa.Guardarropa;
 import domain.guardarropa.GuardarropaIlimitado;
@@ -68,7 +69,7 @@ public class TestUsuario {
 		usuario2 = new Usuario(new UsuarioGratuito());
 		guardarropa = usuario.crearGuardarropa();
 		guardarropa2 = usuario.crearGuardarropa();
-		Config.instance().setProveedor(new ClimaMock(20.0, "Clear"));
+		Config.instance().setProveedor(new ClimaMock(20.0, ECondicionClimatica.CLEAR));
 	}
 	
 	@Test

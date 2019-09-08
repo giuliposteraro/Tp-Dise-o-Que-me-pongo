@@ -5,6 +5,6 @@ import java.util.List;
 public interface ProveedorClima {
 
 	public Double getTemp();
-	public List<String> getWeatherConditions();
+	public List<ECondicionClimatica> getWeatherConditions();
 	
 }

@@ -9,9 +9,10 @@ import org.junit.runners.Parameterized.Parameter;
 
 import domain.Config;
 import domain.clima.ClimaMock;
+import domain.clima.ECondicionClimatica;
 import domain.clima.TareaAlertasMeteorologicas;
 import domain.eventos.Evento;
-import domain.eventos.Frecuencia;
+import domain.eventos.EFrecuencia;
 import domain.guardarropa.Guardarropa;
 import domain.notificaciones.NotificadorMock;
 import domain.usuario.Usuario;
@@ -30,7 +31,7 @@ public class TestNotificaciones {
 		notificador = new NotificadorMock();
 		usuario.agregarNotificador(notificador);
 		Guardarropa guardarropa = usuario.crearGuardarropa();
-		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "Evento Random", Frecuencia.UNICA);
+		evento = new Evento(usuario, guardarropa, LocalDate.now(), "", "Evento Random", EFrecuencia.UNICA);
 	}
 	
 	@Test
@@ -47,14 +48,14 @@ public class TestNotificaciones {
 	
 	@Test
 	public void testNotificacionAlertaDesdeTareaNegativo() {
-		Config.instance().setProveedor(new ClimaMock(10.0, "Clear"));
+		Config.instance().setProveedor(new ClimaMock(10.0, ECondicionClimatica.CLEAR));
 		new TareaAlertasMeteorologicas().run();
 		assertFalse(notificador.alertaNotificada);
 	}
 	
 	@Test
 	public void testNotificacionAlertaDesdeTareaPositivo() {
-		Config.instance().setProveedor(new ClimaMock(10.0, "Thunderstorm"));
+		Config.instance().setProveedor(new ClimaMock(10.0, ECondicionClimatica.THUNDERSTORM));
 		new TareaAlertasMeteorologicas().run();
 		assertTrue(notificador.alertaNotificada);
 	}
