@@ -51,7 +51,7 @@ public class Evento {
 	
 	public void recalcularFecha() {
 		this.pendiente = false;
-		if(!frecuencia.equals(Frecuencia.UNICA)) {
+		if(!frecuencia.equals(EFrecuencia.UNICA)) {
 			frecuencia.actualizarFecha(this);
 		}
 	}
