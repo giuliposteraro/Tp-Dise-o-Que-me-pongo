@@ -2,8 +2,19 @@ package domain.tipoPrenda;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class TipoPrenda {
+	@Id @GeneratedValue
+	private Long id_tipo;
+	@Enumerated(EnumType.STRING)
 	protected ECategoria categoria;
+	
 	protected List<ETela> telasValidas;
 	protected Double nivelAbrigo;
 	

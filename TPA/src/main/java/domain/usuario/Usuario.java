@@ -3,6 +3,12 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import domain.Config;
 import domain.eventos.Evento;
 import domain.eventos.RepositorioEventos;
@@ -15,10 +21,15 @@ import domain.sugerencias.Sugeridor;
 import domain.eventos.EFrecuencia;
 import exceptions.*;
 
+@Entity
 public class Usuario {
 	
+	@Id @GeneratedValue
+	private Long id_usuario;
 	private TipoUsuario tipo;
+	@OneToMany @JoinColumn(name="id_usuario")
 	private Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
+	
 	private List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
 	private List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();
 	private List<INotificador> notificadores = new ArrayList<INotificador>();
