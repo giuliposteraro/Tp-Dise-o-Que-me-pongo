@@ -75,7 +75,7 @@ public class Prenda {
 		return tipo.puedeAbrigarseCon(otraPrenda.getTipo());
 	}
 	
-	public static Prenda SIN_ACCESORIO = new Prenda(RepoTipos.SIN_ACCESORIO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO), null);
-	public static Prenda SIN_ABRIGO = new Prenda(RepoTipos.SIN_ABRIGO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO), null);
+	public static PrendaVacia SIN_ACCESORIO = new PrendaVacia(RepoTipos.SIN_ACCESORIO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO), null);
+	public static PrendaVacia SIN_ABRIGO = new PrendaVacia(RepoTipos.SIN_ABRIGO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO), null);
 }
 

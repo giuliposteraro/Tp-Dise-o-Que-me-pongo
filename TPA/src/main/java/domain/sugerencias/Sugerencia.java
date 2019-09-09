@@ -14,7 +14,7 @@ public class Sugerencia {
 	private EstadoSugerencia estado;
 	private Evento evento;
 	private List<Integer> calificaciones;
-	
+
 	public Sugerencia(Atuendo atuendo, Evento evento) {
 		this.atuendo = atuendo;
 		this.evento = evento;
@@ -24,39 +24,39 @@ public class Sugerencia {
 	public void setEstado(EstadoSugerencia estado) {
 		this.estado = estado;
 	}
-	
-	public Double coeficienteDeAbrigo(Double temp) {
-		List<Double> toleranciasAlFrio = evento.getUsuario().getToleranciasAlFrio();		
+
+	public Double coeficienteDeAbrigo(Double temp) { // TODO corregir todo
+		List<Double> toleranciasAlFrio = evento.getUsuario().getToleranciasAlFrio();
 		List<Double> nivelesAbrigo = this.getNivelesAbrigo();
-		Double coeficiente = Streams.zip(toleranciasAlFrio.stream(), nivelesAbrigo.stream(),(t,a)->
-		this.operarGauss(t, a, temp)).mapToDouble().sum();
-		return coeficiente; 
+		Double coeficiente = Streams
+				.zip(toleranciasAlFrio.stream(), nivelesAbrigo.stream(), (t, a) -> this.operarGauss(t, a, temp))
+				.mapToDouble(num -> num).sum();
+		return coeficiente;
 	}
-	
-	private Double operarGauss(Double t, Double a,Double temp) {
+
+	private Double operarGauss(Double t, Double a, Double temp) {
 		return new CampanaDeGauss().coeficienteDeAbrigo(a, temp, t);
 	}
-	
+
 	public List<Double> getNivelesAbrigo() {
 		return atuendo.getNivelesAbrigo();
 	}
-	
+
 	public Atuendo getAtuendo() {
 		return atuendo;
 	}
 
 	public EstadoSugerencia getEstado() {
 		return estado;
-  }
-  
+	}
+
 	public void ponerPrendasEnUso() {
 		atuendo.ponerPrendasEnUso();
-  }
-  
+	}
+
 	public List<Integer> getCalificaciones() {
 		return calificaciones;
 	}
-	
 
 	public Evento getEvento() {
 		return evento;
@@ -65,6 +65,5 @@ public class Sugerencia {
 	public void setCalificaciones(List<Integer> califs) {
 		calificaciones = califs;
 	}
-    
 
 }

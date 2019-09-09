@@ -1,7 +1,6 @@
 package domain.usuario;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import domain.Config;
