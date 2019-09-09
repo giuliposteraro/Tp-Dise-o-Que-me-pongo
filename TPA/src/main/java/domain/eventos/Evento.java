@@ -49,10 +49,11 @@ public class Evento {
 		this.recalcularFecha();
 	}	
 	
-	public void recalcularFecha() {   //TODO crear distintos eventos en vez de cambiar fecha
-		frecuencia.actualizarFecha(this); //TODO encapsulamiento fecha
-		if(frecuencia.equals(EFrecuencia.UNICA))
-			this.pendiente = false;
+	public void recalcularFecha() {
+		this.pendiente = false;
+		if(!frecuencia.equals(Frecuencia.UNICA)) {
+			frecuencia.actualizarFecha(this);
+		}
 	}
 	
 	public Guardarropa getGuardarropa() {
@@ -79,11 +80,11 @@ public class Evento {
 		pendiente = pend;
 	}
 	
-	public LocalDate fecha() {
+	public LocalDate getFecha() {
 		return this.fecha;
 	}
 	
-	public void fecha(LocalDate fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 	
@@ -99,6 +100,10 @@ public class Evento {
 		return lugar;
 	}
 	
+	public Evento eventoActualizado(LocalDate nuevaFecha) {
+		return new Evento(this.usuario, this.guardarropa, nuevaFecha, this.lugar, this.motivo, this.frecuencia); 
+	}
+
 	public Boolean getTieneSugerencias() {
 		return !sugerencias.isEmpty();
 	}
@@ -112,5 +117,5 @@ public class Evento {
 	public void setSugerencias(Set<Sugerencia> sugerencias) {
 		this.sugerencias = sugerencias;
 	}
-	
+
 }
