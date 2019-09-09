@@ -11,10 +11,14 @@ import java.util.stream.Collectors;
 import org.uqbar.commons.model.annotations.Observable;
 
 import domain.Config;
+import domain.color.EColor;
 import domain.eventos.Evento;
 import domain.eventos.Frecuencia;
 import domain.guardarropa.Guardarropa;
 import domain.guardarropa.GuardarropaIlimitado;
+import domain.prenda.ConstructorPrenda;
+import domain.tipoPrenda.ETela;
+import domain.tipoPrenda.RepoTipos;
 import domain.usuario.Usuario;
 import domain.usuario.UsuarioPremium;
 import exceptions.FechasInvalidas;
@@ -36,18 +40,26 @@ public class ListadoEventosViewModel {
 	public ListadoEventosViewModel() {
 		Usuario usuario = this.nuevoUsuario();
 		Guardarropa guardarropa = usuario.crearGuardarropa();
+		this.generarPrendas(guardarropa);
 		dias = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31);
 		meses = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12);
 		anios = Arrays.asList(2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030);
+		diaDesde = 1;
+		mesDesde = 1;
+		anioDesde = 2010;
+		diaHasta = 31;
+		mesHasta = 12;
+		anioHasta = 2030;
 		
-		Evento unEvento1 = new Evento(usuario, guardarropa, LocalDate.now(), "", "A", Frecuencia.UNICA);
-		Evento unEvento2 = new Evento(usuario, guardarropa, LocalDate.now(), "", "B", Frecuencia.UNICA);
-		Evento unEvento3 = new Evento(usuario, guardarropa, LocalDate.now(), "", "C", Frecuencia.UNICA);
+		Evento unEvento1 = new Evento(usuario, guardarropa, LocalDate.now(), "", "Fiesta DDS", Frecuencia.UNICA);
+		Evento unEvento2 = new Evento(usuario, guardarropa, LocalDate.now(), "", "After DDS", Frecuencia.UNICA);
+		Evento unEvento3 = new Evento(usuario, guardarropa, LocalDate.now(), "", "Previa DDS", Frecuencia.UNICA);
+		unEvento1.sugerir();
 		Config.instance().getRepositorioEventos().agregarEvento(unEvento1);
 		Config.instance().getRepositorioEventos().agregarEvento(unEvento2);
 		Config.instance().getRepositorioEventos().agregarEvento(unEvento3);
 	}
-	
+
 	public Usuario nuevoUsuario() {
 		return new Usuario(new UsuarioPremium());
 	}
@@ -143,16 +155,32 @@ public class ListadoEventosViewModel {
 		this.anioHasta = anioHasta;
 	}
 	
-	public Set<Evento> buscarEventos(){
+	public void buscarEventos(){
 		LocalDate fechaDesde = LocalDate.of(anioDesde, mesDesde, diaDesde);
 		LocalDate fechaHasta = LocalDate.of(anioHasta, mesHasta, diaHasta);
 		if(fechaDesde.isAfter(fechaHasta)) {
 			throw new FechasInvalidas("La fecha desde no puede ser mayor a la fecha hasta");
 		}
-		return this.getEventos().stream().filter(evento -> evento.entre(fechaDesde,fechaHasta)).collect(Collectors.toSet());
+		eventos = Config.instance().getRepositorioEventos().eventos().stream().filter(evento -> evento.entre(fechaDesde,fechaHasta)).collect(Collectors.toSet());
 	}
 	
-	
 
+	private void generarPrendas(Guardarropa guardarropa) {
+		ConstructorPrenda c = new ConstructorPrenda();
+		
+		c.setTipo(RepoTipos.REMERA);
+		c.setTela(ETela.ALGODON);
+		c.setColor(EColor.NEGRO, EColor.AZUL);
+		guardarropa.agregarPrenda(c.crear());
+		c.setTipo(RepoTipos.PANTALON);
+		c.setTela(ETela.JEAN);
+		c.setColor(EColor.AZUL, EColor.NINGUNO);
+		guardarropa.agregarPrenda(c.crear());
+		c.setTipo(RepoTipos.ZAPATILLAS);
+		c.setTela(ETela.TELA);
+		c.setColor(EColor.BLANCO, EColor.NEGRO);
+		guardarropa.agregarPrenda(c.crear());
+		
+	}
 	
 }
