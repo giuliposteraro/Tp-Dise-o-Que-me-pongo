@@ -1,6 +1,7 @@
 package domain.usuario;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import domain.Config;
@@ -46,11 +47,17 @@ public class Usuario {
 		return(guardarropa);
 	}
 	
-	public Double getToleranciaAlFrio() {
-		try{ //TODO Nivel de abrigo por categoria de prenda
-			return this.sugerenciasAprobadas().stream().mapToDouble(s -> s.getCalificacion()).sum() / this.sugerenciasAprobadas().size();
-		}catch(Exception e){ //TODO Excepcion dividir por 0
-			return 0.0;
+	public List<Double> getToleranciasAlFrio() {
+		try{
+			return this.sugerenciasAprobadas().stream()
+					.map(s -> s.getCalificaciones())
+					.reduce((subTotal,element)->vectorialSum(subTotal, element))
+					.orElse(Arrays.asList(0,0,0,0))
+					.stream().mapToDouble(s->s/sugerenciasAprobadas().size())
+					.boxed()
+					.collect(Collectors.toList());
+		}catch(Exception e){
+			return Arrays.asList(0.0,0.0,0.0,0.0);
 		}
 	}
 	
@@ -158,6 +165,10 @@ public class Usuario {
 
 	public List<Sugerencia> getSugerenciasPendientes() {
 		return sugerenciasPendientes;
+	}
+	
+	private List<Integer> vectorialSum(List<Integer> list1, List<Integer> list2){
+		return list1.stream().map(x->x + list2.get(list1.indexOf(x))).collect(Collectors.toList());
 	}
 	
 	public List<Sugerencia> getSugerenciasRevisadas() {

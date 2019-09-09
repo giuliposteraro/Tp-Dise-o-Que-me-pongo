@@ -1,5 +1,9 @@
 package domain.sugerencias;
 
+import java.util.List;
+
+import com.google.common.collect.Streams;
+
 import domain.algoritmoSugeridor.CampanaDeGauss;
 import domain.eventos.Evento;
 import domain.guardarropa.Atuendo;
@@ -9,7 +13,7 @@ public class Sugerencia {
 	private Atuendo atuendo;
 	private EstadoSugerencia estado;
 	private Evento evento;
-	private int calificacion;
+	private List<Integer> calificaciones;
 	
 	public Sugerencia(Atuendo atuendo, Evento evento) {
 		this.atuendo = atuendo;
@@ -22,12 +26,19 @@ public class Sugerencia {
 	}
 	
 	public Double coeficienteDeAbrigo(Double temp) {
-		Double toleranciaAlFrio = evento.getUsuario().getToleranciaAlFrio();		
-		return new CampanaDeGauss().coeficienteDeAbrigo(this.getNivelAbrigo(), temp, toleranciaAlFrio);
+		List<Double> toleranciasAlFrio = evento.getUsuario().getToleranciasAlFrio();		
+		List<Double> nivelesAbrigo = this.getNivelesAbrigo();
+		Double coeficiente = Streams.zip(toleranciasAlFrio.stream(), nivelesAbrigo.stream(),(t,a)->
+		this.operarGauss(t, a, temp)).mapToDouble().sum();
+		return coeficiente; 
 	}
-
-	public Double getNivelAbrigo() {
-		return atuendo.getNivelAbrigo();
+	
+	private Double operarGauss(Double t, Double a,Double temp) {
+		return new CampanaDeGauss().coeficienteDeAbrigo(a, temp, t);
+	}
+	
+	public List<Double> getNivelesAbrigo() {
+		return atuendo.getNivelesAbrigo();
 	}
 	
 	public Atuendo getAtuendo() {
@@ -42,8 +53,8 @@ public class Sugerencia {
 		atuendo.ponerPrendasEnUso();
   }
   
-	public int getCalificacion() {
-		return calificacion;
+	public List<Integer> getCalificaciones() {
+		return calificaciones;
 	}
 	
 
@@ -51,8 +62,8 @@ public class Sugerencia {
 		return evento;
 	}
 
-	public void setCalificacion(int cal) {
-		calificacion = cal;
+	public void setCalificaciones(List<Integer> califs) {
+		calificaciones = califs;
 	}
     
 

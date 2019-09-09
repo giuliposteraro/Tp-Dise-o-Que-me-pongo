@@ -33,8 +33,8 @@ public class Atuendo {
 		return Arrays.asList(superior, abrigo, inferior, calzado, accesorio);
 	}
 
-	public Double getNivelAbrigo() {
-		return abrigo.getNivelAbrigo() + superior.getNivelAbrigo() + inferior.getNivelAbrigo() + calzado.getNivelAbrigo() + accesorio.getNivelAbrigo();
+	public List<Double> getNivelesAbrigo() {
+		return Arrays.asList(abrigo.getNivelAbrigo() + superior.getNivelAbrigo(),inferior.getNivelAbrigo(),calzado.getNivelAbrigo(), accesorio.getNivelAbrigo());
 	}
 
 	public void ponerPrendasEnUso() {

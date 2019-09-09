@@ -77,8 +77,7 @@ public class Sugeridor {
 		return res;
 	}
 
-	private void validarPrendasSuficientes(Set<Prenda> abr, Set<Prenda> sup, Set<Prenda> inf, Set<Prenda> cal,
-			Set<Prenda> acc) {
+	private void validarPrendasSuficientes(Set<Prenda> abr, Set<Prenda> sup, Set<Prenda> inf, Set<Prenda> cal,Set<Prenda> acc) {
 		if (abr.isEmpty() || sup.isEmpty() || inf.isEmpty() || cal.isEmpty() || acc.isEmpty())
 			throw new NoSePuedeGenerarSugerencia("No se pueden generar sugerencias en este guardarropa");
 	}
