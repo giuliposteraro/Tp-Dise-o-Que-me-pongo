@@ -24,12 +24,12 @@ public class Sugeridor {
 
 	public void generarSugerencias() {
 		Double temp = provClima.getTemp();
-		Set<Prenda> abr = evento.getGuardarropa().prendasSuperioresDeAbrigo();
-		Set<Prenda> sup = evento.getGuardarropa().prendasSuperiores();
-		Set<Prenda> inf = evento.getGuardarropa().prendasInferiores();
-		Set<Prenda> cal = evento.getGuardarropa().calzados();
-		Set<Prenda> acc = evento.getGuardarropa().accesorios();
-
+		Set<Prenda> abr = this.soloPrendasSinUsar(evento.getGuardarropa().prendasSuperioresDeAbrigo());
+		Set<Prenda> sup = this.soloPrendasSinUsar(evento.getGuardarropa().prendasSuperiores());
+		Set<Prenda> inf = this.soloPrendasSinUsar(evento.getGuardarropa().prendasInferiores());
+		Set<Prenda> cal = this.soloPrendasSinUsar(evento.getGuardarropa().calzados());
+		Set<Prenda> acc = this.soloPrendasSinUsar(evento.getGuardarropa().accesorios());
+		
 		List<Sugerencia> sugerencias = obtenerSugerencias(abr, sup, inf, cal, acc);
 
 		sugerencias.sort((a, b) -> a.coeficienteDeAbrigo(temp).compareTo(b.coeficienteDeAbrigo(temp)));
@@ -81,5 +81,9 @@ public class Sugeridor {
 			Set<Prenda> acc) {
 		if (abr.isEmpty() || sup.isEmpty() || inf.isEmpty() || cal.isEmpty() || acc.isEmpty())
 			throw new NoSePuedeGenerarSugerencia("No se pueden generar sugerencias en este guardarropa");
+	}
+	
+	private Set<Prenda> soloPrendasSinUsar(Set<Prenda> prendas) {
+		return prendas.stream().filter(p -> !p.getEnUso()).collect(Collectors.toSet()); 
 	}
 }

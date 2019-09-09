@@ -79,7 +79,6 @@ public class Guardarropa {
 	
 	private Set<Prenda> filtrarPrendasPorCategoria(ECategoria categoria) {
 		return prendas.stream()
-				.filter(p -> !p.getEnUso())		//TODO mover a sugeridor
 				.filter(p -> categoria.equals(p.getCategoria()))
 				.collect(Collectors.toSet());
 	}
