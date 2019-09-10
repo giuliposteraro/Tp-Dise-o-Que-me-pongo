@@ -1,15 +1,10 @@
 package domain.eventos;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.*;
-import java.util.stream.Collectors;
 
-import org.uqbar.arena.bindings.DateTransformer;
+import java.time.LocalDate;
 import org.uqbar.commons.model.annotations.Observable;
 import java.util.HashSet;
 import java.util.Set;
 import java.time.temporal.ChronoUnit;
-
 import domain.usuario.*;
 import domain.Config;
 import domain.guardarropa.Guardarropa;
@@ -26,6 +21,7 @@ public class Evento {
 	private Set<Sugerencia> sugerencias;
 	private EFrecuencia frecuencia;
 	private Boolean pendiente;
+	private Evento proximoEvento;
 		
 	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unMotivo, EFrecuencia unaFrecuencia) {
 		this.usuario = unUsuario;
@@ -52,7 +48,7 @@ public class Evento {
 	public void recalcularFecha() {
 		this.pendiente = false;
 		if(!frecuencia.equals(EFrecuencia.UNICA)) {
-			frecuencia.actualizarFecha(this);
+			proximoEvento = frecuencia.crearProximoEvento(this);
 		}
 	}
 	
@@ -116,6 +112,10 @@ public class Evento {
 
 	public void setSugerencias(Set<Sugerencia> sugerencias) {
 		this.sugerencias = sugerencias;
+	}
+
+	public Evento getProximoEvento() {
+		return proximoEvento;
 	}
 
 }

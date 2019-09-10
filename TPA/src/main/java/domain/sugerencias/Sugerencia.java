@@ -13,7 +13,7 @@ public class Sugerencia {
 	private Atuendo atuendo;
 	private EstadoSugerencia estado;
 	private Evento evento;
-	private List<Integer> calificaciones;
+	private Calificacion calificacion;
 
 	public Sugerencia(Atuendo atuendo, Evento evento) {
 		this.atuendo = atuendo;
@@ -30,7 +30,7 @@ public class Sugerencia {
 		List<Double> nivelesAbrigo = this.getNivelesAbrigo();
 		Double coeficiente = Streams
 				.zip(toleranciasAlFrio.stream(), nivelesAbrigo.stream(), (t, a) -> this.operarGauss(t, a, temp))
-				.mapToDouble(num -> num).sum();
+				.mapToDouble(d -> Double.valueOf(d)).sum();
 		return coeficiente;
 	}
 
@@ -54,16 +54,16 @@ public class Sugerencia {
 		atuendo.ponerPrendasEnUso();
 	}
 
-	public List<Integer> getCalificaciones() {
-		return calificaciones;
+	public Calificacion getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(Calificacion calificacion) {
+		this.calificacion = calificacion;
 	}
 
 	public Evento getEvento() {
 		return evento;
-	}
-
-	public void setCalificaciones(List<Integer> califs) {
-		calificaciones = califs;
 	}
 
 }

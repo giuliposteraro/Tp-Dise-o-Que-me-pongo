@@ -13,14 +13,14 @@ import domain.tipoPrenda.RepoTipos;
 //No instanciar directamente, usar ConstructorPrenda
 
 public class Prenda {
-	
+
 	private TipoPrenda tipo;
 	private Color color;
 	private ETela tela;
 	private BufferedImage imagen;
-	private Boolean enUso; //TODO cuando termina un evento poner en false.
+	private Boolean enUso; // TODO cuando termina un evento poner en false.
 	private Optional<Prenda> prendaAbajo = Optional.empty();
-	
+
 	public Prenda(TipoPrenda tipo, ETela tela, Color color, BufferedImage imagen) {
 		this.tipo = tipo;
 		this.tela = tela;
@@ -28,7 +28,7 @@ public class Prenda {
 		this.imagen = imagen;
 		this.enUso = false;
 	}
-	
+
 	public Boolean getEnUso() {
 		return enUso;
 	}
@@ -49,11 +49,11 @@ public class Prenda {
 	public ETela getTela() {
 		return tela;
 	}
-	
+
 	public BufferedImage getImagen() {
 		return imagen;
 	}
-	
+
 	public ECategoria getCategoria() {
 		return tipo.getCategoria();
 	}
@@ -61,21 +61,38 @@ public class Prenda {
 	public Double getNivelAbrigo() {
 		return tipo.getNivelAbrigo() + this.prendaAbajo.map(prenda -> prenda.getNivelAbrigo()).orElse(0.0);
 	}
-	
+
 	public Prenda ponerSobre(Prenda otraPrenda) {
 		Prenda resultadoPrenda = new Prenda(tipo, tela, color, imagen);
-		if(otraPrenda.puededeAbrigarseCon(resultadoPrenda)) {
+		if (otraPrenda.puededeAbrigarseCon(resultadoPrenda)) {
 			resultadoPrenda.prendaAbajo = Optional.of(otraPrenda);
 			return resultadoPrenda;
 		}
 		return null;
 	}
-	
+
 	protected boolean puededeAbrigarseCon(Prenda otraPrenda) {
 		return tipo.puedeAbrigarseCon(otraPrenda.getTipo());
 	}
 	
-	public static PrendaVacia SIN_ACCESORIO = new PrendaVacia(RepoTipos.SIN_ACCESORIO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO), null);
-	public static PrendaVacia SIN_ABRIGO = new PrendaVacia(RepoTipos.SIN_ABRIGO, ETela.NINGUNA, new Color(EColor.NINGUNO, EColor.NINGUNO), null);
-}
+	public Boolean esSuperior() {
+		return this.tipo.getCategoria().equals(ECategoria.SUPERIOR);
+	}
+	
+	public Boolean esInferior() {
+		return this.tipo.getCategoria().equals(ECategoria.INFERIOR);
+	}
+	
+	public Boolean esCalzado() {
+		return this.tipo.getCategoria().equals(ECategoria.CALZADO);
+	}
+	
+	public Boolean esAccesorio() {
+		return this.tipo.getCategoria().equals(ECategoria.ACCESORIO);
+	}
 
+	public static PrendaVacia SIN_ACCESORIO = new PrendaVacia(RepoTipos.SIN_ACCESORIO, ETela.NINGUNA,
+			new Color(EColor.NINGUNO, EColor.NINGUNO), null);
+	public static PrendaVacia SIN_ABRIGO = new PrendaVacia(RepoTipos.SIN_ABRIGO, ETela.NINGUNA,
+			new Color(EColor.NINGUNO, EColor.NINGUNO), null);
+}

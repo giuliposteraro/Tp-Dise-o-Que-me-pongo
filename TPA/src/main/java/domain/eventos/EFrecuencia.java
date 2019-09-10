@@ -18,9 +18,10 @@ public enum EFrecuencia{
 		this.unidad = unidad;
 	}
 	
-	public void actualizarFecha(Evento evento) {	
+	public Evento crearProximoEvento(Evento evento) {	
 		Evento nuevoEvento = evento.eventoActualizado(evento.getFecha().plus(cantidad, unidad));
 		Config.instance().getRepositorioEventos().agregarEvento(nuevoEvento);
+		return nuevoEvento;
 	}
 
 	

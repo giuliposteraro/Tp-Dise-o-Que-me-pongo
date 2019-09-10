@@ -124,7 +124,7 @@ public class TestEventos {
 		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
 		repo.agregarEvento(event);
 		tareaRevision.run();
-		assertEquals(fecha3.plus(1, ChronoUnit.DAYS), event.getFecha());
+		assertEquals(fecha3.plus(1, ChronoUnit.DAYS), event.getProximoEvento().getFecha());
 	}
 
 	@Test
@@ -133,7 +133,7 @@ public class TestEventos {
 		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.SEMANAL);
 		repo.agregarEvento(event);
 		tareaRevision.run();
-		assertEquals(fecha3.plus(1, ChronoUnit.WEEKS), event.getFecha());
+		assertEquals(fecha3.plus(1, ChronoUnit.WEEKS), event.getProximoEvento().getFecha());
 	}
 
 	@Test
@@ -142,7 +142,7 @@ public class TestEventos {
 		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.MENSUAL);
 		repo.agregarEvento(event);
 		tareaRevision.run();
-		assertEquals(fecha3.plus(1, ChronoUnit.MONTHS), event.getFecha());
+		assertEquals(fecha3.plus(1, ChronoUnit.MONTHS), event.getProximoEvento().getFecha());
 	}
 
 	@Test
@@ -151,7 +151,7 @@ public class TestEventos {
 		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.ANUAL);
 		repo.agregarEvento(event);
 		tareaRevision.run();
-		assertEquals(fecha3.plus(1, ChronoUnit.YEARS), event.getFecha());
+		assertEquals(fecha3.plus(1, ChronoUnit.YEARS), event.getProximoEvento().getFecha());
 	}
 
 	@Test
@@ -160,7 +160,8 @@ public class TestEventos {
 		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
 		repo.agregarEvento(event);
 		tareaRevision.run();
-		assertTrue(event.pendiente());
+		assertTrue(event.getProximoEvento().pendiente());
+		assertTrue(!event.pendiente());
 	}
 
 	@Test

@@ -2,12 +2,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
-
 import domain.clima.ClimaMock;
 import domain.clima.ECondicionClimatica;
 import domain.color.EColor;
@@ -17,6 +14,7 @@ import domain.guardarropa.Atuendo;
 import domain.guardarropa.Guardarropa;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
+import domain.sugerencias.Calificacion;
 import domain.sugerencias.Sugerencia;
 import domain.sugerencias.Sugeridor;
 import domain.tipoPrenda.ETela;
@@ -99,7 +97,8 @@ public class TestSugeridor {
 		Sugerencia sug = new Sugerencia(a, evento);
 		usuario.agregarSugerencia(sug);
 		usuario.aceptarSugerencia(sug);
-		sug.setCalificaciones(Arrays.asList(2, 2, 2, 2));
+		sug.setCalificacion(new Calificacion(2.0, 2.0, 2.0));
+		assertEquals(3, usuario.getToleranciasAlFrio().size());
 		assertEquals(2.0, usuario.getToleranciasAlFrio().get(0), 0.001);
 	}
 
@@ -108,15 +107,5 @@ public class TestSugeridor {
 		s.generarSugerencias();
 
 		assertEquals(8, usuario.getSugerenciasPendientes().size());
-	}
-
-	@Test
-	public void combinarAbrigos() {
-		Set<Prenda> abr = new HashSet<Prenda>();
-		abr.add(buzo);
-		abr.add(campera);
-		abr.add(Prenda.SIN_ABRIGO);
-		Set<Prenda> r = s.obtenerCombinacionesDeAbrigos(abr);
-		assertEquals(4, r.size());
 	}
 }
