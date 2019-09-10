@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.persistence.OneToMany;
 import domain.prenda.Prenda;
 import domain.tipoPrenda.ECategoria;
 import exceptions.*;
+import persistency.converters.TipoGuardarropaConverter;
 
 @Entity
 public class Guardarropa {
@@ -20,6 +22,7 @@ public class Guardarropa {
 	private Long id_guardarropa;
 	@OneToMany @JoinColumn(name = "id_guardarropa")
 	private Set<Prenda> prendas;
+	@Convert(converter = TipoGuardarropaConverter.class)
 	private TipoGuardarropa tipoGuardarropa;
 
 	public Guardarropa(TipoGuardarropa tipo) {

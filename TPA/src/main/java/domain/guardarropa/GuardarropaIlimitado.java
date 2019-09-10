@@ -5,4 +5,9 @@ public class GuardarropaIlimitado implements TipoGuardarropa {
 	public Boolean tieneLugar(Guardarropa guardarropa) {
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "ILIMITADO";
+	}
 }

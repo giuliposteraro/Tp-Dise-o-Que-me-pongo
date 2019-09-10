@@ -1,14 +1,16 @@
 package domain.usuario;
+
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import domain.Config;
 import domain.eventos.Evento;
@@ -21,18 +23,22 @@ import domain.sugerencias.Sugerencia;
 import domain.sugerencias.Sugeridor;
 import domain.eventos.EFrecuencia;
 import exceptions.*;
+import persistency.converters.TipoUsuarioConverter;
 
 @Entity
 public class Usuario {
 	
 	@Id @GeneratedValue
 	private Long id_usuario;
+	@Convert(converter = TipoUsuarioConverter.class)
 	private TipoUsuario tipo;
 	@ManyToMany
 	private Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
-	// TODO falta definir la anotacion 
+	@OneToMany
 	private List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
+	@OneToMany
 	private List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();
+	@Transient
 	private List<INotificador> notificadores = new ArrayList<INotificador>();
 	
 	
