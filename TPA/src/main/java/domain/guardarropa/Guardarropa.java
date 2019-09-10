@@ -4,12 +4,21 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import domain.prenda.Prenda;
 import domain.tipoPrenda.ECategoria;
 import exceptions.*;
 
+@Entity
 public class Guardarropa {
-
+	@Id @GeneratedValue
+	private Long id_guardarropa;
+	@OneToMany @JoinColumn(name = "id_guardarropa")
 	private Set<Prenda> prendas;
 	private TipoGuardarropa tipoGuardarropa;
 

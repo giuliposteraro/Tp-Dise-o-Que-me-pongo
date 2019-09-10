@@ -3,6 +3,15 @@ package domain.prenda;
 import java.awt.image.BufferedImage;
 import java.util.Optional;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import domain.color.Color;
 import domain.color.EColor;
 import domain.tipoPrenda.ECategoria;
@@ -12,13 +21,19 @@ import domain.tipoPrenda.RepoTipos;
 
 //No instanciar directamente, usar ConstructorPrenda
 
+@Entity
 public class Prenda {
-	
+	@Id @GeneratedValue
+	private Long id_prenda;
+	@ManyToOne
 	private TipoPrenda tipo;
+	@ManyToOne 
 	private Color color;
+	@Enumerated(EnumType.STRING)
 	private ETela tela;
 	private BufferedImage imagen;
 	private Boolean enUso; //TODO cuando termina un evento poner en false.
+	@OneToMany @JoinColumn(name = "id_prendaAbajo")
 	private Optional<Prenda> prendaAbajo = Optional.empty();
 	
 	public Prenda(TipoPrenda tipo, ETela tela, Color color, BufferedImage imagen) {

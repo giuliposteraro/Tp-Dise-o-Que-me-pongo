@@ -1,13 +1,25 @@
 package domain.sugerencias;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import domain.algoritmoSugeridor.CampanaDeGauss;
 import domain.eventos.Evento;
 import domain.guardarropa.Atuendo;
 
+@Entity
 public class Sugerencia {
-
+	@Id @GeneratedValue
+	private Long id_sugerencia;
+	@ManyToOne
 	private Atuendo atuendo;
+	@Enumerated(EnumType.STRING)
 	private EstadoSugerencia estado;
+	@ManyToOne
 	private Evento evento;
 	private int calificacion;
 	

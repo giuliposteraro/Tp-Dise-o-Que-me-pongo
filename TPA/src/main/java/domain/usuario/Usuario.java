@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import domain.Config;
@@ -27,9 +28,9 @@ public class Usuario {
 	@Id @GeneratedValue
 	private Long id_usuario;
 	private TipoUsuario tipo;
-	@OneToMany @JoinColumn(name="id_usuario")
+	@ManyToMany
 	private Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
-	
+	// TODO falta definir la anotacion 
 	private List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
 	private List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();
 	private List<INotificador> notificadores = new ArrayList<INotificador>();
