@@ -16,10 +16,6 @@ public class Guardarropa {
 	public Guardarropa(TipoGuardarropa tipo) {
 		this.prendas = new HashSet<Prenda>();
 		this.tipoGuardarropa = tipo;
-
-//		Prendas Opcionales
-//		agregarPrenda(Prenda.SIN_ABRIGO);
-//		agregarPrenda(Prenda.SIN_ACCESORIO);
 	}
 	
 	public TipoGuardarropa getTipoGuardarropa() {

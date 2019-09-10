@@ -4,14 +4,11 @@ import java.awt.image.BufferedImage;
 import java.util.Optional;
 
 import domain.color.Color;
-import domain.color.EColor;
 import domain.tipoPrenda.ECategoria;
 import domain.tipoPrenda.ETela;
 import domain.tipoPrenda.TipoPrenda;
-import domain.tipoPrenda.RepoTipos;
 
 //No instanciar directamente, usar ConstructorPrenda
-
 public class Prenda {
 
 	private TipoPrenda tipo;
@@ -74,25 +71,24 @@ public class Prenda {
 	protected boolean puededeAbrigarseCon(Prenda otraPrenda) {
 		return tipo.puedeAbrigarseCon(otraPrenda.getTipo());
 	}
-	
+
 	public Boolean esSuperior() {
 		return this.tipo.getCategoria().equals(ECategoria.SUPERIOR);
 	}
-	
+
 	public Boolean esInferior() {
 		return this.tipo.getCategoria().equals(ECategoria.INFERIOR);
 	}
-	
+
 	public Boolean esCalzado() {
 		return this.tipo.getCategoria().equals(ECategoria.CALZADO);
 	}
-	
+
 	public Boolean esAccesorio() {
 		return this.tipo.getCategoria().equals(ECategoria.ACCESORIO);
 	}
 
-	public static PrendaVacia SIN_ACCESORIO = new PrendaVacia(RepoTipos.SIN_ACCESORIO, ETela.NINGUNA,
-			new Color(EColor.NINGUNO, EColor.NINGUNO), null);
-	public static PrendaVacia SIN_ABRIGO = new PrendaVacia(RepoTipos.SIN_ABRIGO, ETela.NINGUNA,
-			new Color(EColor.NINGUNO, EColor.NINGUNO), null);
+	public Boolean esAbrigo() {
+		return this.tipo.getCategoria().equals(ECategoria.ABRIGO);
+	}
 }

@@ -2,14 +2,10 @@ package scenes.ListadoEventos;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import org.uqbar.commons.model.annotations.Observable;
-
 import domain.Config;
 import domain.color.EColor;
 import domain.eventos.Evento;

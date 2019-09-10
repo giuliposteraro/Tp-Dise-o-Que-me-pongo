@@ -40,7 +40,8 @@ public class Atuendo {
 	}
 
 	public static Boolean esAtuendoValido(Set<Prenda> prendas) {
-		return tieneUnSuperior(prendas) && tieneUnInferior(prendas) && tieneUnCalzado(prendas);
+		return tieneUnSuperior(prendas) && tieneUnInferior(prendas) && tieneUnCalzado(prendas)
+				&& cantidadDeAbrigos(prendas) <= 3;
 	}
 
 	private static Boolean tieneUnSuperior(Set<Prenda> prendas) {
@@ -53,6 +54,10 @@ public class Atuendo {
 
 	private static Boolean tieneUnCalzado(Set<Prenda> prendas) {
 		return prendas.stream().filter(p -> p.esCalzado()).count() == 1;
+	}
+
+	private static Integer cantidadDeAbrigos(Set<Prenda> prendas) {
+		return (int) prendas.stream().filter(p -> p.esAbrigo()).count();
 	}
 
 }

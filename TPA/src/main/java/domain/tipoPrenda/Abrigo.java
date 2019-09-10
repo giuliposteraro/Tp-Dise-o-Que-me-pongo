@@ -17,9 +17,4 @@ public class Abrigo extends Superior {
 		this.nivelAbrigo = nivelAbrigo;
 		this.capa = capa;
 	}
-	
-	@Override
-	public boolean puedeAbrigarseCon(TipoPrenda otroTipo) {
-		return this.capa < otroTipo.getCapa();
-	}
 }
