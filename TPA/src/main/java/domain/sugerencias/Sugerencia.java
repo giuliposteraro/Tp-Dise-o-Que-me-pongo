@@ -8,7 +8,7 @@ import domain.algoritmoSugeridor.CampanaDeGauss;
 import domain.eventos.Evento;
 import domain.guardarropa.Atuendo;
 
-public class Sugerencia {
+public class Sugerencia{
 
 	private Atuendo atuendo;
 	private EstadoSugerencia estado;
@@ -51,7 +51,7 @@ public class Sugerencia {
 	}
 
 	public void ponerPrendasEnUso() {
-		atuendo.ponerPrendasEnUso();
+		atuendo.setPrendasEnUso(true);
 	}
 
 	public Calificacion getCalificacion() {

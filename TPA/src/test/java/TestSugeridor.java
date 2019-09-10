@@ -1,7 +1,12 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
@@ -92,8 +97,14 @@ public class TestSugeridor {
 
 	}
 
+	@Test
+	public void generarSugerenciasParaEstaConfiguracionGenera8Sugerencias() {
+		s.generarSugerencias();
+		assertEquals(8, usuario.getSugerenciasPendientes().size());
+	}
+
 	@Test // TODO Testear que cambie el atuendo sugerido segun la tolerancia al frio
-	public void calificandoUnaSugerenciaVariaLaToleranciaAlFrio() { // TODO Otro test (Calificaciones)
+	public void calificandoUnaSugerenciaVariaLaToleranciaAlFrio() {
 		Sugerencia sug = new Sugerencia(a, evento);
 		usuario.agregarSugerencia(sug);
 		usuario.aceptarSugerencia(sug);
@@ -103,9 +114,29 @@ public class TestSugeridor {
 	}
 
 	@Test
-	public void generarSugerenciasParaEstaConfiguracionGenera8Sugerencias() {
+	public void conVeinteGradosYsinCAlificacionesElAtuendoSugeridoNoTieneAbrigos() {
 		s.generarSugerencias();
-
-		assertEquals(8, usuario.getSugerenciasPendientes().size());
+		Sugerencia sugerencia1 = usuario.getSugerenciasPendientes().stream()
+		.max(Comparator.comparingDouble(s -> s.coeficienteDeAbrigo(20.0))).orElse(null);
+		
+		assertTrue(Atuendo.cantidadDeAbrigos(sugerencia1.getAtuendo().getPrendas())==0);
 	}
+	
+	@Test
+	public void conVeinteGradosYcalificacionesFriolentasLaSugerenciaTieneAbrigo() {
+		Sugerencia sug = new Sugerencia(a, evento);
+		usuario.agregarSugerencia(sug);
+		usuario.aceptarSugerencia(sug);
+		a.setPrendasEnUso(false);
+		sug.setCalificacion(new Calificacion(-5.0, 0.0, 0.0));
+	
+		s.generarSugerencias();
+		
+		Sugerencia sugerencia1 = usuario.getSugerenciasPendientes().stream()
+		.max(Comparator.comparingDouble(s -> s.coeficienteDeAbrigo(20.0))).orElse(null);
+		
+		assertFalse(Atuendo.cantidadDeAbrigos(sugerencia1.getAtuendo().getPrendas())==0);
+	}
+	
+	
 }

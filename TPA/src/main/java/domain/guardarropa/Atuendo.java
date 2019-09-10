@@ -35,29 +35,29 @@ public class Atuendo {
 				.mapToDouble(d -> Double.valueOf(d)).sum();
 	}
 
-	public void ponerPrendasEnUso() {
-		prendas.stream().forEach(p -> p.setEnUso(true));
+	public void setPrendasEnUso(Boolean uso) {
+		prendas.stream().forEach(p -> p.setEnUso(uso));
 	}
 
 	public static Boolean esAtuendoValido(Set<Prenda> prendas) {
-		return tieneUnSuperior(prendas) && tieneUnInferior(prendas) && tieneUnCalzado(prendas)
+		return cantidadDeSuperiores(prendas)==1 && cantidadDeInferiores(prendas)==1 && cantidadDeCalzado(prendas)==1
 				&& cantidadDeAbrigos(prendas) <= 3;
 	}
-
-	private static Boolean tieneUnSuperior(Set<Prenda> prendas) {
-		return prendas.stream().filter(p -> p.esSuperior()).count() == 1;
-	}
-
-	private static Boolean tieneUnInferior(Set<Prenda> prendas) {
-		return prendas.stream().filter(p -> p.esInferior()).count() == 1;
-	}
-
-	private static Boolean tieneUnCalzado(Set<Prenda> prendas) {
-		return prendas.stream().filter(p -> p.esCalzado()).count() == 1;
-	}
-
-	private static Integer cantidadDeAbrigos(Set<Prenda> prendas) {
+	
+	public static Integer cantidadDeAbrigos(Set<Prenda> prendas) {
 		return (int) prendas.stream().filter(p -> p.esAbrigo()).count();
+	}
+	
+	private static Integer cantidadDeSuperiores(Set<Prenda> prendas) {
+		return (int) prendas.stream().filter(p -> p.esSuperior()).count();
+	}
+
+	private static Integer cantidadDeInferiores(Set<Prenda> prendas) {
+		return (int) prendas.stream().filter(p -> p.esInferior()).count();
+	}
+
+	private static Integer cantidadDeCalzado(Set<Prenda> prendas) {
+		return (int) prendas.stream().filter(p -> p.esCalzado()).count();
 	}
 
 }
