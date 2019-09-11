@@ -1,24 +1,43 @@
 package domain.eventos;
 
 import java.time.LocalDate;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.uqbar.arena.bindings.DateTransformer;
 import org.uqbar.commons.model.annotations.Observable;
 import java.util.HashSet;
 import java.util.Set;
 import java.time.temporal.ChronoUnit;
 import domain.usuario.*;
+import persistency.converters.LocalDateConverter;
 import domain.Config;
 import domain.guardarropa.Guardarropa;
 import domain.sugerencias.*;
 
 @Observable
+@Entity
 public class Evento {
-	
+	@Id @GeneratedValue
+	private Long id_evento;
+	@ManyToOne
 	private Guardarropa guardarropa;
+	@ManyToOne
 	private Usuario usuario;
+	@Convert(converter = LocalDateConverter.class)
 	private LocalDate fecha;
 	private String lugar;
 	private String motivo;
+	@OneToMany @JoinColumn(name="id_evento")
 	private Set<Sugerencia> sugerencias;
+	@Enumerated(EnumType.STRING)
 	private EFrecuencia frecuencia;
 	private Boolean pendiente;
 	private Evento proximoEvento;

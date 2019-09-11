@@ -3,10 +3,14 @@ package domain.usuario;
 import domain.guardarropa.Guardarropa;
 import domain.guardarropa.GuardarropaLimitado;
 
-public class UsuarioGratuito implements TipoUsuario{
-	@Override 
+public class UsuarioGratuito implements TipoUsuario {
+	@Override
 	public Guardarropa crearGuardarropa() {
 		return new Guardarropa(new GuardarropaLimitado());
 	}
-	
+
+	@Override
+	public String toString() {
+		return "GRATUITO";
+	}
 }

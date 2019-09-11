@@ -3,15 +3,28 @@ package domain.sugerencias;
 import java.util.List;
 
 import com.google.common.collect.Streams;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import domain.algoritmoSugeridor.CampanaDeGauss;
 import domain.eventos.Evento;
 import domain.guardarropa.Atuendo;
 
-public class Sugerencia{
 
+@Entity
+public class Sugerencia {
+	@Id @GeneratedValue
+	private Long id_sugerencia;
+	@OneToOne
 	private Atuendo atuendo;
+	@Enumerated(EnumType.STRING)
 	private EstadoSugerencia estado;
+	@ManyToOne
 	private Evento evento;
 	private Calificacion calificacion;
 
