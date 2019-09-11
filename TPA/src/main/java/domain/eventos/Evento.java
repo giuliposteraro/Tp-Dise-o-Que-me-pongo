@@ -99,7 +99,7 @@ public class Evento {
 		pendiente = pend;
 	}
 	
-	public LocalDate getFecha() {
+	public LocalDate fecha() {
 		return this.fecha;
 	}
 	

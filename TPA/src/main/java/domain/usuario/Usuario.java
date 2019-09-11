@@ -35,8 +35,8 @@ public class Usuario {
 	@ManyToMany
 	private Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
 	@OneToMany
-	private List<Sugerencia> sugerenciasPendientes = new ArrayList<Sugerencia>();
-	@OneToMany
+	private List<Sugerencia> sugerencias = new ArrayList<Sugerencia>();
+	@Transient
 	private List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();
 	@Transient
 	private List<INotificador> notificadores = new ArrayList<INotificador>();
@@ -126,7 +126,7 @@ public class Usuario {
 	}
 	
 	public void agregarSugerencia(Sugerencia sugerencia) {
-		sugerenciasPendientes.add(sugerencia);
+		sugerencias.add(sugerencia);
 	}
 	
 	public void crearEvento(Guardarropa guardarropa, LocalDate fecha, String lugar, String motivo) {
@@ -145,11 +145,10 @@ public class Usuario {
 	}
 	
 	private void revisarSugerencia(Sugerencia sugerencia, EstadoSugerencia estado) {
-		if(!sugerenciasPendientes.contains(sugerencia)) {
+		if(!sugerencias.contains(sugerencia)) {
 			throw new NoTieneSugerenciaPendiente("Esta sugerencia no esta pendiente para este usuario");
 		}
 		sugerencia.setEstado(estado);
-		sugerenciasPendientes.remove(sugerencia);
 		sugerenciasRevisadas.add(sugerencia);
 	}
 	
@@ -159,7 +158,6 @@ public class Usuario {
 		}
 		Sugerencia sugerenciaADeshacer = sugerenciasRevisadas.remove(sugerenciasRevisadas.size() - 1);
 		sugerenciaADeshacer.setEstado(EstadoSugerencia.PENDIENTE);
-		sugerenciasPendientes.add(sugerenciaADeshacer);
 	}
 	
 	public void agregarNotificador(INotificador notificador) {
@@ -175,7 +173,7 @@ public class Usuario {
 	}
 
 	public List<Sugerencia> getSugerenciasPendientes() {
-		return sugerenciasPendientes;
+		return sugerencias.stream().filter(s -> s.getEstado().equals(EstadoSugerencia.PENDIENTE)).collect(Collectors.toList());
 	}
 	
 	public List<Sugerencia> getSugerenciasRevisadas() {
@@ -188,21 +186,6 @@ public class Usuario {
 
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
-	}
-	
-	//
-	public Set<Sugerencia>  sugerenciasPara(Evento unEvento) {
-		Set<Sugerencia> mergedSet = new HashSet<Sugerencia>(); 
-		  
-        // add the two sets to be merged 
-        // into the new set 
-        mergedSet.addAll(sugerenciasRevisadas.stream().filter(sugerencia -> sugerencia.getEvento().equals(unEvento)).collect(Collectors.toSet())); 
-        mergedSet.addAll(sugerenciasPendientes.stream().filter(sugerencia -> sugerencia.getEvento().equals(unEvento)).collect(Collectors.toSet()));
-  
-        // returning the merged set 
-        return mergedSet; 
-				
-	
 	}
 	
 }
