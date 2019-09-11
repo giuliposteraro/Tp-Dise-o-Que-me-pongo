@@ -3,6 +3,7 @@ package domain.prenda;
 import java.awt.image.BufferedImage;
 import java.util.Optional;
 
+import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,19 +19,18 @@ import domain.color.EColor;
 import domain.tipoPrenda.ECategoria;
 import domain.tipoPrenda.ETela;
 import domain.tipoPrenda.TipoPrenda;
+import persistency.converters.TipoPrendaConverter;
 import domain.tipoPrenda.RepoTipos;
 
 //No instanciar directamente, usar ConstructorPrenda
 
 @Entity
 public class Prenda {
-	@Id
-	@GeneratedValue
+	@Id @GeneratedValue
 	private Long id_prenda;
-	@ManyToOne
-	private TipoPrenda tipo; // TODO Converter
+	@Convert(converter = TipoPrendaConverter.class)
+	private TipoPrenda tipo;
 	@Embedded
-	@ManyToOne
 	private Color color;
 	@Enumerated(EnumType.STRING)
 	private ETela tela;

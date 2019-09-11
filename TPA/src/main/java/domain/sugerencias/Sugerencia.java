@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import domain.algoritmoSugeridor.CampanaDeGauss;
 import domain.eventos.Evento;
@@ -15,7 +16,7 @@ import domain.guardarropa.Atuendo;
 public class Sugerencia {
 	@Id @GeneratedValue
 	private Long id_sugerencia;
-	@ManyToOne
+	@OneToOne
 	private Atuendo atuendo;
 	@Enumerated(EnumType.STRING)
 	private EstadoSugerencia estado;

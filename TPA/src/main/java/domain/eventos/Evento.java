@@ -13,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.uqbar.arena.bindings.DateTransformer;
 import org.uqbar.commons.model.annotations.Observable;
@@ -23,6 +21,7 @@ import java.util.Set;
 import java.time.temporal.ChronoUnit;
 
 import domain.usuario.*;
+import persistency.converters.LocalDateConverter;
 import domain.Config;
 import domain.guardarropa.Guardarropa;
 import domain.sugerencias.*;
@@ -36,7 +35,7 @@ public class Evento {
 	private Guardarropa guardarropa;
 	@ManyToOne
 	private Usuario usuario;
-	@Temporal(TemporalType.DATE) //no 100% seguro, puede ir convert
+	@Convert(converter = LocalDateConverter.class)
 	private LocalDate fecha;
 	private String lugar;
 	private String motivo;

@@ -8,19 +8,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+
 public class TipoPrenda {
-	@Id @GeneratedValue
-	private Long id_tipo;
-	@Enumerated(EnumType.STRING)
+	
 	protected ECategoria categoria;
 	
 	protected List<ETela> telasValidas;
 	protected Double nivelAbrigo;
+	protected String descripcion;
 	
-	protected TipoPrenda(List<ETela> unasTelas, Double nivelAbrigo) {
+
+	protected TipoPrenda(List<ETela> unasTelas, Double nivelAbrigo, String descripcion) {
 		this.telasValidas = unasTelas;
 		this.nivelAbrigo = nivelAbrigo;
+		this.descripcion = descripcion;
 	}
 	
 	public Boolean esTelaValida(ETela tela) {
@@ -41,5 +42,13 @@ public class TipoPrenda {
 
 	public int getCapa() {
 		return 0;
-	}	
+	}
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 }
