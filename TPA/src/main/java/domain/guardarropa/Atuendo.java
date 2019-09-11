@@ -5,14 +5,25 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 import domain.tipoPrenda.ECategoria;
 
 import domain.prenda.Prenda;
 
+@Entity
 public class Atuendo {
-
+	
+	@Id @GeneratedValue
+	private Long id_atuendo;
+	@ManyToMany
 	private Set<Prenda> prendas;
 
+	
 	public Atuendo(Set<Prenda> prendas) {
 		this.prendas = prendas;
 	}

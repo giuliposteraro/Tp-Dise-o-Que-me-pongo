@@ -8,6 +8,7 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -35,7 +36,7 @@ public class Usuario {
 	private TipoUsuario tipo;
 	@ManyToMany
 	private Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
-	@OneToMany
+	@OneToMany @JoinColumn(name = "id_usuario")
 	private List<Sugerencia> sugerencias = new ArrayList<Sugerencia>();
 	@Transient
 	private List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();

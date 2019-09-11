@@ -5,8 +5,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Calificacion {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class Calificacion {
+	
+	@Id @GeneratedValue
+	private long id_calificacion;
+	
 	private Double superior;
 	private Double inferior;
 	private Double calzado;

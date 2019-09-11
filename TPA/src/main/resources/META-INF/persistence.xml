@@ -8,20 +8,21 @@
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
+	<class>domain.guardarropa.Atuendo</class>
 	<class>domain.eventos.Evento</class>
 	<class>domain.guardarropa.Guardarropa</class>
 	<class>domain.usuario.Usuario</class>
 	<class>domain.prenda.Prenda</class>
-	<class>domain.guardarropa.Atuendo</class>
+	<class>domain.sugerencias.Calificacion</class>
 	<class>domain.sugerencias.Sugerencia</class>
     	 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
         
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/TPA-QMP" /> 
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/tpa-qmp?serverTimezone=UTC" /> 
             <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value=""/> 
+            <property name="hibernate.connection.password" value="root"/> 
 
             <!--property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 
             <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-db" /> 

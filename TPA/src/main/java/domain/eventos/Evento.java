@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.uqbar.arena.bindings.DateTransformer;
 import org.uqbar.commons.model.annotations.Observable;
@@ -40,6 +41,7 @@ public class Evento {
 	@Enumerated(EnumType.STRING)
 	private EFrecuencia frecuencia;
 	private Boolean pendiente;
+	@OneToOne
 	private Evento proximoEvento;
 		
 	public Evento(Usuario unUsuario, Guardarropa unGuardarropa, LocalDate unaFecha, String unLugar, String unMotivo, EFrecuencia unaFrecuencia) {

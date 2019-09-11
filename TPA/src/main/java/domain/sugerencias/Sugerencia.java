@@ -26,6 +26,7 @@ public class Sugerencia {
 	private EstadoSugerencia estado;
 	@ManyToOne
 	private Evento evento;
+	@OneToOne
 	private Calificacion calificacion;
 
 	public Sugerencia(Atuendo atuendo, Evento evento) {

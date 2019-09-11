@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import domain.color.Color;
 import domain.tipoPrenda.ECategoria;
@@ -29,6 +30,7 @@ public class Prenda {
 	private Color color;
 	@Enumerated(EnumType.STRING)
 	private ETela tela;
+	@Transient
 	private BufferedImage imagen;
 	private Boolean enUso; // TODO cuando termina un evento poner en false.
 
