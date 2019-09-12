@@ -20,4 +20,6 @@ public class Color {
 		return !EColor.NINGUNO.equals(colorPrimario) && !colorPrimario.equals(colorSecundario);
 	}
 
+	private Color() {}
+
 }

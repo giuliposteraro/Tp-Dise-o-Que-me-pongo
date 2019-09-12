@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class RepositorioEventos {
 	
-	private Set<Evento> eventos;
+	private Set<Evento> eventos;	//TODO Consultar a DB
 	
 	public RepositorioEventos() {
 		this.eventos= new HashSet<Evento>();

@@ -30,7 +30,7 @@ public class Prenda {
 	private Color color;
 	@Enumerated(EnumType.STRING)
 	private ETela tela;
-	@Transient
+	@Transient	//TODO Converter	TODO Tests	TODO Persistencia en dominio	TODO Repo de Usuarios
 	private BufferedImage imagen;
 	private Boolean enUso; // TODO cuando termina un evento poner en false.
 
