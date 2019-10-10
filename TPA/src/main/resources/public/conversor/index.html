@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Conversor</title>
+         <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark">
+            <nav class="navbar-brand" href="#">Conversor</nav>
+        </nav>
+        <div class="bg-secondary">
+            <marquee class="badge badge-secondary bg-secondary">Now with nvent support!</marquee>
+        </div>
+        <div class="container m-3 p-3">
+            <form action="/conversor/resultado" method="get">
+                <b class="badge badge-secondary">Km</b>
+                <input type="number" name="kms" placeholder="kms"/>
+                <input type="submit" value="Convertir" class="btn btn-primary"/>
+            </form>
+        </div>
+    </body>
+</html>

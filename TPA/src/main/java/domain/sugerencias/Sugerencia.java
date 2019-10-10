@@ -39,7 +39,7 @@ public class Sugerencia {
 		this.estado = estado;
 	}
 
-	public Double coeficienteDeAbrigo(Double temp) { // TODO corregir todo
+	public Double coeficienteDeAbrigo(Double temp) {
 		List<Double> toleranciasAlFrio = evento.getUsuario().getToleranciasAlFrio();
 		List<Double> nivelesAbrigo = this.getNivelesAbrigo();
 		Double coeficiente = Streams
