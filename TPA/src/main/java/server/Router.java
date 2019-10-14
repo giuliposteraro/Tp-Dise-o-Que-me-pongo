@@ -1,5 +1,6 @@
 package server;
 
+import server.controllers.HomeController;
 import server.controllers.LoginController;
 import spark.Spark;
 
@@ -17,10 +18,15 @@ public class Router {
 	}
 
 	public void configurar() {
-		LoginController lc = new LoginController();
-		WardrobesController wc = new WardrobesController();
-		Spark.get("/login", lc::loguear);
-		Spark.post("/login", lc::loguear);
+		LoginController loginc = new LoginController();
+		WardrobesController wardrobesc = new WardrobesController();
+		HomeController homec = new HomeController();
+		
+		Spark.before("/*", loginc::verificarAutenticacion);
+		
+		Spark.get("/login", loginc::loguear);
+		Spark.post("/login", loginc::loguear);
+		Spark.get("/home", homec::showHome);
 		//Spark.get("/wardrobes", route);
 	}
 }

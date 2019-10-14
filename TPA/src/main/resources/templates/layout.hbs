@@ -12,9 +12,17 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <h1 class="navbar-brand" href="#">QMP</h1>
+        <div class="navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home">Home</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
-    <p>Hola {{ name }}, tus ganks de hoy son: {{ ganks }}</p>
+    {{#block "contenido"}}
+    {{/block}}
 
     <p>Acordate de usar jwt</p>
 </body>

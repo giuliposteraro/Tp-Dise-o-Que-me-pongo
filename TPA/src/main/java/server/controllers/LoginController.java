@@ -1,30 +1,45 @@
 package server.controllers;
+
 import java.util.HashMap;
+import java.util.Map;
 
 import persistency.services.LoginService;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.template.handlebars.HandlebarsTemplateEngine;
 
-public class LoginController {
+public class LoginController extends Controller {
 	LoginService loginService = new LoginService();
-	
-	public String loguear(Request req,Response res) {
+
+	public String loguear(Request req, Response res) {
+		if (usuarioAutenticado(req) != null)
+			res.redirect("/home");
+
 		String username = req.queryParams("username");
 		String password = req.queryParams("password");
-		HashMap<String,Object> viewModel = new HashMap();
-		if (username!=null) {
-			if (loginService.usuarioValido(username,password)) {
+
+		Map<String, Object> viewModel = new HashMap<String, Object>();
+
+		if (username != null) {
+			if (loginService.autenticar(username, password)) {
+				req.session(true);
+				req.session().attribute("username", username);
 				res.redirect("/home");
-			}else {
-				viewModel.put("username",username);
-				viewModel.put("errorLogueo",true);
+			} else {
+				viewModel.put("username", username);
+				viewModel.put("errorLogueo", true);
 			}
 		}
-		ModelAndView mav= new ModelAndView(viewModel,"login.hbs");
-		return (new HandlebarsTemplateEngine().render(mav));	
-		
+
+		return this.render(viewModel, "login.hbs");
+
 	}
-	
+
+	public void verificarAutenticacion(Request req, Response res) {
+		if (!req.url().contains("/login") && usuarioAutenticado(req) == null)
+			res.redirect("/login");
+	}
+
+	private String usuarioAutenticado(Request req) {
+		return req.session().attribute("username");
+	}
 }

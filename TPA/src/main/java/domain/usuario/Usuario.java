@@ -44,6 +44,8 @@ public class Usuario {
 	@Transient
 	private List<INotificador> notificadores = new ArrayList<INotificador>();
 
+	private Usuario() {}
+	
 	public void compartirGuardarropaCon(Guardarropa guardarropa, Usuario usuario) {
 		if (!this.tieneGuardarropa(guardarropa)) {
 			throw new AccesoAGuardarropaDenegado("No se puede compartir este guardarropa");
@@ -189,7 +191,19 @@ public class Usuario {
 		this.tipo = tipo;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getPassword() {
 		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

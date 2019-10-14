@@ -1,19 +1,12 @@
 package domain;
 
-import java.util.HashMap;
-
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 
 import scenes.ListadoEventos.ListadoEventosView;
 import server.Router;
-import server.controllers.PrendasController;
-import spark.ModelAndView;
 import spark.Spark;
 import spark.debug.DebugScreen;
-import spark.template.handlebars.HandlebarsTemplateEngine;
-import domain.clima.TareaAlertasMeteorologicas;
-import domain.eventos.TareaSugerenciaEventos;
 
 public class Main extends Application {
 	public static void main(String[] args) {
@@ -24,7 +17,6 @@ public class Main extends Application {
 		Router.instance().configurar();
 		DebugScreen.enableDebugScreen();
 		Spark.init();
-		
 	}
 
 	@Override
