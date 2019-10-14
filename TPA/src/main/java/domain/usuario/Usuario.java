@@ -30,8 +30,9 @@ import persistency.converters.TipoUsuarioConverter;
 @Entity
 public class Usuario {
 	
-	@Id @GeneratedValue
-	private Long id_usuario;
+	@Id
+	private String username;
+	private String password;
 	@Convert(converter = TipoUsuarioConverter.class)
 	private TipoUsuario tipo;
 	@ManyToMany
@@ -186,5 +187,9 @@ public class Usuario {
 
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 }
