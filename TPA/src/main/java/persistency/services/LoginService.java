@@ -3,6 +3,7 @@ package persistency.services;
 import java.nio.charset.StandardCharsets;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
@@ -15,10 +16,12 @@ public class LoginService implements WithGlobalEntityManager {
 	
 	public Boolean autenticar(String username, String password) {
 		String query = "from Usuario u where u.username = '" + username + "'";
-		Usuario user = em.createQuery(query ,Usuario.class).getSingleResult();
-		if(user==null)
+		try {
+			Usuario user = em.createQuery(query ,Usuario.class).getSingleResult();
+			return user.getPassword().equals(this.hashPassword(password));
+		} catch (NoResultException e) {
 			return false;
-		return user.getPassword().equals(this.hashPassword(password));
+		}
 	}
 	
 	private String hashPassword(String clearPassword) {

@@ -24,6 +24,7 @@ public class Router {
 		
 		Spark.before("/*", loginc::verificarAutenticacion);
 		
+		Spark.get("/", homec::showHome);
 		Spark.get("/login", loginc::loguear);
 		Spark.post("/login", loginc::loguear);
 		Spark.get("/home", homec::showHome);
