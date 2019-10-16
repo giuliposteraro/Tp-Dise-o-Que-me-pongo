@@ -25,6 +25,7 @@ public class Guardarropa {
 	private Set<Prenda> prendas;
 	@Convert(converter = TipoGuardarropaConverter.class)
 	private TipoGuardarropa tipoGuardarropa;
+	private String nombre;
 
 	private Guardarropa() {}
 	
@@ -92,5 +93,17 @@ public class Guardarropa {
 		return prendas.stream()
 				.filter(p -> categoria.equals(p.getCategoria()))
 				.collect(Collectors.toSet());
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Long getId_guardarropa() {
+		return id_guardarropa;
 	}
 }

@@ -2,6 +2,7 @@ package server;
 
 import server.controllers.HomeController;
 import server.controllers.LoginController;
+import server.controllers.WardrobesController;
 import spark.Spark;
 
 public class Router {
@@ -29,5 +30,6 @@ public class Router {
 		Spark.post("/login", loginc::loguear);
 		Spark.get("/home", homec::showHome);
 		Spark.get("/wardrobes", wardrobesc::showWardrobes);
+		Spark.get("/wardrobes/:id", wardrobesc::showWardrobe);
 	}
 }

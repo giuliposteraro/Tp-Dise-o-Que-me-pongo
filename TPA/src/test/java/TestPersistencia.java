@@ -71,6 +71,7 @@ public class TestPersistencia extends AbstractPersistenceTest implements WithGlo
 				user.setPassword(password);
 			});
 			withTransaction(() -> {
+				g.setNombre("El Guardarropas");
 				g.agregarPrenda(remera);
 				g.agregarPrenda(pantalon);
 				g.agregarPrenda(zapatillas);

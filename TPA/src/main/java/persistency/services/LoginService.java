@@ -15,9 +15,9 @@ public class LoginService implements WithGlobalEntityManager {
 	EntityManager em = entityManager();
 	
 	public Boolean autenticar(String username, String password) {
-		String query = "from Usuario u where u.username = '" + username + "'";
+		String query = "from Usuario u where u.username = :username";
 		try {
-			Usuario user = em.createQuery(query ,Usuario.class).getSingleResult();
+			Usuario user = em.createQuery(query ,Usuario.class).setParameter("username", username).getSingleResult();
 			return user.getPassword().equals(this.hashPassword(password));
 		} catch (NoResultException e) {
 			return false;

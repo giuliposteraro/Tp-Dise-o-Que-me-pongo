@@ -1,0 +1,13 @@
+{{#partial "contenido"}}
+<p>Estos son tus guardarropas, <b>{{username}}</b></p>
+
+{{#each guardarropas}}
+<div>
+  <a href="/wardrobes/{{id_guardarropa}}">
+  <h1>{{nombre}}</h1>
+  </a>
+</div>
+{{/each}}
+{{/partial}}
+
+{{> layout.hbs}}
