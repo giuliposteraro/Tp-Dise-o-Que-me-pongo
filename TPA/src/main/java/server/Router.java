@@ -28,6 +28,6 @@ public class Router {
 		Spark.get("/login", loginc::loguear);
 		Spark.post("/login", loginc::loguear);
 		Spark.get("/home", homec::showHome);
-		//Spark.get("/wardrobes", route);
+		Spark.get("/wardrobes", wardrobesc::showWardrobes);
 	}
 }
