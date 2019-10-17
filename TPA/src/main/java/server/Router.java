@@ -23,11 +23,12 @@ public class Router {
 		WardrobesController wardrobesc = new WardrobesController();
 		HomeController homec = new HomeController();
 		
-		Spark.before("/*", loginc::verificarAutenticacion);
+		Spark.before("/*", loginc::verificarAutenticacion);	//abrir transaccion aca y cerrarla en el after
 		
 		Spark.get("/", homec::showHome);
 		Spark.get("/login", loginc::loguear);
 		Spark.post("/login", loginc::loguear);
+		Spark.get("/logout", loginc::logout);
 		Spark.get("/home", homec::showHome);
 		Spark.get("/wardrobes", wardrobesc::showWardrobes);
 		Spark.get("/wardrobes/:id", wardrobesc::showWardrobe);

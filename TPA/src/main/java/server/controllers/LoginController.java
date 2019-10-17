@@ -28,6 +28,12 @@ public class LoginController extends Controller {
 		return this.render("login.hbs");
 	}
 
+	public String logout(Request req, Response res) {
+		req.session().removeAttribute("username");
+		res.redirect("/login");
+		return "";
+	}
+	
 	public void verificarAutenticacion(Request req, Response res) {
 		if (!req.url().contains("/login") && usuarioAutenticado(req) == null)
 			res.redirect("/login");
