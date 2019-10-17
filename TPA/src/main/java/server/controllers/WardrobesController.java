@@ -11,9 +11,6 @@ public class WardrobesController extends Controller {
 	public String showWardrobes(Request req, Response res) {
 		String username = req.session().attribute("username");
 		this.addAttribute("username", username);
-		
-		
-		
 		this.addAttribute("guardarropas",  wardrobeService.getWardrobesForUser(username));
 		
 		return this.render("wardrobes.hbs");
@@ -22,7 +19,6 @@ public class WardrobesController extends Controller {
 	public String showWardrobe(Request req, Response res) {
 		String username = req.session().attribute("username");
 		this.addAttribute("username", username);
-		
 		this.addAttribute("guardarropas",  wardrobeService.getWardrobesForUser(username));
 		
 		return this.render("wardrobes.hbs");

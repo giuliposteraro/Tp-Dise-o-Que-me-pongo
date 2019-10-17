@@ -1,6 +1,8 @@
 import static org.junit.Assert.assertNotNull;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Before;
@@ -65,17 +67,24 @@ public class TestPersistencia extends AbstractPersistenceTest implements WithGlo
 		try {
 			String password = Hashing.sha256().hashString("nventi", StandardCharsets.UTF_8).toString();
 			user.setUsername("damonte");
-			Guardarropa g = user.crearGuardarropa();
+			Guardarropa g1 = user.crearGuardarropa();
+			Guardarropa g2 = user.crearGuardarropa();
+			List<Guardarropa> gs = new ArrayList<Guardarropa>();
+			for(int i = 0; i < 10; i++) {
+				gs.add(user.crearGuardarropa());
+			}
 			entityManager().persist(user);
 			withTransaction(() -> {
 				user.setPassword(password);
 			});
 			withTransaction(() -> {
-				g.setNombre("El Guardarropas");
-				g.agregarPrenda(remera);
-				g.agregarPrenda(pantalon);
-				g.agregarPrenda(zapatillas);
-				g.agregarPrenda(reloj);
+				g1.setNombre("El Guardarropas");
+				g2.setNombre("Let's go G2");
+				gs.forEach(g -> g.setNombre("Un Guardarropa"));
+				g1.agregarPrenda(remera);
+				g1.agregarPrenda(pantalon);
+				g1.agregarPrenda(zapatillas);
+				g1.agregarPrenda(reloj);
 			});
 		} catch(Exception e) {
 			System.out.println(e.getMessage());

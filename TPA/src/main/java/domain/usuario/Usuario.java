@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Transient;
 
 import domain.Config;
@@ -35,7 +36,7 @@ public class Usuario {
 	private String password;
 	@Convert(converter = TipoUsuarioConverter.class)
 	private TipoUsuario tipo;
-	@ManyToMany(cascade= CascadeType.PERSIST)
+	@ManyToMany(cascade= CascadeType.PERSIST) @OrderBy(value = "id_guardarropa ASC")
 	private Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
 	@OneToMany @JoinColumn(name = "id_usuario")
 	private List<Sugerencia> sugerencias = new ArrayList<Sugerencia>();
