@@ -1,0 +1,37 @@
+{{#partial "contenido"}}
+<p>Estos son las prendas del guardarropas, <b>{{guardarropa.nombre}}</b></p>
+
+<div class="container d-flex p-2 flex-wrap">
+
+  {{#each guardarropa.prendas}}
+    <div class="card-container col-sm-4 m-3" style="display: inline-block">
+      <div class="card border rounded-sm shadow bg-success my-sm-auto p-sm-auto mx-sm-3">
+        <img src="/img/wardrobe1.png" class="card-img-top" alt="Prenda">
+        <div class="card-body">
+          <p class="card-title">
+            <h3>{{tipo.descripcion}}</h3>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  {{/each}}
+
+  <div class="card-container col-sm-4 m-3" style="display: inline-block">
+    <a href="/clothes/" style="color: inherit">
+      <div class="card border rounded-sm shadow bg-success my-sm-auto p-sm-auto mx-sm-3">
+        <img src="/img/plusIcon.png" class="card-img-top" alt="Agregar prenda">
+        <div class="card-body">
+          <p class="card-title">
+            <h3>Agregar prenda</h3>
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+{{/partial}}
+
+{{> layout.hbs}}

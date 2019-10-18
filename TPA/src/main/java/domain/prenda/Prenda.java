@@ -34,6 +34,8 @@ public class Prenda {
 	private BufferedImage imagen;
 	private Boolean enUso; // TODO cuando termina un evento poner en false.
 
+	private Prenda(){}
+	
 	public Prenda(TipoPrenda tipo, ETela tela, Color color, BufferedImage imagen) {
 		this.tipo = tipo;
 		this.tela = tela;

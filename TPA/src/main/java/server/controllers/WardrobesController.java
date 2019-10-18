@@ -18,9 +18,13 @@ public class WardrobesController extends Controller {
 	
 	public String showWardrobe(Request req, Response res) {
 		String username = req.session().attribute("username");
-		this.addAttribute("username", username);
-		this.addAttribute("guardarropas",  wardrobeService.getWardrobesForUser(username));
 		
-		return this.render("wardrobes.hbs");
+		String id = req.params("id");
+		
+		this.addAttribute("guardarropa",  wardrobeService.getGuardarropa(Long.parseLong(id)));	
+		
+		this.addAttribute("username", username);
+		
+		return this.render("wardrobe-content.hbs");
 	}
 }
