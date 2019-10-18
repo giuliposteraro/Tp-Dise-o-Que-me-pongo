@@ -3,6 +3,7 @@ package domain;
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 
+import persistency.services.WardrobeService;
 import scenes.ListadoEventos.ListadoEventosView;
 import server.Router;
 import spark.Spark;
@@ -14,6 +15,7 @@ public class Main extends Application {
 //		new Job(new TareaAlertasMeteorologicas(), 10000, 100000).ejecutar();
 //		new Main().start();
 		Spark.port(9001);		
+		Spark.staticFileLocation("/public");
 		Router.instance().configurar();
 		DebugScreen.enableDebugScreen();
 		Spark.init();

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,11 +21,14 @@ import persistency.converters.TipoGuardarropaConverter;
 public class Guardarropa {
 	@Id @GeneratedValue
 	private Long id_guardarropa;
-	@OneToMany @JoinColumn(name = "id_guardarropa")
+	@OneToMany(cascade= CascadeType.PERSIST) @JoinColumn(name = "id_guardarropa")
 	private Set<Prenda> prendas;
 	@Convert(converter = TipoGuardarropaConverter.class)
 	private TipoGuardarropa tipoGuardarropa;
+	private String nombre;
 
+	private Guardarropa() {}
+	
 	public Guardarropa(TipoGuardarropa tipo) {
 		this.prendas = new HashSet<Prenda>();
 		this.tipoGuardarropa = tipo;
@@ -89,5 +93,17 @@ public class Guardarropa {
 		return prendas.stream()
 				.filter(p -> categoria.equals(p.getCategoria()))
 				.collect(Collectors.toSet());
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Long getId_guardarropa() {
+		return id_guardarropa;
 	}
 }
