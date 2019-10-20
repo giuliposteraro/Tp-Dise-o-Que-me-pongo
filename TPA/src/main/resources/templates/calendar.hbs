@@ -1,0 +1,22 @@
+{{#partial "contenido"}}
+<p>Este es tu calendario, <b>{{username}}</b></p>
+
+<div class="container d-flex p-2 flex-wrap justify-content-center">
+  {{#each eventos}}
+  <div class="card-container col-sm-3 m-3" style="display: inline-block">
+    <a href="/wardrobes/{{id_evento}}" style="color: inherit">
+      <div class="card border rounded-sm shadow bg-success m-sm-auto p-sm-auto">
+        <img src="/img/wardrobe1.png" class="card-img-top" alt="Guardarropa">
+        <div class="card-body">
+          <p class="card-title">
+            <h3>{{motivo}}</h3>
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+  {{/each}}
+</div>
+{{/partial}}
+
+{{> layout.hbs}}
