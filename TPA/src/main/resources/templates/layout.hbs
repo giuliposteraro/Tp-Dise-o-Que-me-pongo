@@ -6,6 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/layout.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -13,8 +14,8 @@
 
 <body style="background-color: rgb(240, 240, 240)">
     <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand my-auto" href="/">
-            <h1><b>QMP</b></h1>
+        <a class="navbar-brand my-auto" href="/" style="font-size: 1.5rem;">
+            <b>Que Me Pongo</b>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +24,7 @@
 
         <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
             <ul class="navbar-nav col">
-                <li class="nav-item active my-auto">
+                <li class="nav-item my-auto">
                     <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item my-auto">
@@ -39,8 +40,6 @@
     <div>
         {{#block "contenido"}}
         {{/block}}
-
-        <p>Acordate de usar jwt</p>
     </div>
 </body>
 

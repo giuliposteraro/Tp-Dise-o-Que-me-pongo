@@ -1,6 +1,8 @@
 package domain.tipoPrenda;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RepoTipos {
 
@@ -19,4 +21,10 @@ public class RepoTipos {
 	public static Accesorio RELOJ = new Accesorio(Arrays.asList(ETela.NINGUNA), "Reloj");
 	public static Accesorio COLLAR = new Accesorio(Arrays.asList(ETela.NINGUNA), "Collar");
 
+	public static List<TipoPrenda> getTipos() {
+		return Arrays.asList(REMERA, BUZO, CAMPERA, CAMISA, SWEATER, PANTALON, BERMUDA, SHORT, POLLERA, ZAPATOS, ZAPATILLAS, LENTES, RELOJ, COLLAR)
+				.stream()
+				.sorted((t1, t2)-> t1.getDescripcion().compareTo(t2.getDescripcion()))
+				.collect(Collectors.toList());
+	}
 }

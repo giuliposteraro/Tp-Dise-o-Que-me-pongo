@@ -3,7 +3,6 @@ package domain;
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 
-import persistency.services.WardrobeService;
 import scenes.ListadoEventos.ListadoEventosView;
 import server.Router;
 import spark.Spark;
