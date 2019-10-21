@@ -35,6 +35,9 @@ public class Router {
 		Spark.get("/wardrobes", wardrobesc::showWardrobes);
 		Spark.get("/wardrobes/:id", wardrobesc::showWardrobe);
 		Spark.get("/calendar", eventosc::showEventos);
+		Spark.get("/calendar/new", eventosc::createEvento);
+		Spark.post("/calendar/new", eventosc::saveEvento);
+
 		
 	}
 }

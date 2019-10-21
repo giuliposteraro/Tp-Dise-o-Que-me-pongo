@@ -15,9 +15,10 @@ public class EventosService implements WithGlobalEntityManager {
 	EntityManager em = entityManager();
 
 	public List<Evento> getEventosForUser(String username) {
+		Usuario user = this.getUsuario(username);
 		String query = "from Evento e where e.usuario = :username";
 		return em.createQuery(query, Evento.class)
-				.setParameter("username", username)
+				.setParameter("username", user)
 				.getResultList();
 	}
 
@@ -26,5 +27,10 @@ public class EventosService implements WithGlobalEntityManager {
 		return em.createQuery(query, Evento.class)
 				.setParameter("id", id)
 				.getSingleResult();
+	}
+	
+	public Usuario getUsuario(String username) {
+		return em.createQuery("from Usuario u where u.username = :username",Usuario.class).setParameter("username", username).getSingleResult();
+
 	}
 }
