@@ -1,6 +1,6 @@
 package domain.eventos;
-import java.time.temporal.ChronoUnit;
 
+import java.time.temporal.ChronoUnit;
 import domain.Config;
 
 public enum EFrecuencia{
@@ -23,6 +23,4 @@ public enum EFrecuencia{
 		Config.instance().getRepositorioEventos().agregarEvento(nuevoEvento);
 		return nuevoEvento;
 	}
-
-	
 }

@@ -19,7 +19,6 @@ public class WardrobesController extends Controller {
 	
 	public String showWardrobe(Request req, Response res) {
 		String username = req.session().attribute("username");
-		
 		String id = req.params("id");
 		
 		this.addAttribute("guardarropa",  wardrobeService.getGuardarropa(Long.parseLong(id)));	

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum ETela {
-	ALGODON, CUERO, JEAN, TELA, LANA, NINGUNA;
+	ALGODON, CUERO, JEAN, LANA, HILO, POLAR, NINGUNA;
 	
 	public static List<String> getTelas() {
 		return Arrays.asList(ETela.values())

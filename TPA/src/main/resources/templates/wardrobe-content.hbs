@@ -39,6 +39,7 @@
   </div>
 
   <form action="/clothes" method="POST">
+    <input type="hidden" value="{{guardarropa.id_guardarropa}}" name="idGuardarropa" />
     <!-- Modal 1 -->
     <div class="modal fade" id="wizard1" tabindex="-1" role="dialog" aria-labelledby="wizard1Label" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -52,7 +53,7 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="tipoPrenda">Tipo de Prenda</label>
-              <select class="form-control" id="tipoPrenda">
+              <select class="form-control" id="tipoPrenda" name="tipo">
                 <option value="null">Seleccione un tipo...</option>
                 {{#each tipos}}
                 <option value="{{descripcion}}">{{descripcion}}</option>
@@ -82,7 +83,7 @@
           <div class="modal-body">
             <div>
               <label for="color1">Color Principal</label>
-              <select class="form-control" id="color1">
+              <select class="form-control" id="color1" name="color1">
                 <option value="null">Seleccione un color...</option>
                 {{#each colores}}
                 <option value="{{this}}">{{this}}</option>
@@ -91,18 +92,9 @@
             </div>
             <div class="mt-3">
               <label for="color2">Color Secundario</label>
-              <select class="form-control" id="color2">
+              <select class="form-control" id="color2" name="color2">
                 <option value="null">Seleccione un color...</option>
                 {{#each colores}}
-                <option value="{{this}}">{{this}}</option>
-                {{/each}}
-              </select>
-            </div>
-            <div class="mt-3">
-              <label for="tela">Tela</label>
-              <select class="form-control" id="tela">
-                <option value="null">Seleccione una tela...</option>
-                {{#each telas}}
                 <option value="{{this}}">{{this}}</option>
                 {{/each}}
               </select>
@@ -118,7 +110,7 @@
       </div>
     </div>
 
-    <!-- Modal 2 -->
+    <!-- Modal 3 -->
     <div class="modal fade" id="wizard3" tabindex="-1" role="dialog" aria-labelledby="wizard3Label" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -129,9 +121,14 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="form-group">
-              <label for="imagen">Imagen</label>
-              <input type="file" class="form-control-file" id="imagen">
+            <div>
+              <label for="tela">Tela</label>
+              <select class="form-control" id="tela" name="tela">
+                <option value="null">Seleccione una tela...</option>
+                {{#each telas}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+              </select>
             </div>
           </div>
           <div class="modal-footer">
@@ -143,6 +140,32 @@
       </div>
     </div>
   </form>
+
+  <!-- Modal 3 -->
+  <!--div class="modal fade" id="wizard3" tabindex="-1" role="dialog" aria-labelledby="wizard3Label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="wizard3Label">Nueva Prenda (3/3)</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="imagen">Imagen</label>
+              <input type="file" class="form-control-file" id="imagen" name="imagen">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+              data-target="#wizard2">Volver</button>
+            <button type="submit" class="btn btn-primary">Finalizar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form-->
 
 </div>
 
