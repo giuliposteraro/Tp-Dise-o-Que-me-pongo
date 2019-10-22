@@ -14,7 +14,7 @@ public enum ETela {
 				.collect(Collectors.toList());
 	}
 	
-	private static String formatTela(ETela tela) {
+	public static String formatTela(ETela tela) {
 		return tela.name().toUpperCase().charAt(0) + tela.name().substring(1).toLowerCase();
 	}
 }

@@ -1,5 +1,8 @@
-{{#partial "contenido"}}
+{{#partial "js"}}
 <script src="/js/wizardForm.js"></script>
+{{/partial}}
+
+{{#partial "contenido"}}
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -54,7 +57,7 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="tipoPrenda">Tipo de Prenda</label>
-              <select class="form-control custom-select" id="tipoPrenda" name="tipo" required>
+              <select class="form-control custom-select" id="tipo" name="tipo" required>
                 <option value="">Seleccione un tipo...</option>
                 {{#each tipos}}
                 <option value="{{descripcion}}">{{descripcion}}</option>
@@ -65,7 +68,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal"
-              data-target="#wizard2" onclick="validarTipo()">Siguiente</button>
+              data-target="#wizard2" onclick="actualizarTelas()">Siguiente</button>
           </div>
         </div>
       </div>

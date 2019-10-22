@@ -1,5 +1,11 @@
 package server.controllers;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.google.gson.Gson;
+
 import domain.color.EColor;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
@@ -8,6 +14,7 @@ import domain.tipoPrenda.RepoTipos;
 import persistency.services.WardrobeService;
 import spark.Request;
 import spark.Response;
+import spark.Spark;
 
 public class ClothesController extends Controller {
 	public String newClothe(Request req, Response res) {
@@ -30,5 +37,16 @@ public class ClothesController extends Controller {
 		this.addAttribute("idGuardarropa", idGuardarropa);
 		
 		return this.render("new-clothe.hbs");
+	}
+	
+	public String fabrics(Request req, Response res) {
+		String tipo = req.params("type");
+		List<String> telasValidas = Arrays.asList(ETela.values())
+		.stream()
+		.filter(tela -> RepoTipos.getTipo(tipo).esTelaValida(tela))
+		.map(tela -> ETela.formatTela(tela))
+		.collect(Collectors.toList());
+		
+		return new Gson().toJson(telasValidas);
 	}
 }

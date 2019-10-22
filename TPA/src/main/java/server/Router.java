@@ -40,7 +40,8 @@ public class Router implements WithGlobalEntityManager, TransactionalOps {
 		Spark.get("/wardrobes", wardrobesc::showWardrobes);
 		Spark.get("/wardrobes/:id", wardrobesc::showWardrobe);
 		Spark.post("/clothes", clothesc::newClothe);
-		Spark.get("/clothes", clothesc::newClothe);
+		//Spark.get("/clothes", clothesc::newClothe);
+		Spark.get("/clothes/:type/fabrics", clothesc::fabrics);
 		
 		Spark.after("/*", (req, res) -> {
 			try {
