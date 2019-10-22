@@ -6,6 +6,7 @@ import domain.Config;
 import domain.eventos.EFrecuencia;
 import domain.eventos.RepositorioEventos;
 import domain.guardarropa.Guardarropa;
+import domain.usuario.RepositorioUsuarios;
 import domain.usuario.Usuario;
 import persistency.services.EventosService;
 import persistency.services.WardrobeService;
@@ -17,8 +18,10 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 public class EventosController extends Controller{
 	//EventosService eventosService = new EventosService();
 	WardrobeService wardrobeService = new WardrobeService();
-	RepositorioEventos repoEventos = Config.instance().getRepositorioEventos();
-			
+	
+	RepositorioUsuarios repoUsuarios = new RepositorioUsuarios();
+	RepositorioEventos repoEventos = new RepositorioEventos(repoUsuarios);
+		
 	public String showEventos(Request req, Response res) {
 		String username = req.session().attribute("username");
 		this.addAttribute("username", username);
@@ -52,7 +55,7 @@ public class EventosController extends Controller{
 		
 		EFrecuencia frecuencia = EFrecuencia.valueOf(frecuenciaString);		
 		
-		Usuario user = repoEventos.getUsuario(username);		
+		Usuario user = repoUsuarios.getUsuario(username);		
 		
 		user.crearEvento(guardarropa, fecha, lugar, motivo, frecuencia);		
 		

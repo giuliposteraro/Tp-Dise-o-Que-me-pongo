@@ -19,8 +19,8 @@ public class Config {
 	// Class
 	private int capacidadMaxima = 20;
 	private String ciudad = "Buenos Aires";
-	private RepositorioEventos repoEventos = new RepositorioEventos();
 	private RepositorioUsuarios repoUsuarios = new RepositorioUsuarios();
+	private RepositorioEventos repoEventos = new RepositorioEventos();
 	private ProveedorClima proveedor = new ClimaOW();
 	
 	private Config() {
