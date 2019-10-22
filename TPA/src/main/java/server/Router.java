@@ -2,8 +2,8 @@ package server;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
-
 import server.controllers.ClothesController;
+import server.controllers.EventosController;
 import server.controllers.HomeController;
 import server.controllers.LoginController;
 import server.controllers.WardrobesController;
@@ -26,6 +26,7 @@ public class Router implements WithGlobalEntityManager, TransactionalOps {
 		WardrobesController wardrobesc = new WardrobesController();
 		ClothesController clothesc = new ClothesController();
 		HomeController homec = new HomeController();
+		EventosController eventosc = new EventosController();
 		
 		Spark.before("/*", (req, res) -> {
 			beginTransaction();
@@ -40,8 +41,10 @@ public class Router implements WithGlobalEntityManager, TransactionalOps {
 		Spark.get("/wardrobes", wardrobesc::showWardrobes);
 		Spark.get("/wardrobes/:id", wardrobesc::showWardrobe);
 		Spark.post("/clothes", clothesc::newClothe);
-		//Spark.get("/clothes", clothesc::newClothe);
 		Spark.get("/clothes/:type/fabrics", clothesc::fabrics);
+    Spark.get("/calendar", eventosc::showEventos);
+		Spark.get("/calendar/new", eventosc::createEvento);
+		Spark.post("/calendar/new", eventosc::saveEvento);
 		
 		Spark.after("/*", (req, res) -> {
 			try {

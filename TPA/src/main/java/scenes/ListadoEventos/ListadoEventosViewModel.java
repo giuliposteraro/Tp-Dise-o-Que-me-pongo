@@ -21,7 +21,7 @@ import exceptions.FechasInvalidas;
 
 @Observable
 public class ListadoEventosViewModel {
-	private Set<Evento> eventos = Config.instance().getRepositorioEventos().eventos();
+	private Set<Evento> eventos = Config.instance().getRepositorioEventos().getEventos();
 	private Evento eventoSeleccionado;
 	private Integer diaDesde;
 	private Integer mesDesde;
@@ -157,7 +157,7 @@ public class ListadoEventosViewModel {
 		if(fechaDesde.isAfter(fechaHasta)) {
 			throw new FechasInvalidas("La fecha desde no puede ser mayor a la fecha hasta");
 		}
-		eventos = Config.instance().getRepositorioEventos().eventos().stream().filter(evento -> evento.entre(fechaDesde,fechaHasta)).collect(Collectors.toSet());
+		eventos = Config.instance().getRepositorioEventos().getEventos().stream().filter(evento -> evento.entre(fechaDesde,fechaHasta)).collect(Collectors.toSet());
 	}
 	
 

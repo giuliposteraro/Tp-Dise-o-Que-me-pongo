@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertNotNull;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,8 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import com.google.common.hash.Hashing;
 
 import domain.color.EColor;
+import domain.eventos.EFrecuencia;
+import domain.eventos.Evento;
 import domain.guardarropa.Guardarropa;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
@@ -30,6 +33,8 @@ public class TestPersistencia extends AbstractPersistenceTest implements WithGlo
 	Prenda pantalon;
 	Prenda zapatillas;
 	Prenda reloj;
+	LocalDate fecha;
+
 	
 	@Before
 	public void beforeEach() {
@@ -70,10 +75,13 @@ public class TestPersistencia extends AbstractPersistenceTest implements WithGlo
 			Guardarropa g1 = user.crearGuardarropa();
 			Guardarropa g2 = user.crearGuardarropa();
 			List<Guardarropa> gs = new ArrayList<Guardarropa>();
+			fecha = LocalDate.of(2023, 8, 4);
+			Evento evento = new Evento(user, g1, fecha, "Boliche", "Fiesta", EFrecuencia.UNICA);
 			for(int i = 0; i < 10; i++) {
 				gs.add(user.crearGuardarropa());
 			}
 			entityManager().persist(user);
+			entityManager().persist(evento);
 			withTransaction(() -> {
 				user.setPassword(password);
 			});

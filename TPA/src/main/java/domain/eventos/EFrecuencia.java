@@ -1,4 +1,8 @@
 package domain.eventos;
+import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import java.time.temporal.ChronoUnit;
 import domain.Config;
@@ -22,5 +26,16 @@ public enum EFrecuencia{
 		Evento nuevoEvento = evento.eventoActualizado(evento.getFecha().plus(cantidad, unidad));
 		Config.instance().getRepositorioEventos().agregarEvento(nuevoEvento);
 		return nuevoEvento;
+	}
+
+	public static List<String> getFrecuencias() {
+		return Arrays.asList(EFrecuencia.values())
+				.stream()
+				.map(frecuencia -> formatFrecuencia(frecuencia))
+				.collect(Collectors.toList());
+	}
+	
+	private static String formatFrecuencia(EFrecuencia frecuencia) {
+		return frecuencia.name().toUpperCase().charAt(0) + frecuencia.name().substring(1).toLowerCase();
 	}
 }
