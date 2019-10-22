@@ -9,7 +9,7 @@ public class SugerenciasController extends Controller{
 	SugerenciasService sugerenciasService = new SugerenciasService();
 
 	public String showSugerencias(Request req, Response res) {
-		String evento = req.session().attribute("evento");
+		Evento evento = req.session().attribute("evento");
 		this.addAttribute("evento", evento);
 		this.addAttribute("sugerencias",  sugerenciasService.getSugerenciasForEvent(evento));
 		
