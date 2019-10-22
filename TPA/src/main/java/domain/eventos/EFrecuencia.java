@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import java.time.temporal.ChronoUnit;
 import domain.Config;
 
 public enum EFrecuencia{
@@ -37,5 +38,4 @@ public enum EFrecuencia{
 	private static String formatFrecuencia(EFrecuencia frecuencia) {
 		return frecuencia.name().toUpperCase().charAt(0) + frecuencia.name().substring(1).toLowerCase();
 	}
-	
 }

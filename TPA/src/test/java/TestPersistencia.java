@@ -51,7 +51,7 @@ public class TestPersistencia extends AbstractPersistenceTest implements WithGlo
 		pantalon = c.crear();
 
 		c.setTipo(RepoTipos.ZAPATILLAS);
-		c.setTela(ETela.TELA);
+		c.setTela(ETela.HILO);
 		c.setColor(EColor.BLANCO, EColor.NEGRO);
 		zapatillas = c.crear();
 

@@ -173,7 +173,7 @@ public class ListadoEventosViewModel {
 		c.setColor(EColor.AZUL, EColor.NINGUNO);
 		guardarropa.agregarPrenda(c.crear());
 		c.setTipo(RepoTipos.ZAPATILLAS);
-		c.setTela(ETela.TELA);
+		c.setTela(ETela.HILO);
 		c.setColor(EColor.BLANCO, EColor.NEGRO);
 		guardarropa.agregarPrenda(c.crear());
 		
