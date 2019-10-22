@@ -132,8 +132,8 @@ public class Usuario {
 		sugerencias.add(sugerencia);
 	}
 
-	public void crearEvento(Guardarropa guardarropa, LocalDate fecha, String lugar, String motivo) {
-		Evento eventoNuevo = new Evento(this, guardarropa, fecha, lugar, motivo, EFrecuencia.UNICA);
+	public void crearEvento(Guardarropa guardarropa, LocalDate fecha, String lugar, String motivo, EFrecuencia frecuencia) {
+		Evento eventoNuevo = new Evento(this, guardarropa, fecha, lugar, motivo, frecuencia);
 		RepositorioEventos repo = Config.instance().getRepositorioEventos();
 		repo.agregarEvento(eventoNuevo);
 	}

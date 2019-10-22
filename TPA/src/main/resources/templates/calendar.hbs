@@ -1,0 +1,15 @@
+{{#partial "contenido"}}
+<p>Este es tu calendario, <b>{{username}}</b></p>
+
+<div class="container">
+  <h2>Eventos</h2>
+  <ul class="list-group">
+    {{#each eventos}}
+    <li class="list-group-item">{{motivo}}</li>
+    {{/each}}
+  </ul>
+</div>
+
+{{/partial}}
+
+{{> layout.hbs}}

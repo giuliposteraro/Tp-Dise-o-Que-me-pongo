@@ -1,5 +1,6 @@
 package server;
 
+import server.controllers.EventosController;
 import server.controllers.HomeController;
 import server.controllers.LoginController;
 import server.controllers.WardrobesController;
@@ -22,6 +23,7 @@ public class Router {
 		LoginController loginc = new LoginController();
 		WardrobesController wardrobesc = new WardrobesController();
 		HomeController homec = new HomeController();
+		EventosController eventosc = new EventosController();
 		
 		Spark.before("/*", loginc::verificarAutenticacion);	//abrir transaccion aca y cerrarla en el after
 		
@@ -32,5 +34,10 @@ public class Router {
 		Spark.get("/home", homec::showHome);
 		Spark.get("/wardrobes", wardrobesc::showWardrobes);
 		Spark.get("/wardrobes/:id", wardrobesc::showWardrobe);
+		Spark.get("/calendar", eventosc::showEventos);
+		Spark.get("/calendar/new", eventosc::createEvento);
+		Spark.post("/calendar/new", eventosc::saveEvento);
+
+		
 	}
 }
