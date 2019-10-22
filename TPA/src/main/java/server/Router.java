@@ -53,6 +53,7 @@ public class Router implements WithGlobalEntityManager, TransactionalOps {
 				rollbackTransaction();
 			} finally {
 				System.out.println("Limpiando cache...");
+				entityManager().close();
 				entityManager().clear();
 			}
 		});
