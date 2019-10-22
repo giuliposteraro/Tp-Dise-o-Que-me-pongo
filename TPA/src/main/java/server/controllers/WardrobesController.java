@@ -21,7 +21,8 @@ public class WardrobesController extends Controller {
 		String username = req.session().attribute("username");
 		String id = req.params("id");
 		
-		this.addAttribute("guardarropa",  wardrobeService.getGuardarropa(Long.parseLong(id)));	
+		this.addAttribute("guardarropa",  wardrobeService.getGuardarropa(Long.parseLong(id)));
+		System.out.println(wardrobeService.getGuardarropa(Long.parseLong(id)).getPrendas());
 		this.addAttribute("username", username);
 		this.addAttribute("tipos", RepoTipos.getTipos());
 		this.addAttribute("telas", ETela.getTelas());

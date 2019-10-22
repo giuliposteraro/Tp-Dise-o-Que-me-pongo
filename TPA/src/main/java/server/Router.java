@@ -30,7 +30,7 @@ public class Router implements WithGlobalEntityManager, TransactionalOps {
 		Spark.before("/*", (req, res) -> {
 			beginTransaction();
 		});
-		Spark.before("/*", loginc::verificarAutenticacion);	//abrir transaccion aca y cerrarla en el after
+		Spark.before("/*", loginc::verificarAutenticacion);
 		
 		Spark.get("/", homec::showHome);
 		Spark.get("/login", loginc::loguear);
@@ -48,8 +48,10 @@ public class Router implements WithGlobalEntityManager, TransactionalOps {
 				commitTransaction();
 			} catch (Exception e) {
 				rollbackTransaction();
+			} finally {
+				System.out.println("Limpiando cache...");
+				entityManager().clear();
 			}
-			entityManager().clear();
 		});
 	}
 }
