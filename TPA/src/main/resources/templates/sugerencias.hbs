@@ -1,0 +1,25 @@
+{{#partial "contenido"}}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Guardarropas</li>
+  </ol>
+</nav>
+
+<p>Estas son tus sugerencias para el evento, <b>{{evento}}</b></p>
+
+<div class="container d-flex p-2 flex-wrap justify-content-center">
+  {{#each sugerencia}}
+  <div class="card-container col-sm-3 m-3" style="display: inline-block">
+    <a href="/sugerencias/{{id_sugerencia}}" style="color: inherit">
+      <div class="card border rounded-sm shadow m-sm-auto p-sm-auto">
+       
+      </div>
+    </a>
+  </div>
+  {{/each}}
+</div>
+
+{{/partial}}
+
+{{> layout.hbs}}
