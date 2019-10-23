@@ -1,24 +1,18 @@
 package server.controllers;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import domain.Config;
 import domain.eventos.EFrecuencia;
 import domain.eventos.RepositorioEventos;
 import domain.guardarropa.Guardarropa;
 import domain.usuario.RepositorioUsuarios;
 import domain.usuario.Usuario;
-import persistency.services.EventosService;
 import persistency.services.WardrobeService;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.template.handlebars.HandlebarsTemplateEngine;
 
-public class EventosController extends Controller{
-	//EventosService eventosService = new EventosService();
+public class EventosController extends Controller {
 	WardrobeService wardrobeService = new WardrobeService();
-	
 	RepositorioUsuarios repoUsuarios = new RepositorioUsuarios();
 	RepositorioEventos repoEventos = new RepositorioEventos(repoUsuarios);
 		
@@ -36,7 +30,6 @@ public class EventosController extends Controller{
 		this.addAttribute("frecuencias", EFrecuencia.getFrecuencias());
 		this.addAttribute("guardarropas", wardrobeService.getWardrobesForUser(username));
 
-		
 		return this.render("event-create.hbs");
 	}
 	
