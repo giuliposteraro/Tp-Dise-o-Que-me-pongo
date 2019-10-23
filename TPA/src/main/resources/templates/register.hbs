@@ -9,6 +9,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="/js/registerForm.js"></script>
   <link rel="stylesheet" href="/css/login.css" />
 </head>
 
@@ -20,19 +21,21 @@
       <h1 class="m-3 p-3 indigo-text lighten-1">Que me pongo</h1>
       <form class="rounded mx-3 my-4" method="POST" action="/register">
         <div class="m-3">
-          <input class="rounded form-control" type="text" name="username" placeholder="Ingrese un Usuario" value="{{username}}" required/>
+          <input class="rounded form-control" id="usr" type="text" name="username" placeholder="Ingrese un Usuario"
+            value="{{username}}" required />
         </div>
         <div class="m-3">
-          <input class="rounded form-control " id="psw" type="password" name="password" placeholder="Contraseña" required/>
+          <input class="rounded form-control " id="psw" type="password" name="password" placeholder="Contraseña"
+            required />
         </div>
         <div class="m-3">
-          <input class="rounded form-control is-invalid" id="psw2" type="password" name="password" placeholder="Repita contraseña" required/>
+          <input class="rounded form-control" id="psw2" type="password" name="password" placeholder="Repita contraseña"
+            required />
         </div>
 
         <select class="m-3 rounded form-control" id="tipoUsuario" name="tipoUsuario" required>
-          <option value="null">Tipo de usuario</option>
           {{#each tipos}}
-              <option  value="{{this}}">{{this}}</option>
+          <option value="{{this}}">{{this}}</option>
           {{/each}}
         </select>
         <div class="mx-3 my-4">
@@ -42,84 +45,9 @@
     </div>
 
     {{#if errorRegistro}}
-      <p>{{errorRegistro.message}}</p>
+    <p>{{errorRegistro.message}}</p>
     {{/if}}
   </div>
-    <script>
-    var myInput = document.getElementById("psw");
-    var myInput2 = document.getElementById("psw2");
-    var sumbitButton = document.getElementById("submitBtn");
-    // When the user starts to type something inside the password field
-    myInput.onkeyup = function() {
-      // Validate lowercase letters
-      var lowerCaseLetters = /[a-z]/g;
-      if(myInput.value.match(lowerCaseLetters)) {
-        myInput.classList.remove("is-invalid");
-      } else {
-        myInput.classList.add("is-invalid");
-      }
-
-      //psw matchs psw2
-      if(myInput.value == myInput2.value) {
-        myInput2.classList.remove("is-invalid");
-      } else {
-        myInput2.classList.add("is-invalid");
-      }
-
-      // Validate capital letters
-      var upperCaseLetters = /[A-Z]/g;
-      if(myInput.value.match(upperCaseLetters)) {
-        myInput.classList.remove("is-invalid");
-      } else {
-        myInput.classList.add("is-invalid");
-      }
-
-      // Validate numbers
-      var numbers = /[0-9]/g;
-      if(myInput.value.match(numbers)) {
-        myInput.classList.remove("is-invalid");
-      } else {
-        myInput.classList.add("is-invalid");
-      }
-
-      // Validate length
-      if(myInput.value.length >= 8) {
-        myInput.classList.remove("is-invalid");
-      } else {
-        myInput.classList.add("is-invalid");
-      }
-    }
-
-    myInput2.onkeyup = function() {
-      //psw matchs psw2
-      if(myInput.value == myInput2.value) {
-        myInput2.classList.remove("is-invalid");
-      } else {
-        myInput2.classList.add("is-invalid");
-      }
-    }
-
-
-    sumbitButton.onclick = function(){
-        // REVISAR
-        var pswOK = !$("#psw").hasClass("is-invalid");
-        var psw2OK = !$("#psw2").hasClass("is-invalid");
-
-        if(!pswOK || !psw2OK){
-          alert("error");
-          //event.preventDefault()
-        }else{
-          alert("OK");
-        }
-    }
-    /*function(id){
-        $.get("/user/" + id,()=>
-
-      )*/
-
-
-
-    </script>
 </body>
 
 </html>
