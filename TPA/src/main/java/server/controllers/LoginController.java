@@ -25,7 +25,7 @@ public class LoginController extends Controller {
 			}
 		}
 
-		return this.render("login.hbs");
+		return this.render("register.hbs");
 	}
 
 	public String logout(Request req, Response res) {
