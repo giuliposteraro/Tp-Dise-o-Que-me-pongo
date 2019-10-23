@@ -3,6 +3,8 @@ package domain.sugerencias;
 import java.util.List;
 
 import com.google.common.collect.Streams;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,7 +28,7 @@ public class Sugerencia {
 	private EstadoSugerencia estado;
 	@ManyToOne
 	private Evento evento;
-	@OneToOne
+	@OneToOne(optional=true)
 	private Calificacion calificacion;
 
 	public Sugerencia(Atuendo atuendo, Evento evento) {
@@ -34,7 +36,9 @@ public class Sugerencia {
 		this.evento = evento;
 		this.estado = EstadoSugerencia.PENDIENTE;
 	}
-
+	
+	private Sugerencia() {}
+	
 	public void setEstado(EstadoSugerencia estado) {
 		this.estado = estado;
 	}
@@ -74,6 +78,10 @@ public class Sugerencia {
 
 	public void setCalificacion(Calificacion calificacion) {
 		this.calificacion = calificacion;
+	}
+	
+	public Long getId_sugerencia() {
+		return id_sugerencia;
 	}
 
 	public Evento getEvento() {

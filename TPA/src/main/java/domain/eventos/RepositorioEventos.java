@@ -16,7 +16,7 @@ import domain.usuario.RepositorioUsuarios;
 import domain.usuario.Usuario;
 
 public class RepositorioEventos implements WithGlobalEntityManager, TransactionalOps{
-	EntityManager em = entityManager();
+
 	RepositorioUsuarios repoUsuarios;
 	
 	private Set<Evento> eventos;	//TODO Consultar a DB
@@ -32,12 +32,12 @@ public class RepositorioEventos implements WithGlobalEntityManager, Transactiona
 	
 	public void agregarEvento(Evento unEvento) {
 		this.eventos.add(unEvento);
-		em.persist(unEvento);
+		entityManager().persist(unEvento);
 		
 	}
 	
 	public Set<Evento> proximosEventos(){
-		return em.createQuery("from Evento e where e.pendiente = true and fecha<:maniana",Evento.class)
+		return entityManager().createQuery("from Evento e where e.pendiente = true and fecha<:maniana",Evento.class)
 		.setParameter("maniana",LocalDate.now().plus(2,ChronoUnit.DAYS))
 		.getResultList().stream().collect(Collectors.toSet());
 		
@@ -49,20 +49,20 @@ public class RepositorioEventos implements WithGlobalEntityManager, Transactiona
 	}
 	
 	public Set<Evento> getEventos(){
-		return em.createQuery("from Evento",Evento.class).getResultList().stream().collect(Collectors.toSet());
+		return entityManager().createQuery("from Evento",Evento.class).getResultList().stream().collect(Collectors.toSet());
 	}
 	
 	public List<Evento> getEventosForUser(String username) {
 		Usuario user = repoUsuarios.getUsuario(username);
 		String query = "from Evento e where e.usuario = :username";
-		return em.createQuery(query, Evento.class)
+		return entityManager().createQuery(query, Evento.class)
 				.setParameter("username", user)
 				.getResultList();
 	}
 	
 	public Evento getEvento(Long id) {
 		String query = "from Evento e where e.id_evento = :id";
-		return em.createQuery(query, Evento.class)
+		return entityManager().createQuery(query, Evento.class)
 				.setParameter("id", id)
 				.getSingleResult();
 	}

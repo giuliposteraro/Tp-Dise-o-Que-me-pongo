@@ -15,20 +15,31 @@ import domain.usuario.Usuario;
 public class SugerenciasService implements WithGlobalEntityManager {
 	EntityManager em = entityManager();
 
-	public List<Sugerencia> getSugerenciasForEvent(Evento evento) {
-		String query = "from Sugerencia s where s.evento = :evento";
-		return em.createQuery(query, Sugerencia.class)
-				.setParameter("evento", evento)
-				.getResultList();
+	public Set<Sugerencia> getSugerenciasForEvent(Long id_evento) {
+		String query = "from Evento e where e.id_evento = :id_evento";
+		return em.createQuery(query, Evento.class)
+				.setParameter("id_evento", id_evento)
+				.getSingleResult()
+				.getSugerencias();
 	}
 	
-	public List<Sugerencia> getSugerenciasForUser(String username) {
+	public String getMotivoEvento(Long id_evento) {
+		String query = "from Evento e where e.id_evento = :id_evento";
+		return em.createQuery(query, Evento.class)
+				.setParameter("id_evento", id_evento)
+				.getSingleResult()
+				.getMotivo();
+	}
+	
+	
+	/*public List<Sugerencia> getSugerenciasForUser(String username) {
 		String query = "from Usuario u where u.username = :username";
 		return em.createQuery(query, Usuario.class)
 				.setParameter("username", username)
 				.getSingleResult()
 				.getSugerenciasPendientes();
 	}
+	*/
 
 	public Sugerencia getSugerencia(Long id) {
 		String query = "from Sugerencia s where s.id_sugerencia = :id";

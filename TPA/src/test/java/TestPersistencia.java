@@ -84,8 +84,7 @@ public class TestPersistencia extends AbstractPersistenceTest implements WithGlo
 			entityManager().persist(evento);
 			withTransaction(() -> {
 				user.setPassword(password);
-			});
-			withTransaction(() -> {
+
 				g1.setNombre("El Guardarropas");
 				g2.setNombre("Let's go G2");
 				gs.forEach(g -> g.setNombre("Un Guardarropa"));
@@ -93,6 +92,7 @@ public class TestPersistencia extends AbstractPersistenceTest implements WithGlo
 				g1.agregarPrenda(pantalon);
 				g1.agregarPrenda(zapatillas);
 				g1.agregarPrenda(reloj);
+				//evento.sugerir();
 			});
 		} catch(Exception e) {
 			System.out.println(e.getMessage());

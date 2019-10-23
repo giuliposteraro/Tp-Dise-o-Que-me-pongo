@@ -38,7 +38,7 @@ public class Usuario {
 	private TipoUsuario tipo;
 	@ManyToMany(cascade= CascadeType.PERSIST) @OrderBy(value = "id_guardarropa ASC")
 	private Set<Guardarropa> guardarropas = new HashSet<Guardarropa>();
-	@OneToMany @JoinColumn(name = "id_usuario")
+	@OneToMany(cascade=CascadeType.PERSIST) @JoinColumn(name = "id_usuario")
 	private List<Sugerencia> sugerencias = new ArrayList<Sugerencia>();
 	@Transient
 	private List<Sugerencia> sugerenciasRevisadas = new ArrayList<Sugerencia>();

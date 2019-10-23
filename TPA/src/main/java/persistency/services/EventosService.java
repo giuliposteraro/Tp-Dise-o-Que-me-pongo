@@ -14,9 +14,4 @@ import domain.usuario.Usuario;
 public class EventosService implements WithGlobalEntityManager {
 	EntityManager em = entityManager();
 
-
-
-	
-	
-
 }

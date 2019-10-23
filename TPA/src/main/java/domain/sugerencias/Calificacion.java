@@ -25,6 +25,8 @@ public class Calificacion {
 		this.calzado = calzado;
 	}
 
+	private Calificacion() {}
+	
 	public static List<Double> promedio(Collection<Calificacion> calificaciones) {
 		try {
 			return calificaciones.stream().map(c -> c.getCalificaciones()).reduce((a, b) -> vectorialSum(a, b))

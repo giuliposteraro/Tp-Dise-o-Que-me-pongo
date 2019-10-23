@@ -6,27 +6,25 @@
   </ol>
 </nav>
 
-<p>Estas son tus sugerencias para el evento, <b>{{evento}}</b></p>
+<p>{{username}}, estas son tus sugerencias para el evento: <b>{{evento}}</b></p>
 
 <div class="container">
 	<h2>Sugerencias</h2>
 </div>
 
-<ul class="list-group">
-  <li class="list-group-item active">Cras justo odio</li>
-  <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item">Morbi leo risus</li>
-  <li class="list-group-item">Porta ac consectetur ac</li>
-  <li class="list-group-item">Vestibulum at eros</li>
-</ul>
-
 <div class="container d-flex p-2 flex-wrap justify-content-center">
-  {{#each sugerencia}}
+  {{#each sugerencias}}
+  {{id_sugerencia}}
   <div class="card-container col-sm-3 m-3" style="display: inline-block">
-    <a href="/sugerencias/{{id_sugerencia}}" style="color: inherit">
+    <a href="/calendar/{{id_evento}}/suggestions/{{id_sugerencia}}" style="color: inherit">
       <div class="card border rounded-sm shadow m-sm-auto p-sm-auto">
-       
+	  <img src="/img/suggestion.png" class="card-img-top" alt="Sugerencia">
       </div>
+	   <div class="card-body">
+          <p class="card-title">
+            <h3> Sugerencia </h3>
+          </p>
+        </div>
     </a>
   </div>
   {{/each}}

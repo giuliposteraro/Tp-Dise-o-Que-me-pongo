@@ -27,6 +27,8 @@ public class Atuendo {
 	public Atuendo(Set<Prenda> prendas) {
 		this.prendas = prendas;
 	}
+	
+	private Atuendo() {}
 
 	public Atuendo(Collection<Prenda> prendas) {
 		this.prendas = prendas.stream().collect(Collectors.toSet());
