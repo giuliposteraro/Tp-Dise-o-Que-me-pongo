@@ -32,12 +32,13 @@
           <input class="rounded form-control" id="psw2" type="password" name="password" placeholder="Repita contraseña"
             required />
         </div>
-
-        <select class="m-3 rounded form-control" id="tipoUsuario" name="tipoUsuario" required>
-          {{#each tipos}}
-          <option value="{{this}}">{{this}}</option>
-          {{/each}}
-        </select>
+        <div class="m-3">
+          <select class="rounded form-control" id="tipoUsuario" name="tipoUsuario" required>
+            {{#each tipos}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
         <div class="mx-3 my-4">
           <button class="btn btn-primary px-3 rounded" id="submitBtn" type="submit">Registrarse</button>
         </div>
