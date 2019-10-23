@@ -16,4 +16,5 @@ public class SugerenciasController extends Controller{
 		return this.render("sugerencias.hbs");
 	
 	}
+	
 }
