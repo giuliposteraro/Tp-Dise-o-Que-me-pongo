@@ -13,4 +13,14 @@ public class LoginService extends Service {
 			return false;
 		}
 	}
+	
+	public Boolean userExists(String username) {
+		String query = "from Usuario u where u.username = :username";
+		try {
+			Usuario user = em().createQuery(query ,Usuario.class).setParameter("username", username).getSingleResult();
+			return true;
+		} catch (NoResultException e) {
+			return false;
+		}
+	}
 }
