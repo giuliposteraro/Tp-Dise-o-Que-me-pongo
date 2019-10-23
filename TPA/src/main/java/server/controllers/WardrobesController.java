@@ -17,7 +17,7 @@ public class WardrobesController extends Controller {
 		return this.render("wardrobes.hbs");
 	}
 	
-	public String showWardrobe(Request req, Response res) {
+	public String showWardrobeContent(Request req, Response res) {
 		String username = req.session().attribute("username");
 		String id = req.params("id");
 		
