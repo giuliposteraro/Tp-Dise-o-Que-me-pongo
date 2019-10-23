@@ -20,6 +20,7 @@ public class ConstructorPrenda {
 	private Color color;
 	private ETela tela;
 	private BufferedImage imagen;
+	private String img;
 	
 	public Prenda crear() {
 		validar();
@@ -45,6 +46,7 @@ public class ConstructorPrenda {
 	}
 	
 	public void setImagen(String path) {
+		this.img = path;
 		File archivoImg = new File(path);
 		try {
 			imagen = ImageIO.read(archivoImg);

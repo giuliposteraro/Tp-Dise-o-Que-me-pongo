@@ -1,9 +1,10 @@
 package server.controllers;
+import domain.color.EColor;
+import domain.tipoPrenda.ETela;
+import domain.tipoPrenda.RepoTipos;
 import persistency.services.WardrobeService;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class WardrobesController extends Controller {
 	WardrobeService wardrobeService = new WardrobeService();
@@ -16,14 +17,16 @@ public class WardrobesController extends Controller {
 		return this.render("wardrobes.hbs");
 	}
 	
-	public String showWardrobe(Request req, Response res) {
+	public String showWardrobeContent(Request req, Response res) {
 		String username = req.session().attribute("username");
-		
 		String id = req.params("id");
 		
-		this.addAttribute("guardarropa",  wardrobeService.getGuardarropa(Long.parseLong(id)));	
-		
+		this.addAttribute("guardarropa",  wardrobeService.getGuardarropa(Long.parseLong(id)));
+		System.out.println(wardrobeService.getGuardarropa(Long.parseLong(id)).getPrendas());
 		this.addAttribute("username", username);
+		this.addAttribute("tipos", RepoTipos.getTipos());
+		this.addAttribute("telas", ETela.getTelas());
+		this.addAttribute("colores", EColor.getColores());
 		
 		return this.render("wardrobe-content.hbs");
 	}

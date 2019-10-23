@@ -2,14 +2,9 @@ package domain.usuario;
 
 import java.util.HashSet;
 import java.util.Set;
+import persistency.services.Service;
 
-import javax.persistence.EntityManager;
-
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-
-public class RepositorioUsuarios implements WithGlobalEntityManager{
-	EntityManager em = entityManager();
-	
+public class RepositorioUsuarios extends Service {
 	private Set<Usuario> usuarios;
 	
 	public RepositorioUsuarios() {
@@ -20,7 +15,7 @@ public class RepositorioUsuarios implements WithGlobalEntityManager{
 		this.usuarios.add(unUsuario);
 	}
 	
-	public Set<Usuario> usuarios(){
+	public Set<Usuario> usuarios() {
 		return this.usuarios;
 	}
 	
@@ -29,8 +24,7 @@ public class RepositorioUsuarios implements WithGlobalEntityManager{
 	}
 	
 	public Usuario getUsuario(String username) {
-		return em.createQuery("from Usuario u where u.username = :username",Usuario.class).setParameter("username", username).getSingleResult();
-
+		return em().createQuery("from Usuario u where u.username = :username",Usuario.class).setParameter("username", username).getSingleResult();
 	}
 	
 }

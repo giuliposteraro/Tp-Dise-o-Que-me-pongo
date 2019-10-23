@@ -1,0 +1,13 @@
+{{#partial "contenido"}}
+<div class="container">
+    {{#if error}}
+    <p>{{error}}</p>
+    {{else}}
+    <div>
+        <p>Prenda creada exitosamente</p>
+    </div>
+    {{/if}}
+    <a href="/wardrobes/{{idGuardarropa}}"><button type="button" class="btn btn-primary">Volver</button></a>
+</div>
+{{/partial}}
+{{> layout.hbs}}
