@@ -1,15 +1,15 @@
 {{#partial "contenido"}}
-<form method="POST" action="/calendar/new/suggestion">
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Guardarropas</li>
-  </ol>
-</nav>
-
 <p>Estas son tus sugerencias para el evento, <b>{{evento}}</b></p>
-
 <div class="container">
 	<h2>Sugerencias</h2>
+	<div class="container d-flex p-2 flex-wrap justify-content-center">
+  {{#each sugerencia}}
+  <div class="card-container col-sm-3 m-3" style="display: inline-block">
+    <a href="/sugggestions/{{id_sugerencia}}" style="color: inherit">
+    </a>
+   </div>
+  {{/each}}
+	</div>
 </div>
 
 <ul class="list-group">
