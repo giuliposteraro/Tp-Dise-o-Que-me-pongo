@@ -24,16 +24,6 @@
     </div>
 
     <div class="form-group">
-      <label for="frecuencia">Frecuencia</label>
-      <select class="form-control" id="frecuencia" name="frecuencia">
-        <option value="null">Seleccione una frecuencia</option>
-        {{#each frecuencias}}
-        <option value="{{this}}">{{this}}</option>
-        {{/each}}
-      </select>
-    </div>
-
-    <div class="form-group">
       <label for="frecuencia">Guardarropas</label>
       <select class="form-control" id="guardarropa" name="guardarropa">
         <option value="null">Seleccione un guardarropa</option>
@@ -55,9 +45,6 @@
         event.preventDefault();
       }
       if ($("#guardarropa").val() == "null") {
-        event.preventDefault();
-      }
-      if ($("#frecuencia").val() == "null") {
         event.preventDefault();
       }
     });

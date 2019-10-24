@@ -27,7 +27,6 @@ public class EventosController extends Controller {
 	public String createEvento(Request req, Response res) {
 		String username = req.session().attribute("username");
 		this.addAttribute("username", username);
-		this.addAttribute("frecuencias", EFrecuencia.getFrecuencias());
 		this.addAttribute("guardarropas", wardrobeService.getWardrobesForUser(username));
 
 		return this.render("event-create.hbs");
@@ -38,7 +37,6 @@ public class EventosController extends Controller {
 		String motivo = req.queryParams("motivo");
 		String lugar = req.queryParams("lugar");
 		String fechaString = req.queryParams("fecha");
-		String frecuenciaString = req.queryParams("frecuencia").toUpperCase();
 		String guardarropaId = req.queryParams("guardarropa");
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -46,13 +44,13 @@ public class EventosController extends Controller {
 		
 		Guardarropa guardarropa = wardrobeService.getGuardarropa(Long.parseLong(guardarropaId));
 		
-		EFrecuencia frecuencia = EFrecuencia.valueOf(frecuenciaString);		
+		EFrecuencia frecuencia = EFrecuencia.UNICA;		
 		
 		Usuario user = repoUsuarios.getUsuario(username);		
 		
 		user.crearEvento(guardarropa, fecha, lugar, motivo, frecuencia);		
 		
 		res.redirect("/calendar");
-		return "ESTO NUNCA SE VERA";
+		return "";
 	}
 }

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.uqbar.arena.bindings.DateTransformer;
 import org.uqbar.commons.model.annotations.Observable;
@@ -40,6 +41,8 @@ public class Evento {
 	private String motivo;
 	@OneToMany(cascade=CascadeType.PERSIST) @JoinColumn(name="id_evento")
 	private Set<Sugerencia> sugerencias;
+	@OneToOne
+	private Sugerencia sugerenciaAceptada;
 	@Enumerated(EnumType.STRING)
 	private EFrecuencia frecuencia;
 	private Boolean pendiente;
@@ -145,6 +148,14 @@ public class Evento {
 	
 	public Long getId_evento() {
 		return id_evento;
+	}
+
+	public Sugerencia getSugerenciaAceptada() {
+		return sugerenciaAceptada;
+	}
+
+	public void setSugerenciaAceptada(Sugerencia sugerenciaAceptada) {
+		this.sugerenciaAceptada = sugerenciaAceptada;
 	}
 	
 	
