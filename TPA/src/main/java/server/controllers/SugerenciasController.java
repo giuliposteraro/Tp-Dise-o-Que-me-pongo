@@ -50,6 +50,14 @@ public class SugerenciasController extends Controller{
 		
 		return this.render("sugerencias.hbs");		
 	}
+	
+	public String aceptarSugerencia(Request req, Response res) {
+		return "";
+	}
+	
+	public String rechazarSugerencia(Request req, Response res) {
+		return "";
+	}
 }
 	
 

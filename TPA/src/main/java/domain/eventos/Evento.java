@@ -58,7 +58,7 @@ public class Evento {
 		this.pendiente = true;
 	}
 	
-	public Evento(){}
+	private Evento(){}
 	
 	public boolean esProximo() {  // es proximo si el evento es antes de maniana
 		return fecha.isBefore(LocalDate.now().plus(2,ChronoUnit.DAYS));
