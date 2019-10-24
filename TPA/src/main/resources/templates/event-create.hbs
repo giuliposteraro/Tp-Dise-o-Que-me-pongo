@@ -1,44 +1,82 @@
 {{#partial "contenido"}}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"><a href="/calendar">Calendario</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Nuevo evento</li>
+  </ol>
+</nav>
+
 <div class="container">
-<form method="POST" action="/calendar/new">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Motivo</label>
-    <input type="text" class="form-control" placeholder="Ingrese el motivo" name="motivo">
-  </div>
+  <form method="POST" action="/calendar/new">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Motivo</label>
+      <input type="text" class="form-control" placeholder="Ingrese el motivo" id="motivo" name="motivo">
+    </div>
 
-  <div class="form-group">
-    <label for="exampleInputEmail1">Lugar</label>
-    <input type="text" class="form-control" placeholder="Ingrese el lugar" name="lugar">
-  </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Lugar</label>
+      <input type="text" class="form-control" placeholder="Ingrese el lugar" id="lugar" name="lugar">
+    </div>
 
-  <div class="form-group">
-    <label for="exampleInputEmail1">Fecha</label>
-    <input type="date" class="form-control" placeholder="Ingrese la fecha" name="fecha">
-  </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Fecha</label>
+      <input type="date" class="form-control" placeholder="Ingrese la fecha" id="fecha" name="fecha">
+    </div>
 
-  <div class="form-group">
-    <label for="frecuencia">Frecuencia</label>
-    <select class="form-control" id="frecuencia" name="frecuencia">
-      <option value="null">Seleccione una frecuencia</option>
-      {{#each frecuencias}}
-          <option  value="{{this}}">{{this}}</option>
-      {{/each}}
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="frecuencia">Frecuencia</label>
+      <select class="form-control" id="frecuencia" name="frecuencia">
+        <option value="null">Seleccione una frecuencia</option>
+        {{#each frecuencias}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="frecuencia">Guardarropas</label>
-    <select class="form-control" id="guardarropa" name="guardarropa">
-      <option value="null">Seleccione un guardarropa</option>
-      {{#each guardarropas}}
-          <option  value="{{id_guardarropa}}">{{nombre}}</option>
-      {{/each}}
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="frecuencia">Guardarropas</label>
+      <select class="form-control" id="guardarropa" name="guardarropa">
+        <option value="null">Seleccione un guardarropa</option>
+        {{#each guardarropas}}
+        <option value="{{id_guardarropa}}">{{nombre}}</option>
+        {{/each}}
+      </select>
+    </div>
 
-  <button type="submit" class="btn btn-primary">Crear</button>
-</form>
+    <button type="submit" id="submitBtn" class="btn btn-primary">Crear</button>
+  </form>
 </div>
+
+<script>
+
+  $(document).ready(() => {
+    $("#submitBtn").click(function () {
+      if (!$("#fecha").val() || !$("#lugar").val()) {
+        event.preventDefault();
+      }
+      if ($("#guardarropa").val() == "null") {
+        event.preventDefault();
+      }
+      if ($("#frecuencia").val() == "null") {
+        event.preventDefault();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {{/partial}}
 
 {{> layout.hbs}}

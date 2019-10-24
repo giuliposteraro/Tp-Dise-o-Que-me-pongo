@@ -1,17 +1,36 @@
 {{#partial "contenido"}}
-<p>Este es tu calendario, <b>{{username}}</b></p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Calendario</li>
+  </ol>
+</nav>
 
 <div class="container">
-  <h2>Eventos</h2>
+  <div class="my-3 d-flex">
+    <div class="col-sm">
+      <h2>Eventos</h2>
+    </div>
+    <div class="col-sm-3">
+      <a class="btn btn-primary" href="/calendar/new" role="button">Agregar evento</a>
+    </div>
+  </div>
   <ul class="list-group">
     {{#each eventos}}
-    <li class="list-group-item">{{motivo}} 
-	{{#if TieneSugerencias}}
-	<form action="/calendar/{{id_evento}}/suggestions" method="GET"><button type="submit" class="btn">Ver sugerencias</button></form></li>
-    {{else}}
-	<form action="/calendar/{{id_evento}}/suggestions" method="POST"><button type="submit" class="btn">Sugerir</button></form></li>
-	{{/if}}
-	{{/each}}
+    <li class="list-group-item">
+      <div class="float-sm-left d-flex align-items-center">
+        <p>{{motivo}}</p>
+      </div>
+      {{#if tieneSugerencias}}
+      <form action="/calendar/{{id_evento}}/suggestions" method="GET">
+        <button type="submit" class="btn btn-primary float-sm-right">Ver sugerencias</button>
+      </form>
+      {{else}}
+      <form action="/calendar/{{id_evento}}/suggestions" method="POST">
+        <button type="submit" class="btn btn-success float-sm-right">Sugerir</button>
+      </form>
+      {{/if}}
+    </li>
+    {{/each}}
   </ul>
 </div>
 

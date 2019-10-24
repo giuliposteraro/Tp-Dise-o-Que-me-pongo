@@ -3,6 +3,7 @@ package server.controllers;
 import domain.eventos.Evento;
 import domain.eventos.RepositorioEventos;
 import domain.usuario.RepositorioUsuarios;
+import exceptions.NoSePuedeGenerarSugerencia;
 import persistency.services.SugerenciasService;
 import spark.Request;
 import spark.Response;
@@ -35,21 +36,35 @@ public class SugerenciasController extends Controller{
 		String id_evento = req.params("event");
 		Evento evento = repoEventos.getEvento(Long.parseLong(id_evento));
 		String username = req.session().attribute("username");
-		evento.sugerir();
-		this.addAttribute("evento", sugerenciasService.getMotivoEvento(Long.parseLong(id_evento)));
-		this.addAttribute("id_evento", id_evento);
-		this.addAttribute("sugerencias",  sugerenciasService.getSugerenciasForEvent(Long.parseLong(id_evento)));
+		
 		this.addAttribute("username", username);
+		this.addAttribute("id_evento", id_evento);
+		this.addAttribute("evento", sugerenciasService.getMotivoEvento(Long.parseLong(id_evento)));
+		
+		try {
+			evento.sugerir();
+			this.addAttribute("sugerencias",  sugerenciasService.getSugerenciasForEvent(Long.parseLong(id_evento)));
+		} catch (NoSePuedeGenerarSugerencia e) {
+			this.addAttribute("error", e.getMessage());
+		}
+		
 		return this.render("sugerencias.hbs");		
 	}
-	
+  
 	public String calificarSugerencias(Request req, Response res) {
 		String username = req.session().attribute("username");
 		this.addAttribute("username", username);
 		this.addAttribute("sugerenciasAprobadas", sugerenciasService.getSugerenciasForUser(username));
 		return this.render("calificacion-sugerencias.hbs");
 	}
+  
+	public String aceptarSugerencia(Request req, Response res) {
+		return "";
+	}
 	
+	public String rechazarSugerencia(Request req, Response res) {
+		return "";
+	}
 }
 	
 
