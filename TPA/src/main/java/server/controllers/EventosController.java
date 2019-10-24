@@ -52,6 +52,7 @@ public class EventosController extends Controller {
 		
 		user.crearEvento(guardarropa, fecha, lugar, motivo, frecuencia);		
 		
-		return username + motivo;
+		res.redirect("/calendar");
+		return "ESTO NUNCA SE VERA";
 	}
 }

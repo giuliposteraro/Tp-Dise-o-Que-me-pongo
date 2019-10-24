@@ -1,8 +1,19 @@
 {{#partial "contenido"}}
-<p>Este es tu calendario, <b>{{username}}</b></p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Calendario</li>
+  </ol>
+</nav>
 
 <div class="container">
-  <h2 class="ml-3">Eventos</h2>
+  <div class="my-3 d-flex">
+    <div class="col-sm">
+      <h2>Eventos</h2>
+    </div>
+    <div class="col-sm-3">
+      <a class="btn btn-primary" href="/calendar/new" role="button">Agregar evento</a>
+    </div>
+  </div>
   <ul class="list-group">
     {{#each eventos}}
     <li class="list-group-item">
