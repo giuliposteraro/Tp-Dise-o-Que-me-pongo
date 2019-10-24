@@ -3,17 +3,17 @@
 <form method="POST" action="/calendar/new">
   <div class="form-group">
     <label for="exampleInputEmail1">Motivo</label>
-    <input type="text" class="form-control" placeholder="Ingrese el motivo" name="motivo">
+    <input type="text" class="form-control" placeholder="Ingrese el motivo" id="motivo" name="motivo">
   </div>
 
   <div class="form-group">
     <label for="exampleInputEmail1">Lugar</label>
-    <input type="text" class="form-control" placeholder="Ingrese el lugar" name="lugar">
+    <input type="text" class="form-control" placeholder="Ingrese el lugar" id="lugar" name="lugar">
   </div>
 
   <div class="form-group">
     <label for="exampleInputEmail1">Fecha</label>
-    <input type="date" class="form-control" placeholder="Ingrese la fecha" name="fecha">
+    <input type="date" class="form-control" placeholder="Ingrese la fecha" id="fecha" name="fecha">
   </div>
 
   <div class="form-group">
@@ -36,9 +36,40 @@
     </select>
   </div>
 
-  <button type="submit" class="btn btn-primary">Crear</button>
+  <button type="submit" id="submitBtn" class="btn btn-primary">Crear</button>
 </form>
 </div>
+
+<script>
+
+$(document).ready(() => {
+  $("#submitBtn").click(function(){
+    if (!$("#fecha").val() || !$("#lugar").val()) {
+      event.preventDefault();
+    }
+    if($("#guardarropa").val()=="null"){
+      event.preventDefault();
+    }
+    if($("#frecuencia").val()=="null"){
+      event.preventDefault();
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {{/partial}}
 
 {{> layout.hbs}}
