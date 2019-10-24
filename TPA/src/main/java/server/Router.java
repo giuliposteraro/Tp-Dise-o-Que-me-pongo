@@ -6,6 +6,7 @@ import server.controllers.ClothesController;
 import server.controllers.EventosController;
 import server.controllers.HomeController;
 import server.controllers.LoginController;
+import server.controllers.SugerenciasController;
 import server.controllers.WardrobesController;
 import spark.Spark;
 
@@ -27,6 +28,7 @@ public class Router implements WithGlobalEntityManager, TransactionalOps {
 		ClothesController clothesc = new ClothesController();
 		HomeController homec = new HomeController();
 		EventosController eventosc = new EventosController();
+		SugerenciasController sugerenciasc = new SugerenciasController();
 		
 		Spark.before("/*", (req, res) -> {
 			beginTransaction();
@@ -45,6 +47,9 @@ public class Router implements WithGlobalEntityManager, TransactionalOps {
 		Spark.get("/calendar", eventosc::showEventos);
 		Spark.get("/calendar/new", eventosc::createEvento);
 		Spark.post("/calendar/new", eventosc::saveEvento);
+		Spark.get("/calendar/:event/suggestions", sugerenciasc::showSugerencias);
+		Spark.get("/calendar/:event/suggestions/:suggestion", sugerenciasc::showAtuendo);
+		Spark.post("/calendar/:event/suggestions", sugerenciasc::generarSugerencias);
 		Spark.get("/register", loginc::showRegister);
 		Spark.post("/register", loginc::register);
 		Spark.get("/users/:username", loginc::userExists);
