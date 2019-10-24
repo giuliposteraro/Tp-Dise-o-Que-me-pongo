@@ -1,6 +1,13 @@
 {{#partial "contenido"}}
 
-<p>{{username}}, estas son tus sugerencias para el evento: <b>{{evento}}</b></p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Calendar</li>
+	<li class="breadcrumb-item active" aria-current="page">Sugerencias({{evento}})</li>
+  </ol>
+</nav>
+
+<p> Estas son tus sugerencias para el evento: <b>{{evento}}</b></p>
 
 <div class="container d-flex p-2 flex-wrap justify-content-center">
   {{#if error}}
