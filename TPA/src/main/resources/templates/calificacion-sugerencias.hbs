@@ -17,23 +17,24 @@
     {{#each sugerenciasAprobadas}}
     <li class="list-group-item">
       <div class="row">
-      <div class="col-sm-4 align-items-center">
-        <h5> Sugerencia para {{evento.motivo}}</h5>
-      </div>
-      <div class="col-sm-4">
-        <a href="calendar/{{evento.id_evento}}/suggestions/{{id_sugerencia}}"> Ver sugerencia</a>
-      </div>
+        <div class="col-sm-3 align-items-center">
+          <h5> Sugerencia para {{evento.motivo}}</h5>
+        </div>
+        <div class="col-sm-3">
+          <a href="calendar/{{evento.id_evento}}/suggestions/{{id_sugerencia}}"> Ver sugerencia</a>
+        </div>
 
-      <div class="col-sm-4 align-items-center">
-        <form method="POST" action="/sugerencias/{{id_sugerencia}}/nota">
-          <input type="number" name="nota" placeholder="Calicacion"/>
-          <button class="btn btn-success" type="submit">Calificar</button>
-        </form>
+        <div class="col-sm-6 align-items-center">
+          <form method="POST" action="/sugerencias/{{id_sugerencia}}/nota">
+            <label for="customRange2">Frio - Calor</label>
+            <input type="range" class="custom-range" name="nota" min="-5" max="5" id="customRange2">
+            <button class="btn btn-success" type="submit">Calificar</button>
+          </form>
+        </div>
+        <div class="col-sm-4">
+          Calificación: {{calificacion.superior}}
+        </div>
       </div>
-      <div class="col-sm-4">
-        Calificación: {{calificacion.superior}}
-      </div>
-    </div>
     </li>
     {{/each}}
   </ul>
