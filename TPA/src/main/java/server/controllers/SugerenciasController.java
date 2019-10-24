@@ -3,7 +3,6 @@ package server.controllers;
 import domain.eventos.Evento;
 import domain.eventos.RepositorioEventos;
 import domain.usuario.RepositorioUsuarios;
-import persistency.services.EventosService;
 import persistency.services.SugerenciasService;
 import spark.Request;
 import spark.Response;
