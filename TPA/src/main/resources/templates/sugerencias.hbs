@@ -3,20 +3,29 @@
 <p>{{username}}, estas son tus sugerencias para el evento: <b>{{evento}}</b></p>
 
 <div class="container d-flex p-2 flex-wrap justify-content-center">
+  {{#if error}}
+  <div>
+    <p>{{error}}</p>
+  </div><br>
+  <div>
+    <a href="/calendar"><button type="button" class="btn btn-primary">Volver</button></a>
+  </div>
+  {{else}}
   {{#each sugerencias}}
   <div class="card-container col-sm-3 m-3" style="display: inline-block">
     <a href="/calendar/{{id_evento}}/suggestions/{{id_sugerencia}}" style="color: inherit">
       <div class="card border rounded-sm shadow m-sm-auto p-sm-auto">
-	  <img src="/img/suggestion.png" class="card-img-top" alt="Sugerencia">
+        <img src="/img/suggestion.png" class="card-img-top" alt="Sugerencia">
       </div>
-	   <div class="card-body">
-          <p class="card-title">
-            <h3> Sugerencia </h3>
-          </p>
-        </div>
+      <div class="card-body">
+        <p class="card-title">
+          <h3> Sugerencia </h3>
+        </p>
+      </div>
     </a>
   </div>
   {{/each}}
+  {{/if}}
 </div>
 {{/partial}}
 
