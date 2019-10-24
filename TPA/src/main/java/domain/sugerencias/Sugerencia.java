@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.common.collect.Streams;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,7 +23,7 @@ import domain.guardarropa.Atuendo;
 public class Sugerencia {
 	@Id @GeneratedValue
 	private Long id_sugerencia;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST)
 	private Atuendo atuendo;
 	@Enumerated(EnumType.STRING)
 	private EstadoSugerencia estado;

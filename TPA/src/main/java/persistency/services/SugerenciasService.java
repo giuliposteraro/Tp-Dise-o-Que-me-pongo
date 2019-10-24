@@ -13,11 +13,10 @@ import domain.usuario.Usuario;
 
 
 public class SugerenciasService implements WithGlobalEntityManager {
-	EntityManager em = entityManager();
 
 	public Set<Sugerencia> getSugerenciasForEvent(Long id_evento) {
 		String query = "from Evento e where e.id_evento = :id_evento";
-		return em.createQuery(query, Evento.class)
+		return entityManager().createQuery(query, Evento.class)
 				.setParameter("id_evento", id_evento)
 				.getSingleResult()
 				.getSugerencias();
@@ -25,7 +24,7 @@ public class SugerenciasService implements WithGlobalEntityManager {
 	
 	public String getMotivoEvento(Long id_evento) {
 		String query = "from Evento e where e.id_evento = :id_evento";
-		return em.createQuery(query, Evento.class)
+		return entityManager().createQuery(query, Evento.class)
 				.setParameter("id_evento", id_evento)
 				.getSingleResult()
 				.getMotivo();
@@ -43,7 +42,7 @@ public class SugerenciasService implements WithGlobalEntityManager {
 
 	public Sugerencia getSugerencia(Long id) {
 		String query = "from Sugerencia s where s.id_sugerencia = :id";
-		return em.createQuery(query, Sugerencia.class)
+		return entityManager().createQuery(query, Sugerencia.class)
 				.setParameter("id", id)
 				.getSingleResult();
 	}
