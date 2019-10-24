@@ -86,7 +86,7 @@ public class LoginController extends Controller {
 	public void verificarAutenticacion(Request req, Response res) throws JSONException {
 		if (!(req.url().endsWith("/login") || req.url().endsWith("/register")) 
 				&& usuarioAutenticado(req) == null
-				&& req.queryParams("masterToken") == "bokita")
+				&& !(req.queryParams("masterToken") == "bokita"))
 			res.redirect("/login");
 	}
 
