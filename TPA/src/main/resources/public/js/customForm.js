@@ -14,5 +14,5 @@ function submitForm(id) {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*"
     }
-  }).then(res => ($(document).innerHTML = res));
+  }).then(setTimeout(() => location.reload(), 300));
 }
