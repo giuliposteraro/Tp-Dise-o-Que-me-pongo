@@ -21,7 +21,7 @@ public class LoginController extends Controller {
 
 	public String loguear(Request req, Response res) {
 		if (usuarioAutenticado(req) != null)
-			res.redirect("/home");
+			res.redirect("/calendar");
 
 		String username = req.queryParams("username");
 		String password = req.queryParams("password");
@@ -30,7 +30,7 @@ public class LoginController extends Controller {
 			if (loginService.autenticar(username, password)) {
 				req.session(true);
 				req.session().attribute("username", username);
-				res.redirect("/home");
+				res.redirect("/calendar");
 			} else {
 				this.addAttribute("username", username);
 				this.addAttribute("errorLogueo", true);
