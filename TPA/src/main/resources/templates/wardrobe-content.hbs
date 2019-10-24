@@ -67,8 +67,8 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal"
-              data-target="#wizard2" onclick="actualizarTelas()">Siguiente</button>
+            <button type="button" id="btnTipo" class="btn btn-primary" data-toggle="modal" data-dismiss="modal"
+              data-target="#wizard2" onclick="actualizarTelas()" disabled>Siguiente</button>
           </div>
         </div>
       </div>
@@ -107,8 +107,8 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
               data-target="#wizard1">Volver</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal"
-              data-target="#wizard3">Siguiente</button>
+            <button type="button" id="btnColor" class="btn btn-primary" data-toggle="modal" data-dismiss="modal"
+              data-target="#wizard3" disabled>Siguiente</button>
           </div>
         </div>
       </div>
@@ -138,7 +138,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
               data-target="#wizard2">Volver</button>
-            <button type="submit" class="btn btn-primary">Finalizar</button>
+            <button type="submit" id="btnTela" class="btn btn-primary" disabled>Finalizar</button>
           </div>
         </div>
       </div>

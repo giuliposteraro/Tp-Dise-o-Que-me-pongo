@@ -14,9 +14,9 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import domain.Config;
 import domain.usuario.RepositorioUsuarios;
 import domain.usuario.Usuario;
+import persistency.services.Service;
 
-public class RepositorioEventos implements WithGlobalEntityManager, TransactionalOps{
-
+public class RepositorioEventos extends Service {
 	RepositorioUsuarios repoUsuarios;
 	
 	private Set<Evento> eventos;	//TODO Consultar a DB
@@ -32,16 +32,13 @@ public class RepositorioEventos implements WithGlobalEntityManager, Transactiona
 	
 	public void agregarEvento(Evento unEvento) {
 		this.eventos.add(unEvento);
-		entityManager().persist(unEvento);
-		
+		em().persist(unEvento);
 	}
 	
 	public Set<Evento> proximosEventos(){
-		return entityManager().createQuery("from Evento e where e.pendiente = true and fecha<:maniana",Evento.class)
+		return em().createQuery("from Evento e where e.pendiente = true and fecha<:maniana",Evento.class)
 		.setParameter("maniana",LocalDate.now().plus(2,ChronoUnit.DAYS))
 		.getResultList().stream().collect(Collectors.toSet());
-		
-		//return this.getEventos().stream().filter(evento->evento.proximoPendiente()).collect(Collectors.toSet());
 	}
 	
 	public void eventos(Set<Evento> unosEventos){
@@ -49,23 +46,21 @@ public class RepositorioEventos implements WithGlobalEntityManager, Transactiona
 	}
 	
 	public Set<Evento> getEventos(){
-		return entityManager().createQuery("from Evento",Evento.class).getResultList().stream().collect(Collectors.toSet());
+		return em().createQuery("from Evento",Evento.class).getResultList().stream().collect(Collectors.toSet());
 	}
 	
 	public List<Evento> getEventosForUser(String username) {
 		Usuario user = repoUsuarios.getUsuario(username);
 		String query = "from Evento e where e.usuario = :username";
-		return entityManager().createQuery(query, Evento.class)
+		return em().createQuery(query, Evento.class)
 				.setParameter("username", user)
 				.getResultList();
 	}
 	
 	public Evento getEvento(Long id) {
 		String query = "from Evento e where e.id_evento = :id";
-		return entityManager().createQuery(query, Evento.class)
+		return em().createQuery(query, Evento.class)
 				.setParameter("id", id)
 				.getSingleResult();
 	}
-	
-
 }

@@ -32,11 +32,11 @@ public class ClothesController extends Controller {
 			Prenda prenda = constPrenda.crear();
 			new WardrobeService().getGuardarropa(idGuardarropa).agregarPrenda(prenda);
 		} catch (Exception e) {
-			this.addAttribute("error", "No se pudo crear la prenda: " + e.getMessage());
+			res.cookie("error", "No se pudo crear la prenda: " + e.getMessage());
 		}
-		this.addAttribute("idGuardarropa", idGuardarropa);
 		
-		return this.render("new-clothe.hbs");
+		res.redirect("/wardrobes/" + idGuardarropa.toString());
+		return "";
 	}
 	
 	public String fabrics(Request req, Response res) {
