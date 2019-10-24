@@ -44,4 +44,12 @@ public class Calificacion {
 	private static List<Double> vectorialSum(List<Double> a, List<Double> b) {
 		return a.stream().map(x -> x + b.get(a.indexOf(x))).collect(Collectors.toList());
 	}
+
+	public Double getSuperior() {
+		return superior;
+	}
+
+	public void setSuperior(Double superior) {
+		this.superior = superior;
+	}
 }

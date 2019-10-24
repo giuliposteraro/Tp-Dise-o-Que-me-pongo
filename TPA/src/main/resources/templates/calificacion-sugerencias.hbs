@@ -1,29 +1,44 @@
 {{#partial "contenido"}}
-
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item active" aria-current="page">Sugerencias</li>
   </ol>
 </nav>
 
-<div class="container d-flex p-2 flex-wrap justify-content-center">
-  {{#each sugerenciasAprobadas}}
-  <div class="card-container col-sm-3 m-3" style="display: inline-block">
-      <div class="card border rounded-sm shadow m-sm-auto p-sm-auto">
-	  <img src="/img/suggestion.png" class="card-img-top" alt="Sugerencia">
-      </div>
-	 <form class="rounded mx-3 my-4" method="POST">
-		<label for="customRange2">Calificar sugerencia</label>
-		<input type="calificacion" class="custom-range" min="-5" max="5" id="calificacion">
-	 </form>
-	   <div class="card-body">
-          <p class="card-title">
-            <h3> Sugerencia para {{evento.motivo}}</h3>
-          </p>
-        </div>
+<div class="container">
+  <div class="my-3 d-flex">
+    <div class="col-sm">
+      <h2>Sugerencias aceptadas</h2>
+    </div>
   </div>
-  {{/each}}
+
+
+  <ul class="list-group">
+    {{#each sugerenciasAprobadas}}
+    <li class="list-group-item">
+      <div class="row">
+      <div class="col-sm-4 align-items-center">
+        <h5> Sugerencia para {{evento.motivo}}</h5>
+      </div>
+      <div class="col-sm-4">
+        <a href="calendar/{{evento.id_evento}}/suggestions/{{id_sugerencia}}"> Ver sugerencia</a>
+      </div>
+
+      <div class="col-sm-4 align-items-center">
+        <form method="POST" action="/sugerencias/{{id_sugerencia}}/nota">
+          <input type="number" name="nota" placeholder="Calicacion"/>
+          <button class="btn btn-success" type="submit">Calificar</button>
+        </form>
+      </div>
+      <div class="col-sm-4">
+        Calificación: {{calificacion.superior}}
+      </div>
+    </div>
+    </li>
+    {{/each}}
+  </ul>
 </div>
+
 {{/partial}}
 
 {{> layout.hbs}}

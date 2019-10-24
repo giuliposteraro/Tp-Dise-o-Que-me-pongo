@@ -76,7 +76,7 @@ public class Usuario {
 	}
 
 	public List<Sugerencia> getSugerenciasAprobadas() {
-		return sugerenciasRevisadas.stream().filter(s -> s.getEstado() == EstadoSugerencia.ACEPTADA)
+		return sugerencias.stream().filter(s -> s.getEstado() == EstadoSugerencia.ACEPTADA)
 				.collect(Collectors.toList());
 	}
 
@@ -141,6 +141,13 @@ public class Usuario {
 	public void aceptarSugerencia(Sugerencia sugerencia) {
 		this.revisarSugerencia(sugerencia, EstadoSugerencia.ACEPTADA);
 		sugerencia.ponerPrendasEnUso();
+		Evento miEvento = sugerencia.getEvento();
+		
+		if(miEvento.getSugerenciaAceptada() != null) {
+			miEvento.getSugerenciaAceptada().setEstado(EstadoSugerencia.RECHAZADA);
+		}
+		sugerencia.setEstado(EstadoSugerencia.ACEPTADA);
+		miEvento.setSugerenciaAceptada(sugerencia);		
 	}
 
 	public void rechazarSugerencia(Sugerencia sugerencia) {

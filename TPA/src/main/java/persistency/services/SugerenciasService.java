@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import domain.eventos.Evento;
+import domain.sugerencias.Calificacion;
 import domain.sugerencias.Sugerencia;
 import domain.usuario.Usuario;
 
@@ -44,6 +45,10 @@ public class SugerenciasService implements WithGlobalEntityManager {
 		return entityManager().createQuery(query, Sugerencia.class)
 				.setParameter("id", id)
 				.getSingleResult();
+	}
+	
+	public void persistCalificacion(Calificacion c) {
+		entityManager().persist(c);		
 	}
 }
 
