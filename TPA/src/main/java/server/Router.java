@@ -4,7 +4,6 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import server.controllers.ClothesController;
 import server.controllers.EventosController;
-import server.controllers.HomeController;
 import server.controllers.LoginController;
 import server.controllers.SugerenciasController;
 import server.controllers.WardrobesController;
@@ -26,7 +25,6 @@ public class Router implements WithGlobalEntityManager, TransactionalOps {
 		LoginController loginc = new LoginController();
 		WardrobesController wardrobesc = new WardrobesController();
 		ClothesController clothesc = new ClothesController();
-		HomeController homec = new HomeController();
 		EventosController eventosc = new EventosController();
 		SugerenciasController sugerenciasc = new SugerenciasController();
 		
@@ -35,11 +33,10 @@ public class Router implements WithGlobalEntityManager, TransactionalOps {
 		});
 		Spark.before("/*", loginc::verificarAutenticacion);
 		
-		Spark.get("/", homec::showHome);
+		//Spark.get("/", homec::showHome);
 		Spark.get("/login", loginc::loguear);
 		Spark.post("/login", loginc::loguear);
 		Spark.get("/logout", loginc::logout);
-		//Spark.get("/home", homec::showHome);
 		Spark.get("/wardrobes", wardrobesc::showWardrobes);
 		Spark.get("/wardrobes/:guardarropa", wardrobesc::showWardrobeContent);
 		Spark.post("/clothes", clothesc::newClothe);
