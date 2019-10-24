@@ -1,10 +1,10 @@
-
 {{#partial "contenido"}}
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Calendario</li>
-    <li class="breadcrumb-item active" aria-current="page">Sugerencias({{sugerencia.evento.motivo}})</li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="/calendar">Calendario</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a
+        href="/calendar/{{sugerencia.evento.id_evento}}/suggestions">Sugerencias({{sugerencia.evento.motivo}})</a></li>
     <li class="breadcrumb-item active" aria-current="page">Atuendo</li>
   </ol>
 </nav>
