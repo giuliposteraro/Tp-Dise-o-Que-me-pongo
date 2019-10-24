@@ -1,0 +1,25 @@
+{{#partial "contenido"}}
+
+<p>Estas son tus sugerencias a calificar, {{username}} : </p>
+
+<div class="container d-flex p-2 flex-wrap justify-content-center">
+  {{#each sugerenciasAprobadas}}
+  <div class="card-container col-sm-3 m-3" style="display: inline-block">
+      <div class="card border rounded-sm shadow m-sm-auto p-sm-auto">
+	  <img src="/img/suggestion.png" class="card-img-top" alt="Sugerencia">
+      </div>
+	 <form class="rounded mx-3 my-4" method="POST">
+		<label for="customRange2">Calificar sugerencia</label>
+		<input type="calificacion" class="custom-range" min="-5" max="5" id="calificacion">
+	 </form>
+	   <div class="card-body">
+          <p class="card-title">
+            <h3> Sugerencia para {{evento.motivo}}</h3>
+          </p>
+        </div>
+  </div>
+  {{/each}}
+</div>
+{{/partial}}
+
+{{> layout.hbs}}

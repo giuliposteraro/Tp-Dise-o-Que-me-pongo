@@ -3,7 +3,6 @@ package server.controllers;
 import domain.eventos.Evento;
 import domain.eventos.RepositorioEventos;
 import domain.usuario.RepositorioUsuarios;
-import persistency.services.EventosService;
 import persistency.services.SugerenciasService;
 import spark.Request;
 import spark.Response;
@@ -42,6 +41,13 @@ public class SugerenciasController extends Controller{
 		this.addAttribute("sugerencias",  sugerenciasService.getSugerenciasForEvent(Long.parseLong(id_evento)));
 		this.addAttribute("username", username);
 		return this.render("sugerencias.hbs");		
+	}
+	
+	public String calificarSugerencias(Request req, Response res) {
+		String username = req.session().attribute("username");
+		this.addAttribute("username", username);
+		this.addAttribute("sugerenciasAprobadas", sugerenciasService.getSugerenciasForUser(username));
+		return this.render("calificacion-sugerencias.hbs");
 	}
 	
 }
