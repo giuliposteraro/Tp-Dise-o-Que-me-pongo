@@ -19,10 +19,10 @@ public class WardrobesController extends Controller {
 	
 	public String showWardrobeContent(Request req, Response res) {
 		String username = req.session().attribute("username");
-		String id = req.params("id");
+		String guardarropa = req.params("guardarropa");
 		
-		this.addAttribute("guardarropa",  wardrobeService.getGuardarropa(Long.parseLong(id)));
-		System.out.println(wardrobeService.getGuardarropa(Long.parseLong(id)).getPrendas());
+		this.addAttribute("guardarropa",  wardrobeService.getGuardarropa(Long.parseLong(guardarropa)));
+		System.out.println(wardrobeService.getGuardarropa(Long.parseLong(guardarropa)).getPrendas());
 		this.addAttribute("username", username);
 		this.addAttribute("tipos", RepoTipos.getTipos());
 		this.addAttribute("telas", ETela.getTelas());

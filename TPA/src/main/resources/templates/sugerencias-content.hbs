@@ -1,0 +1,21 @@
+
+{{#partial "contenido"}}
+<p> Estos son las prendas de la sugerencia </p>
+
+<div class="container d-flex p-2 flex-wrap">
+
+  {{#each sugerencia.atuendo.prendas}}
+  <div class="card-container col-sm-3 m-3" style="display: inline-block">
+    <div class="card border rounded-sm shadow m-sm-auto p-sm-auto">
+      <img src="/img/wardrobe1.png" class="card-img-top" alt="Prenda">
+      <div class="card-body">
+        <p class="card-title">
+          <h3>{{tipo.descripcion}}</h3>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {{/each}}
+  
+  {{/partial}}

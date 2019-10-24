@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import com.google.gson.Gson;
 
 import domain.color.EColor;
+import domain.guardarropa.Guardarropa;
 import domain.prenda.ConstructorPrenda;
 import domain.prenda.Prenda;
 import domain.tipoPrenda.ETela;
@@ -48,5 +49,16 @@ public class ClothesController extends Controller {
 		.collect(Collectors.toList());
 		
 		return new Gson().toJson(telasValidas);
+	}
+	
+	public String deleteClothe(Request req, Response res) {
+		String g = req.params("guardarropa");
+		String p = req.params("prenda");
+		
+		Guardarropa guardarropa = new WardrobeService().getGuardarropa(Long.parseLong(g));
+		guardarropa.eliminarPrenda(Long.parseLong(p));
+		this.addAttribute("guardarropa", g);
+		
+		return this.render("deleted-clothe.hbs");
 	}
 }

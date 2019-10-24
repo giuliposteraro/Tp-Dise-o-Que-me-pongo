@@ -16,10 +16,13 @@
   </div>
   <ul class="list-group">
     {{#each eventos}}
-    <li class="list-group-item">
-      <p>{{motivo}}</p>
-    </li>
-    {{/each}}
+    <li class="list-group-item">{{motivo}} 
+	{{#if TieneSugerencias}}
+	<form action="/calendar/{{id_evento}}/suggestions" method="GET"><button type="submit" class="btn">Ver sugerencias</button></form></li>
+    {{else}}
+	<form action="/calendar/{{id_evento}}/suggestions" method="POST"><button type="submit" class="btn">Sugerir</button></form></li>
+	{{/if}}
+	{{/each}}
   </ul>
 </div>
 

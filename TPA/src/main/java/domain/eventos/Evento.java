@@ -1,6 +1,8 @@
 package domain.eventos;
 
 import java.time.LocalDate;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -36,7 +38,7 @@ public class Evento {
 	private LocalDate fecha;
 	private String lugar;
 	private String motivo;
-	@OneToMany @JoinColumn(name="id_evento")
+	@OneToMany(cascade=CascadeType.PERSIST) @JoinColumn(name="id_evento")
 	private Set<Sugerencia> sugerencias;
 	@Enumerated(EnumType.STRING)
 	private EFrecuencia frecuencia;
@@ -56,7 +58,7 @@ public class Evento {
 		this.pendiente = true;
 	}
 	
-	private Evento(){}
+	public Evento(){}
 	
 	public boolean esProximo() {  // es proximo si el evento es antes de maniana
 		return fecha.isBefore(LocalDate.now().plus(2,ChronoUnit.DAYS));
@@ -140,5 +142,10 @@ public class Evento {
 	public Evento getProximoEvento() {
 		return proximoEvento;
 	}
-
+	
+	public Long getId_evento() {
+		return id_evento;
+	}
+	
+	
 }
