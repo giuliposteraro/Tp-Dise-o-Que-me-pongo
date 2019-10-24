@@ -65,6 +65,10 @@ public class Guardarropa {
 		prendas.remove(prenda);
 	}
 
+	public void eliminarPrenda(Long id) {
+		prendas.removeIf(p -> p.getId_prenda() == id);
+	}
+	
 	public Set<Prenda> getPrendas() {
 		return this.prendas;
 	}

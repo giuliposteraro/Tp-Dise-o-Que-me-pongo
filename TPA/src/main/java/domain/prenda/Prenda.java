@@ -44,6 +44,10 @@ public class Prenda {
 		this.enUso = false;
 	}
 
+	public Long getId_prenda() {
+		return id_prenda;
+	}
+	
 	public Boolean getEnUso() {
 		return enUso;
 	}
