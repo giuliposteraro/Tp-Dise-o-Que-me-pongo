@@ -21,6 +21,9 @@
       <div class="card-body container d-flex justify-content-between">
         <p class="card-title">
           <h3>{{tipo.descripcion}}</h3>
+          {{#if enUso}}
+            <small><b>En uso</b></small>
+          {{/if}}
         </p>
         <form id="eliminarPrenda" action="/wardrobes/{{guardarropa.id_guardarropa}}/clothes/{{id_prenda}}"
           method="DELETE">

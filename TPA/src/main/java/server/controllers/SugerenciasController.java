@@ -2,7 +2,11 @@ package server.controllers;
 
 import domain.eventos.Evento;
 import domain.eventos.RepositorioEventos;
+import domain.sugerencias.Calificacion;
+import domain.sugerencias.EstadoSugerencia;
+import domain.sugerencias.Sugerencia;
 import domain.usuario.RepositorioUsuarios;
+import domain.usuario.Usuario;
 import exceptions.NoSePuedeGenerarSugerencia;
 import persistency.services.SugerenciasService;
 import spark.Request;
@@ -25,11 +29,11 @@ public class SugerenciasController extends Controller{
 	
 	public String showAtuendo(Request req, Response res) {
 		String username = req.session().attribute("username");
-		String id_sugerencia = req.params("id_sugerencia");
+		String id_sugerencia = req.params("suggestion");
 		
 		this.addAttribute("sugerencia",  sugerenciasService.getSugerencia(Long.parseLong(id_sugerencia)));
-		System.out.println(sugerenciasService.getSugerencia(Long.parseLong(id_sugerencia)).getAtuendo());
-		return this.render("suggestion-content.hbs");
+		
+		return this.render("sugerencias-content.hbs");
 	}
 	
 	public String generarSugerencias(Request req, Response res) {
@@ -51,20 +55,58 @@ public class SugerenciasController extends Controller{
 		return this.render("sugerencias.hbs");		
 	}
   
-	public String calificarSugerencias(Request req, Response res) {
-		String username = req.session().attribute("username");
-		this.addAttribute("username", username);
-		this.addAttribute("sugerenciasAprobadas", sugerenciasService.getSugerenciasForUser(username));
-		return this.render("calificacion-sugerencias.hbs");
+	public String calificarSugerencia(Request req, Response res) {
+		String sugerenciaId = req.params("sug");
+		String notaString = req.queryParams("nota");
+		
+		Double nota = Double.parseDouble(notaString);
+		
+		Sugerencia sug = sugerenciasService.getSugerencia(Long.parseLong(sugerenciaId));
+		
+		Calificacion c = new Calificacion(nota,nota,nota);
+		
+		sugerenciasService.persistCalificacion(c);
+		sug.setCalificacion(c);
+		
+		res.redirect("/suggestions");
+		
+		return "";
 	}
   
-	public String aceptarSugerencia(Request req, Response res) {
+	public String decidirSugerencia(Request req, Response res) {
+		String username = req.session().attribute("username");
+		
+		String id_sugerencia = req.params("suggestion");
+		String decision = req.params("decision").toUpperCase();
+		
+		Sugerencia sug = sugerenciasService.getSugerencia(Long.parseLong(id_sugerencia));
+		String id_evento = sug.getEvento().getId_evento().toString();	
+		
+		
+		Usuario user = repoUsuarios.getUsuario(username);
+		
+		if(decision.equals("RECHAZADA"))
+			user.rechazarSugerencia(sug);
+		else
+			user.aceptarSugerencia(sug);
+					
+		res.redirect("/calendar/"+ id_evento + "/suggestions");
+		
 		return "";
 	}
 	
-	public String rechazarSugerencia(Request req, Response res) {
-		return "";
+	public String mostrarSugerenciasAceptadas(Request req, Response res) {
+		String username = req.session().attribute("username");
+		
+		this.addAttribute("username", username);
+		this.addAttribute("sugerenciasAprobadas", sugerenciasService.getSugerenciasForUser(username));
+		
+		return this.render("calificacion-sugerencias.hbs");
+		
+		
 	}
+	
+	
 }
 	
 

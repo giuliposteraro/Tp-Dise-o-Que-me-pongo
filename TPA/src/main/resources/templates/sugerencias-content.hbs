@@ -12,16 +12,18 @@
         <p class="card-title">
           <h3>{{tipo.descripcion}}</h3>
         </p>
-        <form method="POST" action="/suggestions/{{id_sugerencia}}/accept">
-          <button class="btn btn-success" type="submit">Aceptar</button>
-        </form>
-        <form method="POST" action="/suggestions/{{id_sugerencia}}/decline">
-          <button class="btn btn-danger" type="submit">Rechazar</button>
-        </form>
+
       </div>
     </div>
   </div>
 
   {{/each}}
-
+  <form method="POST" action="/suggestions/{{sugerencia.id_sugerencia}}/aceptada">
+    <button class="btn btn-success" type="submit">Aceptar</button>
+  </form>
+  <form method="POST" action="/suggestions/{{sugerencia.id_sugerencia}}/rechazada">
+    <button class="btn btn-danger" type="submit">Rechazar</button>
+  </form>
   {{/partial}}
+
+  {{> layout.hbs}}
