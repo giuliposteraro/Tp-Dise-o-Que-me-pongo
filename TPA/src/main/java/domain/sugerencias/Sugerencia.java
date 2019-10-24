@@ -28,7 +28,7 @@ public class Sugerencia {
 	@Enumerated(EnumType.STRING)
 	private EstadoSugerencia estado;
 	@ManyToOne
-	private Evento evento;
+	public Evento evento;
 	@OneToOne(optional=true)
 	private Calificacion calificacion;
 

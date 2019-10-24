@@ -50,7 +50,14 @@ public class SugerenciasController extends Controller{
 		
 		return this.render("sugerencias.hbs");		
 	}
-	
+  
+	public String calificarSugerencias(Request req, Response res) {
+		String username = req.session().attribute("username");
+		this.addAttribute("username", username);
+		this.addAttribute("sugerenciasAprobadas", sugerenciasService.getSugerenciasForUser(username));
+		return this.render("calificacion-sugerencias.hbs");
+	}
+  
 	public String aceptarSugerencia(Request req, Response res) {
 		return "";
 	}

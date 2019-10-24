@@ -75,7 +75,7 @@ public class Usuario {
 		return Calificacion.promedio(calificaciones);
 	}
 
-	private List<Sugerencia> getSugerenciasAprobadas() {
+	public List<Sugerencia> getSugerenciasAprobadas() {
 		return sugerenciasRevisadas.stream().filter(s -> s.getEstado() == EstadoSugerencia.ACEPTADA)
 				.collect(Collectors.toList());
 	}

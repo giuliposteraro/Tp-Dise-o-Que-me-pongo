@@ -31,15 +31,14 @@ public class SugerenciasService implements WithGlobalEntityManager {
 	}
 	
 	
-	/*public List<Sugerencia> getSugerenciasForUser(String username) {
+	public List<Sugerencia> getSugerenciasForUser(String username) {
 		String query = "from Usuario u where u.username = :username";
-		return em.createQuery(query, Usuario.class)
+		return entityManager().createQuery(query, Usuario.class)
 				.setParameter("username", username)
 				.getSingleResult()
-				.getSugerenciasPendientes();
+				.getSugerenciasAprobadas();
 	}
-	*/
-
+	
 	public Sugerencia getSugerencia(Long id) {
 		String query = "from Sugerencia s where s.id_sugerencia = :id";
 		return entityManager().createQuery(query, Sugerencia.class)
