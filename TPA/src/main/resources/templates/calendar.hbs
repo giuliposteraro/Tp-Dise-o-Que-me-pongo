@@ -2,16 +2,24 @@
 <p>Este es tu calendario, <b>{{username}}</b></p>
 
 <div class="container">
-  <h2>Eventos</h2>
+  <h2 class="ml-3">Eventos</h2>
   <ul class="list-group">
     {{#each eventos}}
-    <li class="list-group-item">{{motivo}} 
-	{{#if TieneSugerencias}}
-	<form action="/calendar/{{id_evento}}/suggestions" method="GET"><button type="submit" class="btn">Ver sugerencias</button></form></li>
-    {{else}}
-	<form action="/calendar/{{id_evento}}/suggestions" method="POST"><button type="submit" class="btn">Sugerir</button></form></li>
-	{{/if}}
-	{{/each}}
+    <li class="list-group-item">
+      <div class="float-sm-left d-flex align-items-center">
+        <p>{{motivo}}</p>
+      </div>
+      {{#if tieneSugerencias}}
+      <form action="/calendar/{{id_evento}}/suggestions" method="GET">
+        <button type="submit" class="btn btn-primary float-sm-right">Ver sugerencias</button>
+      </form>
+      {{else}}
+      <form action="/calendar/{{id_evento}}/suggestions" method="POST">
+        <button type="submit" class="btn btn-success float-sm-right">Sugerir</button>
+      </form>
+      {{/if}}
+    </li>
+    {{/each}}
   </ul>
 </div>
 
