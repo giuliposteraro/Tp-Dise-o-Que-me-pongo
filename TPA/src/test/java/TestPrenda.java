@@ -50,7 +50,7 @@ public class TestPrenda {
 		c.setTipo(RepoTipos.REMERA);
 		c.setColor(EColor.ROJO, EColor.NINGUNO);
 		c.setTela(ETela.ALGODON);
-		c.setImagen("img/remera-azul.png");
+		c.setImagen("src/test/resources/img/remera-azul.png");
 		Prenda p = c.crear();
 		assertNotNull(p.getImagen());
 	}

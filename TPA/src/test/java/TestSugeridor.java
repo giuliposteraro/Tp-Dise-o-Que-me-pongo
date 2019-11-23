@@ -112,15 +112,6 @@ public class TestSugeridor {
 		assertEquals(3, usuario.getToleranciasAlFrio().size());
 		assertEquals(2.0, usuario.getToleranciasAlFrio().get(0), 0.001);
 	}
-
-	@Test
-	public void conVeinteGradosYsinCAlificacionesElAtuendoSugeridoNoTieneAbrigos() {
-		s.generarSugerencias();
-		Sugerencia sugerencia1 = usuario.getSugerenciasPendientes().stream()
-		.max(Comparator.comparingDouble(s -> s.coeficienteDeAbrigo(20.0))).orElse(null);
-		
-		assertTrue(Atuendo.cantidadDeAbrigos(sugerencia1.getAtuendo().getPrendas())==0);
-	}
 	
 	@Test
 	public void conVeinteGradosYcalificacionesFriolentasLaSugerenciaTieneAbrigo() {

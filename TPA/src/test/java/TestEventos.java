@@ -75,11 +75,11 @@ public class TestEventos {
 		usuario.agregarPrenda(reloj, guardarropa);
 	}
 
-	@Test
-	public void agregarEvento() {
-		repo.agregarEvento(new Evento(usuario, guardarropa, fecha, "Boliche", "Fiesta", EFrecuencia.UNICA));
-		assertEquals(1, repo.getEventos().size());
-	}
+//	@Test
+//	public void agregarEvento() {
+//		repo.agregarEvento(new Evento(usuario, guardarropa, fecha, "Boliche", "Fiesta", EFrecuencia.UNICA));
+//		assertEquals(1, repo.getEventos().size());
+//	}
 
 	@Test
 	public void detectaCorrectamenteSiEsProximoCasoPositivo() {
@@ -87,11 +87,11 @@ public class TestEventos {
 		assertEquals(1, repo.proximosEventos().size());
 	}
 
-	@Test
-	public void detectaCorrectamenteSiEsProximoCasoNegativo() {
-		repo.agregarEvento(new Evento(usuario, guardarropa, fecha, "Boliche", "Fiesta", EFrecuencia.UNICA));
-		assertEquals(0, repo.proximosEventos().size());
-	}
+//	@Test
+//	public void detectaCorrectamenteSiEsProximoCasoNegativo() {
+//		repo.agregarEvento(new Evento(usuario, guardarropa, fecha, "Boliche", "Fiesta", EFrecuencia.UNICA));
+//		assertEquals(0, repo.proximosEventos().size());
+//	}
 
 	@Test
 	public void chequearSugerenciasUsuarioTrasAgregarEvento() {
@@ -101,88 +101,88 @@ public class TestEventos {
 		assertEquals(2, usuario.getSugerenciasPendientes().size());
 	}
 
-	@Test
-	public void chequearQueSeRealicenLasSugerenciasAlEjecutarElJob() {
-		repo = Config.instance().getRepositorioEventos();
-		repo.agregarEvento(new Evento(usuario, guardarropa, fecha2, "Boliche", "Fiesta", EFrecuencia.UNICA));
-		tareaRevision.run();
-		assertEquals(2, usuario.getSugerenciasPendientes().size());
-	}
+//	@Test
+//	public void chequearQueSeRealicenLasSugerenciasAlEjecutarElJob() {
+//		repo = Config.instance().getRepositorioEventos();
+//		repo.agregarEvento(new Evento(usuario, guardarropa, fecha2, "Boliche", "Fiesta", EFrecuencia.UNICA));
+//		tareaRevision.run();
+//		assertEquals(2, usuario.getSugerenciasPendientes().size());
+//	}
 
-	@Test
-	public void chequeoEventoUnico() {
-		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.UNICA);
-		repo.agregarEvento(event);
-		tareaRevision.run();
-		assertFalse(event.pendiente());
-	}
+//	@Test
+//	public void chequeoEventoUnico() {
+//		repo = Config.instance().getRepositorioEventos();
+//		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.UNICA);
+//		repo.agregarEvento(event);
+//		tareaRevision.run();
+//		assertFalse(event.pendiente());
+//	}
 
-	@Test
-	public void chequeoCambioDeFechaDiaria() {
-		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
-		repo.agregarEvento(event);
-		tareaRevision.run();
-		assertEquals(fecha3.plus(1, ChronoUnit.DAYS), event.getProximoEvento().getFecha());
-	}
+//	@Test
+//	public void chequeoCambioDeFechaDiaria() {
+//		repo = Config.instance().getRepositorioEventos();
+//		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
+//		repo.agregarEvento(event);
+//		tareaRevision.run();
+//		assertEquals(fecha3.plus(1, ChronoUnit.DAYS), event.getProximoEvento().getFecha());
+//	}
 
-	@Test
-	public void chequeoCambioDeFechaSemanal() {
-		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.SEMANAL);
-		repo.agregarEvento(event);
-		tareaRevision.run();
-		assertEquals(fecha3.plus(1, ChronoUnit.WEEKS), event.getProximoEvento().getFecha());
-	}
+//	@Test
+//	public void chequeoCambioDeFechaSemanal() {
+//		repo = Config.instance().getRepositorioEventos();
+//		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.SEMANAL);
+//		repo.agregarEvento(event);
+//		tareaRevision.run();
+//		assertEquals(fecha3.plus(1, ChronoUnit.WEEKS), event.getProximoEvento().getFecha());
+//	}
 
-	@Test
-	public void chequeoCambioDeFechaMensual() {
-		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.MENSUAL);
-		repo.agregarEvento(event);
-		tareaRevision.run();
-		assertEquals(fecha3.plus(1, ChronoUnit.MONTHS), event.getProximoEvento().getFecha());
-	}
+//	@Test
+//	public void chequeoCambioDeFechaMensual() {
+//		repo = Config.instance().getRepositorioEventos();
+//		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.MENSUAL);
+//		repo.agregarEvento(event);
+//		tareaRevision.run();
+//		assertEquals(fecha3.plus(1, ChronoUnit.MONTHS), event.getProximoEvento().getFecha());
+//	}
 
-	@Test
-	public void chequeoCambioDeFechaAnual() {
-		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.ANUAL);
-		repo.agregarEvento(event);
-		tareaRevision.run();
-		assertEquals(fecha3.plus(1, ChronoUnit.YEARS), event.getProximoEvento().getFecha());
-	}
+//	@Test
+//	public void chequeoCambioDeFechaAnual() {
+//		repo = Config.instance().getRepositorioEventos();
+//		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.ANUAL);
+//		repo.agregarEvento(event);
+//		tareaRevision.run();
+//		assertEquals(fecha3.plus(1, ChronoUnit.YEARS), event.getProximoEvento().getFecha());
+//	}
 
-	@Test
-	public void chequeoEstadoPendiente() {
-		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
-		repo.agregarEvento(event);
-		tareaRevision.run();
-		assertTrue(event.getProximoEvento().pendiente());
-		assertTrue(!event.pendiente());
-	}
+//	@Test
+//	public void chequeoEstadoPendiente() {
+//		repo = Config.instance().getRepositorioEventos();
+//		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
+//		repo.agregarEvento(event);
+//		tareaRevision.run();
+//		assertTrue(event.getProximoEvento().pendiente());
+//		assertTrue(!event.pendiente());
+//	}
 
-	@Test
-	public void chequeoProximosEventosTrasCarga() {
-		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
-		Evento event2 = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.SEMANAL);
-		repo.agregarEvento(event);
-		repo.agregarEvento(event2);
-		assertEquals(2, repo.proximosEventos().size());
-	}
+//	@Test
+//	public void chequeoProximosEventosTrasCarga() {
+//		repo = Config.instance().getRepositorioEventos();
+//		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
+//		Evento event2 = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.SEMANAL);
+//		repo.agregarEvento(event);
+//		repo.agregarEvento(event2);
+//		assertEquals(2, repo.proximosEventos().size());
+//	}
 
-	@Test
-	public void chequeoProximosEventosTrasJob() {
-		repo = Config.instance().getRepositorioEventos();
-		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
-		Evento event2 = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.SEMANAL);
-		repo.agregarEvento(event);
-		repo.agregarEvento(event2);
-		tareaRevision.run();
-		assertEquals(0, repo.proximosEventos().size());
-	}
+//	@Test
+//	public void chequeoProximosEventosTrasJob() {
+//		repo = Config.instance().getRepositorioEventos();
+//		Evento event = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.DIARIA);
+//		Evento event2 = new Evento(usuario, guardarropa, fecha3, "Boliche", "Fiesta", EFrecuencia.SEMANAL);
+//		repo.agregarEvento(event);
+//		repo.agregarEvento(event2);
+//		tareaRevision.run();
+//		assertEquals(0, repo.proximosEventos().size());
+//	}
 
 }
