@@ -13,7 +13,7 @@ public class Main extends Application {
 //		new Job(new TareaSugerenciaEventos(), 5000, 10000).ejecutar();
 //		new Job(new TareaAlertasMeteorologicas(), 10000, 100000).ejecutar();
 //		new Main().start();
-		Spark.port(9001);		
+		Spark.port(8080);		
 		Spark.staticFileLocation("/public");
 		Router.instance().configurar();
 		DebugScreen.enableDebugScreen();
