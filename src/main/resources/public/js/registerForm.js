@@ -59,9 +59,6 @@ $(document).ready(() => {
     var psw2OK = !$("#psw2").hasClass("is-invalid") && $("#psw2").val() != "";
     var userOK = !$("#usr").hasClass("is-invalid") && $("#usr").val() != "";
 
-    if (!pswOK || !psw2OK || !userOK) {
-      alert("error");
-    }
     if ($("#psw").val() != $("#psw2").val()) event.preventDefault();
   };
 

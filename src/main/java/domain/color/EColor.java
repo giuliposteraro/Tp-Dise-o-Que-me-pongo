@@ -10,6 +10,7 @@ public enum EColor {
 	public static List<String> getColores() {
 		return Arrays.asList(EColor.values())
 				.stream()
+				.filter(color -> color != EColor.NINGUNO)
 				.map(color -> formatColor(color))
 				.collect(Collectors.toList());
 	}

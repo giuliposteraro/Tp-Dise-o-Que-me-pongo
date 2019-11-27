@@ -4,7 +4,7 @@ $(document).ready(() => {
     else $("#btnTipo").removeAttr("disabled");
   });
 
-  $("#color1 option[value='Ninguno']").remove();
+  $("#color2").attr("disabled", true);
 
   $("#color1, #color2").change(() => {
     if (
@@ -19,6 +19,12 @@ $(document).ready(() => {
       $("#btnColor").removeAttr("disabled");
       if ($("#color1").val() != $("#color2").val())
         $("#color2").removeClass("is-invalid");
+    }
+    if($("#color1").val() == ""){
+      $("#color2").attr("disabled", true);
+      $("#color2").val("Ninguno");
+    }else{
+      $("#color2").attr("disabled", false);
     }
   });
 

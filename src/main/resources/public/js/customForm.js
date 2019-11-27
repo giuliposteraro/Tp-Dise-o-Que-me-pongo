@@ -16,3 +16,12 @@ function submitForm(id) {
     }
   }).then(setTimeout(() => location.reload(), 300));
 }
+
+function confirmarEliminacion() {
+  var result = confirm("Desea eliminar la prenda?");
+  if (result == true) {
+      submitForm('eliminarPrenda');
+  }else{
+      event.preventDefault();
+  }
+}

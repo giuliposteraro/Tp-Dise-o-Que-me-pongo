@@ -27,7 +27,7 @@
         </p>
         <form id="eliminarPrenda" action="/wardrobes/{{guardarropa.id_guardarropa}}/clothes/{{id_prenda}}"
           method="DELETE">
-          <button type="submit" class="btn btn-danger" onclick="submitForm('eliminarPrenda')">
+          <button type="submit" class="btn btn-danger" onclick="confirmarEliminacion()">
             <img src="/img/outline_delete_white_18dp.png" />
           </button>
         </form>
@@ -98,16 +98,16 @@
               <select class="form-control custom-select" id="color1" name="color1" required>
                 <option value="">Seleccione un color...</option>
                 {{#each colores}}
-                <option value="{{this}}">{{this}}</option>
+                  <option value="{{this}}">{{this}}</option>
                 {{/each}}
               </select>
             </div>
             <div class="mt-3">
               <label for="color2">Color Secundario</label>
               <select class="form-control custom-select" id="color2" name="color2" required>
-                <option value="">Seleccione un color...</option>
+                <option value="Ninguno">Ninguno</option>
                 {{#each colores}}
-                <option value="{{this}}">{{this}}</option>
+                  <option value="{{this}}">{{this}}</option>
                 {{/each}}
               </select>
             </div>
@@ -180,6 +180,7 @@
   </form-->
 
 </div>
+
 
 {{/partial}}
 
