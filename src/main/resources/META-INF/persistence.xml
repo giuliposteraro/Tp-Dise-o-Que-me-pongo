@@ -30,11 +30,12 @@
             <property name="hibernate.connection.password" value="" /> 
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" /-->
 
-			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-            <property name="hibernate.connection.url" value="mysql://da54uoaq0vyp6tfh:bhbfi6gl66pzze3n@lmag6s0zwmcswp5w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/kdgptaxrvy6iu79w" /> 
-            <property name="hibernate.connection.username" value="da54uoaq0vyp6tfh" />
-            <property name="hibernate.connection.password" value="bhbfi6gl66pzze3n"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.connection.url" value="jdbc:mysql://da54uoaq0vyp6tfh:bhbfi6gl66pzze3n@lmag6s0zwmcswp5w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/kdgptaxrvy6iu79w"/>
+			<property name="hibernate.connection.username" value="da54uoaq0vyp6tfh"/>
+			<property name="hibernate.connection.password" value="bhbfi6gl66pzze3n"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+
                             
             <property name="hibernate.show_sql" value="true" /> 
             <property name="hibernate.format_sql" value="true" /> 
